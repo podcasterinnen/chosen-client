@@ -8,7 +8,7 @@
     </div>
     <div v-if="profiles">
       Profiles
-      <ul>
+      <ul class="profiles">
         <li v-for="profile in this.profiles.data" :key="profile.id">
           {{ profile.forename }} {{ profile.surname}}
         </li>
@@ -61,5 +61,8 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-
+.profiles {
+  margin: 0;
+  padding: 0;
+}
 </style>
