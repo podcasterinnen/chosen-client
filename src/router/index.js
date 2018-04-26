@@ -6,11 +6,13 @@ import Contact from '@/components/Contact'
 import FAQ from '@/components/FAQ'
 import Home from '@/components/Home'
 import Imprint from '@/components/Imprint'
+import Login from '@/components/Login'
 import PageNotFound from '@/components/PageNotFound'
 import Podcasterin from '@/components/Podcasterin'
 import Podcasterinnen from '@/components/Podcasterinnen'
 import Privacy from '@/components/Privacy'
 import Profile from '@/components/Profile'
+import Register from '@/components/Register'
 
 Vue.use(Router)
 
@@ -47,6 +49,11 @@ export default new Router({
       component: Imprint
     },
     {
+      path: '/login',
+      name: 'Login',
+      component: Login
+    },
+    {
       path: '/podcasterinnen',
       name: 'Podcasterinnen',
       component: Podcasterinnen
@@ -60,6 +67,11 @@ export default new Router({
       path: '/profile',
       name: 'Profile',
       component: Profile
+    },
+    {
+      path: '/register',
+      name: 'Register',
+      component: Register
     },
     {
       path: '*',
