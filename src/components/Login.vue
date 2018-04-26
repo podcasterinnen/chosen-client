@@ -3,16 +3,17 @@
     <div>
       Login
     </div>
-    <div>
+    <form @submit.prevent="handleSubmit">
       <div>
         <label for="email">E-Mail-Adresse:</label>
-        <input id="email" v-model="email" placeholder="deine-email-adresse@mail.com">
+        <input id="email" v-model="user.email" placeholder="deine-email-adresse@mail.com">
       </div>
       <div>
         <label for="password">Passwort:</label>
-        <input id="password" v-model="password" placeholder="dein-sicheres-passwort" type="password">
+        <input id="password" v-model="user.password" placeholder="dein-sicheres-passwort" type="password">
       </div>
-    </div>
+      <button type="submit">Login</button>
+    </form>
   </div>
 </template>
 
@@ -21,8 +22,35 @@ export default {
   name: 'Login',
   data () {
     return {
-      email: '',
-      password: ''
+      user: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    handleSubmit () {
+      this.postData('https://chosen-cors-proxy.herokuapp.com/account/sign_in', {
+        email: this.user.email,
+        password: this.user.password
+      })
+        .then((data) => {
+          console.log(data)
+          window.localStorage.setItem('token', data.data.token)
+        })
+        .catch(error => console.error(error))
+    },
+    postData (url, data) {
+      return fetch(url, {
+        body: JSON.stringify(data),
+        cache: 'no-cache',
+        headers: {
+          'content-type': 'application/json'
+        },
+        method: 'POST',
+        mode: 'cors'
+      })
+        .then(response => response.json())
     }
   }
 }

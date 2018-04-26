@@ -55,7 +55,7 @@ export default {
         method: 'POST',
         mode: 'cors'
       })
-        .then(response => response.json()) // parses response to JSON
+        .then(response => response.json())
     }
   }
 }
