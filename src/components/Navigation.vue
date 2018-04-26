@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="header">
     <nav role="navigation">
       <ul class="nav">
         <li class="nav__item"><a href="/" class="nav__item__link">podcasterinnen.org</a></li>
@@ -24,6 +24,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+.header {
+  position: fixed;
+  width: 100%;
+}
 .nav {
   display: flex;
   list-style: none;

@@ -8,6 +8,11 @@
     </div>
     <div v-if="profiles">
       Profiles
+      <ul>
+        <li v-for="profile in this.profiles.data" :key="profile.id">
+          {{ profile.forename }} {{ profile.surname}}
+        </li>
+      </ul>
     </div>
   </div>
 </template>
