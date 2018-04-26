@@ -2,9 +2,9 @@
   <footer class="footer">
     <nav role="navigation">
       <ul class="nav">
-        <li class="nav__item"><a href="/#/contact" class="nav__item__link">Kontakt</a></li>
+        <li class="nav__item"><a href="/#/kontakt" class="nav__item__link">Kontakt</a></li>
         <li class="nav__item"><a href="/#/faq" class="nav__item__link">FAQ</a></li>
-        <li class="nav__item"><a href="/#/privacy" class="nav__item__link">Datenschutz</a></li>
+        <li class="nav__item"><a href="/#/datenschutz" class="nav__item__link">Datenschutz</a></li>
       </ul>
     </nav>
   </footer>
