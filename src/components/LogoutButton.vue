@@ -25,7 +25,6 @@ export default {
         method: 'DELETE',
         mode: 'cors'
       })
-        .then(response => response.json())
     }
   }
 }
