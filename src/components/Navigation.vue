@@ -5,7 +5,9 @@
         <li class="nav__item"><a href="/" class="nav__item__link">podcasterinnen.org</a></li>
         <li class="nav__item"><a href="/#/podcasterinnen" class="nav__item__link">Podcasterinnen</a></li>
         <li class="nav__item"><a href="/#/about" class="nav__item__link">Über uns</a></li>
-        <li class="nav__item nav__item--right"><logout-button></logout-button></li>
+        <li v-if="isLoggedIn" class="nav__item"><a href="/#/profile" class="nav__item__link">Dein Profil</a></li>
+        <li v-if="isLoggedIn" class="nav__item nav__item--right"><logout-button></logout-button></li>
+        <li v-if="!isLoggedIn" class="nav__item nav__item--right"><a href="/#/login" class="nav__item__link">Login</a></li>
       </ul>
     </nav>
   </header>
@@ -18,6 +20,11 @@ export default {
   name: 'navigation',
   components: {
     logoutButton
+  },
+  computed: {
+    isLoggedIn: function () {
+      return this.$session.exists()
+    }
   }
 }
 </script>

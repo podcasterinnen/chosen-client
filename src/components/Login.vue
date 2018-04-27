@@ -39,8 +39,9 @@ export default {
           console.log(data)
           this.$session.start()
           this.$session.set('jwt', data.data.token)
+          this.$session.set('podcaster_id', data.data.podcaster_id)
           this.$http.headers.common['Authorization'] = 'Bearer ' + data.data.token
-          this.$router.push('/podcasterinnen')
+          this.$router.push('/profile')
         })
         .catch(error => console.error(error))
     },
