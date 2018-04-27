@@ -18,6 +18,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'Login',
   data () {
@@ -36,7 +37,10 @@ export default {
       })
         .then((data) => {
           console.log(data)
-          window.localStorage.setItem('token', data.data.token)
+          this.$session.start()
+          this.$session.set('jwt', data.data.token)
+          this.$http.headers.common['Authorization'] = 'Bearer ' + data.data.token
+          this.$router.push('/podcasterinnen')
         })
         .catch(error => console.error(error))
     },
