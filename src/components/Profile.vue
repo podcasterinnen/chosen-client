@@ -1,12 +1,18 @@
 <template>
   <div>
-    Profil
+    Dein Profil
+    <podcasterin :id="1"></podcasterin>
   </div>
 </template>
 
 <script>
+import podcasterin from './Podcasterin.vue'
+
 export default {
-  name: 'Profile'
+  name: 'Profile',
+  components: {
+    podcasterin
+  }
 }
 </script>
 

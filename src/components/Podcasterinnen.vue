@@ -10,7 +10,9 @@
       Profiles
       <ul class="profiles">
         <li v-for="profile in this.profiles.data" :key="profile.id">
-          {{ profile.forename }} {{ profile.surname}}
+          <h2>{{ profile.forename }} {{ profile.surname}}</h2>
+          <p>{{ profile.bio_short }}</p>
+          <button @click="handleProfileVisit(profile.id)">Profil ansehen</button>
         </li>
       </ul>
     </div>
@@ -54,6 +56,9 @@ export default {
           console.log('Fetch Error :-S', err)
           this.error = err
         })
+    },
+    handleProfileVisit (id) {
+      this.$router.push('/podcasterinnen/' + id)
     }
   }
 }
