@@ -9,10 +9,9 @@ export default {
   name: 'logout-button',
   methods: {
     handleLogout () {
-      console.log('HAndle Logout')
       this.postData('https://chosen-cors-proxy.herokuapp.com/account/sign_out')
         .then(data => console.log(data))
-        .catch(error => console.error(error))
+        .catch(error => console.error(error)) // API returns a 204: No Content when user is logged out
     },
     postData (url) {
       let token = window.localStorage.getItem('token')
