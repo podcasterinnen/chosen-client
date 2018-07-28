@@ -1,0 +1,33 @@
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import './App.css'
+import { initialiseApp } from './AppActions'
+
+class App extends Component {
+  componentDidMount() {
+    this.props.handleInitApp()
+  }
+
+  render() {
+    return (
+      <div className="App">
+        <p className="App-intro">
+          App
+        </p>
+      </div>
+    )
+  }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+  handleInitApp: () => {
+    dispatch(initialiseApp())
+  }
+})
+
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(App)
