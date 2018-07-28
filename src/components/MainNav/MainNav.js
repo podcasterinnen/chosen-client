@@ -18,7 +18,8 @@ class MainNav extends Component {
           <li><Link to="/about">Über uns</Link></li>
           <li>
             <Link to="/session">
-              { sessionState === 'UNKNOWN' &&
+              { (sessionState === 'UNKNOWN' ||
+                sessionState === 'REGISTRATION_IN_PROGRESS') &&
                 <span>Login</span>
               }
               { sessionState === 'REGISTERED' &&
