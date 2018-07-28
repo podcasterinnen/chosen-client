@@ -2,7 +2,8 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { createStore, applyMiddleware } from 'redux'
+import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 
 import './index.css'
@@ -24,6 +25,7 @@ import chosenApp from './reducer'
 const store = createStore(
   chosenApp,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  applyMiddleware(thunk),
 )
 
 ReactDOM.render(
