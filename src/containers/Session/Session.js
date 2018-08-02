@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import './Session.css'
+import { handleChange, handleSubmit } from '../../utils/helper'
 import { initialiseSession, loginUser, registerNewUser, setSessionState } from './SessionActions'
 
 class Session extends Component {
@@ -13,36 +14,43 @@ class Session extends Component {
       forename: '',
       password: '',
     }
-    this.handleEmailChange = this.handleEmailChange.bind(this)
-    this.handleForenameChange = this.handleForenameChange.bind(this)
-    this.handleLoginSubmit = this.handleLoginSubmit.bind(this)
-    this.handlePasswordChange = this.handlePasswordChange.bind(this)
-    this.handleRegisterSubmit = this.handleRegisterSubmit.bind(this)
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleToggleClick = this.handleToggleClick.bind(this)
   }
+  
   componentDidMount() {
     this.props.handleInitSession()
   }
 
-  handleEmailChange = (e) => {
-    this.setState({ emailAddress: e.target.value })
+  handleChange = (e, type) => {
+    switch(type) {
+    case 'emailAdress':
+      this.setState({ emailAddress: e.target.value })
+      break
+    case 'forename':
+      this.setState({ forename: e.target.value })
+      break
+    case 'password':
+      this.setState({ password: e.target.value })
+      break
+    default:
+      return
+    }
   }
 
-  handleForenameChange = (e) => {
-    this.setState({ forename: e.target.value })
-  }
-
-  handleLoginSubmit = (e) => {
+  handleSubmit = (e, type) => {
     e.preventDefault()
-    this.props.handleLoginNewUser(this.state.emailAddress, this.state.password)
-  }
-
-  handlePasswordChange = (e) => {
-    this.setState({ password: e.target.value })
-  }
-
-  handleRegisterSubmit = (e) => {
-    e.preventDefault()
-    this.props.handleRegisterNewUser(this.state.emailAddress, this.state.forename, this.state.password)
+    switch(type) {
+    case 'login':
+      this.props.handleLoginNewUser(this.state.emailAddress, this.state.password)
+      break
+    case 'register':
+      this.props.handleRegisterNewUser(this.state.emailAddress, this.state.forename, this.state.password)
+      break
+    default:
+      return
+    }
   }
 
   handleToggleClick = () => {
@@ -75,33 +83,33 @@ class Session extends Component {
           }
         </div>
         { sessionState === 'UNKNOWN' &&
-          <form onSubmit={this.handleRegisterSubmit}>
+          <form onSubmit={() => handleSubmit('register')}>
             <h2>Registrieren:</h2>
             <div>
               <label>Dein Vorname:</label>
-              <input onChange={this.handleForenameChange} placeholder="Your forename" type="text" value={this.state.forename} />
+              <input onChange={() => handleChange('forename')} placeholder="Your forename" type="text" value={this.state.forename} />
             </div>
             <div>
               <label>Email address</label>
-              <input onChange={this.handleEmailChange} placeholder="Your email address" type="email" value={this.state.emailAddress} />
+              <input onChange={() => handleChange('email')} placeholder="Your email address" type="email" value={this.state.emailAddress} />
             </div>
             <div>
               <label>Password</label>
-              <input onChange={this.handlePasswordChange} placeholder="Your safe password." type="password" value={this.state.password} />
+              <input onChange={() => handleChange('password')} placeholder="Your safe password." type="password" value={this.state.password} />
             </div>
             <button type="submit" value="submit">Registrieren</button>
           </form>
         }
         { sessionState === 'REGISTERED' &&
-          <form onSubmit={this.handleLoginSubmit}>
+          <form onSubmit={() => handleSubmit('login')}>
             <h2>Login:</h2>
             <div>
               <label>Email address</label>
-              <input onChange={this.handleEmailChange} placeholder="Your email address" type="email" />
+              <input onChange={() => handleChange('email')} placeholder="Your email address" type="email" />
             </div>
             <div>
               <label>Password</label>
-              <input onChange={this.handlePasswordChange}  placeholder="Your safe password." type="password" />
+              <input onChange={() => handleChange('password')}  placeholder="Your safe password." type="password" />
             </div>
             <button type="submit" value="submit">Login</button>
           </form>
