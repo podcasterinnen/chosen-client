@@ -4,7 +4,7 @@ import registerServiceWorker from './registerServiceWorker'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 
 import './index.css'
 
@@ -13,6 +13,7 @@ import App from './containers/App/App'
 import Contact from './containers/Contact/Contact'
 import Faq from './containers/Faq/Faq'
 import Imprint from './containers/Imprint/Imprint'
+import NotFound from './containers/NotFound/NotFound'
 import Podcasterinnen from './containers/Podcasterinnen/Podcasterinnen'
 import Privacy from './containers/Privacy/Privacy'
 import Session from './containers/Session/Session'
@@ -33,14 +34,17 @@ ReactDOM.render(
     <Router>
       <div>
         <MainNav></MainNav>
-        <Route exact path="/" component={App} />
-        <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/faq" component={Faq} />
-        <Route path="/imprint" component={Imprint} />
-        <Route path="/podcasterinnen" component={Podcasterinnen} />
-        <Route path="/privacy" component={Privacy} />
-        <Route path="/session" component={Session} />
+        <Switch>
+          <Route exact path="/" component={App} />
+          <Route path="/about" component={About} />
+          <Route path="/contact" component={Contact} />
+          <Route path="/faq" component={Faq} />
+          <Route path="/imprint" component={Imprint} />
+          <Route path="/podcasterinnen" component={Podcasterinnen} />
+          <Route path="/privacy" component={Privacy} />
+          <Route path="/session" component={Session} />
+          <Route component={NotFound} />
+        </Switch>
         <FooterNav></FooterNav>
       </div>
     </Router>
