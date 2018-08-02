@@ -11,11 +11,11 @@ class Imprint extends Component {
 
   render() {
     return (
-      <div className="Imprint">
-        <p className="Imprint-intro">
+      <section className="imprint">
+        <h1 className="imprint__headline">
           Imprint
-        </p>
-      </div>
+        </h1>
+      </section>
     )
   }
 }

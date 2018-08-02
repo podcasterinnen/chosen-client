@@ -3,9 +3,14 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { initialiseSession } from '../../containers/Session/SessionActions'
+import { initialiseSession, logoutUser } from '../../containers/Session/SessionActions'
 
 class MainNav extends Component {
+  handleLogout = (e) => {
+    e.preventDefault()
+    this.props.handleLogoutUser()
+  }
+
   render() {
     const { sessionState } = this.props
 
@@ -24,6 +29,9 @@ class MainNav extends Component {
               }
               { sessionState === 'REGISTERED' &&
                 <span>Register</span>
+              }
+              { sessionState === 'LOGGED_IN' &&
+                <span onClick={this.handleLogout}>Logout</span>
               }
             </Link>
           </li>
@@ -44,6 +52,9 @@ MainNav.defaultProps = {
 const mapDispatchToProps = (dispatch) => ({
   handleInitSession: () => {
     dispatch(initialiseSession())
+  },
+  handleLogoutUser: () => {
+    dispatch(logoutUser())
   },
 })
 

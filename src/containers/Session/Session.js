@@ -33,7 +33,6 @@ class Session extends Component {
 
   handleLoginSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target.value)
     this.props.handleLoginNewUser(this.state.emailAddress, this.state.password)
   }
 
@@ -43,7 +42,6 @@ class Session extends Component {
 
   handleRegisterSubmit = (e) => {
     e.preventDefault()
-    console.log(e.target.value)
     this.props.handleRegisterNewUser(this.state.emailAddress, this.state.forename, this.state.password)
   }
 
@@ -95,17 +93,17 @@ class Session extends Component {
           </form>
         }
         { sessionState === 'REGISTERED' &&
-          <form>
+          <form onSubmit={this.handleLoginSubmit}>
             <h2>Login:</h2>
             <div>
               <label>Email address</label>
-              <input placeholder="Your email address" type="email" />
+              <input onChange={this.handleEmailChange} placeholder="Your email address" type="email" />
             </div>
             <div>
               <label>Password</label>
-              <input placeholder="Your safe password." type="password" />
+              <input onChange={this.handlePasswordChange}  placeholder="Your safe password." type="password" />
             </div>
-            <button type="submit">Login</button>
+            <button type="submit" value="submit">Login</button>
           </form>
         }
         { sessionState === 'REGISTRATION_IN_PROGRESS' &&
