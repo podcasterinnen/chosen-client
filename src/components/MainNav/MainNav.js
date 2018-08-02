@@ -19,11 +19,15 @@ class MainNav extends Component {
         <ol>
           <li><Link to="/">Home</Link></li>
           <li><Link to="/podcasterinnen">Podcasterinnen</Link></li>
+          { sessionState === 'LOGGED_IN' &&
+            <li><Link to="/profile">Profil</Link></li>
+          }
           <li><Link to="/faq">FAQ</Link></li>
           <li><Link to="/about">Über uns</Link></li>
           <li>
             <Link to="/session">
               { (sessionState === 'UNKNOWN' ||
+                sessionState === 'INVALID' ||
                 sessionState === 'REGISTRATION_IN_PROGRESS') &&
                 <span>Login</span>
               }

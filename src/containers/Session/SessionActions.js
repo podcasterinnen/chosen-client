@@ -121,6 +121,7 @@ export const logoutUser = () => {
       })
       .catch((error) => {
         console.log(error)
+        localStorage.removeItem(LOCAL_STORAGE_USER_ID)
         dispatch(sessionError(error))
       })
   }
