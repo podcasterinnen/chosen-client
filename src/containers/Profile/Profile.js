@@ -72,7 +72,7 @@ class Profile extends Component {
         <h1 className="profile__headline">Profile</h1>
         <button handleEditToggle={this.handleEditToggle}>Bearbeiten</button>
         { !this.state.editing &&
-         <p>Dein Profil</p>
+          <p>Dein Profil</p>
         }
         { this.state.editing &&
           <form onSubmit={this.handleSubmit}>
