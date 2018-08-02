@@ -1,4 +1,5 @@
 import {
+  INVALID,
   LOCAL_STORAGE_USER_ID,
   LOGGED_IN,
   LOGIN_IN_PROGRESS,
@@ -33,6 +34,9 @@ const reducer = (store = defaultStore, action) => {
     case 'REGISTER_REQUEST':
       console.log('Registration requested.', action)
       return {...store, sessionState: REGISTRATION_IN_PROGRESS}
+    case 'SESSION_ERROR':
+      console.log('Something went wrong.', action)
+      return {...store, sessionState: INVALID}
     case 'SET_SESSION_STATE': 
       console.log('New Session State.', action)
       return {...store, sessionState: action.payload}

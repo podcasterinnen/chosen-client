@@ -1,4 +1,5 @@
 import {
+  API_URL_REGISTER_LOCALHOST,
   API_URL_SESSIONS_LOCALHOST,
 } from '../../config/config'
 
@@ -13,43 +14,54 @@ const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const REGISTER_REQUEST = 'REGISTER_REQUEST'
+const SESSION_ERROR = 'SESSION_ERROR'
 const SET_SESSION_STATE = 'SET_SESSION_STATE'
 
 export const initialiseSession = () => ({
   type: INITIALISE_SESSION,
 })
 
-const loginRequest = () => ({
+export const loginRequest = () => ({
   type: LOGIN_REQUEST,
 })
 
-const loginSuccess = (json) => ({
+export const loginSuccess = (json) => ({
   payload: json,
   type: LOGIN_SUCCESS,
 })
 
-const logoutRequest = () => ({
+export const logoutRequest = () => ({
   type: LOGOUT_REQUEST,
 })
 
-const logoutSuccess = (json) => ({
+export const logoutSuccess = (json) => ({
   payload: json,
   type: LOGOUT_SUCCESS,
 })
 
-const registerRequest = () => ({
+export const registerRequest = () => ({
   type: REGISTER_REQUEST,
 })
 
-const registerSuccess = (json) => ({
+export const registerSuccess = (json) => ({
   payload: json,
   type: REGISTER_SUCCESS,
+})
+
+export const sessionError = (error) => ({
+  payload: error,
+  type: SESSION_ERROR,
 })
 
 export const setSessionState = (newState) => ({
   payload: newState,
   type: SET_SESSION_STATE,
 })
+
+
+/**
+ * ASYNC ACTIONS
+ */
 
 export const loginUser = (emailAddress, password) => {
   return (dispatch) => {
@@ -79,7 +91,10 @@ export const loginUser = (emailAddress, password) => {
         localStorage.setItem(LOCAL_STORAGE_USER_ID, json.info.detail)
         return dispatch(loginSuccess(json))
       })
-      .catch((error) => (console.log(error)))
+      .catch((error) => {
+        console.log(error)
+        dispatch(sessionError(error))
+      })
   }
 }
 
@@ -104,7 +119,10 @@ export const logoutUser = () => {
         console.log(json)
         return dispatch(logoutSuccess(json))
       })
-      .catch((error) => (console.log(error)))
+      .catch((error) => {
+        console.log(error)
+        dispatch(sessionError(error))
+      })
   }
 }
 
@@ -120,14 +138,13 @@ export const registerNewUser = (emailAddress, forename, password) => {
         },
       }
     }
-    return fetch(`https://chosen-cors-proxy.herokuapp.com/users/`, {
+    return fetch(`${API_URL_REGISTER_LOCALHOST}`, {
         body: JSON.stringify(data),
-        cache: 'no-cache',
+        'cache-control': 'no-cache',
         headers: {
           'content-type': 'application/json',
-          'Access-Control-Allow-Origin':'*',
         },
-        method: 'post',
+        method: 'POST',
         mode: 'cors',
       })
       .then(response => {
@@ -135,6 +152,9 @@ export const registerNewUser = (emailAddress, forename, password) => {
         return response.json()
       })
       .then(json => dispatch(registerSuccess(json)))
-      .catch((error) => (console.log(error)))
+      .catch((error) => {
+        console.log(error)
+        dispatch(sessionError(error))
+      })
   }
 }

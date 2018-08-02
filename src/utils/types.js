@@ -2,6 +2,7 @@
 export const LOCAL_STORAGE_USER_ID = 'CHOSEN_USER_ID'
 
 // Session States
+export const INVALID = 'INVALID'
 export const UNKNOWN = 'UNKNOWN'
 export const REGISTRATION_IN_PROGRESS = 'REGISTRATION_IN_PROGRESS'
 export const REGISTERED = 'REGISTERED'
