@@ -29,10 +29,10 @@ class MainNav extends Component {
               { (sessionState === 'UNKNOWN' ||
                 sessionState === 'INVALID' ||
                 sessionState === 'REGISTRATION_IN_PROGRESS') &&
-                <span>Login</span>
+                <span>Register</span>
               }
               { sessionState === 'REGISTERED' &&
-                <span>Register</span>
+                <span>Login</span>
               }
               { sessionState === 'LOGGED_IN' &&
                 <span onClick={this.handleLogout}>Logout</span>
