@@ -11,7 +11,7 @@ class Imprint extends Component {
 
   render() {
     return (
-      <section className="imprint">
+      <section className="imprint main__section">
         <h1 className="imprint__headline">Impressum</h1>
         <p>Angaben gemäß § 5 TMG</p>
         <h2>Kontakt</h2>
