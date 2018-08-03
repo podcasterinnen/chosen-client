@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import 'normalize.css'
 import './App.css'
 import { initialiseApp } from './AppActions'
 

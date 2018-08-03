@@ -6,6 +6,7 @@ import { createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
 
+import 'normalize.css'
 import './index.css'
 import { 
   LOGGED_IN,
