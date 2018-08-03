@@ -1,0 +1,4 @@
+.app {
+  padding: var(--main-nav-height) 0 0 0;
+  min-height: calc(100vh - var(--main-nav-height) - var(--main-nav-height));
+}

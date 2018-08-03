@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
+import 'normalize.css'
 import './App.css'
 import { initialiseApp } from './AppActions'
 
@@ -11,10 +12,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <p className="App-intro">
-          App
-        </p>
+      <div className="app">
+        <h1 className="app__headline">podcasterinnen.org</h1>
       </div>
     )
   }

@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import './Session.css'
-import { handleChange, handleSubmit } from '../../utils/helper'
 import { initialiseSession, loginUser, registerNewUser, setSessionState } from './SessionActions'
 
 class Session extends Component {
@@ -83,33 +82,33 @@ class Session extends Component {
           }
         </div>
         { sessionState === 'UNKNOWN' &&
-          <form onSubmit={() => handleSubmit('register')}>
+          <form onSubmit={() => this.handleSubmit('register')}>
             <h2>Registrieren:</h2>
             <div>
               <label>Dein Vorname:</label>
-              <input onChange={() => handleChange('forename')} placeholder="Your forename" type="text" value={this.state.forename} />
+              <input onChange={() => this.handleChange('forename')} placeholder="Your forename" type="text" value={this.state.forename} />
             </div>
             <div>
               <label>Email address</label>
-              <input onChange={() => handleChange('email')} placeholder="Your email address" type="email" value={this.state.emailAddress} />
+              <input onChange={() => this.handleChange('email')} placeholder="Your email address" type="email" value={this.state.emailAddress} />
             </div>
             <div>
               <label>Password</label>
-              <input onChange={() => handleChange('password')} placeholder="Your safe password." type="password" value={this.state.password} />
+              <input onChange={() => this.handleChange('password')} placeholder="Your safe password." type="password" value={this.state.password} />
             </div>
             <button type="submit" value="submit">Registrieren</button>
           </form>
         }
         { sessionState === 'REGISTERED' &&
-          <form onSubmit={() => handleSubmit('login')}>
+          <form onSubmit={() => this.handleSubmit('login')}>
             <h2>Login:</h2>
             <div>
               <label>Email address</label>
-              <input onChange={() => handleChange('email')} placeholder="Your email address" type="email" />
+              <input onChange={() => this.handleChange('email')} placeholder="Your email address" type="email" />
             </div>
             <div>
               <label>Password</label>
-              <input onChange={() => handleChange('password')}  placeholder="Your safe password." type="password" />
+              <input onChange={() => this.handleChange('password')}  placeholder="Your safe password." type="password" />
             </div>
             <button type="submit" value="submit">Login</button>
           </form>

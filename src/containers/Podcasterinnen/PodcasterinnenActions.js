@@ -1,5 +1,5 @@
 import {
-  API_URL_PODCASTERINNEN_PROD,
+  API_URL_PODCASTERINNEN,
 } from '../../config/config'
 
 const RECEIVE_PODCASTERINNEN = 'RECEIVE_PODCASTERINNEN'
@@ -17,7 +17,7 @@ const requestPodcasterinnen = () => ({
 export const initialisePodcasterinnen = () => {
   return (dispatch) => {
     dispatch(requestPodcasterinnen())
-    return fetch(API_URL_PODCASTERINNEN_PROD)
+    return fetch(API_URL_PODCASTERINNEN)
       .then(response => response.json())
       .then(json => dispatch(receivePodcasterinnen(json)))
       .catch((error) => console.log(error))

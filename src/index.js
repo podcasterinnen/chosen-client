@@ -53,7 +53,7 @@ const PrivateRoute = ({ component: Component, sessionState, ...rest }) => (
 ReactDOM.render(
   <Provider store={store}>
     <Router>
-      <div>
+      <main className="main" role="main">
         <MainNav></MainNav>
         <Switch>
           <Route exact path="/" component={App} />
@@ -68,7 +68,7 @@ ReactDOM.render(
           <Route component={NotFound} />
         </Switch>
         <FooterNav></FooterNav>
-      </div>
+      </main>
     </Router>
   </Provider>, 
   document.getElementById('root'),

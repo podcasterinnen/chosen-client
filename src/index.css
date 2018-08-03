@@ -1,5 +1,29 @@
+/* VARIABLES */
+:root {
+  --theme-primary-color: #7797AE;
+  --theme-primary-color-dark: #2C3E50;
+  --theme-secondary-color: #A84E54;
+
+  --footer-nav-height: 60px;
+  --main-nav-height: 60px;
+}
+
+/* GENERAL STYLES */
 body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--theme-primary-color-dark);
+
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+}
+
+a {
+  color: var(--theme-primary-color);
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
 }

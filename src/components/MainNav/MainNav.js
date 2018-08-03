@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
+import './MainNav.css'
 import { initialiseSession, logoutUser } from '../../containers/Session/SessionActions'
 
 class MainNav extends Component {
@@ -15,17 +16,27 @@ class MainNav extends Component {
     const { sessionState } = this.props
 
     return(
-      <nav>
-        <ol>
-          <li><Link to="/">Home</Link></li>
-          <li><Link to="/podcasterinnen">Podcasterinnen</Link></li>
+      <nav className="mainnav">
+        <ol className="mainnav__list">
+          <li className="mainnav__list__element">
+            <Link className="mainnav__list__element__link" to="/">Home</Link>
+          </li>
+          <li className="mainnav__list__element">
+            <Link className="mainnav__list__element__link" to="/podcasterinnen">Podcasterinnen</Link>
+          </li>
           { sessionState === 'LOGGED_IN' &&
-            <li><Link to="/profile">Profil</Link></li>
+            <li className="mainnav__list__element">
+              <Link className="mainnav__list__element__link" to="/profile">Profil</Link>
+            </li>
           }
-          <li><Link to="/faq">FAQ</Link></li>
-          <li><Link to="/about">Über uns</Link></li>
-          <li>
-            <Link to="/session">
+          <li className="mainnav__list__element">
+            <Link className="mainnav__list__element__link" to="/faq">FAQ</Link>
+          </li>
+          <li className="mainnav__list__element">
+            <Link className="mainnav__list__element__link" to="/about">Über uns</Link>
+          </li>
+          <li className="mainnav__list__element">
+            <Link className="mainnav__list__element__link" to="/session">
               { (sessionState === 'UNKNOWN' ||
                 sessionState === 'INVALID' ||
                 sessionState === 'REGISTRATION_IN_PROGRESS') &&

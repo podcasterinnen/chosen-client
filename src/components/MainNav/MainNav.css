@@ -1,0 +1,28 @@
+/* GENERAL STYLES */
+.mainnav {
+  background-color: var(--theme-primary-color);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  position: fixed;
+  height: var(--main-nav-height);
+  width: 100%;
+}
+
+.mainnav__list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* .mainnav__list__element {} */
+
+.mainnav__list__element__link {
+  color: #FFFFFF;
+  text-decoration: none;
+
+  display: inline-block;
+  padding: 20px;
+}
+
+/* .mainnav__list__element__link:active, 
+.mainnav__list__element__link:hover, {} */

@@ -1,6 +1,6 @@
 import {
-  API_URL_REGISTER_LOCALHOST,
-  API_URL_SESSIONS_LOCALHOST,
+  API_URL_REGISTER,
+  API_URL_SESSIONS,
 } from '../../config/config'
 
 import {
@@ -72,7 +72,7 @@ export const loginUser = (emailAddress, password) => {
         password: password,
       }
     }
-    return fetch(API_URL_SESSIONS_LOCALHOST, {
+    return fetch(API_URL_SESSIONS, {
         body: JSON.stringify(data),
         'cache-control': 'no-cache',
         credentials: 'include',
@@ -101,7 +101,7 @@ export const loginUser = (emailAddress, password) => {
 export const logoutUser = () => {
   return (dispatch) => {
     dispatch(logoutRequest())
-    return fetch(`${API_URL_SESSIONS_LOCALHOST}${localStorage.getItem(LOCAL_STORAGE_USER_ID)}`, {
+    return fetch(`${API_URL_SESSIONS}${localStorage.getItem(LOCAL_STORAGE_USER_ID)}`, {
         'cache-control': 'no-cache',
         credentials: 'include',
         headers: {
@@ -139,7 +139,7 @@ export const registerNewUser = (emailAddress, forename, password) => {
         },
       }
     }
-    return fetch(`${API_URL_REGISTER_LOCALHOST}`, {
+    return fetch(`${API_URL_REGISTER}`, {
         body: JSON.stringify(data),
         'cache-control': 'no-cache',
         headers: {
