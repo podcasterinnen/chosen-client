@@ -9,6 +9,10 @@
   --section-padding-top: 100px;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* GENERAL STYLES */
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
@@ -28,6 +32,8 @@ a {
 
 h1,
 h2 {
+  line-height: 1.375em;
+
   margin-top: 1.5em;
 }
 
@@ -40,5 +46,5 @@ h2 {
   margin: 0 auto;
   padding: var(--section-padding-top) 40px var(--section-padding-top) 40px;
   max-width: 860px;
-  min-height: calc(100vh - var(--main-nav-height) - var(--main-nav-height));
+  min-height: calc(100vh - var(--main-nav-height));
 }

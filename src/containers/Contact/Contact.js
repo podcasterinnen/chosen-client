@@ -11,10 +11,8 @@ class Contact extends Component {
 
   render() {
     return (
-      <div className="Contact">
-        <p className="Contact-intro">
-          Contact
-        </p>
+      <div className="contact">
+        <h1>Contact</h1>
       </div>
     )
   }

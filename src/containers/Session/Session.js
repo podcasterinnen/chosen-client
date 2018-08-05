@@ -69,10 +69,8 @@ class Session extends Component {
     const { sessionState } = this.props
 
     return (
-      <div className="Session">
-        <p className="Session-intro">
-          Session
-        </p>
+      <div className="session main__section">
+        <h1>Session</h1>
         <div>
           { sessionState === 'UNKNOWN' &&
             <button onClick={this.handleToggleClick}>Login</button>

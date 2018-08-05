@@ -13,7 +13,7 @@ class Podcasterinnen extends Component {
   render() {
     const { podcasterinnen } = this.props
     return (
-      <div className="Podcasterinnen">
+      <div className="Podcasterinnen main__section">
         <p className="Podcasterinnen-intro">
           Podcasterinnen
         </p>

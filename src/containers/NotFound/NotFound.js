@@ -11,10 +11,8 @@ class NotFound extends Component {
 
   render() {
     return (
-      <div className="NotFound">
-        <p className="NotFound-intro">
-          NotFound
-        </p>
+      <div className="notfound main__section">
+        <h1>404</h1>
       </div>
     )
   }
