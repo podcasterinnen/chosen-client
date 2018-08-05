@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import './Podcasterinnen.css'
 import { initialisePodcasterinnen } from './PodcasterinnenActions'
+import PodcasterinnenCard from '../../components/PodcasterinnenCard/PodcasterinnenCard'
+import { generateKey } from '../../utils/utils'
 
 class Podcasterinnen extends Component {
   componentDidMount() {
@@ -14,18 +16,22 @@ class Podcasterinnen extends Component {
     const { podcasterinnen } = this.props
     return (
       <div className="Podcasterinnen main__section">
-        <p className="Podcasterinnen-intro">
-          Podcasterinnen
-        </p>
+        <h1>Podcasterinnen</h1>
         {!podcasterinnen &&
           <p>
             Loading...
           </p>
         }
         {podcasterinnen &&
-          <p>
-            Podcasterinnen loaded.
-          </p>
+          <ul className="podcasterinnen__list">
+            {podcasterinnen.map((podcasterin, i) => {
+              return (
+                <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
+                  <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
+                </li>
+              )
+            })}
+          </ul>
         }
       </div>
     )
