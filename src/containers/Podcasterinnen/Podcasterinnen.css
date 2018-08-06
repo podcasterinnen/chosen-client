@@ -1,9 +1,17 @@
+/* CONTAINER VARIABLES */
+:root {
+  --podcasterinnen-grid-gutter-size: 10px;
+}
+
 .podcasterinnen__list {
   display: flex;
   flex-wrap: wrap;
+  margin: 0 calc(var(--podcasterinnen-grid-gutter-size) * -1);
   padding: 0;
 }
 
 .podcasterinnen__list__item {
   list-style: none;
+  
+  padding: var(--podcasterinnen-grid-gutter-size);
 }

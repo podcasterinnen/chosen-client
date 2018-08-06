@@ -3,6 +3,7 @@
   --theme-primary-color: #7797AE;
   --theme-primary-color-dark: #2C3E50;
   --theme-secondary-color: #A84E54;
+  --theme-light-color: #EBEEF1;
 
   --footer-nav-height: 60px;
   --main-nav-height: 60px;
@@ -22,6 +23,7 @@ body {
   font-size: 16px;
   line-height: 1.5em;
 
+  background-color: var(--theme-light-color);
   margin: 0;
   padding: 0;
 }

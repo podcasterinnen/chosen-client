@@ -17,14 +17,14 @@ class Podcasterinnen extends Component {
     return (
       <div className="Podcasterinnen main__section">
         <h1>Podcasterinnen</h1>
-        {!podcasterinnen &&
+        { !podcasterinnen &&
           <p>
             Loading...
           </p>
         }
-        {podcasterinnen &&
+        { podcasterinnen &&
           <ul className="podcasterinnen__list">
-            {podcasterinnen.map((podcasterin, i) => {
+            { podcasterinnen.map((podcasterin, i) => {
               return (
                 <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
                   <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
