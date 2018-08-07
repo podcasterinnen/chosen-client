@@ -8,15 +8,50 @@ import PodcasterinnenCard from '../../components/PodcasterinnenCard/Podcasterinn
 import { generateKey } from '../../utils/utils'
 
 class Podcasterinnen extends Component {
-  componentDidMount() {
+  constructor(props) {
+    super(props)
+    this.state = {
+      query: '',
+      results: [],
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSearch = this.handleSearch.bind(this)
+  }
+
+  componentDidMount = () => {
     this.props.handleInitPodcasterinnen()
+  }
+
+  handleChange = () => {
+    this.setState({
+      query: this.search.value
+    }, () => {
+      if (this.state.query && this.state.query.length > 1) {
+        if (this.state.query.length % 2 === 0) {
+          this.handleSearch()
+        }
+      } 
+    })
+  }
+
+  handleSearch = () => {
+    console.log( 'Handling Search', this.state )
   }
 
   render() {
     const { podcasterinnen } = this.props
     return (
-      <div className="Podcasterinnen main__section">
+      <div className="Podcasterinnen main__section main__section--wide">
         <h1>Podcasterinnen</h1>
+        <form className="podcasterinnen__search">
+          <label className="podcasterinnen__search__label">Suche</label>
+          <input
+            className="podcasterinnen__search__bar"
+            ref={input => this.search = input}
+            onChange={this.handleChange}
+            placeholder="Suche nach ..."
+          />
+        </form>
         { !podcasterinnen &&
           <p>
             Loading...

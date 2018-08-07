@@ -4,14 +4,58 @@
 }
 
 .podcasterinnen__list {
-  display: flex;
-  flex-wrap: wrap;
-  margin: 0 calc(var(--podcasterinnen-grid-gutter-size) * -1);
+  align-items: stretch;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: 1fr;
+  justify-items: stretch;
+  margin: 0;
   padding: 0;
+}
+
+@media screen and (min-width: 550px) {
+  .podcasterinnen__list {
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .podcasterinnen__list {
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
 }
 
 .podcasterinnen__list__item {
   list-style: none;
-  
-  padding: var(--podcasterinnen-grid-gutter-size);
+}
+
+.podcasterinnen__search {
+  margin: 20px 0;
+}
+
+.podcasterinnen__search__bar {
+  background-color: #FFFFFF;
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid var(--theme-primary-color-dark);
+  border-left: 1px solid #FFFFFF;
+  display: block;
+  margin: 10px 0;
+  padding: 20px 5px 10px 5px;
+  width: 100%;
+}
+
+.podcasterinnen__search__bar:focus {
+  border: 1px solid var(--theme-primary-color-dark);
+  outline: none;
+}
+
+.podcasterinnen__search__label {
+  display: block;
+  font-size: 14px;
 }

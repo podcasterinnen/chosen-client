@@ -7,7 +7,6 @@ class PodcasterinnenCard extends Component {
 
   render() {
     const { item } = this.props
-    console.log(item)
 
     return(
       <div className="card">

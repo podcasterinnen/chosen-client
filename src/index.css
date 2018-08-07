@@ -47,6 +47,11 @@ h2 {
 .main__section {
   margin: 0 auto;
   padding: var(--section-padding-top) 40px var(--section-padding-top) 40px;
+  width: 100%;
   max-width: 860px;
   min-height: calc(100vh - var(--main-nav-height));
+}
+
+.main__section--wide {
+  max-width: 1100px;
 }
