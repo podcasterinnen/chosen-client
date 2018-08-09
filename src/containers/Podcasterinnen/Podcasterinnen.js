@@ -26,16 +26,22 @@ class Podcasterinnen extends Component {
     this.setState({
       query: this.search.value
     }, () => {
-      if (this.state.query && this.state.query.length > 1) {
-        if (this.state.query.length % 2 === 0) {
-          this.handleSearch()
-        }
-      } 
+      this.handleSearch()
     })
   }
 
   handleSearch = () => {
-    console.log( 'Handling Search', this.state )
+    const result = []
+    this.props.podcasterinnen.forEach((podcasterin) => {
+      const podcasterinString = JSON.stringify(podcasterin).toLowerCase()
+      const queryString = this.state.query.toLowerCase()
+      if (podcasterinString.includes(queryString)) {
+        result.push(podcasterin)
+      }
+    })
+    this.setState({
+      results: result,
+    })
   }
 
   render() {
@@ -57,7 +63,21 @@ class Podcasterinnen extends Component {
             Loading...
           </p>
         }
-        { podcasterinnen &&
+        { this.state.results.length > 0 &&
+          <div>
+            <h2>Suchergebnisse:</h2>
+            <ul className="podcasterinnen__list">
+              { this.state.results.map((result, i) => {
+                return (
+                  <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
+                    <PodcasterinnenCard item={result}></PodcasterinnenCard>
+                  </li>
+                )
+              })}
+            </ul>
+          </div>
+        }
+        { (this.state.results <= 0 && podcasterinnen) &&
           <ul className="podcasterinnen__list">
             { podcasterinnen.map((podcasterin, i) => {
               return (
