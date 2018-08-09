@@ -4,6 +4,7 @@
   --theme-primary-color-dark: #2C3E50;
   --theme-secondary-color: #A84E54;
   --theme-light-color: #EBEEF1;
+  --theme-light-color-grey: #B7BFC8;
 
   --footer-nav-height: 60px;
   --main-nav-height: 60px;
@@ -14,7 +15,7 @@
   box-sizing: border-box;
 }
 
-/* GENERAL STYLES */
+/* GENERAL TYPOGRAPHY STYLES */
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -22,10 +23,6 @@ body {
   color: var(--theme-primary-color-dark);
   font-size: 16px;
   line-height: 1.5em;
-
-  background-color: var(--theme-light-color);
-  margin: 0;
-  padding: 0;
 }
 
 a {
@@ -35,7 +32,31 @@ a {
 h1,
 h2 {
   line-height: 1.375em;
+}
 
+.button {
+  color: #FFFFFF;
+  text-transform: uppercase;
+
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+
+.button--decent {
+  background-color: var(--theme-light-color-grey);
+  border: 1px solid var(--theme-light-color-grey);
+}
+
+
+/* GENERAL LAYOUT STYLES */
+body {
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2 {
   margin-top: 1.5em;
 }
 
@@ -54,4 +75,9 @@ h2 {
 
 .main__section--wide {
   max-width: 1100px;
+}
+
+/* GENERAL THEME STYLES */
+body {
+  background-color: var(--theme-light-color);
 }

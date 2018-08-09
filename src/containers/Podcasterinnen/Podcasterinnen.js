@@ -16,6 +16,7 @@ class Podcasterinnen extends Component {
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleSearchReset = this.handleSearchReset.bind(this)
   }
 
   componentDidMount = () => {
@@ -44,6 +45,13 @@ class Podcasterinnen extends Component {
     })
   }
 
+  handleSearchReset = () => {
+    this.setState({
+      query: '',
+      results: [],
+    })
+  }
+
   render() {
     const { podcasterinnen } = this.props
     return (
@@ -66,6 +74,8 @@ class Podcasterinnen extends Component {
         { this.state.results.length > 0 &&
           <div>
             <h2>Suchergebnisse:</h2>
+            <p><small>{this.state.results.length} Einträge</small></p>
+            <p><button className="button button--decent" onClick={this.handleSearchReset}>Suche zurücksetzen</button></p>
             <ul className="podcasterinnen__list">
               { this.state.results.map((result, i) => {
                 return (
