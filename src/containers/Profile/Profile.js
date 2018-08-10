@@ -68,9 +68,9 @@ class Profile extends Component {
 
   render() {
     return (
-      <section className="profile">
+      <section className="profile main__section">
         <h1 className="profile__headline">Profile</h1>
-        <button handleEditToggle={this.handleEditToggle}>Bearbeiten</button>
+        <button onClick={this.handleEditToggle}>Bearbeiten</button>
         { !this.state.editing &&
           <p>Dein Profil</p>
         }
