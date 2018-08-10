@@ -75,38 +75,38 @@ class Profile extends Component {
           <p>Dein Profil</p>
         }
         { this.state.editing &&
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={(e) => this.handleSubmit(e)}>
             <div>
               <label>Vorname</label>
-              <input onChange={() => this.handleChange('forename')} placeholder="Vorname" type="text" />
+              <input onChange={(e) => this.handleChange(e, 'forename')} placeholder="Vorname" type="text" />
             </div>
             <div>
               <label>Nachname</label>
-              <input onChange={() => this.handleChange('surname')} placeholder="Nachname" type="text" />
+              <input onChange={(e) => this.handleChange(e, 'surname')} placeholder="Nachname" type="text" />
             </div>
             <div>
               <label>Kurz-Biographie</label>
-              <textarea onChange={() => this.handleChange('bioShort')} placeholder="Kurz-Biographie"></textarea>
+              <textarea onChange={(e) => this.handleChange(e, 'bioShort')} placeholder="Kurz-Biographie"></textarea>
             </div>
             <div>
               <label>Über mich</label>
-              <textarea onChange={() => this.handleChange('bioLong')} placeholder="Über mich"></textarea>
+              <textarea onChange={(e) => this.handleChange(e, 'bioLong')} placeholder="Über mich"></textarea>
             </div>
             <div>
               <label>Twitter-URL</label>
-              <input onChange={() => this.handleChange('twitter')} placeholder="Twitter-URL" type="url" />
+              <input onChange={(e) => this.handleChange(e, 'twitter')} placeholder="Twitter-URL" type="url" />
             </div>
             <div>
               <label>Webseite</label>
-              <input onChange={() => this.handleChange('website')} placeholder="Webseite" type="url" />
+              <input onChange={(e) => this.handleChange(e, 'website')} placeholder="Webseite" type="url" />
             </div>
             <div>
               <label>Stadt</label>
-              <input onChange={() => this.handleChange('city')} placeholder="Stadt" type="text" />
+              <input onChange={(e) => this.handleChange(e, 'city')} placeholder="Stadt" type="text" />
             </div>
             <div>
               <label>Land</label>
-              <input onChange={() => this.handleChange('country')} placeholder="Land" type="text" />
+              <input onChange={(e) => this.handleChange(e, 'country')} placeholder="Land" type="text" />
             </div>
             <button type="submit" value="submit">Login</button>
           </form>

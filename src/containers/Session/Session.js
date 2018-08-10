@@ -24,7 +24,7 @@ class Session extends Component {
 
   handleChange = (e, type) => {
     switch(type) {
-    case 'emailAdress':
+    case 'email':
       this.setState({ emailAddress: e.target.value })
       break
     case 'forename':
@@ -80,33 +80,33 @@ class Session extends Component {
           }
         </div>
         { sessionState === 'UNKNOWN' &&
-          <form onSubmit={() => this.handleSubmit('register')}>
+          <form onSubmit={(e) => this.handleSubmit(e, 'register')}>
             <h2>Registrieren:</h2>
             <div>
               <label>Dein Vorname:</label>
-              <input onChange={() => this.handleChange('forename')} placeholder="Your forename" type="text" value={this.state.forename} />
+              <input onChange={(e) => this.handleChange(e, 'forename')} autoComplete="given-name" placeholder="Your forename" type="text" value={this.state.forename} />
             </div>
             <div>
               <label>Email address</label>
-              <input onChange={() => this.handleChange('email')} placeholder="Your email address" type="email" value={this.state.emailAddress} />
+              <input onChange={(e) => this.handleChange(e, 'email')} autoComplete="username" placeholder="Your email address" type="email" value={this.state.emailAddress} />
             </div>
             <div>
               <label>Password</label>
-              <input onChange={() => this.handleChange('password')} placeholder="Your safe password." type="password" value={this.state.password} />
+              <input onChange={(e) => this.handleChange(e, 'password')} autoComplete="current-password" placeholder="Your safe password." type="password" value={this.state.password} />
             </div>
             <button type="submit" value="submit">Registrieren</button>
           </form>
         }
         { sessionState === 'REGISTERED' &&
-          <form onSubmit={() => this.handleSubmit('login')}>
+          <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
             <h2>Login:</h2>
             <div>
               <label>Email address</label>
-              <input onChange={() => this.handleChange('email')} placeholder="Your email address" type="email" />
+              <input onChange={(e) => this.handleChange(e, 'email')} autoComplete="username" placeholder="Your email address" type="email" />
             </div>
             <div>
               <label>Password</label>
-              <input onChange={() => this.handleChange('password')}  placeholder="Your safe password." type="password" />
+              <input onChange={(e) => this.handleChange(e, 'password')}  autoComplete="current-password" placeholder="Your safe password." type="password" />
             </div>
             <button type="submit" value="submit">Login</button>
           </form>
