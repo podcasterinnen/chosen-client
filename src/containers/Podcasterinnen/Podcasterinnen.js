@@ -64,6 +64,7 @@ class Podcasterinnen extends Component {
             ref={input => this.search = input}
             onChange={this.handleChange}
             placeholder="Suche nach ..."
+            type="text"
           />
         </form>
         { !podcasterinnen &&
