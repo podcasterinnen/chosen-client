@@ -115,7 +115,7 @@ Podcasterinnen.defaultProps = {
 const mapDispatchToProps = (dispatch) => ({
   handleInitPodcasterinnen: () => {
     dispatch(initialisePodcasterinnen())
-    .then(() => console.log('Podcasterinnen Loaded'))
+    .then(() => console.log('Podcasterinnen loaded'))
   }
 })
 

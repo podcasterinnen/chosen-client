@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
 import './Profile.css'
-import { initialiseProfile } from './ProfileActions'
+import { submitProfile, editingProfile, initialiseProfile } from './ProfileActions'
 
 class Profile extends Component {
   constructor(props) {
@@ -13,7 +13,6 @@ class Profile extends Component {
       bioLong: '',
       city: '',
       country: '',
-      editing: false,
       forename: '',
       surname: '',
       twitter: '',
@@ -60,24 +59,48 @@ class Profile extends Component {
   }
 
   handleEditToggle = () => {
-    this.setState({editing: !this.state.editing})
+    this.props.handleEditingProfile()
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
+    this.props.handleSubmitProfile({
+      bio_short: this.state.bioShort,
+      bio_long: this.state.bioLong,
+      city: this.state.city,
+      country: this.state.country,
+      forename: this.state.forename,
+      surname: this.state.surname,
+      twitter: this.state.twitter,
+      website: this.state.website,
+    })
   }
 
   render() {
+    const { profile, state } = this.props
     return (
       <section className="profile main__section">
         <h1 className="profile__headline">Profil</h1>
-        { !this.state.editing &&
+        { (state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR') &&
           <div>
             <button className="button button--decent" onClick={this.handleEditToggle}>Bearbeiten</button>
             <h2>Dein Profil</h2>
+            { profile &&
+              <div>
+                <p>{profile.forename} {profile.lastname}</p>
+                <p>{profile.bio_short}</p>
+                <p>{profile.bio_long}</p>
+                <p>{profile.city}, {profile.country}</p>
+                <p>{profile.twitter}</p>
+                <p>{profile.website}</p>
+              </div>
+            }
           </div>
         }
-        { this.state.editing &&
+        { state === 'STATE_SENDING_REQUEST' &&
+          <p>Profil wird bearbeitet ...</p>
+        }
+        { state === 'STATE_EDITING' &&
           <div>
             <button className="button button--decent" onClick={this.handleEditToggle}>Bearbeiten beenden</button>
             <h2>Bearbeite dein Profil:</h2>
@@ -85,6 +108,7 @@ class Profile extends Component {
               <div>
                 <label>Vorname</label>
                 <input 
+                  autoComplete="given-name"
                   onChange={(e) => this.handleChange(e, 'forename')} 
                   placeholder="Vorname" 
                   type="text"
@@ -93,6 +117,7 @@ class Profile extends Component {
               <div>
                 <label>Nachname</label>
                 <input 
+                  autoComplete="family-name"
                   onChange={(e) => this.handleChange(e, 'surname')}
                   placeholder="Nachname"
                   type="text"
@@ -133,6 +158,7 @@ class Profile extends Component {
               <div>
                 <label>Stadt</label>
                 <input 
+                  autoComplete="address-level-2"
                   onChange={(e) => this.handleChange(e, 'city')} 
                   placeholder="Stadt" 
                   type="text"
@@ -141,6 +167,7 @@ class Profile extends Component {
               <div>
                 <label>Land</label>
                 <input 
+                  autoComplete="address-level-1"
                   onChange={(e) => this.handleChange(e, 'country')} 
                   placeholder="Land" 
                   type="text"
@@ -150,7 +177,7 @@ class Profile extends Component {
                 className="button" 
                 type="submit" 
                 value="submit"
-              >Login</button>
+              >Fertig</button>
             </form>
           </div>
         }
@@ -160,21 +187,31 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
-  podcasterinnen: PropTypes.array,
+  profile: PropTypes.object,
+  state: PropTypes.string,
 }
 
 Profile.defaultProps = {
-  podcasterinnen: null,
+  profile: null,
+  state: 'STATE_DEFAULT',
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  handleEditingProfile: () => {
+    dispatch(editingProfile())
+  },
   handleInitProfile: () => {
     dispatch(initialiseProfile())
-  }
+    .then(() => console.log('Profile loaded.'))
+  },
+  handleSubmitProfile: (profile) => {
+    dispatch(submitProfile(profile))
+  },
 })
 
 const mapStateToProps = (state) => ({
-  podcasterinnen: state.podcasterinnenReducer.podcasterinnen,
+  profile: state.profileReducer.profile,
+  state: state.profileReducer.state,
 })
 
 export default connect(
