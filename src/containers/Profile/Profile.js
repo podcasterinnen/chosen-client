@@ -138,7 +138,7 @@ class Profile extends Component {
             <h2>Dein Profil</h2>
             { profile &&
               <div>
-                <p>{profile.forename} {profile.lastname}</p>
+                <p>{profile.forename} {profile.surname}</p>
                 { profile.bio_short &&
                   <p>{profile.bio_short}</p>
                 }
