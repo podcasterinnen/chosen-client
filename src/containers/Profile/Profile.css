@@ -1,0 +1,8 @@
+.profile__button--delete {
+  margin-left: 20px;
+}
+
+.profile__input--multi {
+  display: inline-block !important;
+  width: calc(100% - 60px) !important;
+}

@@ -12,6 +12,8 @@ const reducer = (store = defaultStore, action) => {
       return {...store, state: STATE_REQUEST_ERROR}
     case 'EDITING_PROFILE':
       return {...store, state: STATE_EDITING}
+    case 'EDITING_QUIT':
+      return {...store, state: STATE_DEFAULT}
     case 'EDIT_REQUEST':
       return {...store, state: STATE_SENDING_REQUEST}
     case 'EDIT_SUCCESS':

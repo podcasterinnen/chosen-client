@@ -7,8 +7,8 @@ import {
 } from '../../utils/types'
 
 const EDIT_ERROR = 'EDIT_ERROR'
-const EDIT_PROFILE = 'EDIT_PROFILE'
 const EDITING_PROFILE = 'EDITING_PROFILE'
+const EDITING_QUIT = 'EDITING_QUIT'
 const EDIT_REQUEST = 'EDIT_REQUEST'
 const EDIT_SUCCESS = 'EDIT_SUCCESS'
 const RECEIVE_PROFILE = 'RECEIVE_PROFILE'
@@ -21,6 +21,10 @@ export const editError = (error) => ({
 
 export const editingProfile = () => ({
   type: EDITING_PROFILE,
+})
+
+export const editingQuit = () => ({
+  type: EDITING_QUIT,
 })
 
 export const editRequest = (data) => ({
@@ -48,8 +52,13 @@ export const submitProfile = (object) => {
     let data = {}
     data.podcaster = {}
     Object.entries(object).forEach(([key, value]) => {
-      if (value !== '') {
+      if (value !== '' && typeof value === 'string') {
         data.podcaster[key] = value
+      } else if (typeof value === 'array' && value.length > 0) {
+        data.podcaster[key] = []
+        value.forEach((item) => {
+          data.podcaster[key].push(item)
+        })
       }
     })
     dispatch(editRequest(data))
