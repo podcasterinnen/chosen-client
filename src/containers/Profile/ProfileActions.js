@@ -59,6 +59,9 @@ export const submitProfile = (object) => {
         value.forEach((item) => {
           data.podcaster[key].push(item)
         })
+      } else if (typeof value === 'boolean') {
+        console.log(value)
+        data.podcaster[key] = value
       }
     })
     dispatch(editRequest(data))

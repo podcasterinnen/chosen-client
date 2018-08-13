@@ -17,6 +17,7 @@ class Profile extends Component {
         city: '',
         country: '',
         forename: '',
+        remote_possible: false,
         surname: '',
         twitter_url: '',
         website_url: '',
@@ -53,6 +54,12 @@ class Profile extends Component {
     } else {
       this.props.handleEditingQuit()
     }
+  }
+
+  handleRemoteInput = (e) => {
+    this.setState({
+      profile: {...this.state.profile, remote_possible: !this.state.profile.remote_possible}
+    })
   }
 
   handleSubmit = (e) => {
@@ -102,6 +109,14 @@ class Profile extends Component {
             { profile &&
               <div>
                 <p>{profile.forename} {profile.surname}</p>
+                <p>Remote verfügbar:
+                  { profile.remote_possible &&
+                    <span> Ja</span>
+                  }
+                  { !profile.remote_possible &&
+                    <span> Nein</span>
+                  }
+                </p>
                 { profile.bio_short &&
                   <p>{profile.bio_short}</p>
                 }
@@ -165,11 +180,21 @@ class Profile extends Component {
                 />
               </div>
               <div>
+                <input 
+                  id="remotePossible"
+                  name="remote"
+                  onChange={(e) => this.handleRemoteInput(e)}
+                  type="checkbox" 
+                  value={profile.remote_possible || false}
+                />
+                <label htmlFor="remotePossible">Remote verfügbar</label>
+              </div>
+              <div>
                 <label>Schlagworte</label>
                 { tags.map((tag, index) => (
                   <div key={index}>
                     <input
-                      autocomplete="off"
+                      autoComplete="off"
                       className="profile__input--multi"
                       list="tags-data"
                       onChange={this.handleTagsChange(index)}
@@ -183,15 +208,19 @@ class Profile extends Component {
                         <option key={index} value={staticTag} />
                       ))}
                     </datalist>
-                    <button
-                      className="button button--icon profile__button--delete"
-                      onClick={this.handleRemoveTagsInput(index)}
-                    >-</button>
+                    { index > 0 &&
+                      <button
+                        className="button button--decent button--icon profile__button--delete"
+                        onClick={this.handleRemoveTagsInput(index)}
+                        tabIndex="-1"
+                      >-</button>
+                    }
                   </div>
                 ))}
                 <button 
                   className="button profile__button--add"
                   onClick={(e) => this.handleAddTagsInput(e)}
+                  tabIndex="-1"
                 >Schlagwort hinzufügen</button>
               </div>
               <div>
