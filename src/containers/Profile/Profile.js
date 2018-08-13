@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import staticTags from '../../assets/data/tags.json'
+
 import './Profile.css'
 import { submitProfile, editingProfile, editingQuit, initialiseProfile } from './ProfileActions'
 
@@ -19,6 +21,7 @@ class Profile extends Component {
         twitter_url: '',
         website_url: '',
       },
+      staticTags: staticTags.tags,
       tags: [{
         name: '',
       }],
@@ -86,7 +89,8 @@ class Profile extends Component {
 
   render() {
     const { state } = this.props
-    const { profile, tags } = this.state
+    const { profile, staticTags, tags } = this.state
+    const patternDataTags = staticTags.join('|')
 
     return (
       <section className="profile main__section">
@@ -165,12 +169,20 @@ class Profile extends Component {
                 { tags.map((tag, index) => (
                   <div key={index}>
                     <input
+                      autocomplete="off"
                       className="profile__input--multi"
+                      list="tags-data"
                       onChange={this.handleTagsChange(index)}
+                      pattern={patternDataTags}
                       placeholder="Schlagwort"
                       value={tag.name}
                       type="text"
                     />
+                    <datalist id="tags-data">
+                      { staticTags.map((staticTag, index) => (
+                        <option key={index} value={staticTag} />
+                      ))}
+                    </datalist>
                     <button
                       className="button button--icon profile__button--delete"
                       onClick={this.handleRemoveTagsInput(index)}

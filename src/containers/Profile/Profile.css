@@ -1,8 +1,14 @@
+.profile__button--add {
+  margin-top: 5px;
+  margin-bottom: 30px;
+}
+
 .profile__button--delete {
   margin-left: 20px;
 }
 
 .profile__input--multi {
   display: inline-block !important;
+  margin-bottom: 10px !important;
   width: calc(100% - 60px) !important;
 }
