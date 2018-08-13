@@ -16,8 +16,8 @@ class Profile extends Component {
         country: '',
         forename: '',
         surname: '',
-        twitter: '',
-        website: '',
+        twitter_url: '',
+        website_url: '',
       },
       tags: [{
         name: '',
@@ -39,50 +39,9 @@ class Profile extends Component {
   }
 
   handleChange = (e, type) => {
-    switch(type) {
-    case 'bioLong':
-      this.setState({
-        profile: {...this.state.profile, bio_long: e.target.value},
-      })
-      break
-    case 'bioShort':
-      this.setState({
-        profile: {...this.state.profile, bio_short: e.target.value},
-      })
-      break
-    case 'city':
-      this.setState({
-        profile: {...this.state.profile, city: e.target.value},
-      })
-      break
-    case 'country':
-      this.setState({
-        profile: {...this.state.profile, country: e.target.value},
-      })
-      break
-    case 'forename':
-      this.setState({
-        profile: {...this.state.profile, forename: e.target.value},
-      })
-      break
-    case 'surname':
-      this.setState({
-        profile: {...this.state.profile, surname: e.target.value},
-      })
-      break
-    case 'twitter':
-      this.setState({
-        profile: {...this.state.profile, twitter: e.target.value},
-      })
-      break
-    case 'website':
-      this.setState({
-        profile: {...this.state.profile, website: e.target.value},
-      })
-      break
-    default:
-      return
-    }
+    this.setState({
+      profile: {...this.state.profile, [type]: e.target.value}
+    })
   }
 
   handleEditToggle = () => {
@@ -128,7 +87,7 @@ class Profile extends Component {
   render() {
     const { state } = this.props
     const { profile, tags } = this.state
-    console.log(profile, tags)
+
     return (
       <section className="profile main__section">
         <h1 className="profile__headline">Profil</h1>
@@ -152,11 +111,11 @@ class Profile extends Component {
                   }
                   </p>
                 }
-                { profile.twitter &&
-                  <p>{profile.twitter}</p>
+                { profile.twitter_url &&
+                  <p><a href={profile.twitter_url} target="_blank">{profile.twitter_url}</a></p>
                 }
-                { profile.website &&
-                  <p>{profile.website}</p>
+                { profile.website_url &&
+                  <p><a href={profile.website_url} target="_blank">{profile.website_url}</a></p>
                 }
                 { (tags && tags[0].name && tags[0].name !== '') &&
                   <ul>
@@ -188,7 +147,7 @@ class Profile extends Component {
                   onChange={(e) => this.handleChange(e, 'forename')} 
                   placeholder="Vorname" 
                   type="text"
-                  value={profile.forename}
+                  value={profile.forename || ''}
                 />
               </div>
               <div>
@@ -198,7 +157,7 @@ class Profile extends Component {
                   onChange={(e) => this.handleChange(e, 'surname')}
                   placeholder="Nachname"
                   type="text"
-                  value={profile.lastname}
+                  value={profile.surname || ''}
                 />
               </div>
               <div>
@@ -226,37 +185,37 @@ class Profile extends Component {
               <div>
                 <label>Kurz-Biographie</label>
                 <textarea 
-                  onChange={(e) => this.handleChange(e, 'bioShort')} 
+                  onChange={(e) => this.handleChange(e, 'bio_short')} 
                   placeholder="Kurz-Biographie" 
                   rows="3"
-                  value={profile.bio_short}
+                  value={profile.bio_short || ''}
                 ></textarea>
               </div>
               <div>
                 <label>Über mich</label>
                 <textarea 
-                  onChange={(e) => this.handleChange(e, 'bioLong')} 
+                  onChange={(e) => this.handleChange(e, 'bio_long')} 
                   placeholder="Über mich" 
                   rows="6"
-                  value={profile.bio_long}
+                  value={profile.bio_long || ''}
                 ></textarea>
               </div>
               <div>
                 <label>Twitter-URL</label>
                 <input 
-                  onChange={(e) => this.handleChange(e, 'twitter')}
+                  onChange={(e) => this.handleChange(e, 'twitter_url')}
                   placeholder="Twitter-URL" 
                   type="url"
-                  value={profile.twitter}
+                  value={profile.twitter_url || ''}
                 />
               </div>
               <div>
                 <label>Webseite</label>
                 <input 
-                  onChange={(e) => this.handleChange(e, 'website')} 
+                  onChange={(e) => this.handleChange(e, 'website_url')} 
                   placeholder="Webseite" 
                   type="url"
-                  value={profile.website}
+                  value={profile.website_url || ''}
                 />
               </div>
               <div>
@@ -266,7 +225,7 @@ class Profile extends Component {
                   onChange={(e) => this.handleChange(e, 'city')} 
                   placeholder="Stadt" 
                   type="text"
-                  value={profile.city}
+                  value={profile.city || ''}
                 />
               </div>
               <div>
@@ -276,7 +235,7 @@ class Profile extends Component {
                   onChange={(e) => this.handleChange(e, 'country')} 
                   placeholder="Land" 
                   type="text"
-                  value={profile.country}
+                  value={profile.country || ''}
                 />
               </div>
               <button 
