@@ -16,17 +16,25 @@
 }
 
 /* GENERAL TYPOGRAPHY STYLES */
+
 body {
   font-family: 'Avenir', Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--theme-primary-color-dark);
-  font-size: 16px;
+  font-size: 18px;
   line-height: 1.5em;
 }
 
 a {
   color: var(--theme-primary-color);
+  text-decoration: none;
+  transition: .3s;
+}
+
+a:hover {
+  color: var(--theme-secondary-color);
+  text-decoration: underline;
 }
 
 h1,
