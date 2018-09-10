@@ -11,10 +11,8 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <p className="App-intro">
-          App
-        </p>
+      <div className="app main__section">
+        <h1 className="app__headline">podcasterinnen.org</h1>
       </div>
     )
   }
