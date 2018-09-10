@@ -15,11 +15,10 @@
 }
 
 /* .mainnav__list__element {} */
-
 .mainnav__list__element__link {
   color: #FFFFFF;
   text-decoration: none;
-
+  
   display: inline-block;
   padding: 20px;
 }
