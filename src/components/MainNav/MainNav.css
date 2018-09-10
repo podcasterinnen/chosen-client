@@ -1,6 +1,4 @@
 /* GENERAL STYLES */
-
-
 .mainnav {
   background-color: var(--theme-primary-color);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -17,11 +15,10 @@
 }
 
 /* .mainnav__list__element {} */
-
 .mainnav__list__element__link {
   color: #FFFFFF;
   text-decoration: none;
-
+  
   display: inline-block;
   padding: 20px;
 }
