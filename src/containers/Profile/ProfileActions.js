@@ -54,13 +54,17 @@ export const submitProfile = (object) => {
     Object.entries(object).forEach(([key, value]) => {
       if (value !== '' && typeof value === 'string') {
         data.podcaster[key] = value
-      } else if (typeof value === 'array' && value.length > 0) {
+      } else if (Array.isArray(value) && value.length > 0) {
+        console.log('Array', value)
         data.podcaster[key] = []
-        value.forEach((item) => {
+        value.forEach((item, index) => {
+          if (item.id) {
+            delete item.id
+          }
           data.podcaster[key].push(item)
         })
+        console.log(data.podcaster[key])
       } else if (typeof value === 'boolean') {
-        console.log(value)
         data.podcaster[key] = value
       }
     })

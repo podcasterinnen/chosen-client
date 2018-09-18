@@ -19,13 +19,11 @@ class Profile extends Component {
         forename: '',
         remote_possible: false,
         surname: '',
+        tags: [''],
         twitter_url: '',
         website_url: '',
       },
       staticTags: staticTags.tags,
-      tags: [{
-        name: '',
-      }],
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleEditToggle = this.handleEditToggle.bind(this)
@@ -64,39 +62,40 @@ class Profile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
+    console.log(this.state.profile)
     this.props.handleSubmitProfile(this.state.profile)
   }
 
   handleAddTagsInput = (e) => {
     e.preventDefault()
     this.setState({
-      tags: this.state.tags.concat([{ name: '' }])
+      profile: {...this.state.profile, tags: this.state.profile.tags.concat([''])}
     })
   }
 
   handleRemoveTagsInput = (index) => (e) => {
     e.preventDefault()
     this.setState({
-      tags: this.state.tags.filter((tag, tagIndex) => index !== tagIndex)
+      profile: {...this.state.profile, tags: this.state.profile.tags.filter((tag, tagIndex) => index !== tagIndex)}
     })
   }
 
   handleTagsChange = (index) => (e) => {
     e.preventDefault()
-    const newTags = this.state.tags.map((tag, tagIndex) => {
+    const newTags = this.state.profile.tags.map((tag, tagIndex) => {
       if (index !== tagIndex) {
         return tag
       }
-      return { ...tag, name: e.target.value }
+      return e.target.value
     })
     this.setState({
-      tags: newTags,
+      profile: {...this.state.profile, tags: newTags},
     })
   }
 
   render() {
     const { state } = this.props
-    const { profile, staticTags, tags } = this.state
+    const { profile, staticTags } = this.state
     const patternDataTags = staticTags.join('|')
 
     return (
@@ -136,12 +135,12 @@ class Profile extends Component {
                 { profile.website_url &&
                   <p><a href={profile.website_url} target="_blank">{profile.website_url}</a></p>
                 }
-                { (tags && tags[0].name && tags[0].name !== '') &&
+                { (profile.tags && profile !== '') &&
                   <ul>
-                    { tags.map((tag, index) => {
-                      if (tag.name !== '') {
+                    { profile.tags.map((tag) => {
+                      if (tag !== '') {
                         return (
-                          <li key={index}>{tag.name}</li>
+                          <li key={tag}>{tag}</li>
                         )
                       }
                     })}
@@ -191,7 +190,7 @@ class Profile extends Component {
               </div>
               <div>
                 <label>Schlagworte</label>
-                { tags.map((tag, index) => (
+                { profile.tags.map((tag, index) => (
                   <div key={index}>
                     <input
                       autoComplete="off"
@@ -200,7 +199,7 @@ class Profile extends Component {
                       onChange={this.handleTagsChange(index)}
                       pattern={patternDataTags}
                       placeholder="Schlagwort"
-                      value={tag.name}
+                      value={tag}
                       type="text"
                     />
                     <datalist id="tags-data">
