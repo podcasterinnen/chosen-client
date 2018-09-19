@@ -17,6 +17,15 @@ class Profile extends Component {
         city: '',
         country: '',
         forename: '',
+        languages: [''],
+        podcasts: [{
+          name: '',
+          url: '',
+        }],
+        references: [{
+          title: '',
+          url: '',
+        }],
         remote_possible: false,
         surname: '',
         tags: [''],
@@ -52,6 +61,46 @@ class Profile extends Component {
     } else {
       this.props.handleEditingQuit()
     }
+  }
+
+  handleAddPodcastsInput = (e) => {
+    e.preventDefault()
+    this.setState({
+      profile: {...this.state.profile, podcasts: this.state.profile.podcasts.concat([{ name: '', url: '' }])}
+    })
+  }
+
+  handleRemovePodcastsInput = (index) => (e) => {
+    e.preventDefault()
+    this.setState({
+      profile: {...this.state.profile, podcasts: this.state.profile.podcasts.filter((podcast, podcastIndex) => index !== podcastIndex)}
+    })
+  }
+
+  handlePodcastsNameChange = (index) => (e) => {
+    e.preventDefault()
+    const newPodcasts = this.state.profile.podcasts.map((podcast, podcastIndex) => {
+      if (index !== podcastIndex) {
+        return podcast
+      }
+      return { name: e.target.value, url: podcast.url, id: podcast.id }
+    })
+    this.setState({
+      profile: {...this.state.profile, podcasts: newPodcasts},
+    })
+  }
+
+  handlePodcastsUrlChange = (index) => (e) => {
+    e.preventDefault()
+    const newPodcasts = this.state.profile.podcasts.map((podcast, podcastIndex) => {
+      if (index !== podcastIndex) {
+        return podcast
+      }
+      return { name: podcast.name, url: e.target.value, id: podcast.id }
+    })
+    this.setState({
+      profile: {...this.state.profile, podcasts: newPodcasts},
+    })
   }
 
   handleRemoteInput = (e) => {
@@ -135,16 +184,35 @@ class Profile extends Component {
                 { profile.website_url &&
                   <p><a href={profile.website_url} target="_blank">{profile.website_url}</a></p>
                 }
-                { (profile.tags && profile !== '') &&
-                  <ul>
-                    { profile.tags.map((tag) => {
-                      if (tag !== '') {
-                        return (
-                          <li key={tag}>{tag}</li>
-                        )
-                      }
-                    })}
-                  </ul>
+                { (Array.isArray(profile.podcasts) && profile.podcasts.length > 0 && profile.podcasts[0].name !== '') &&
+                  <div>
+                    <h3>Podcasts:</h3>
+                    <ul>
+                      { profile.podcasts.map((podcast) => (
+                        <li key={podcast.name}><a href={podcast.url} target="_blank">{podcast.name}</a></li>
+                      ))}
+                    </ul>
+                  </div>
+                }
+                { (Array.isArray(profile.languages) && profile.languages.length > 0 && profile.languages[0] !== '') &&
+                  <div>
+                    <h3>Sprachen:</h3>
+                    <ul>
+                      { profile.languages.map((language) => (
+                        <li key={language}>{language}</li>
+                      ))}
+                    </ul>
+                  </div>
+                }
+                { (Array.isArray(profile.tags) && profile.tags.length > 0 && profile.tags[0] !== '') &&
+                  <div>
+                    <h3>Themen:</h3>
+                    <ul>
+                      { profile.tags.map((tag) => (
+                        <li key={tag}>{tag}</li>
+                      ))}
+                    </ul>
+                  </div>
                 }
               </div>
             }
@@ -187,6 +255,45 @@ class Profile extends Component {
                   value={profile.remote_possible || false}
                 />
                 <label htmlFor="remotePossible">Remote verfügbar</label>
+              </div>
+              <div>
+                <h3>Podcasts</h3>
+                { profile.podcasts.map((podcast, index) => (
+                  <div key={index}>
+                    <label>Name des Podcasts</label>
+                    <input
+                      autoComplete="off"
+                      className="profile__input--multi"
+                      list="podcasts-data"
+                      onChange={this.handlePodcastsNameChange(index)}
+                      placeholder="Name des Podcast"
+                      value={podcast.name}
+                      type="text"
+                    />
+                    <label>Feed-URL des Podcasts</label>
+                    <input
+                      autoComplete="off"
+                      className="profile__input--multi"
+                      list="podcasts-data"
+                      onChange={this.handlePodcastsUrlChange(index)}
+                      placeholder="Feed-URL des Podcast"
+                      value={podcast.url}
+                      type="url"
+                    />
+                    { index >= 0 &&
+                      <button
+                        className="button button--decent button--icon profile__button--delete"
+                        onClick={this.handleRemovePodcastsInput(index)}
+                        tabIndex="-1"
+                      >-</button>
+                    }
+                  </div>
+                ))}
+                <button 
+                  className="button profile__button--add"
+                  onClick={(e) => this.handleAddPodcastsInput(e)}
+                  tabIndex="-1"
+                >Podcast hinzufügen</button>
               </div>
               <div>
                 <label>Schlagworte</label>
