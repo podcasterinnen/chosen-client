@@ -63,6 +63,33 @@ class Profile extends Component {
     }
   }
 
+  handleLanguagesChange = (index) => (e) => {
+    e.preventDefault()
+    const newLanguages = this.state.profile.languages.map((language, languageIndex) => {
+      if (index !== languageIndex) {
+        return language
+      }
+      return e.target.value
+    })
+    this.setState({
+      profile: {...this.state.profile, languages: newLanguages},
+    })
+  }
+
+  handleRemoveLanguagesInput = (index) => (e) => {
+    e.preventDefault()
+    this.setState({
+      profile: {...this.state.profile, languages: this.state.profile.languages.filter((language, languageIndex) => index !== languageIndex)}
+    })
+  }
+
+  handleAddLanguagesInput = (e) => {
+    e.preventDefault()
+    this.setState({
+      profile: {...this.state.profile, languages: this.state.profile.languages.concat([''])}
+    })
+  }
+
   handleAddPodcastsInput = (e) => {
     e.preventDefault()
     this.setState({
@@ -75,6 +102,7 @@ class Profile extends Component {
     this.setState({
       profile: {...this.state.profile, podcasts: this.state.profile.podcasts.filter((podcast, podcastIndex) => index !== podcastIndex)}
     })
+    console.log(this.state)
   }
 
   handlePodcastsNameChange = (index) => (e) => {
@@ -280,13 +308,11 @@ class Profile extends Component {
                       value={podcast.url}
                       type="url"
                     />
-                    { index >= 0 &&
-                      <button
-                        className="button button--decent button--icon profile__button--delete"
-                        onClick={this.handleRemovePodcastsInput(index)}
-                        tabIndex="-1"
-                      >-</button>
-                    }
+                    <button
+                      className="button button--decent button--icon profile__button--delete"
+                      onClick={this.handleRemovePodcastsInput(index)}
+                      tabIndex="-1"
+                    >-</button>
                   </div>
                 ))}
                 <button 
@@ -314,13 +340,11 @@ class Profile extends Component {
                         <option key={index} value={staticTag} />
                       ))}
                     </datalist>
-                    { index > 0 &&
-                      <button
-                        className="button button--decent button--icon profile__button--delete"
-                        onClick={this.handleRemoveTagsInput(index)}
-                        tabIndex="-1"
-                      >-</button>
-                    }
+                    <button
+                      className="button button--decent button--icon profile__button--delete"
+                      onClick={this.handleRemoveTagsInput(index)}
+                      tabIndex="-1"
+                    >-</button>
                   </div>
                 ))}
                 <button 
@@ -328,6 +352,31 @@ class Profile extends Component {
                   onClick={(e) => this.handleAddTagsInput(e)}
                   tabIndex="-1"
                 >Schlagwort hinzufügen</button>
+              </div>
+              <div>
+                <label>Sprachen</label>
+                { profile.languages.map((language, index) => (
+                  <div key={index}>
+                    <input
+                      autoComplete="off"
+                      className="profile__input--multi"
+                      onChange={this.handleLanguagesChange(index)}
+                      placeholder="Sprache"
+                      value={language}
+                      type="text"
+                    />
+                    <button
+                      className="button button--decent button--icon profile__button--delete"
+                      onClick={this.handleRemoveLanguagesInput(index)}
+                      tabIndex="-1"
+                    >-</button>
+                  </div>
+                ))}
+                <button 
+                  className="button profile__button--add"
+                  onClick={(e) => this.handleAddLanguagesInput(e)}
+                  tabIndex="-1"
+                >Sprache hinzufügen</button>
               </div>
               <div>
                 <label>Kurz-Biographie</label>
