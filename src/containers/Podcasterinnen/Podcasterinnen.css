@@ -1,0 +1,39 @@
+/* CONTAINER VARIABLES */
+:root {
+  --podcasterinnen-grid-gutter-size: 10px;
+}
+
+.podcasterinnen__list {
+  align-items: stretch;
+  display: grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: 1fr;
+  justify-items: stretch;
+  margin: 0;
+  padding: 0;
+}
+
+@media screen and (min-width: 550px) {
+  .podcasterinnen__list {
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 850px) {
+  .podcasterinnen__list {
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+.podcasterinnen__list__item {
+  list-style: none;
+}
+
+.podcasterinnen__search {
+  margin: 20px 0;
+}

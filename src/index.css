@@ -1,5 +1,161 @@
+/* VARIABLES */
+:root {
+  --theme-primary-color: #7797AE;
+  --theme-primary-color-dark: #2C3E50;
+  --theme-secondary-color: #A84E54;
+  --theme-light-color: #EBEEF1;
+  --theme-light-color-grey: #B7BFC8;
+
+  --footer-nav-height: 60px;
+  --main-nav-height: 60px;
+  --section-padding-top: 100px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* GENERAL TYPOGRAPHY STYLES */
+
+@font-face {
+  font-family: 'Glacial';
+  font-weight: 400;
+  src:  url('./assets/fonts/glacialindifference-regular-webfont.woff2') format('woff2'),
+        url('./assets/fonts/glacialindifference-regular-webfont.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Glacial';
+  font-weight: 700;
+  src:  url('./assets/fonts/glacialindifference-bold-webfont.woff2') format('woff2'),
+        url('./assets/fonts/glacialindifference-bold-webfont.woff') format('woff');
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: var(--theme-primary-color-dark);
+  font-family: "Glacial", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5em;
+}
+
+a {
+  color: var(--theme-primary-color);
+  text-decoration: none;
+  transition: .3s;
+}
+
+a:hover {
+  color: var(--theme-secondary-color);
+  text-decoration: underline;
+}
+
+h1,
+h2 {
+  line-height: 1.375em;
+}
+
+/* GENERAL LAYOUT STYLES */
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+}
+
+h1,
+h2 {
+  margin-top: 1.5em;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__section {
+  margin: 0 auto;
+  padding: var(--section-padding-top) 40px var(--section-padding-top) 40px;
+  width: 100%;
+  max-width: 860px;
+  min-height: calc(100vh - var(--main-nav-height));
+}
+
+.main__section--wide {
+  max-width: 1100px;
+}
+
+/* GENERAL FORM STYLES */
+button,
+.button {
+  color: #FFFFFF;
+  text-transform: uppercase;
+
+  background-color: var(--theme-primary-color);
+  border-radius: 4px;
+  cursor: pointer;
+  padding: 10px 30px;
+}
+
+button:active,
+.button:active,
+button:focus,
+.button:focus,
+button:hover,
+.button:hover {
+  background-color: var(--theme-primary-color-dark);
+  outline: none;
+}
+
+.button--decent {
+  background-color: var(--theme-light-color-grey);
+  border: 1px solid var(--theme-light-color-grey);
+}
+
+.button--icon {
+  padding: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="url"],
+textarea {
+  background-color: #FFFFFF;
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid var(--theme-primary-color-dark);
+  border-left: 1px solid #FFFFFF;
+  display: block;
+  margin: 5px 0 30px 0;
+  padding: 20px 5px 10px 5px;
+  width: 100%;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="url"]:focus,
+textarea:focus {
+  border: 1px solid var(--theme-primary-color-dark);
+  outline: none;
+}
+
+textarea {
+  line-height: 1.5;
+  
+  padding-bottom: 20px;
+}
+
+label {
+  font-size: 14px;
+
+  display: block;
+}
+
+/* GENERAL THEME STYLES */
+body {
+  background-color: var(--theme-light-color);
 }
