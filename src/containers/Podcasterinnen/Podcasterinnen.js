@@ -55,7 +55,7 @@ class Podcasterinnen extends Component {
   render() {
     const { podcasterinnen } = this.props
     return (
-      <div className="Podcasterinnen main__section main__section--wide">
+      <section className="Podcasterinnen main__section main__section--wide">
         <h1>Podcasterinnen</h1>
         <form className="podcasterinnen__search">
           <label className="podcasterinnen__search__label">Suche</label>
@@ -99,7 +99,7 @@ class Podcasterinnen extends Component {
             })}
           </ul>
         }
-      </div>
+      </section>
     )
   }
 }

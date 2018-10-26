@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { NavLink, withRouter } from 'react-router-dom'
 
 import './FooterNav.css'
 
@@ -9,13 +11,22 @@ class FooterNav extends Component {
       <nav className="footernav">
         <ol className="footernav__list">
           <li className="footernav__list__element">
-            <Link className="footernav__list__element__link" to="/contact">Kontakt</Link>
+            <NavLink
+              activeClassName="footernav__list__element__link--active"
+              className="footernav__list__element__link"
+              to="/privacy"
+            >
+              Datenschutz
+            </NavLink>
           </li>
           <li className="footernav__list__element">
-            <Link className="footernav__list__element__link" to="/privacy">Datenschutz</Link>
-          </li>
-          <li className="footernav__list__element">
-            <Link className="footernav__list__element__link" to="/imprint">Impressum</Link>
+            <NavLink
+              activeClassName="footernav__list__element__link--active"
+              className="footernav__list__element__link"
+              to="/imprint"
+            >
+              Kontakt & Impressum
+            </NavLink>
           </li>
         </ol>
       </nav>
@@ -23,4 +34,4 @@ class FooterNav extends Component {
   }
 }
 
-export default FooterNav
+export default withRouter(connect()(FooterNav))
