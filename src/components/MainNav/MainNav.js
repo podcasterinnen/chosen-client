@@ -15,8 +15,6 @@ class MainNav extends Component {
   render() {
     const { sessionState } = this.props
 
-    console.log('!!', this.props)
-
     return(
       <nav className="mainnav">
         <ol className="mainnav__list">
@@ -27,7 +25,7 @@ class MainNav extends Component {
               exact
               to="/"
             >
-              Home
+              podcasterinnen.org
             </NavLink>
           </li>
           <li className="mainnav__list__element">
