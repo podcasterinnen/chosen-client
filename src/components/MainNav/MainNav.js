@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { NavLink, withRouter } from 'react-router-dom'
 
 import './MainNav.css'
 import { initialiseSession, logoutUser } from '../../containers/Session/SessionActions'
@@ -15,28 +15,70 @@ class MainNav extends Component {
   render() {
     const { sessionState } = this.props
 
+    console.log('!!', this.props)
+
     return(
       <nav className="mainnav">
         <ol className="mainnav__list">
           <li className="mainnav__list__element">
-            <Link className="mainnav__list__element__link" to="/">Home</Link>
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link"
+              exact
+              to="/"
+            >
+              Home
+            </NavLink>
           </li>
           <li className="mainnav__list__element">
-            <Link className="mainnav__list__element__link" to="/podcasterinnen">Podcasterinnen</Link>
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link"
+              exact
+              to="/podcasterinnen"
+            >
+              Podcasterinnen
+            </NavLink>
           </li>
           { sessionState === 'LOGGED_IN' &&
             <li className="mainnav__list__element">
-              <Link className="mainnav__list__element__link" to="/profile">Profil</Link>
+              <NavLink
+                activeClassName="mainnav__list__element__link--active"
+                className="mainnav__list__element__link"
+                exact
+                to="/profile"
+              >
+                Profil
+              </NavLink>
             </li>
           }
           <li className="mainnav__list__element">
-            <Link className="mainnav__list__element__link" to="/faq">FAQ</Link>
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link"
+              exact
+              to="/faq"
+            >
+              FAQ
+            </NavLink>
           </li>
           <li className="mainnav__list__element">
-            <Link className="mainnav__list__element__link" to="/about">Über uns</Link>
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link"
+              exact
+              to="/about"
+            >
+              Über uns
+            </NavLink>
           </li>
           <li className="mainnav__list__element">
-            <Link className="mainnav__list__element__link" to="/session">
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link mainnav__list__element__link--right"
+              exact
+              to="/session"
+            >
               { (sessionState === 'UNKNOWN' ||
                 sessionState === 'INVALID' ||
                 sessionState === 'REGISTRATION_IN_PROGRESS') &&
@@ -48,7 +90,7 @@ class MainNav extends Component {
               { sessionState === 'LOGGED_IN' &&
                 <span onClick={this.handleLogout}>Logout</span>
               }
-            </Link>
+            </NavLink>
           </li>
         </ol>
       </nav>
@@ -77,7 +119,7 @@ const mapStateToProps = (state) => ({
   sessionState: state.sessionReducer.sessionState,
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(MainNav)
+)(MainNav))
