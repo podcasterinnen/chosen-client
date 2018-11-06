@@ -1,7 +1,7 @@
 let backendHost
 const hostname = window && window.location && window.location.hostname;
 
-if (hostname === 'podcasterinnen.github.io/chosen-client/') {
+if (hostname === 'chosen-client.herokuapp.com/') {
   backendHost = 'https://chosen-cors-proxy.herokuapp.com'
 } else {
   // backendHost = process.env.REACT_APP_BACKEND_HOST || 'http://localhost:4000'
