@@ -14,7 +14,6 @@ import {
 
 import About from './containers/About/About'
 import App from './containers/App/App'
-import Contact from './containers/Contact/Contact'
 import Faq from './containers/Faq/Faq'
 import Imprint from './containers/Imprint/Imprint'
 import NotFound from './containers/NotFound/NotFound'
@@ -59,7 +58,6 @@ ReactDOM.render(
         <Switch>
           <Route exact path="/" component={App} />
           <Route path="/about" component={About} />
-          <Route path="/contact" component={Contact} />
           <Route path="/faq" component={Faq} />
           <Route path="/imprint" component={Imprint} />
           <Route path="/podcasterinnen" component={Podcasterinnen} />
