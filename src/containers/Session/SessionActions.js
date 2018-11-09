@@ -82,11 +82,11 @@ export const loginUser = (emailAddress, password) => {
         method: 'POST',
         mode: 'cors',
       })
-      .then(response => {
+      .then((response) => {
         console.log({response})
         return response.json()
       })
-      .then(json => {
+      .then((json) => {
         console.log(json)
         localStorage.setItem(LOCAL_STORAGE_USER_ID, json.info.detail)
         return dispatch(loginSuccess(json))
