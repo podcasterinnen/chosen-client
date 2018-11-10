@@ -16,3 +16,20 @@
 - api.staging.podcasterinnen.org
 - podcasterinnen.org
 - staging.podcasterinnen.org
+
+# Questions
+- Which db do I use for different envs?
+
+# Heroku
+
+## Pros
+- easy build chain
+- easy ssl
+- easy config vars
+- easy role management
+- easy updates for elixir and node
+- easy db access
+
+## Cons
+- no automatic deployments from dev branches from Github
+- many projects -> high costs
