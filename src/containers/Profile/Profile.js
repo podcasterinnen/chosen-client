@@ -286,7 +286,7 @@ class Profile extends Component {
               </div>
               <div>
                 <h3>Podcasts</h3>
-                { profile.podcasts.map((podcast, index) => (
+                { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
                   <div key={index}>
                     <label>Name des Podcasts</label>
                     <input
@@ -323,7 +323,7 @@ class Profile extends Component {
               </div>
               <div>
                 <label>Schlagworte</label>
-                { profile.tags.map((tag, index) => (
+                { profile.tags && profile.tags.length && profile.tags.map((tag, index) => (
                   <div key={index}>
                     <input
                       autoComplete="off"
@@ -355,7 +355,7 @@ class Profile extends Component {
               </div>
               <div>
                 <label>Sprachen</label>
-                { profile.languages.map((language, index) => (
+                { profile.languages && profile.languages.length && profile.languages.map((language, index) => (
                   <div key={index}>
                     <input
                       autoComplete="off"

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import querySearch from 'stringquery'
+import { Link, withRouter } from 'react-router-dom'
 
 import './Confirm.css'
 import { confirmEmail, initialiseConfirm } from './ConfirmActions'
@@ -29,7 +30,7 @@ class Confirm extends Component {
           <p>Deine E-Mail-Adresse konnte leider nicht verifiziert werden. Schreibe uns gerne eine E-Mail an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>. Wir versuchen das Problem so schnell wie möglich zu beheben.</p>
         }
         { confirmState === 'SUCCESS' &&
-          <p>Deine E-Mail-Adresse wurde erfolgreich verifiziert. <a href="/session">Logge dich ein</a>, um dein Profil anzulegen und zu bearbeiten.</p>
+          <p>Deine E-Mail-Adresse wurde erfolgreich verifiziert. <Link to="/session">Logge dich ein</Link>, um dein Profil anzulegen und zu bearbeiten.</p>
         }
       </section>
     )
@@ -57,7 +58,7 @@ const mapStateToProps = (state) => ({
   confirmState: state.confirmReducer.confirmState,
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps,
-)(Confirm)
+)(Confirm))
