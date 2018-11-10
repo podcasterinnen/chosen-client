@@ -8,7 +8,6 @@ import { initialiseSession, logoutUser } from '../../containers/Session/SessionA
 
 class MainNav extends Component {
   handleLogout = (e) => {
-    e.preventDefault()
     this.props.handleLogoutUser()
   }
 

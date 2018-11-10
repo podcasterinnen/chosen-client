@@ -38,28 +38,31 @@ const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
   )
 }
 
-const Root = ({ store }) => (
-  <Provider store={store}>
-    <Router>
-      <main className="main" role="main">
-        <MainNav></MainNav>
-        <Switch>
-          <Route exact path="/" component={App} />
-          <Route path="/about" component={About} />
-          <Route path="/confirm" component={Confirm} />
-          <Route path="/faq" component={Faq} />
-          <Route path="/imprint" component={Imprint} />
-          <Route path="/podcasterinnen" component={Podcasterinnen} />
-          <Route path="/privacy" component={Privacy} />
-          <PrivateRoute sessionState={store.getState().sessionReducer.sessionState} path="/profile" component={Profile} />
-          <Route path="/session" component={Session} />
-          <Route component={NotFound} />
-        </Switch>
-        <FooterNav></FooterNav>
-      </main>
-    </Router>
-  </Provider>
-)
+const Root = ({ store }) => {
+  console.log(store.getState().sessionReducer.sessionState)
+  return(
+    <Provider store={store}>
+      <Router>
+        <main className="main" role="main">
+          <MainNav></MainNav>
+          <Switch>
+            <Route exact path="/" component={App} />
+            <Route path="/about" component={About} />
+            <Route path="/confirm" component={Confirm} />
+            <Route path="/faq" component={Faq} />
+            <Route path="/imprint" component={Imprint} />
+            <Route path="/podcasterinnen" component={Podcasterinnen} />
+            <Route path="/privacy" component={Privacy} />
+            <PrivateRoute sessionState={store.getState().sessionReducer.sessionState} path="/profile" component={Profile} />
+            <Route path="/session" component={Session} />
+            <Route component={NotFound} />
+          </Switch>
+          <FooterNav></FooterNav>
+        </main>
+      </Router>
+    </Provider>
+  )
+}
 
 Root.propTypes = {
   store: PropTypes.object.isRequired
