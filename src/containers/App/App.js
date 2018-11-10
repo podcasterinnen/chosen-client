@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link, withRouter } from 'react-router-dom'
 
 import './App.css'
 import { initialiseApp } from './AppActions'
@@ -11,9 +12,11 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app main__section">
-        <h1 className="app__headline">podcasterinnen.org</h1>
-      </div>
+      <section className="app main__section">
+        <h1 className="title app__headline">podcasterinnen.org</h1>
+        <p className="subtitle">Frauen und Mikrophone. Frauen und Technik. Frauen und Inhalte. Frauen hinter dem Mikro und auf der Bühne.</p>
+        <Link className="button button--cta app__button" to="/session">Mitmachen</Link>
+      </section>
     )
   }
 }
@@ -25,7 +28,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 
-export default connect(
+export default withRouter(connect(
   null,
   mapDispatchToProps
-)(App)
+)(App))

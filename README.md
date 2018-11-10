@@ -19,6 +19,9 @@
 
 # Questions
 - Which db do I use for different envs?
+- Elixir Auth Unit Tests
+- How to combine Phoenix and React?
+- How to fill Database?
 
 # Heroku
 

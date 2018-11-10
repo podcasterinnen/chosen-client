@@ -40,6 +40,7 @@ const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
 
 const Root = ({ store }) => {
   console.log(store.getState().sessionReducer.sessionState)
+  store.dispatch(initialiseSession())
   return(
     <Provider store={store}>
       <Router>
