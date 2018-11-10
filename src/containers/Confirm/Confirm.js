@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import querySearch from 'stringquery'
 
 import './Confirm.css'
 import { confirmEmail, initialiseConfirm } from './ConfirmActions'
 
-const qs = require('query-string')
-
 class Confirm extends Component {
   componentDidMount() {
-    const key = qs.parse(this.props.location.search, { ignoreQueryPrefix: true }).key
+    const key = querySearch(this.props.location.search, { ignoreQueryPrefix: true }).key
     this.props.handleInitConfirm()
     // check if there is a url parameter key
     // that is a string to verify email address
