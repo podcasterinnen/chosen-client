@@ -50,6 +50,7 @@ export const submitProfile = (object) => {
   return (dispatch) => {
     console.log('Object', object)
     let data = {}
+    let id = null
     data.podcaster = {}
     Object.entries(object).forEach(([key, value]) => {
       if (value !== '' && typeof value === 'string') {
@@ -66,11 +67,13 @@ export const submitProfile = (object) => {
         console.log(data.podcaster[key])
       } else if (typeof value === 'boolean') {
         data.podcaster[key] = value
+      } else if (typeof value === 'number' && key === 'id') {
+        id = value
       }
     })
     dispatch(editRequest(data))
     console.log('Data', data)
-    return fetch(`${API_URL_PODCASTERINNEN}63`, {
+    return fetch(`${API_URL_PODCASTERINNEN}${id}`, {
         body: JSON.stringify(data),
         'cache-control': 'no-cache',
         credentials: 'include',

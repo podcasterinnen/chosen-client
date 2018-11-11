@@ -22,6 +22,7 @@
 - Elixir Auth Unit Tests
 - How to combine Phoenix and React?
 - How to fill Database?
+- How to upload images?
 
 # Heroku
 
