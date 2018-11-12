@@ -126,6 +126,12 @@ h2 {
 }
 
 /* GENERAL FORM STYLES */
+button {
+  background-color: none;
+  border: none;
+  outline: none;
+}
+
 .button {
   color: #FFFFFF;
   text-transform: uppercase;
