@@ -43,7 +43,7 @@
 @media screen and (min-width: 600px) {
   .mainnav__list {
     background-color: transparent;
-    border-top: none;
+    border-bottom: none;
     flex-direction: row;
     height: auto;
 
@@ -61,7 +61,7 @@
 @media screen and (min-width: 600px) {
   .mainnav__list__element {
     background-color: transparent;
-    border-top: none;
+    border-bottom: none;
     flex-direction: row;
     height: auto;
 

@@ -1,3 +1,10 @@
+.profile__avatar {
+  border-radius: 50%;
+  clear: right;
+  display: block;
+  margin: 0 auto;
+}
+
 .profile__button--add {
   margin-top: 5px;
   margin-bottom: 30px;
@@ -7,8 +14,68 @@
   margin-left: 20px;
 }
 
+.profile__info-text {
+  margin: 5px 0;
+}
+
 .profile__input--multi {
   display: inline-block !important;
   margin-bottom: 10px !important;
   width: calc(100% - 60px) !important;
+}
+
+.profile__podcast {
+  list-style: none;
+
+  align-items: center;
+  display: flex;
+}
+
+.profile__podcast__image {
+  border-radius: 4px;
+  margin: 5px 10px 5px 0;
+  width: 70px;
+  height: 70px;
+}
+
+.profile__podcast-list {
+  margin: 0;
+  padding: 0;
+}
+
+.profile__subheadline {
+  margin: 40px 0 10px 0;
+}
+
+.profile__subtitle {
+  color: var(--theme-primary-color);
+  font-weight: 700;
+  letter-spacing: 3px;
+  line-height: 1.375em;
+  text-align: center;
+  text-transform: uppercase;
+
+  margin-top: 0;
+  margin-bottom: 60px;
+}
+
+.profile__tag {
+  list-style: none;
+
+  background-color: var(--theme-light-color-grey);
+  border-radius: 2px;
+  display: inline-block;
+  margin: 0 5px;
+  padding: 3px 14px 2px 14px;
+}
+
+.profile__tag-list {
+  margin: 0 -5px;
+  padding: 0;
+}
+
+.profile__title {
+  text-align: center;
+
+  margin-bottom: 10px;
 }

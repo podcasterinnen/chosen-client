@@ -52,7 +52,29 @@ class Profile extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.profile !== this.state.profile) {
-      this.setState({ profile: nextProps.profile })
+      const nextProfile = nextProps.profile
+      const newProfile = {}
+      console.log('!', nextProfile)
+      Object.entries(nextProfile).forEach(([key, value]) => {
+        if (value === null && key === 'podcasts') {
+          newProfile.podcasts = [{
+            name: '',
+            url: '',
+          }]
+        } else if (value === null && key === 'languages') {
+          newProfile.languages = ['']
+        } else if (value === null && key === 'tags') {
+          newProfile.tags = ['']
+        } else if (value === null && key === 'references') {
+          newProfile.references = [{
+            title: '',
+            url: '',
+          }]
+        } else {
+          newProfile[key] = value
+        }
+      })
+      this.setState({ profile: newProfile })
     }
   }
 
@@ -187,14 +209,64 @@ class Profile extends Component {
         { (state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR') &&
           <div>
             { isEditable && 
-              <div>
-                <button className="button button--decent" onClick={this.handleEditToggle}>Bearbeiten</button>
+              <div className="message-container message-container--align-right">
+                <button className="button button--decent" onClick={this.handleEditToggle}>Profil Bearbeiten</button>
               </div>
             }
             { profile &&
               <div>
-                <h1>{profile.forename} {profile.surname}</h1>
-                <p>Remote verfügbar:
+                <img className="profile__avatar" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${profile.forename}&background=2C3E50&color=FFFFFF&font-size=0.125&size=200&length=100`} />
+                <h1 className="profile__title">{profile.forename} {profile.surname}</h1>
+                { profile.bio_short &&
+                  <p className="profile__subtitle">{profile.bio_short}</p>
+                }
+                { profile.bio_long &&
+                  <p>{profile.bio_long}</p>
+                }
+                { (Array.isArray(profile.podcasts) && profile.podcasts.length > 0 && profile.podcasts[0].name !== '') &&
+                  <div>
+                    <h3 className="profile__subheadline">{profile.forename}'s Podcasts:</h3>
+                    <ul className="profile__podcast-list">
+                      { profile.podcasts.map((podcast) => (
+                        <li className="profile__podcast" key={podcast.name}>
+                          <img className="profile__podcast__image" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${podcast.name}&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100`} />
+                          <a href={podcast.url} target="_blank">{podcast.name}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                }
+                { (Array.isArray(profile.tags) && profile.tags.length > 0 && profile.tags[0] !== '') &&
+                  <div>
+                    <h3 className="profile__subheadline">Interessen und Leidenschaften:</h3>
+                    <ul className="profile__tag-list">
+                      { profile.tags.map((tag) => (
+                        <li className="profile__tag" key={tag}>{tag}</li>
+                      ))}
+                    </ul>
+                  </div>
+                }
+                { (Array.isArray(profile.languages) && profile.languages.length > 0 && profile.languages[0] !== '') &&
+                  <div>
+                    <h3 className="profile__subheadline">Sprachen:</h3>
+                    <ul className="profile__tag-list">
+                      { profile.languages.map((language) => (
+                        <li className="profile__tag" key={language}>{language}</li>
+                      ))}
+                    </ul>
+                  </div>
+                }
+                { (profile.remote_possible || profile.city || profile.twitter_url || profile.website_url) &&
+                  <h3 className="profile__subheadline">Weitere Infos über {profile.forename}:</h3>
+                }
+                { profile.city &&
+                  <p className="profile__info-text">Wohnort: {profile.city}
+                  { profile.country &&
+                    <span>, {profile.country}</span>
+                  }
+                  </p>
+                }
+                <p className="profile__info-text">Remote verfügbar?
                   { profile.remote_possible &&
                     <span> Ja</span>
                   }
@@ -202,54 +274,11 @@ class Profile extends Component {
                     <span> Nein</span>
                   }
                 </p>
-                { profile.bio_short &&
-                  <p>{profile.bio_short}</p>
-                }
-                { profile.bio_long &&
-                  <p>{profile.bio_long}</p>
-                }
-                { profile.city &&
-                  <p>{profile.city}
-                  { profile.country &&
-                    <span>, {profile.country}</span>
-                  }
-                  </p>
-                }
                 { profile.twitter_url &&
-                  <p><a href={profile.twitter_url} target="_blank">{profile.twitter_url}</a></p>
+                  <p className="profile__info-text"><a href={profile.twitter_url} target="_blank">{profile.forename} auf Twitter</a></p>
                 }
                 { profile.website_url &&
-                  <p><a href={profile.website_url} target="_blank">{profile.website_url}</a></p>
-                }
-                { (Array.isArray(profile.podcasts) && profile.podcasts.length > 0 && profile.podcasts[0].name !== '') &&
-                  <div>
-                    <h3>Podcasts:</h3>
-                    <ul>
-                      { profile.podcasts.map((podcast) => (
-                        <li key={podcast.name}><a href={podcast.url} target="_blank">{podcast.name}</a></li>
-                      ))}
-                    </ul>
-                  </div>
-                }
-                { (Array.isArray(profile.languages) && profile.languages.length > 0 && profile.languages[0] !== '') &&
-                  <div>
-                    <h3>Sprachen:</h3>
-                    <ul>
-                      { profile.languages.map((language) => (
-                        <li key={language}>{language}</li>
-                      ))}
-                    </ul>
-                  </div>
-                }
-                { (Array.isArray(profile.tags) && profile.tags.length > 0 && profile.tags[0] !== '') &&
-                  <div>
-                    <h3>Themen:</h3>
-                    <ul>
-                      { profile.tags.map((tag) => (
-                        <li key={tag}>{tag}</li>
-                      ))}
-                    </ul>
-                  </div>
+                  <p className="profile__info-text"><a href={profile.website_url} target="_blank">{profile.forename}'s Webseite</a></p>
                 }
               </div>
             }
@@ -294,7 +323,7 @@ class Profile extends Component {
                 <label htmlFor="remotePossible">Remote verfügbar</label>
               </div>
               <div>
-                <h3>Podcasts</h3>
+                <h3 className="profile__subheadline">Podcasts</h3>
                 { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
                   <div key={index}>
                     <label>Name des Podcasts</label>

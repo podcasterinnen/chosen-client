@@ -112,7 +112,7 @@ class MainNav extends Component {
               { (sessionState === 'UNKNOWN' ||
                 sessionState === 'INVALID' ||
                 sessionState === 'REGISTRATION_IN_PROGRESS') &&
-                <span>Register</span>
+                <span>Registrieren / Login</span>
               }
               { sessionState === 'REGISTERED' &&
                 <span>Login</span>

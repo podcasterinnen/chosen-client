@@ -11,7 +11,7 @@ class PodcasterinnenCard extends Component {
 
     return(
       <div className="card">
-        <img className="card__avatar" alt={`Avatar-Foto von ${item.forname}.`} src="https://api.adorable.io/avatars/285/abott@adorable.png" />
+        <img className="card__avatar" alt={`Avatar-Foto von ${item.forename}.`} src={`https://ui-avatars.com/api/?name=${item.forename}&background=2C3E50&color=FFFFFF&font-size=0.125&size=200&length=100`} />
         <div className="card__text">
           <p>{item.forename} {item.lastname}</p>
           { item.bio_short &&

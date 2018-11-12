@@ -71,18 +71,17 @@ class Session extends Component {
 
     return (
       <div className="session main__section">
-        <h1>Session</h1>
-        <div>
+        <div className="message-container message-container--align-right">
           { sessionState === 'UNKNOWN' &&
-            <button className="button" onClick={this.handleToggleClick}>Login</button>
+            <button className="button button--decent" onClick={this.handleToggleClick}>Zum Login</button>
           }
           { sessionState === 'REGISTERED' &&
-            <button className="button" onClick={this.handleToggleClick}>Register</button>
+            <button className="button button--decent" onClick={this.handleToggleClick}>Registrieren</button>
           }
         </div>
         { sessionState === 'UNKNOWN' &&
           <form onSubmit={(e) => this.handleSubmit(e, 'register')}>
-            <h2>Registrieren:</h2>
+            <h1>Registrieren:</h1>
             <div>
               <label>Dein Vorname:</label>
               <input onChange={(e) => this.handleChange(e, 'forename')} autoComplete="given-name" placeholder="Your forename" type="text" value={this.state.forename} />
@@ -100,7 +99,7 @@ class Session extends Component {
         }
         { sessionState === 'REGISTERED' &&
           <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
-            <h2>Login:</h2>
+            <h1>Login:</h1>
             <div>
               <label>Email address</label>
               <input onChange={(e) => this.handleChange(e, 'email')} autoComplete="username" placeholder="Your email address" type="email" />
@@ -115,6 +114,11 @@ class Session extends Component {
         { sessionState === 'REGISTRATION_IN_PROGRESS' &&
           <p>
             Validiere deine E-Mail-Adresse.
+          </p>
+        }
+        { sessionState === 'INVALID' &&
+          <p>
+            Hier ist leider etwas schief gegangen.
           </p>
         }
         { sessionState === 'LOGGED_IN' &&
