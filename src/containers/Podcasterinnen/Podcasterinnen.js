@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withRouter, Link, Route } from 'react-router-dom'
 
 import './Podcasterinnen.css'
+import Profile from '../Profile/Profile'
 import { initialisePodcasterinnen } from './PodcasterinnenActions'
 import PodcasterinnenCard from '../../components/PodcasterinnenCard/PodcasterinnenCard'
 import { generateKey } from '../../utils/utils'
@@ -53,53 +55,65 @@ class Podcasterinnen extends Component {
   }
 
   render() {
-    const { podcasterinnen } = this.props
-    return (
-      <section className="Podcasterinnen main__section main__section--wide">
-        <h1>Podcasterinnen</h1>
-        <form className="podcasterinnen__search">
-          <label className="podcasterinnen__search__label">Suche</label>
-          <input
-            className="podcasterinnen__search__bar"
-            ref={input => this.search = input}
-            onChange={this.handleChange}
-            placeholder="Suche nach ..."
-            type="text"
-          />
-        </form>
-        { !podcasterinnen &&
-          <p>
-            Loading...
-          </p>
-        }
-        { this.state.results.length > 0 &&
-          <div>
-            <h2>Suchergebnisse:</h2>
-            <p><small>{this.state.results.length} Einträge</small></p>
-            <p><button className="button button--decent" onClick={this.handleSearchReset}>Suche zurücksetzen</button></p>
-            <ul className="podcasterinnen__list">
-              { this.state.results.map((result, i) => {
-                return (
-                  <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
-                    <PodcasterinnenCard item={result}></PodcasterinnenCard>
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        }
-        { (this.state.results <= 0 && podcasterinnen) &&
-          <ul className="podcasterinnen__list">
-            { podcasterinnen.map((podcasterin, i) => {
-              return (
-                <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
-                  <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
-                </li>
-              )
-            })}
-          </ul>
-        }
-      </section>
+    const { match, podcasterinnen } = this.props
+    
+    return(
+      <div>
+      <Route path={`${match.path}/:id`} component={Profile} />
+      <Route
+        exact
+        props={match.patch}
+        render={() => {
+          return (
+            <section className="Podcasterinnen main__section main__section--wide">
+              <h1>Podcasterinnen</h1>
+              <form className="podcasterinnen__search">
+                <label className="podcasterinnen__search__label">Suche</label>
+                <input
+                  className="podcasterinnen__search__bar"
+                  ref={input => this.search = input}
+                  onChange={this.handleChange}
+                  placeholder="Suche nach ..."
+                  type="text"
+                />
+              </form>
+              { !podcasterinnen &&
+                <p>
+                  Loading...
+                </p>
+              }
+              { this.state.results.length > 0 &&
+                <div>
+                  <h2>Suchergebnisse:</h2>
+                  <p><small>{this.state.results.length} Einträge</small></p>
+                  <p><button className="button button--decent" onClick={this.handleSearchReset}>Suche zurücksetzen</button></p>
+                  <ul className="podcasterinnen__list">
+                    { this.state.results.map((result, i) => {
+                      return (
+                        <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
+                          <PodcasterinnenCard item={result}></PodcasterinnenCard>
+                        </li>
+                      )
+                    })}
+                  </ul>
+                </div>
+              }
+              { (this.state.results <= 0 && podcasterinnen) &&
+                <ul className="podcasterinnen__list">
+                  { podcasterinnen.map((podcasterin, i) => {
+                    return (
+                      <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
+                        <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
+                      </li>
+                    )
+                  })}
+                </ul>
+              }
+            </section>
+          )
+        }}
+      />
+      </div>
     )
   }
 }
@@ -123,7 +137,7 @@ const mapStateToProps = (state) => ({
   podcasterinnen: state.podcasterinnenReducer.podcasterinnen,
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Podcasterinnen)
+)(Podcasterinnen))

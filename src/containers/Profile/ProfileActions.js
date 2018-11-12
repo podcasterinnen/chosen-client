@@ -95,10 +95,17 @@ export const submitProfile = (object) => {
   }
 }
 
-export const initialiseProfile = () => {
+export const initialiseProfile = (match) => {
+  let userId
+  if (match.path === '/profile') {
+    userId = localStorage.getItem(LOCAL_STORAGE_USER_ID)
+  } else if (match.params && match.params.id) {
+    userId = match.params.id
+  } else {
+    // TODO: handle error
+  }
   return (dispatch) => {
     dispatch(requestProfile())
-    const userId = localStorage.getItem(LOCAL_STORAGE_USER_ID)
     return fetch(`${API_URL_PODCASTERINNEN}?user_id=${userId}`)
       .then(response => response.json())
       .then(json => dispatch(receiveProfile(json)))

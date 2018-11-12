@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter, Link, Route } from 'react-router-dom'
 
 import './PodcasterinnenCard.css'
 
 class PodcasterinnenCard extends Component {
 
   render() {
-    const { item } = this.props
+    const { item, match } = this.props
 
     return(
       <div className="card">
@@ -29,7 +30,7 @@ class PodcasterinnenCard extends Component {
             <ul className="card__list">
               { item.podcasts.map((podcast) => {
                   return (
-                    <li className="card__list__item"><a href={podcast.url}>{podcast.name}</a></li>
+                    <li className="card__list__item" key="podcast"><a href={podcast.url}>{podcast.name}</a></li>
                   )
                 })
               }
@@ -39,13 +40,13 @@ class PodcasterinnenCard extends Component {
             <ul className="card__list">
               { item.tags.map((tag) => {
                   return (
-                    <li className="card__list__item">{tag.name}</li>
+                    <li className="card__list__item" key="tag">{tag.name}</li>
                   )
                 })
               }
             </ul>
           }
-          <a href="#">Mehr über {item.forename}</a>
+          <Link to={`${match.url}/${item.id}`}>Mehr über {item.forename}</Link>
         </div>
       </div>
     )
@@ -60,4 +61,4 @@ PodcasterinnenCard.defaultProps = {
   item: null,
 }
 
-export default PodcasterinnenCard
+export default withRouter(PodcasterinnenCard)

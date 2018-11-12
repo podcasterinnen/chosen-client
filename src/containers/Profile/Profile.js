@@ -11,6 +11,7 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isEditable: false,
       profile: {
         bioShort: '',
         bioLong: '',
@@ -40,7 +41,13 @@ class Profile extends Component {
   }
 
   componentDidMount() {
-    this.props.handleInitProfile()
+    const match = this.props.match
+    this.props.handleInitProfile(match)
+    if (this.props.match.path === '/profile') {
+      this.setState({
+        isEditable: true,
+      })
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -172,19 +179,21 @@ class Profile extends Component {
 
   render() {
     const { state } = this.props
-    const { profile, staticTags } = this.state
+    const { isEditable, profile, staticTags } = this.state
     const patternDataTags = staticTags.join('|')
 
     return (
       <section className="profile main__section">
-        <h1 className="profile__headline">Profil</h1>
         { (state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR') &&
           <div>
-            <button className="button button--decent" onClick={this.handleEditToggle}>Bearbeiten</button>
-            <h2>Dein Profil</h2>
+            { isEditable && 
+              <div>
+                <button className="button button--decent" onClick={this.handleEditToggle}>Bearbeiten</button>
+              </div>
+            }
             { profile &&
               <div>
-                <p>{profile.forename} {profile.surname}</p>
+                <h1>{profile.forename} {profile.surname}</h1>
                 <p>Remote verfügbar:
                   { profile.remote_possible &&
                     <span> Ja</span>
@@ -464,8 +473,8 @@ const mapDispatchToProps = (dispatch) => ({
   handleEditingQuit: () => {
     dispatch(editingQuit())
   },
-  handleInitProfile: () => {
-    dispatch(initialiseProfile())
+  handleInitProfile: (match) => {
+    dispatch(initialiseProfile(match))
     .then(() => console.log('Profile loaded'))
   },
   handleSubmitProfile: (profile) => {
