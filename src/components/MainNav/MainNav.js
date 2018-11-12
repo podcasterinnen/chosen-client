@@ -102,10 +102,10 @@ class MainNav extends Component {
               Über uns
             </NavLink>
           </li>
-          <li className="mainnav__list__element">
+          <li className="mainnav__list__element mainnav__list__element--right">
             <NavLink
               activeClassName="mainnav__list__element__link--active"
-              className="mainnav__list__element__link mainnav__list__element__link--right"
+              className="mainnav__list__element__link"
               exact
               to="/session"
             >

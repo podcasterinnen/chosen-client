@@ -30,7 +30,7 @@ class PodcasterinnenCard extends Component {
             <ul className="card__list">
               { item.podcasts.map((podcast) => {
                   return (
-                    <li className="card__list__item" key="podcast"><a href={podcast.url}>{podcast.name}</a></li>
+                    <li className="card__list__item" key={podcast}><a href={podcast.url}>{podcast.name}</a></li>
                   )
                 })
               }
@@ -40,7 +40,7 @@ class PodcasterinnenCard extends Component {
             <ul className="card__list">
               { item.tags.map((tag) => {
                   return (
-                    <li className="card__list__item" key="tag">{tag.name}</li>
+                    <li className="card__list__item" key={tag}>{tag.name}</li>
                   )
                 })
               }

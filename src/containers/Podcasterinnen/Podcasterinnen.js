@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Link, Route } from 'react-router-dom'
+import { withRouter, Switch, Route } from 'react-router-dom'
 
 import './Podcasterinnen.css'
 import Profile from '../Profile/Profile'
@@ -22,7 +22,9 @@ class Podcasterinnen extends Component {
   }
 
   componentDidMount = () => {
+    // if(this.props.match.params && this.props.match.params.id === )
     this.props.handleInitPodcasterinnen()
+    console.log(this.props, this.state)
   }
 
   handleChange = () => {
@@ -56,64 +58,65 @@ class Podcasterinnen extends Component {
 
   render() {
     const { match, podcasterinnen } = this.props
+    console.log(match)
     
     return(
-      <div>
-      <Route path={`${match.path}/:id`} component={Profile} />
-      <Route
-        exact
-        props={match.patch}
-        render={() => {
-          return (
-            <section className="Podcasterinnen main__section main__section--wide">
-              <h1>Podcasterinnen</h1>
-              <form className="podcasterinnen__search">
-                <label className="podcasterinnen__search__label">Suche</label>
-                <input
-                  className="podcasterinnen__search__bar"
-                  ref={input => this.search = input}
-                  onChange={this.handleChange}
-                  placeholder="Suche nach ..."
-                  type="text"
-                />
-              </form>
-              { !podcasterinnen &&
-                <p>
-                  Loading...
-                </p>
-              }
-              { this.state.results.length > 0 &&
-                <div>
-                  <h2>Suchergebnisse:</h2>
-                  <p><small>{this.state.results.length} Einträge</small></p>
-                  <p><button className="button button--decent" onClick={this.handleSearchReset}>Suche zurücksetzen</button></p>
+      <Switch>
+        <Route path={`${match.path}/:id`} component={Profile} />
+        <Route
+          exact
+          props={match.path}
+          render={() => {
+            return (
+              <section className="Podcasterinnen main__section main__section--wide">
+                <h1>Podcasterinnen</h1>
+                <form className="podcasterinnen__search">
+                  <label className="podcasterinnen__search__label">Suche</label>
+                  <input
+                    className="podcasterinnen__search__bar"
+                    ref={input => this.search = input}
+                    onChange={this.handleChange}
+                    placeholder="Suche nach ..."
+                    type="text"
+                  />
+                </form>
+                { !podcasterinnen &&
+                  <p>
+                    Loading...
+                  </p>
+                }
+                { this.state.results.length > 0 &&
+                  <div>
+                    <h2>Suchergebnisse:</h2>
+                    <p><small>{this.state.results.length} Einträge</small></p>
+                    <p><button className="button button--decent" onClick={this.handleSearchReset}>Suche zurücksetzen</button></p>
+                    <ul className="podcasterinnen__list">
+                      { this.state.results.map((result, i) => {
+                        return (
+                          <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
+                            <PodcasterinnenCard item={result}></PodcasterinnenCard>
+                          </li>
+                        )
+                      })}
+                    </ul>
+                  </div>
+                }
+                { (this.state.results <= 0 && podcasterinnen) &&
                   <ul className="podcasterinnen__list">
-                    { this.state.results.map((result, i) => {
+                    { podcasterinnen.map((podcasterin, i) => {
                       return (
-                        <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
-                          <PodcasterinnenCard item={result}></PodcasterinnenCard>
+                        <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
+                          <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
                         </li>
                       )
                     })}
                   </ul>
-                </div>
-              }
-              { (this.state.results <= 0 && podcasterinnen) &&
-                <ul className="podcasterinnen__list">
-                  { podcasterinnen.map((podcasterin, i) => {
-                    return (
-                      <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
-                        <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
-                      </li>
-                    )
-                  })}
-                </ul>
-              }
-            </section>
-          )
-        }}
-      />
-      </div>
+                }
+              </section>
+            )
+          }}
+        />
+      </Switch>
     )
   }
 }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { withRouter, Link } from 'react-router-dom'
 
 import './Session.css'
 import { initialiseSession, loginUser, registerNewUser, setSessionState } from './SessionActions'
@@ -118,7 +119,7 @@ class Session extends Component {
         }
         { sessionState === 'LOGGED_IN' &&
           <p>
-            Du bist erfolgreich eingelogged.
+            Du bist erfolgreich eingelogged. Hier geht's zu deinem <Link to="/profile">Podcasterinnen-Profil</Link>.
           </p>
         }
       </div>
@@ -153,7 +154,7 @@ const mapStateToProps = (state) => ({
   sessionState: state.sessionReducer.sessionState,
 })
 
-export default connect(
+export default withRouter(connect(
   mapStateToProps,
   mapDispatchToProps
-)(Session)
+)(Session))
