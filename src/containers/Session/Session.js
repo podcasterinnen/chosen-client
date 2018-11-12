@@ -73,10 +73,10 @@ class Session extends Component {
         <h1>Session</h1>
         <div>
           { sessionState === 'UNKNOWN' &&
-            <button onClick={this.handleToggleClick}>Login</button>
+            <button className="button" onClick={this.handleToggleClick}>Login</button>
           }
           { sessionState === 'REGISTERED' &&
-            <button onClick={this.handleToggleClick}>Register</button>
+            <button className="button" onClick={this.handleToggleClick}>Register</button>
           }
         </div>
         { sessionState === 'UNKNOWN' &&
@@ -94,7 +94,7 @@ class Session extends Component {
               <label>Password</label>
               <input onChange={(e) => this.handleChange(e, 'password')} autoComplete="current-password" placeholder="Your safe password." type="password" value={this.state.password} />
             </div>
-            <button type="submit" value="submit">Registrieren</button>
+            <button className="button" type="submit" value="submit">Registrieren</button>
           </form>
         }
         { sessionState === 'REGISTERED' &&
@@ -108,7 +108,7 @@ class Session extends Component {
               <label>Password</label>
               <input onChange={(e) => this.handleChange(e, 'password')}  autoComplete="current-password" placeholder="Your safe password." type="password" />
             </div>
-            <button type="submit" value="submit">Login</button>
+            <button className="button" type="submit" value="submit">Login</button>
           </form>
         }
         { sessionState === 'REGISTRATION_IN_PROGRESS' &&

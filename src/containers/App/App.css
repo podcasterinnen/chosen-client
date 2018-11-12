@@ -3,5 +3,10 @@
 }
 
 .app__button {
-  margin: 40px 0;
+  margin: 20px 0;
+}
+@media screen and (min-width: 600px) {
+  .app__button {
+    margin: 40px 0;
+  }
 }

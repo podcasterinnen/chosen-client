@@ -7,16 +7,49 @@ import './MainNav.css'
 import { initialiseSession, logoutUser } from '../../containers/Session/SessionActions'
 
 class MainNav extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      menuIsOpen: false,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.onRouteChanged()
+    }
+  }
+
   handleLogout = (e) => {
     this.props.handleLogoutUser()
   }
 
+  handleMenuClick = (e) => {
+    e.preventDefault()
+    this.setState({
+      menuIsOpen: !this.state.menuIsOpen,
+    })
+  }
+
+  onRouteChanged() {
+    this.setState({
+      menuIsOpen: false,
+    })
+  }
+
   render() {
     const { sessionState } = this.props
+    const { menuIsOpen } = this.state
 
     return(
       <nav className="mainnav">
-        <ol className="mainnav__list">
+        <button className="mainnav__button" onClick={this.handleMenuClick}>
+          Menü
+          { menuIsOpen &&
+            <span> schließen</span>
+          }
+        </button>
+        <ol className={menuIsOpen ? 'mainnav__list mainnav__list--open' : 'mainnav__list'}>
           <li className="mainnav__list__element">
             <NavLink
               activeClassName="mainnav__list__element__link--active"

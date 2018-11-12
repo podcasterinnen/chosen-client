@@ -100,56 +100,46 @@ h2 {
   margin-top: 1.5em;
 }
 
-.main {
-  display: flex;
-  flex-direction: column;
-}
-
-.main__section {
-  margin: 0 auto;
-  padding: var(--section-padding-top) 40px var(--section-padding-top) 40px;
-  width: 100%;
-  max-width: 860px;
-  min-height: calc(100vh - var(--main-nav-height));
-}
-
-.main__section--wide {
-  max-width: 1100px;
-}
-
 .subtitle {
   color: var(--theme-primary-color);
-  font-size: 24px;
+  font-size: 16px;
   font-weight: 700;
   letter-spacing: 3px;
   line-height: 1.375em;
   text-align: center;
   text-transform: uppercase;
 }
+@media screen and (min-width: 600px) {
+  .subtitle {
+    font-size: 24px;
+  }
+}
 
 .title {
-  font-size: 70px;
+  font-size: 26px;
   text-align: center;
+}
+@media screen and (min-width: 600px) {
+  .title {
+    font-size: 70rem;
+  }
 }
 
 /* GENERAL FORM STYLES */
-button,
 .button {
   color: #FFFFFF;
   text-transform: uppercase;
 
   background-color: var(--theme-primary-color);
+  border: none;
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
   padding: 10px 30px;
 }
 
-button:active,
 .button:active,
-button:focus,
 .button:focus,
-button:hover,
 .button:hover {
   color: #FFFFFF;
   text-decoration: none;
@@ -213,4 +203,27 @@ label {
 /* GENERAL THEME STYLES */
 body {
   background-color: var(--theme-light-color);
+}
+
+/* GENEREAL LAYOUT STYLES */
+.main {
+  display: flex;
+  flex-direction: column;
+}
+
+.main__section {
+  margin: 0 auto;
+  padding: var(--section-padding-top) 20px var(--section-padding-top) 20px;
+  width: 100%;
+  max-width: 860px;
+  min-height: calc(100vh - var(--main-nav-height));
+}
+@media screen and (min-width: 600px) {
+  .main__section {
+    padding: var(--section-padding-top) 40px var(--section-padding-top) 40px;
+  }
+}
+
+.main__section--wide {
+  max-width: 1100px;
 }
