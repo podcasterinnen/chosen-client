@@ -206,6 +206,10 @@ body {
 }
 
 /* GENEREAL LAYOUT STYLES */
+img {
+  max-width: 100%;
+}
+
 .main {
   display: flex;
   flex-direction: column;
