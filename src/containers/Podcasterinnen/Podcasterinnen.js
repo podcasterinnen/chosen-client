@@ -58,7 +58,6 @@ class Podcasterinnen extends Component {
 
   render() {
     const { match, podcasterinnen } = this.props
-    console.log(match)
     
     return(
       <Switch>

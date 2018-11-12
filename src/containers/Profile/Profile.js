@@ -42,19 +42,26 @@ class Profile extends Component {
 
   componentDidMount() {
     const match = this.props.match
-    this.props.handleInitProfile(match)
     if (this.props.match.path === '/profile') {
+      this.props.handleInitProfile(match)
       this.setState({
         isEditable: true,
       })
+    } else {
+      for (let podcasterin of this.props.podcasterinnen) {
+        if (podcasterin.id === this.props.match.params.id) {
+          this.setState({
+            profile: podcasterin,
+          })
+        }
+      }
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.profile !== this.state.profile) {
+    if (this.props.match.path === '/profile' && nextProps.profile !== this.state.profile) {
       const nextProfile = nextProps.profile
       const newProfile = {}
-      console.log('!', nextProfile)
       Object.entries(nextProfile).forEach(([key, value]) => {
         if (value === null && key === 'podcasts') {
           newProfile.podcasts = [{
@@ -75,6 +82,15 @@ class Profile extends Component {
         }
       })
       this.setState({ profile: newProfile })
+    } else {
+      for (let podcasterin of nextProps.podcasterinnen) {
+        // TODO: fix type error
+        if (podcasterin.id == this.props.match.params.id) {
+          this.setState({
+            profile: podcasterin,
+          })
+        }
+      }
     }
   }
 
@@ -214,7 +230,7 @@ class Profile extends Component {
               </div>
             }
             { profile &&
-              <div>
+              <div className="profile__container">
                 <img className="profile__avatar" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${profile.forename}&background=2C3E50&color=FFFFFF&font-size=0.125&size=200&length=100`} />
                 <h1 className="profile__title">{profile.forename} {profile.surname}</h1>
                 { profile.bio_short &&
@@ -486,12 +502,14 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
+  podcasterinnen: PropTypes.array,
   profile: PropTypes.object,
   state: PropTypes.string,
 }
 
 Profile.defaultProps = {
-  profile: null,
+  podcasterinnen: [],
+  profile: {},
   state: 'STATE_DEFAULT',
 }
 
@@ -512,6 +530,7 @@ const mapDispatchToProps = (dispatch) => ({
 })
 
 const mapStateToProps = (state) => ({
+  podcasterinnen: state.podcasterinnenReducer.podcasterinnen,
   profile: state.profileReducer.profile,
   state: state.profileReducer.state,
 })

@@ -100,7 +100,7 @@ export const initialiseProfile = (match) => {
   if (match.path === '/profile') {
     userId = localStorage.getItem(LOCAL_STORAGE_USER_ID)
   } else if (match.params && match.params.id) {
-    userId = match.params.id
+    // userId = match.params.id
   } else {
     // TODO: handle error
   }
