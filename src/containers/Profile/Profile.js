@@ -11,6 +11,7 @@ class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      bioShortCharactersRemaining: 255,
       isEditable: false,
       profile: {
         bioShort: '',
@@ -81,7 +82,10 @@ class Profile extends Component {
           newProfile[key] = value
         }
       })
-      this.setState({ profile: newProfile })
+      this.setState({ 
+        bioShortCharactersRemaining: 255 - newProfile.bio_short.length,
+        profile: newProfile
+      })
     } else {
       for (let podcasterin of nextProps.podcasterinnen) {
         // TODO: fix type error
@@ -95,8 +99,13 @@ class Profile extends Component {
   }
 
   handleChange = (e, type) => {
+    if (type === 'bio_short') {
+      this.setState({
+        bioShortCharactersRemaining: 255 - e.target.value.length,
+      })
+    }
     this.setState({
-      profile: {...this.state.profile, [type]: e.target.value}
+      profile: {...this.state.profile, [type]: e.target.value},
     })
   }
 
@@ -433,12 +442,16 @@ class Profile extends Component {
                 >Sprache hinzufügen</button>
               </div>
               <div>
-                <label>Kurz-Biographie</label>
+                <label>
+                  Kurz-Biographie
+                  <span className="label label--right">{this.state.bioShortCharactersRemaining} Zeichen</span>
+                </label>
                 <textarea 
                   onChange={(e) => this.handleChange(e, 'bio_short')} 
                   placeholder="Kurz-Biographie" 
                   rows="3"
                   value={profile.bio_short || ''}
+                  maxLength="255"
                 ></textarea>
               </div>
               <div>
