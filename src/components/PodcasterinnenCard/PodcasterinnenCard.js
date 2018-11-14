@@ -19,7 +19,7 @@ class PodcasterinnenCard extends Component {
           }
           { item.podcasts &&
             <div>
-              <p className="card__subtitle">Podcasts:</p>
+              <p className="card__subtitle">{item.forename}s Podcasts:</p>
               <ul className="card__list">
                 { item.podcasts.map((podcast) => {
                     return (
@@ -32,7 +32,7 @@ class PodcasterinnenCard extends Component {
           }
           { item.tags &&
             <div>
-              <p className="card__subtitle">Interessen:</p>
+              <p className="card__subtitle">Themen, über die {item.forename} spricht:</p>
               <ul className="card__list">
                 { item.tags.map((tag) => {
                     return (

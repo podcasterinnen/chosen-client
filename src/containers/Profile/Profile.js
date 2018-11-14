@@ -250,7 +250,7 @@ class Profile extends Component {
                 }
                 { (Array.isArray(profile.podcasts) && profile.podcasts.length > 0 && profile.podcasts[0].name !== '') &&
                   <div>
-                    <h3 className="profile__subheadline">{profile.forename}'s Podcasts:</h3>
+                    <h3 className="profile__subheadline">{profile.forename}s Podcasts:</h3>
                     <ul className="profile__podcast-list">
                       { profile.podcasts.map((podcast) => (
                         <li className="profile__podcast" key={podcast.name}>
@@ -263,7 +263,7 @@ class Profile extends Component {
                 }
                 { (Array.isArray(profile.tags) && profile.tags.length > 0 && profile.tags[0] !== '') &&
                   <div>
-                    <h3 className="profile__subheadline">Interessen und Leidenschaften:</h3>
+                    <h3 className="profile__subheadline">Themen, über die {profile.forename} spricht:</h3>
                     <ul className="profile__tag-list">
                       { profile.tags.map((tag) => (
                         <li className="profile__tag" key={tag}>{tag}</li>
@@ -385,7 +385,7 @@ class Profile extends Component {
                 >Podcast hinzufügen</button>
               </div>
               <div>
-                <label>Schlagworte</label>
+                <label>Themen, über die ich spreche:</label>
                 { profile.tags && profile.tags.length && profile.tags.map((tag, index) => (
                   <div key={index}>
                     <input
@@ -394,7 +394,7 @@ class Profile extends Component {
                       list="tags-data"
                       onChange={this.handleTagsChange(index)}
                       pattern={patternDataTags}
-                      placeholder="Schlagwort"
+                      placeholder="Thema"
                       value={tag}
                       type="text"
                     />
@@ -414,7 +414,7 @@ class Profile extends Component {
                   className="button profile__button--add"
                   onClick={(e) => this.handleAddTagsInput(e)}
                   tabIndex="-1"
-                >Schlagwort hinzufügen</button>
+                >Thema hinzufügen</button>
               </div>
               <div>
                 <label>Sprachen</label>
