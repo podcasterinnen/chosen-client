@@ -18,8 +18,8 @@ class Imprint extends Component {
         <address>
           <span itemProp="name">podcasterinnen.org</span><br />
           <span itemProp="address" itemScope itemType="http://schema.org/PostalAddress">
-            <span itemProp="streetAddress">Zähringerstraße 39d</span><br />
-            <span itemProp="addressLocality">10707 Berlin</span>
+            <span itemProp="streetAddress">Fischerinsel 4</span><br />
+            <span itemProp="addressLocality">10179 Berlin</span>
           </span>
         </address>
         <p><a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a></p>
