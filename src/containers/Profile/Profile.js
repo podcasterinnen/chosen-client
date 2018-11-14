@@ -361,13 +361,13 @@ class Profile extends Component {
                       value={podcast.name}
                       type="text"
                     />
-                    <label>Feed-URL des Podcasts</label>
+                    <label>Link zur Webseite des Podcasts</label>
                     <input
                       autoComplete="off"
                       className="profile__input--multi"
                       list="podcasts-data"
                       onChange={this.handlePodcastsUrlChange(index)}
-                      placeholder="Feed-URL des Podcast"
+                      placeholder="Link zur Webseite des Podcast"
                       value={podcast.url}
                       type="url"
                     />
