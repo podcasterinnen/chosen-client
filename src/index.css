@@ -5,6 +5,7 @@
   --theme-secondary-color: #A84E54;
   --theme-light-color: #EBEEF1;
   --theme-light-color-grey: #B7BFC8;
+  --theme-color-grey: #7B828A;
 
   --footer-nav-height: 60px;
   --main-nav-height: 60px;
@@ -169,6 +170,14 @@ button {
   height: 40px;
 }
 
+[type="submit"]:disabled,
+[type="submit"][disabled] {
+  color: var(--theme-color-grey);
+
+  background-color: var(--theme-light-color-grey);
+  cursor: inherit;
+}
+
 input[type="email"],
 input[type="password"],
 input[type="text"],
@@ -192,6 +201,25 @@ input[type="url"]:focus,
 textarea:focus {
   border: 1px solid var(--theme-primary-color-dark);
   outline: none;
+}
+
+input[type="email"].inputIsValid,
+input[type="password"].inputIsValid,
+input[type="text"].inputIsValid,
+input[type="url"].inputIsValid,
+textarea.inputIsValid {
+  border-top: 1px solid #FFFFFF;
+  border-right: 1px solid #FFFFFF;
+  border-bottom: 1px solid var(--theme-primary-color-dark);
+  border-left: 1px solid #FFFFFF;
+}
+
+input[type="email"].inputIsInvalid,
+input[type="password"].inputIsInvalid,
+input[type="text"].inputIsInvalid,
+input[type="url"].inputIsInvalid,
+textarea.inputIsInvalid {
+  border: 1px solid var(--theme-secondary-color);
 }
 
 textarea {

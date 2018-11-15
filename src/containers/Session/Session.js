@@ -11,8 +11,14 @@ class Session extends Component {
     super(props)
     this.state = {
       emailAddress: '',
+      emailAddressValid: true,
+      isEnabledForRegistration: false,
       forename: '',
+      forenameValid: true,
       password: '',
+      passwordValid: true,
+      passwordControl: '',
+      passwordControlValid: true,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,17 +32,95 @@ class Session extends Component {
   handleChange = (e, type) => {
     switch(type) {
     case 'email':
-      this.setState({ emailAddress: e.target.value })
+      this.setState({ emailAddress: e.target.value }, () => {
+        this.handleRegisterFormValidation()
+        this.handleEmailValidation()
+      })
       break
     case 'forename':
-      this.setState({ forename: e.target.value })
+      this.setState({ forename: e.target.value }, () => {
+        this.handleRegisterFormValidation()
+      })
       break
     case 'password':
-      this.setState({ password: e.target.value })
+      this.setState({ password: e.target.value }, () => {
+        this.handleRegisterFormValidation()
+        this.handlePasswordValidation()
+      })
+      break
+    case 'passwordControl':
+      this.setState({ passwordControl: e.target.value }, () => {
+        this.handleRegisterFormValidation()
+        this.handlePasswordControlValidation()
+      })
       break
     default:
       return
     }
+  }
+
+  handleEmailValidation = () => {
+    this.setState({
+      emailAddressValid: this.validateEmail(this.state.emailAddress)
+    })
+  }
+
+  handleForenameValidation = () => {
+    if (this.state.forename !== '') {
+      this.setState({
+        forenameValid: true,
+      })
+    } else {
+      this.setState({
+        forenameValid: false,
+      })
+    }
+  }
+
+  handlePasswordValidation = () => {
+    if (this.state.password.length >= 8) {
+      this.setState({
+        passwordValid: true,
+      })
+    } else {
+      this.setState({
+        passwordValid: false,
+      })
+    }
+  }
+
+  handlePasswordControlValidation = () => {
+    if (this.state.passwordControl === this.state.password) {
+      this.setState({
+        passwordControlValid: true,
+      })
+    } else {
+      this.setState({
+        passwordControlValid: false,
+      })
+    }
+  }
+
+  handleRegisterFormValidation = () => {
+    // Validate for Submit Button
+    if (this.state.password.length >= 8 &&
+      this.state.passwordControl === this.state.password &&
+      this.state.forename !== '' &&
+      this.state.emailAddress !== '' &&
+      this.validateEmail(this.state.emailAddress)) {
+      this.setState({
+        isEnabledForRegistration: true,
+      })
+    } else {
+      this.setState({
+        isEnabledForRegistration: false,
+      })
+    }
+  }
+
+  validateEmail(email) {
+    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return re.test(String(email).toLowerCase())
   }
 
   handleSubmit = (e, type) => {
@@ -68,6 +152,7 @@ class Session extends Component {
 
   render() {
     const { sessionState } = this.props
+    const { isEnabledForRegistration } = this.state
 
     return (
       <div className="session main__section">
@@ -83,18 +168,59 @@ class Session extends Component {
           <form onSubmit={(e) => this.handleSubmit(e, 'register')}>
             <h1>Registrieren:</h1>
             <div>
-              <label>Dein Vorname:</label>
-              <input onChange={(e) => this.handleChange(e, 'forename')} autoComplete="given-name" placeholder="Your forename" type="text" value={this.state.forename} />
+              <label>Vorname/Nickname:</label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'forename')} 
+                autoComplete="given-name" 
+                placeholder="Buffy"
+                type="text" value={this.state.forename} 
+                required
+                className={this.state.forenameValid ? 'inputIsValid' : 'inputIsInvalid'}
+              />
             </div>
             <div>
-              <label>Email address</label>
-              <input onChange={(e) => this.handleChange(e, 'email')} autoComplete="username" placeholder="Your email address" type="email" value={this.state.emailAddress} />
+              <label>E-Mail-Adresse</label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'email')} 
+                autoComplete="username" 
+                placeholder="buffy.summers@sunnydaly-high.net" 
+                type="email" 
+                value={this.state.emailAddress}
+                required
+                className={this.state.emailAddressValid ? 'inputIsValid' : 'inputIsInvalid'}
+              />
             </div>
             <div>
-              <label>Password</label>
-              <input onChange={(e) => this.handleChange(e, 'password')} autoComplete="current-password" placeholder="Your safe password." type="password" value={this.state.password} />
+              <label>
+                Passwort
+                <span className="label label--right">Minimum: 8 Zeichen</span>
+              </label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'password')} 
+                autoComplete="current-password" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                type="password" 
+                value={this.state.password}
+                required
+                className={this.state.passwordValid ? 'inputIsValid' : 'inputIsInvalid'}
+              />
             </div>
-            <button className="button" type="submit" value="submit">Registrieren</button>
+            <div>
+              <label>
+                Passwort wiederholen
+                <span className="label label--right">Minimum: 8 Zeichen</span>
+              </label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'passwordControl')}
+                autoComplete="current-password" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                type="password" 
+                value={this.state.passwordControl} 
+                required
+                className={this.state.passwordControlValid ? 'inputIsValid' : 'inputIsInvalid'}
+              />
+            </div>
+            <button className="button" type="submit" value="submit" disabled={!isEnabledForRegistration}>Registrieren</button>
           </form>
         }
         { sessionState === 'REGISTERED' &&
