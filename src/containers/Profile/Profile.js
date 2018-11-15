@@ -318,7 +318,7 @@ class Profile extends Component {
             <h2>Bearbeite dein Profil:</h2>
             <form onSubmit={(e) => this.handleSubmit(e)}>
               <div>
-                <label>Vorname</label>
+                <label>Vorname/Nickname</label>
                 <input 
                   autoComplete="given-name"
                   onChange={(e) => this.handleChange(e, 'forename')} 
