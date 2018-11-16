@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import './ProfilePage.css'
+
 class ProfilePage extends Component {
 
   render() {
@@ -49,16 +51,39 @@ class ProfilePage extends Component {
           </ul>
         </div>
       }
-      { profile.remote_possible &&
-        <p className="profile__info-text">Ich kann remote aufnehmen.
-          { profile.remote_possible &&
-            <span> Ja</span>
-          }
-          { !profile.remote_possible &&
-            <span> Nein</span>
-          }
-        </p>
-      }
+      <h3 className="profile__subheadline">Dazu kann man mich anfragen:</h3>
+      <p className="profile__info-text">
+        <span className={profile.talks === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.talks === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich halte Vorträge.</span>
+      </p>
+      <p className="profile__info-text">
+        <span className={profile.workshops === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.workshops === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich gebe Workshops/Schulungen.</span>
+      </p>
+      <p className="profile__info-text">
+        <span className={profile.remote_possible === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.remote_possible === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich kann remote aufnehmen.</span>
+      </p>
+      <p className="profile__info-text">
+        <span className={profile.foreign_language === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.foreign_language === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich nehme auch fremdsprachige Podcasts auf.</span>
+      </p>
+      <p className="profile__info-text">
+        <span className={profile.record_outside === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.record_outside === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich nehme auch Podcasts draußen auf.</span>
+      </p>
+      <p className="profile__info-text">
+        <span className={profile.guests === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.guests === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich lade auch Gästinnen ein.</span>
+      </p>
+      <p className="profile__info-text">
+        <span className={profile.travel === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.travel === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich reise auch um Podcasts aufzuzeichnen.</span>
+      </p>
+      <p className="profile__info-text">
+        <span className={profile.podcast_production === true ? 'profile-page__checkbox profile-page__checkbox--checked' : 'profile-page__checkbox'}></span>
+        <span className={profile.podcast_production === true ? 'profile-page__checkbox-label profile-page__checkbox-label--checked' : 'profile-page__checkbox-label'}>Ich kann Podcasts schneiden, aufnehmen und produzieren.</span>
+      </p>
       { (profile.city || profile.twitter_url || profile.website_url) &&
         <h3 className="profile__subheadline">Weitere Infos über {profile.forename}:</h3>
       }

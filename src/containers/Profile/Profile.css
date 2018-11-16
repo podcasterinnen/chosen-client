@@ -24,7 +24,7 @@
 }
 
 .profile__info-text {
-  margin: 5px 0;
+  margin: 10px 0;
 }
 
 .profile__input--multi {
@@ -53,7 +53,7 @@
 }
 
 .profile__subheadline {
-  margin: 40px 0 10px 0;
+  margin: 60px 0 20px 0;
 }
 
 .profile__subtitle {

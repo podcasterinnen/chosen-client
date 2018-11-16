@@ -27,6 +27,8 @@ class ProfileForm extends Component {
       staticTags,
     } = this.props
 
+    console.log('1', profile)
+
     return(
       <div>
         <button className="button button--decent" onClick={handleEditToggle}>Bearbeiten beenden</button>
@@ -176,7 +178,7 @@ class ProfileForm extends Component {
                 name="talks"
                 onChange={(e) => handleCheckboxInput(e, 'TALKS')}
                 type="checkbox" 
-                value={profile.talks_possible || false}
+                checked={profile.talks || false}
               />
               <label 
                 className="label label--checkbox"
@@ -189,7 +191,7 @@ class ProfileForm extends Component {
                 name="workshops"
                 onChange={(e) => handleCheckboxInput(e, 'WORKSHOPS')}
                 type="checkbox" 
-                value={profile.workshops_possible || false}
+                checked={profile.workshops || false}
               />
               <label 
                 className="label label--checkbox"
@@ -202,7 +204,7 @@ class ProfileForm extends Component {
                 name="remote"
                 onChange={(e) => handleCheckboxInput(e, 'REMOTE')}
                 type="checkbox" 
-                value={profile.remote_possible || false}
+                checked={profile.remote_possible || false}
               />
               <label 
                 className="label label--checkbox"
@@ -215,7 +217,7 @@ class ProfileForm extends Component {
                 name="foreignLanguage"
                 onChange={(e) => handleCheckboxInput(e, 'FOREIGN_LANGUAGE')}
                 type="checkbox" 
-                value={profile.foreignLanguage_possible || false}
+                checked={profile.foreign_language || false}
               />
               <label 
                 className="label label--checkbox"
@@ -228,7 +230,7 @@ class ProfileForm extends Component {
                 name="recordOutside"
                 onChange={(e) => handleCheckboxInput(e, 'RECORD_OUTSIDE')}
                 type="checkbox" 
-                value={profile.recordOutside_possible || false}
+                checked={profile.record_outside || false}
               />
               <label 
                 className="label label--checkbox"
@@ -241,7 +243,7 @@ class ProfileForm extends Component {
                 name="guests"
                 onChange={(e) => handleCheckboxInput(e, 'GUESTS')}
                 type="checkbox" 
-                value={profile.guests_possible || false}
+                checked={profile.guests || false}
               />
               <label 
                 className="label label--checkbox"
@@ -254,7 +256,7 @@ class ProfileForm extends Component {
                 name="travel"
                 onChange={(e) => handleCheckboxInput(e, 'TRAVEL')}
                 type="checkbox" 
-                value={profile.travel_possible || false}
+                checked={profile.travel || false}
               />
               <label 
                 className="label label--checkbox"
@@ -267,7 +269,7 @@ class ProfileForm extends Component {
                 name="podcastProduction"
                 onChange={(e) => handleCheckboxInput(e, 'PODCAST_PRODUCTION')}
                 type="checkbox" 
-                value={profile.podcastProduction_possible || false}
+                checked={profile.podcast_production || false}
               />
               <label 
                 className="label label--checkbox"
