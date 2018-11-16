@@ -14,6 +14,7 @@ class ProfileForm extends Component {
       handleChange,
       handleEditToggle,
       handleLanguagesChange,
+      handlePodcastsDescriptionChange,
       handlePodcastsNameChange,
       handlePodcastsUrlChange,
       handleCheckboxInput,
@@ -146,6 +147,19 @@ class ProfileForm extends Component {
                   placeholder="Name des Podcast"
                   type="text"
                   value={podcast.name}
+                />
+                <label>
+                  Kurze Beschreibung des Podcasts
+                </label>
+                <input
+                  autoComplete="off"
+                  className="profile__input--multi"
+                  list="podcasts-data"
+                  maxLength="144"
+                  onChange={handlePodcastsDescriptionChange(index)}
+                  placeholder="Kurze Beschreibung des Podcasts"
+                  type="text"
+                  value={podcast.description}
                 />
                 <label>Link zur Webseite des Podcasts</label>
                 <input
@@ -338,6 +352,7 @@ ProfileForm.propTypes = {
   handleCheckboxInput: PropTypes.func,
   handleEditToggle: PropTypes.func,
   handleLanguagesChange: PropTypes.func,
+  handlePodcastsDescriptionChange: PropTypes.func,
   handlePodcastsNameChange: PropTypes.func,
   handlePodcastsUrlChange: PropTypes.func,
   handleRemoveLanguagesInput: PropTypes.func,
@@ -358,6 +373,7 @@ ProfileForm.defaultProps = {
   handleCheckboxInput: undefined,
   handleEditToggle: undefined,
   handleLanguagesChange: undefined,
+  handlePodcastsDescriptionChange: undefined,
   handlePodcastsNameChange: undefined,
   handlePodcastsUrlChange: undefined,
   handleRemoveLanguagesInput: undefined,

@@ -36,13 +36,20 @@
 .profile__podcast {
   list-style: none;
 
-  align-items: center;
-  display: flex;
+  margin: 20px 0;
+}
+
+/* clears the floating podcast covers */
+.profile__podcast::after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
 .profile__podcast__image {
   border-radius: 4px;
-  margin: 5px 10px 5px 0;
+  float: left;
+  margin: 0 10px 0 0;
   width: 70px;
   height: 70px;
 }
@@ -50,6 +57,18 @@
 .profile__podcast-list {
   margin: 0;
   padding: 0;
+}
+
+/* .profile__podcast__text {} */
+@media screen and (min-width: 600px) {
+  .profile__podcast__text {
+    padding: 10px 0;
+    height: 70px;
+  }
+}
+
+.profile__podcast__text p {
+  margin: 0;
 }
 
 .profile__subheadline {

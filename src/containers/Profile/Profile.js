@@ -23,6 +23,7 @@ class Profile extends Component {
         forename: '',
         languages: [''],
         podcasts: [{
+          description: '',
           name: '',
           url: '',
         }],
@@ -168,13 +169,26 @@ class Profile extends Component {
     console.log(this.state)
   }
 
+  handlePodcastsDescriptionChange = (index) => (e) => {
+    e.preventDefault()
+    const newPodcasts = this.state.profile.podcasts.map((podcast, podcastIndex) => {
+      if (index !== podcastIndex) {
+        return podcast
+      }
+      return { name: podcast.name, description: e.target.value, url: podcast.url, id: podcast.id }
+    })
+    this.setState({
+      profile: {...this.state.profile, podcasts: newPodcasts},
+    })
+  }
+
   handlePodcastsNameChange = (index) => (e) => {
     e.preventDefault()
     const newPodcasts = this.state.profile.podcasts.map((podcast, podcastIndex) => {
       if (index !== podcastIndex) {
         return podcast
       }
-      return { name: e.target.value, url: podcast.url, id: podcast.id }
+      return { name: e.target.value, description: podcast.description, url: podcast.url, id: podcast.id }
     })
     this.setState({
       profile: {...this.state.profile, podcasts: newPodcasts},
@@ -187,7 +201,7 @@ class Profile extends Component {
       if (index !== podcastIndex) {
         return podcast
       }
-      return { name: podcast.name, url: e.target.value, id: podcast.id }
+      return { name: podcast.name, description: podcast.description, url: e.target.value, id: podcast.id }
     })
     this.setState({
       profile: {...this.state.profile, podcasts: newPodcasts},
@@ -313,6 +327,7 @@ class Profile extends Component {
             handleCheckboxInput={this.handleCheckboxInput}
             handleEditToggle={this.handleEditToggle}
             handleLanguagesChange={this.handleLanguagesChange}
+            handlePodcastsDescriptionChange={this.handlePodcastsDescriptionChange}
             handlePodcastsNameChange={this.handlePodcastsNameChange}
             handlePodcastsUrlChange={this.handlePodcastsUrlChange}
             handleRemoveLanguagesInput={this.handleRemoveLanguagesInput}
