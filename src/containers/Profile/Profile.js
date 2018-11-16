@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import staticTags from '../../assets/data/tags.json'
 
 import './Profile.css'
+import ProfileForm from '../../components/ProfileForm/ProfileForm'
+import ProfilePage from '../../components/ProfilePage/ProfilePage'
 import { submitProfile, editingProfile, editingQuit, initialiseProfile } from './ProfileActions'
 
 class Profile extends Component {
@@ -226,7 +228,12 @@ class Profile extends Component {
 
   render() {
     const { state } = this.props
-    const { isEditable, profile, staticTags } = this.state
+    const { 
+      bioShortCharactersRemaining, 
+      isEditable, 
+      profile, 
+      staticTags,
+    } = this.state
     const patternDataTags = staticTags.join('|')
 
     return (
@@ -239,73 +246,9 @@ class Profile extends Component {
               </div>
             }
             { profile &&
-              <div className="profile__container">
-                <img className="profile__avatar" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${profile.forename}&background=2C3E50&color=FFFFFF&font-size=0.125&size=200&length=100`} />
-                <h1 className="profile__title">{profile.forename} {profile.surname}</h1>
-                { profile.bio_short &&
-                  <p className="profile__subtitle">{profile.bio_short}</p>
-                }
-                { profile.bio_long &&
-                  <p>{profile.bio_long}</p>
-                }
-                { (Array.isArray(profile.podcasts) && profile.podcasts.length > 0 && profile.podcasts[0].name !== '') &&
-                  <div>
-                    <h3 className="profile__subheadline">{profile.forename}s Podcasts:</h3>
-                    <ul className="profile__podcast-list">
-                      { profile.podcasts.map((podcast) => (
-                        <li className="profile__podcast" key={podcast.name}>
-                          <img className="profile__podcast__image" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${podcast.name}&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100`} />
-                          <a href={podcast.url} target="_blank">{podcast.name}</a>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                }
-                { (Array.isArray(profile.tags) && profile.tags.length > 0 && profile.tags[0] !== '') &&
-                  <div>
-                    <h3 className="profile__subheadline">Themen, über die {profile.forename} spricht:</h3>
-                    <ul className="profile__tag-list">
-                      { profile.tags.map((tag) => (
-                        <li className="profile__tag" key={tag}>{tag}</li>
-                      ))}
-                    </ul>
-                  </div>
-                }
-                { (Array.isArray(profile.languages) && profile.languages.length > 0 && profile.languages[0] !== '') &&
-                  <div>
-                    <h3 className="profile__subheadline">Sprachen:</h3>
-                    <ul className="profile__tag-list">
-                      { profile.languages.map((language) => (
-                        <li className="profile__tag" key={language}>{language}</li>
-                      ))}
-                    </ul>
-                  </div>
-                }
-                { (profile.remote_possible || profile.city || profile.twitter_url || profile.website_url) &&
-                  <h3 className="profile__subheadline">Weitere Infos über {profile.forename}:</h3>
-                }
-                { profile.city &&
-                  <p className="profile__info-text">Wohnort: {profile.city}
-                  { profile.country &&
-                    <span>, {profile.country}</span>
-                  }
-                  </p>
-                }
-                <p className="profile__info-text">Remote verfügbar?
-                  { profile.remote_possible &&
-                    <span> Ja</span>
-                  }
-                  { !profile.remote_possible &&
-                    <span> Nein</span>
-                  }
-                </p>
-                { profile.twitter_url &&
-                  <p className="profile__info-text"><a href={profile.twitter_url} target="_blank">{profile.forename} auf Twitter</a></p>
-                }
-                { profile.website_url &&
-                  <p className="profile__info-text"><a href={profile.website_url} target="_blank">{profile.forename}'s Webseite</a></p>
-                }
-              </div>
+              <ProfilePage
+                profile={profile}
+              ></ProfilePage>
             }
           </div>
         }
@@ -313,201 +256,26 @@ class Profile extends Component {
           <p>Profil wird bearbeitet ...</p>
         }
         { state === 'STATE_EDITING' &&
-          <div>
-            <button className="button button--decent" onClick={this.handleEditToggle}>Bearbeiten beenden</button>
-            <h2>Bearbeite dein Profil:</h2>
-            <form onSubmit={(e) => this.handleSubmit(e)}>
-              <div>
-                <label>Vorname/Nickname</label>
-                <input 
-                  autoComplete="given-name"
-                  onChange={(e) => this.handleChange(e, 'forename')} 
-                  placeholder="Vorname" 
-                  type="text"
-                  value={profile.forename || ''}
-                />
-              </div>
-              <div>
-                <label>Nachname</label>
-                <input 
-                  autoComplete="family-name"
-                  onChange={(e) => this.handleChange(e, 'surname')}
-                  placeholder="Nachname"
-                  type="text"
-                  value={profile.surname || ''}
-                />
-              </div>
-              <div>
-                <input 
-                  id="remotePossible"
-                  name="remote"
-                  onChange={(e) => this.handleRemoteInput(e)}
-                  type="checkbox" 
-                  value={profile.remote_possible || false}
-                />
-                <label htmlFor="remotePossible">Remote verfügbar</label>
-              </div>
-              <div>
-                <h3 className="profile__subheadline">Podcasts</h3>
-                { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
-                  <div key={index}>
-                    <label>Name des Podcasts</label>
-                    <input
-                      autoComplete="off"
-                      className="profile__input--multi"
-                      list="podcasts-data"
-                      onChange={this.handlePodcastsNameChange(index)}
-                      placeholder="Name des Podcast"
-                      value={podcast.name}
-                      type="text"
-                    />
-                    <label>Link zur Webseite des Podcasts</label>
-                    <input
-                      autoComplete="off"
-                      className="profile__input--multi"
-                      list="podcasts-data"
-                      onChange={this.handlePodcastsUrlChange(index)}
-                      placeholder="Link zur Webseite des Podcast"
-                      value={podcast.url}
-                      type="url"
-                    />
-                    <button
-                      className="button button--decent button--icon profile__button--delete"
-                      onClick={this.handleRemovePodcastsInput(index)}
-                      tabIndex="-1"
-                    >-</button>
-                  </div>
-                ))}
-                <button 
-                  className="button profile__button--add"
-                  onClick={(e) => this.handleAddPodcastsInput(e)}
-                  tabIndex="-1"
-                >Podcast hinzufügen</button>
-              </div>
-              <div>
-                <label>Themen, über die ich spreche:</label>
-                { profile.tags && profile.tags.length && profile.tags.map((tag, index) => (
-                  <div key={index}>
-                    <input
-                      autoComplete="off"
-                      className="profile__input--multi"
-                      list="tags-data"
-                      onChange={this.handleTagsChange(index)}
-                      pattern={patternDataTags}
-                      placeholder="Thema"
-                      value={tag}
-                      type="text"
-                    />
-                    <datalist id="tags-data">
-                      { staticTags.map((staticTag, index) => (
-                        <option key={index} value={staticTag} />
-                      ))}
-                    </datalist>
-                    <button
-                      className="button button--decent button--icon profile__button--delete"
-                      onClick={this.handleRemoveTagsInput(index)}
-                      tabIndex="-1"
-                    >-</button>
-                  </div>
-                ))}
-                <button 
-                  className="button profile__button--add"
-                  onClick={(e) => this.handleAddTagsInput(e)}
-                  tabIndex="-1"
-                >Thema hinzufügen</button>
-              </div>
-              <div>
-                <label>Sprachen</label>
-                { profile.languages && profile.languages.length && profile.languages.map((language, index) => (
-                  <div key={index}>
-                    <input
-                      autoComplete="off"
-                      className="profile__input--multi"
-                      onChange={this.handleLanguagesChange(index)}
-                      placeholder="Sprache"
-                      value={language}
-                      type="text"
-                    />
-                    <button
-                      className="button button--decent button--icon profile__button--delete"
-                      onClick={this.handleRemoveLanguagesInput(index)}
-                      tabIndex="-1"
-                    >-</button>
-                  </div>
-                ))}
-                <button 
-                  className="button profile__button--add"
-                  onClick={(e) => this.handleAddLanguagesInput(e)}
-                  tabIndex="-1"
-                >Sprache hinzufügen</button>
-              </div>
-              <div>
-                <label>
-                  Kurz-Biographie
-                  <span className="label label--right">{this.state.bioShortCharactersRemaining} Zeichen</span>
-                </label>
-                <textarea 
-                  onChange={(e) => this.handleChange(e, 'bio_short')} 
-                  placeholder="Kurz-Biographie" 
-                  rows="3"
-                  value={profile.bio_short || ''}
-                  maxLength="255"
-                ></textarea>
-              </div>
-              <div>
-                <label>Über mich</label>
-                <textarea 
-                  onChange={(e) => this.handleChange(e, 'bio_long')} 
-                  placeholder="Über mich" 
-                  rows="6"
-                  value={profile.bio_long || ''}
-                ></textarea>
-              </div>
-              <div>
-                <label>Twitter-URL</label>
-                <input 
-                  onChange={(e) => this.handleChange(e, 'twitter_url')}
-                  placeholder="Twitter-URL" 
-                  type="url"
-                  value={profile.twitter_url || ''}
-                />
-              </div>
-              <div>
-                <label>Webseite</label>
-                <input 
-                  onChange={(e) => this.handleChange(e, 'website_url')} 
-                  placeholder="Webseite" 
-                  type="url"
-                  value={profile.website_url || ''}
-                />
-              </div>
-              <div>
-                <label>Stadt</label>
-                <input 
-                  autoComplete="address-level-2"
-                  onChange={(e) => this.handleChange(e, 'city')} 
-                  placeholder="Stadt" 
-                  type="text"
-                  value={profile.city || ''}
-                />
-              </div>
-              <div>
-                <label>Land</label>
-                <input 
-                  autoComplete="address-level-1"
-                  onChange={(e) => this.handleChange(e, 'country')} 
-                  placeholder="Land" 
-                  type="text"
-                  value={profile.country || ''}
-                />
-              </div>
-              <button 
-                className="button" 
-                type="submit" 
-                value="submit"
-              >Fertig</button>
-            </form>
-          </div>
+          <ProfileForm
+            bioShortCharactersRemaining={bioShortCharactersRemaining}
+            handleAddLanguagesInput={this.handleAddLanguagesInput}
+            handleAddPodcastsInput={this.handleAddPodcastsInput}
+            handleAddTagsInput={this.handleAddTagsInput}
+            handleChange={this.handleChange}
+            handleEditToggle={this.handleEditToggle}
+            handleLanguagesChange={this.handleLanguagesChange}
+            handlePodcastsNameChange={this.handlePodcastsNameChange}
+            handlePodcastsUrlChange={this.handlePodcastsUrlChange}
+            handleRemoteInput={this.handleRemoteInput}
+            handleRemoveLanguagesInput={this.handleRemoveLanguagesInput}
+            handleRemovePodcastsInput={this.handleRemovePodcastsInput}
+            handleRemoveTagsInput={this.handleRemoveTagsInput}
+            handleSubmit={this.handleSubmit}
+            handleTagsChange={this.handleTagsChange}
+            patternDataTags={patternDataTags}
+            profile={profile}
+            staticTags={staticTags}
+          ></ProfileForm>
         }
       </section>
     )

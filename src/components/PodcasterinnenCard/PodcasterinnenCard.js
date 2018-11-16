@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter, Link, Route } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 import './PodcasterinnenCard.css'
 
