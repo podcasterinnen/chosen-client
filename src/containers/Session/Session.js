@@ -227,14 +227,24 @@ class Session extends Component {
           <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
             <h1>Login:</h1>
             <div>
-              <label>Email address</label>
-              <input onChange={(e) => this.handleChange(e, 'email')} autoComplete="username" placeholder="Your email address" type="email" />
+              <label>E-Mail-Adresse</label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'email')} 
+                autoComplete="username" 
+                placeholder="buffy.summers@sunnydale.high.net" 
+                type="email" 
+              />
             </div>
             <div>
-              <label>Password</label>
-              <input onChange={(e) => this.handleChange(e, 'password')}  autoComplete="current-password" placeholder="Your safe password." type="password" />
+              <label>Passwort</label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'password')}
+                autoComplete="current-password"
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                type="password"
+              />
             </div>
-            <button className="button" type="submit" value="submit">Login</button>
+            <button className="button" type="submit" value="submit">Einloggen</button>
           </form>
         }
         { sessionState === 'REGISTRATION_IN_PROGRESS' &&
