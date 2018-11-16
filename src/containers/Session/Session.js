@@ -259,7 +259,7 @@ class Session extends Component {
         }
         { sessionState === 'LOGGED_IN' &&
           <p>
-            Du bist erfolgreich eingelogged. Hier geht's zu deinem <Link to="/profile">Podcasterinnen-Profil</Link>.
+            Du hast dich erfolgreich angemeldet. Hier geht es zu deinem <Link to="/profile">Podcasterinnen-Profil</Link>.
           </p>
         }
       </div>

@@ -42,7 +42,7 @@ class ProfilePage extends Component {
         <div>
           <h3 className="profile__subheadline">{profile.forename}s Podcasts:</h3>
           <ul className="profile__podcast-list">
-            { profile.references.map((podcast) => (
+            { profile.podcasts.map((podcast) => (
               <li className="profile__podcast" key={podcast.name}>
                 <img className="profile__podcast__image" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${podcast.name}&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100`} />
                 <div className="profile__podcast__text">
