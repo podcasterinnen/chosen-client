@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <section className="app main__section">
         <h1 className="title app__headline">podcasterinnen.org</h1>
-        <p className="subtitle">Frauen und Mikrophone. Frauen und Technik. Frauen und Inhalte. Frauen hinter dem Mikro und auf der Bühne.</p>
+        <p className="subtitle">Frauen und Technik. Frauen und Inhalte. Frauen hinter dem Mikro und auf der Bühne.</p>
         <Link className="button button--cta app__button" to="/session">Mitmachen</Link>
       </section>
     )
