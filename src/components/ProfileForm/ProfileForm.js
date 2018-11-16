@@ -51,51 +51,26 @@ class ProfileForm extends Component {
             />
           </div>
           <div>
-            <input 
-              id="remotePossible"
-              name="remote"
-              onChange={(e) => handleRemoteInput(e)}
-              type="checkbox" 
-              value={profile.remote_possible || false}
-            />
-            <label htmlFor="remotePossible">Remote verfügbar</label>
+            <label>
+              Kurz-Biographie
+              <span className="label label--right">{bioShortCharactersRemaining} Zeichen</span>
+            </label>
+            <textarea 
+              maxLength="255"
+              onChange={(e) => handleChange(e, 'bio_short')} 
+              placeholder="Kurz-Biographie" 
+              rows="3"
+              value={profile.bio_short || ''}
+            ></textarea>
           </div>
           <div>
-            <h3 className="profile__subheadline">Podcasts</h3>
-            { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
-              <div key={index}>
-                <label>Name des Podcasts</label>
-                <input
-                  autoComplete="off"
-                  className="profile__input--multi"
-                  list="podcasts-data"
-                  onChange={handlePodcastsNameChange(index)}
-                  placeholder="Name des Podcast"
-                  type="text"
-                  value={podcast.name}
-                />
-                <label>Link zur Webseite des Podcasts</label>
-                <input
-                  autoComplete="off"
-                  className="profile__input--multi"
-                  list="podcasts-data"
-                  onChange={handlePodcastsUrlChange(index)}
-                  placeholder="Link zur Webseite des Podcast"
-                  type="url"
-                  value={podcast.url}
-                />
-                <button
-                  className="button button--decent button--icon profile__button--delete"
-                  onClick={handleRemovePodcastsInput(index)}
-                  tabIndex="-1"
-                >-</button>
-              </div>
-            ))}
-            <button 
-              className="button profile__button--add"
-              onClick={(e) => handleAddPodcastsInput(e)}
-              tabIndex="-1"
-            >Podcast hinzufügen</button>
+            <label>Über mich</label>
+            <textarea 
+              onChange={(e) => handleChange(e, 'bio_long')} 
+              placeholder="Über mich" 
+              rows="6"
+              value={profile.bio_long || ''}
+            ></textarea>
           </div>
           <div>
             <label>Themen, über die ich spreche:</label>
@@ -155,44 +130,51 @@ class ProfileForm extends Component {
             >Sprache hinzufügen</button>
           </div>
           <div>
-            <label>
-              Kurz-Biographie
-              <span className="label label--right">{bioShortCharactersRemaining} Zeichen</span>
-            </label>
-            <textarea 
-              maxLength="255"
-              onChange={(e) => handleChange(e, 'bio_short')} 
-              placeholder="Kurz-Biographie" 
-              rows="3"
-              value={profile.bio_short || ''}
-            ></textarea>
+            <h3 className="profile__subheadline">Podcasts</h3>
+            { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
+              <div key={index}>
+                <label>Name des Podcasts</label>
+                <input
+                  autoComplete="off"
+                  className="profile__input--multi"
+                  list="podcasts-data"
+                  onChange={handlePodcastsNameChange(index)}
+                  placeholder="Name des Podcast"
+                  type="text"
+                  value={podcast.name}
+                />
+                <label>Link zur Webseite des Podcasts</label>
+                <input
+                  autoComplete="off"
+                  className="profile__input--multi"
+                  list="podcasts-data"
+                  onChange={handlePodcastsUrlChange(index)}
+                  placeholder="Link zur Webseite des Podcast"
+                  type="url"
+                  value={podcast.url}
+                />
+                <button
+                  className="button button--decent button--icon profile__button--delete"
+                  onClick={handleRemovePodcastsInput(index)}
+                  tabIndex="-1"
+                >-</button>
+              </div>
+            ))}
+            <button 
+              className="button profile__button--add"
+              onClick={(e) => handleAddPodcastsInput(e)}
+              tabIndex="-1"
+            >Podcast hinzufügen</button>
           </div>
           <div>
-            <label>Über mich</label>
-            <textarea 
-              onChange={(e) => handleChange(e, 'bio_long')} 
-              placeholder="Über mich" 
-              rows="6"
-              value={profile.bio_long || ''}
-            ></textarea>
-          </div>
-          <div>
-            <label>Twitter-URL</label>
             <input 
-              onChange={(e) => handleChange(e, 'twitter_url')}
-              placeholder="Twitter-URL" 
-              type="url"
-              value={profile.twitter_url || ''}
+              id="remotePossible"
+              name="remote"
+              onChange={(e) => handleRemoteInput(e)}
+              type="checkbox" 
+              value={profile.remote_possible || false}
             />
-          </div>
-          <div>
-            <label>Webseite</label>
-            <input 
-              onChange={(e) => handleChange(e, 'website_url')} 
-              placeholder="Webseite" 
-              type="url"
-              value={profile.website_url || ''}
-            />
+            <label htmlFor="remotePossible">Remote verfügbar</label>
           </div>
           <div>
             <label>Stadt</label>
@@ -212,6 +194,24 @@ class ProfileForm extends Component {
               placeholder="Land" 
               type="text"
               value={profile.country || ''}
+            />
+          </div>
+          <div>
+            <label>Twitter-URL</label>
+            <input 
+              onChange={(e) => handleChange(e, 'twitter_url')}
+              placeholder="Twitter-URL" 
+              type="url"
+              value={profile.twitter_url || ''}
+            />
+          </div>
+          <div>
+            <label>Webseite</label>
+            <input 
+              onChange={(e) => handleChange(e, 'website_url')} 
+              placeholder="Webseite" 
+              type="url"
+              value={profile.website_url || ''}
             />
           </div>
           <button 

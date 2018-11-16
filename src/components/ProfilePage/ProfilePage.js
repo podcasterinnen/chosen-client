@@ -16,19 +16,6 @@ class ProfilePage extends Component {
       { profile.bio_long &&
         <p>{profile.bio_long}</p>
       }
-      { (Array.isArray(profile.podcasts) && profile.podcasts.length > 0 && profile.podcasts[0].name !== '') &&
-        <div>
-          <h3 className="profile__subheadline">{profile.forename}s Podcasts:</h3>
-          <ul className="profile__podcast-list">
-            { profile.podcasts.map((podcast) => (
-              <li className="profile__podcast" key={podcast.name}>
-                <img className="profile__podcast__image" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${podcast.name}&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100`} />
-                <a href={podcast.url} target="_blank">{podcast.name}</a>
-              </li>
-            ))}
-          </ul>
-        </div>
-      }
       { (Array.isArray(profile.tags) && profile.tags.length > 0 && profile.tags[0] !== '') &&
         <div>
           <h3 className="profile__subheadline">Themen, über die {profile.forename} spricht:</h3>
@@ -49,7 +36,30 @@ class ProfilePage extends Component {
           </ul>
         </div>
       }
-      { (profile.remote_possible || profile.city || profile.twitter_url || profile.website_url) &&
+      { (Array.isArray(profile.podcasts) && profile.podcasts.length > 0 && profile.podcasts[0].name !== '') &&
+        <div>
+          <h3 className="profile__subheadline">{profile.forename}s Podcasts:</h3>
+          <ul className="profile__podcast-list">
+            { profile.podcasts.map((podcast) => (
+              <li className="profile__podcast" key={podcast.name}>
+                <img className="profile__podcast__image" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${podcast.name}&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100`} />
+                <a href={podcast.url} target="_blank">{podcast.name}</a>
+              </li>
+            ))}
+          </ul>
+        </div>
+      }
+      { profile.remote_possible &&
+        <p className="profile__info-text">Remote verfügbar?
+          { profile.remote_possible &&
+            <span> Ja</span>
+          }
+          { !profile.remote_possible &&
+            <span> Nein</span>
+          }
+        </p>
+      }
+      { (profile.city || profile.twitter_url || profile.website_url) &&
         <h3 className="profile__subheadline">Weitere Infos über {profile.forename}:</h3>
       }
       { profile.city &&
@@ -59,14 +69,6 @@ class ProfilePage extends Component {
         }
         </p>
       }
-      <p className="profile__info-text">Remote verfügbar?
-        { profile.remote_possible &&
-          <span> Ja</span>
-        }
-        { !profile.remote_possible &&
-          <span> Nein</span>
-        }
-      </p>
       { profile.twitter_url &&
         <p className="profile__info-text"><a href={profile.twitter_url} target="_blank">{profile.forename} auf Twitter</a></p>
       }
