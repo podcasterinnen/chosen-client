@@ -42,11 +42,25 @@ class ProfilePage extends Component {
         <div>
           <h3 className="profile__subheadline">{profile.forename}s Podcasts:</h3>
           <ul className="profile__podcast-list">
-            { profile.podcasts.map((podcast) => (
+            { profile.references.map((podcast) => (
               <li className="profile__podcast" key={podcast.name}>
                 <img className="profile__podcast__image" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${podcast.name}&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100`} />
                 <div className="profile__podcast__text">
                   <p><a href={podcast.url} target="_blank">{podcast.name}</a> · {podcast.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+      }
+      { (Array.isArray(profile.references) && profile.references.length > 0 && profile.references[0].name !== '') &&
+        <div>
+          <h3 className="profile__subheadline">{profile.forename}s Referenzen:</h3>
+          <ul className="profile__reference-list">
+            { profile.references.map((reference) => (
+              <li className="profile__reference" key={reference.title}>
+                <div className="profile__reference__text">
+                  <p><a href={reference.url} target="_blank">{reference.title}</a> · {reference.description}</p>
                 </div>
               </li>
             ))}

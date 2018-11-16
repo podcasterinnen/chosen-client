@@ -10,6 +10,7 @@ class ProfileForm extends Component {
       bioShortCharactersRemaining,
       handleAddLanguagesInput,
       handleAddPodcastsInput,
+      handleAddReferencesInput,
       handleAddTagsInput,
       handleChange,
       handleEditToggle,
@@ -18,8 +19,12 @@ class ProfileForm extends Component {
       handlePodcastsNameChange,
       handlePodcastsUrlChange,
       handleCheckboxInput,
+      handleReferencesDescriptionChange,
+      handleReferencesNameChange,
+      handleReferencesUrlChange,
       handleRemoveLanguagesInput,
       handleRemovePodcastsInput,
+      handleRemoveReferencesInput,
       handleRemoveTagsInput,
       handleSubmit,
       handleTagsChange,
@@ -185,6 +190,56 @@ class ProfileForm extends Component {
             >Podcast hinzufügen</button>
           </div>
           <div>
+            <h3 className="profile__subheadline">Referenzen</h3>
+            { profile.references && profile.references.length && profile.references.map((reference, index) => (
+              <div key={index}>
+                <label>Titel</label>
+                <input
+                  autoComplete="off"
+                  className="profile__input--multi"
+                  list="references-data"
+                  onChange={handleReferencesNameChange(index)}
+                  placeholder="Titel"
+                  type="text"
+                  value={reference.title}
+                />
+                <label>
+                  Kurze Beschreibung
+                </label>
+                <input
+                  autoComplete="off"
+                  className="profile__input--multi"
+                  list="references-data"
+                  maxLength="144"
+                  onChange={handleReferencesDescriptionChange(index)}
+                  placeholder="Kurze Beschreibung"
+                  type="text"
+                  value={reference.description}
+                />
+                <label>Link</label>
+                <input
+                  autoComplete="off"
+                  className="profile__input--multi"
+                  list="references-data"
+                  onChange={handleReferencesUrlChange(index)}
+                  placeholder="Link"
+                  type="url"
+                  value={reference.url}
+                />
+                <button
+                  className="button button--decent button--icon profile__button--delete"
+                  onClick={handleRemoveReferencesInput(index)}
+                  tabIndex="-1"
+                >-</button>
+              </div>
+            ))}
+            <button 
+              className="button profile__button--add"
+              onClick={(e) => handleAddReferencesInput(e)}
+              tabIndex="-1"
+            >Referenz hinzufügen</button>
+          </div>
+          <div>
             <h3 className="profile__subheadline">Dazu kann man mich anfragen:</h3>
             <div>
               <input 
@@ -347,6 +402,7 @@ ProfileForm.propTypes = {
   bioShortCharactersRemaining: PropTypes.number,
   handleAddLanguagesInput: PropTypes.func,
   handleAddPodcastsInput: PropTypes.func,
+  handleAddReferencesInput: PropTypes.func,
   handleAddTagsInput: PropTypes.func,
   handleChange: PropTypes.func,
   handleCheckboxInput: PropTypes.func,
@@ -355,8 +411,12 @@ ProfileForm.propTypes = {
   handlePodcastsDescriptionChange: PropTypes.func,
   handlePodcastsNameChange: PropTypes.func,
   handlePodcastsUrlChange: PropTypes.func,
+  handleReferencesDescriptionChange: PropTypes.func,
+  handleReferencesNameChange: PropTypes.func,
+  handleReferencesUrlChange: PropTypes.func,
   handleRemoveLanguagesInput: PropTypes.func,
   handleRemovePodcastsInput: PropTypes.func,
+  handleRemoveReferencesInput: PropTypes.func,
   handleRemoveTagsInput: PropTypes.func,
   handleSubmit: PropTypes.func,
   handleTagsChange: PropTypes.func,
@@ -368,6 +428,7 @@ ProfileForm.defaultProps = {
   bioShortCharactersRemaining: undefined,
   handleAddLanguagesInput: undefined,
   handleAddPodcastsInput: undefined,
+  handleAddReferencesInput: undefined,
   handleAddTagsInput: undefined,
   handleChange: undefined,
   handleCheckboxInput: undefined,
@@ -376,8 +437,12 @@ ProfileForm.defaultProps = {
   handlePodcastsDescriptionChange: undefined,
   handlePodcastsNameChange: undefined,
   handlePodcastsUrlChange: undefined,
+  handleReferencesDescriptionChange: undefined,
+  handleReferencesNameChange: undefined,
+  handleReferencesUrlChange: undefined,
   handleRemoveLanguagesInput: undefined,
   handleRemovePodcastsInput: undefined,
+  handleRemoveReferencesInput: undefined,
   handleRemoveTagsInput: undefined,
   handleSubmit: undefined,
   handleTagsChange: undefined,

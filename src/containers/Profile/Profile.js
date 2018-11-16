@@ -77,6 +77,7 @@ class Profile extends Component {
         if (value === null && key === 'podcasts') {
           newProfile.podcasts = [{
             name: '',
+            description: '',
             url: '',
           }]
         } else if (value === null && key === 'languages') {
@@ -86,12 +87,14 @@ class Profile extends Component {
         } else if (value === null && key === 'references') {
           newProfile.references = [{
             title: '',
+            description: '',
             url: '',
           }]
         } else {
           newProfile[key] = value
         }
       })
+      console.log(newProfile, newProfile.bio_short)
       this.setState({ 
         bioShortCharactersRemaining: 255 - newProfile.bio_short.length,
         profile: newProfile
@@ -157,7 +160,14 @@ class Profile extends Component {
   handleAddPodcastsInput = (e) => {
     e.preventDefault()
     this.setState({
-      profile: {...this.state.profile, podcasts: this.state.profile.podcasts.concat([{ name: '', url: '' }])}
+      profile: {...this.state.profile, podcasts: this.state.profile.podcasts.concat([{ name: '', description: '', url: '' }])}
+    })
+  }
+
+  handleAddReferencesInput = (e) => {
+    e.preventDefault()
+    this.setState({
+      profile: {...this.state.profile, references: this.state.profile.references.concat([{ title: '', description: '', url: '' }])}
     })
   }
 
@@ -165,6 +175,14 @@ class Profile extends Component {
     e.preventDefault()
     this.setState({
       profile: {...this.state.profile, podcasts: this.state.profile.podcasts.filter((podcast, podcastIndex) => index !== podcastIndex)}
+    })
+    console.log(this.state)
+  }
+
+  handleRemoveReferencesInput = (index) => (e) => {
+    e.preventDefault()
+    this.setState({
+      profile: {...this.state.profile, references: this.state.profile.references.filter((reference, referenceIndex) => index !== referenceIndex)}
     })
     console.log(this.state)
   }
@@ -205,6 +223,45 @@ class Profile extends Component {
     })
     this.setState({
       profile: {...this.state.profile, podcasts: newPodcasts},
+    })
+  }
+
+  handleReferencesDescriptionChange = (index) => (e) => {
+    e.preventDefault()
+    const newReferences = this.state.profile.references.map((reference, referenceIndex) => {
+      if (index !== referenceIndex) {
+        return reference
+      }
+      return { title: reference.title, description: e.target.value, url: reference.url, id: reference.id }
+    })
+    this.setState({
+      profile: {...this.state.profile, references: newReferences},
+    })
+  }
+
+  handleReferencesNameChange = (index) => (e) => {
+    e.preventDefault()
+    const newReferences = this.state.profile.references.map((reference, referenceIndex) => {
+      if (index !== referenceIndex) {
+        return reference
+      }
+      return { title: e.target.value, description: reference.description, url: reference.url, id: reference.id }
+    })
+    this.setState({
+      profile: {...this.state.profile, references: newReferences},
+    })
+  }
+
+  handleReferencesUrlChange = (index) => (e) => {
+    e.preventDefault()
+    const newReferences = this.state.profile.references.map((reference, referenceIndex) => {
+      if (index !== referenceIndex) {
+        return reference
+      }
+      return { title: reference.title, description: reference.description, url: e.target.value, id: reference.id }
+    })
+    this.setState({
+      profile: {...this.state.profile, references: newReferences},
     })
   }
 
@@ -322,6 +379,7 @@ class Profile extends Component {
             bioShortCharactersRemaining={bioShortCharactersRemaining}
             handleAddLanguagesInput={this.handleAddLanguagesInput}
             handleAddPodcastsInput={this.handleAddPodcastsInput}
+            handleAddReferencesInput={this.handleAddReferencesInput}
             handleAddTagsInput={this.handleAddTagsInput}
             handleChange={this.handleChange}
             handleCheckboxInput={this.handleCheckboxInput}
@@ -330,8 +388,12 @@ class Profile extends Component {
             handlePodcastsDescriptionChange={this.handlePodcastsDescriptionChange}
             handlePodcastsNameChange={this.handlePodcastsNameChange}
             handlePodcastsUrlChange={this.handlePodcastsUrlChange}
+            handleReferencesDescriptionChange={this.handleReferencesDescriptionChange}
+            handleReferencesNameChange={this.handleReferencesNameChange}
+            handleReferencesUrlChange={this.handleReferencesUrlChange}
             handleRemoveLanguagesInput={this.handleRemoveLanguagesInput}
             handleRemovePodcastsInput={this.handleRemovePodcastsInput}
+            handleRemoveReferencesInput={this.handleRemoveReferencesInput}
             handleRemoveTagsInput={this.handleRemoveTagsInput}
             handleSubmit={this.handleSubmit}
             handleTagsChange={this.handleTagsChange}
