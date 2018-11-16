@@ -374,7 +374,7 @@ class ProfileForm extends Component {
               <input 
                 className="profile-form__twitter-input"
                 onChange={(e) => handleChange(e, 'twitter_url')}
-                placeholder="buffysummers" 
+                placeholder="dein_twitter_handle" 
                 type="text"
                 value={profile.twitter_url || ''}
               />
