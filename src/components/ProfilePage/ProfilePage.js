@@ -50,7 +50,7 @@ class ProfilePage extends Component {
         </div>
       }
       { profile.remote_possible &&
-        <p className="profile__info-text">Remote verfügbar?
+        <p className="profile__info-text">Ich kann remote aufnehmen.
           { profile.remote_possible &&
             <span> Ja</span>
           }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import './ProfileForm.css'
+
 class ProfileForm extends Component {
   
   render() {
@@ -14,7 +16,7 @@ class ProfileForm extends Component {
       handleLanguagesChange,
       handlePodcastsNameChange,
       handlePodcastsUrlChange,
-      handleRemoteInput,
+      handleCheckboxInput,
       handleRemoveLanguagesInput,
       handleRemovePodcastsInput,
       handleRemoveTagsInput,
@@ -167,52 +169,152 @@ class ProfileForm extends Component {
             >Podcast hinzufügen</button>
           </div>
           <div>
-            <input 
-              id="remotePossible"
-              name="remote"
-              onChange={(e) => handleRemoteInput(e)}
-              type="checkbox" 
-              value={profile.remote_possible || false}
-            />
-            <label htmlFor="remotePossible">Remote verfügbar</label>
+            <h3 className="profile__subheadline">Dazu kann man mich anfragen:</h3>
+            <div>
+              <input 
+                id="talksPossible"
+                name="talks"
+                onChange={(e) => handleCheckboxInput(e, 'TALKS')}
+                type="checkbox" 
+                value={profile.talks_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="talksPossible"
+              >Ich halte Vorträge.</label>
+            </div>
+            <div>
+              <input 
+                id="workshopsPossible"
+                name="workshops"
+                onChange={(e) => handleCheckboxInput(e, 'WORKSHOPS')}
+                type="checkbox" 
+                value={profile.workshops_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="workshopsPossible"
+              >Ich gebe Workshops/Schulungen.</label>
+            </div>
+            <div>
+              <input 
+                id="remotePossible"
+                name="remote"
+                onChange={(e) => handleCheckboxInput(e, 'REMOTE')}
+                type="checkbox" 
+                value={profile.remote_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="remotePossible"
+              >Ich kann remote aufnehmen.</label>
+            </div>
+            <div>
+              <input 
+                id="foreignLanguagePossible"
+                name="foreignLanguage"
+                onChange={(e) => handleCheckboxInput(e, 'FOREIGN_LANGUAGE')}
+                type="checkbox" 
+                value={profile.foreignLanguage_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="foreignLanguagePossible"
+              >Ich nehme auch fremdsprachige Podcasts auf.</label>
+            </div>
+            <div>
+              <input 
+                id="recordOutsidePossible"
+                name="recordOutside"
+                onChange={(e) => handleCheckboxInput(e, 'RECORD_OUTSIDE')}
+                type="checkbox" 
+                value={profile.recordOutside_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="recordOutsidePossible"
+              >Ich nehme auch Podcasts draußen auf.</label>
+            </div>
+            <div>
+              <input 
+                id="guestsPossible"
+                name="guests"
+                onChange={(e) => handleCheckboxInput(e, 'GUESTS')}
+                type="checkbox" 
+                value={profile.guests_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="guestsPossible"
+              >Ich lade auch Gästinnen ein.</label>
+            </div>
+            <div>
+              <input 
+                id="travelPossible"
+                name="travel"
+                onChange={(e) => handleCheckboxInput(e, 'TRAVEL')}
+                type="checkbox" 
+                value={profile.travel_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="travelPossible"
+              >Ich reise auch um Podcasts aufzuzeichnen.</label>
+            </div>
+            <div>
+              <input 
+                id="podcastProductionPossible"
+                name="podcastProduction"
+                onChange={(e) => handleCheckboxInput(e, 'PODCAST_PRODUCTION')}
+                type="checkbox" 
+                value={profile.podcastProduction_possible || false}
+              />
+              <label 
+                className="label label--checkbox"
+                htmlFor="podcastProductionPossible"
+              >Ich kann Podcasts schneiden, aufnehmen und produzieren.</label>
+            </div>
           </div>
           <div>
-            <label>Stadt</label>
-            <input 
-              autoComplete="address-level-2"
-              onChange={(e) => handleChange(e, 'city')} 
-              placeholder="Stadt" 
-              type="text"
-              value={profile.city || ''}
-            />
-          </div>
-          <div>
-            <label>Land</label>
-            <input 
-              autoComplete="address-level-1"
-              onChange={(e) => handleChange(e, 'country')} 
-              placeholder="Land" 
-              type="text"
-              value={profile.country || ''}
-            />
-          </div>
-          <div>
-            <label>Twitter-URL</label>
-            <input 
-              onChange={(e) => handleChange(e, 'twitter_url')}
-              placeholder="Twitter-URL" 
-              type="url"
-              value={profile.twitter_url || ''}
-            />
-          </div>
-          <div>
-            <label>Webseite</label>
-            <input 
-              onChange={(e) => handleChange(e, 'website_url')} 
-              placeholder="Webseite" 
-              type="url"
-              value={profile.website_url || ''}
-            />
+          <h3 className="profile__subheadline">Weitere Infos über mich:</h3>
+            <div>
+              <label>Stadt</label>
+              <input 
+                autoComplete="address-level-2"
+                onChange={(e) => handleChange(e, 'city')} 
+                placeholder="Stadt" 
+                type="text"
+                value={profile.city || ''}
+              />
+            </div>
+            <div>
+              <label>Land</label>
+              <input 
+                autoComplete="address-level-1"
+                onChange={(e) => handleChange(e, 'country')} 
+                placeholder="Land" 
+                type="text"
+                value={profile.country || ''}
+              />
+            </div>
+            <div>
+              <label>Twitter-URL</label>
+              <input 
+                onChange={(e) => handleChange(e, 'twitter_url')}
+                placeholder="Twitter-URL" 
+                type="url"
+                value={profile.twitter_url || ''}
+              />
+            </div>
+            <div>
+              <label>Webseite</label>
+              <input 
+                onChange={(e) => handleChange(e, 'website_url')} 
+                placeholder="Webseite" 
+                type="url"
+                value={profile.website_url || ''}
+              />
+            </div>
           </div>
           <button 
             className="button" 
@@ -231,11 +333,11 @@ ProfileForm.propTypes = {
   handleAddPodcastsInput: PropTypes.func,
   handleAddTagsInput: PropTypes.func,
   handleChange: PropTypes.func,
+  handleCheckboxInput: PropTypes.func,
   handleEditToggle: PropTypes.func,
   handleLanguagesChange: PropTypes.func,
   handlePodcastsNameChange: PropTypes.func,
   handlePodcastsUrlChange: PropTypes.func,
-  handleRemoteInput: PropTypes.func,
   handleRemoveLanguagesInput: PropTypes.func,
   handleRemovePodcastsInput: PropTypes.func,
   handleRemoveTagsInput: PropTypes.func,
@@ -251,11 +353,11 @@ ProfileForm.defaultProps = {
   handleAddPodcastsInput: undefined,
   handleAddTagsInput: undefined,
   handleChange: undefined,
+  handleCheckboxInput: undefined,
   handleEditToggle: undefined,
   handleLanguagesChange: undefined,
   handlePodcastsNameChange: undefined,
   handlePodcastsUrlChange: undefined,
-  handleRemoteInput: undefined,
   handleRemoveLanguagesInput: undefined,
   handleRemovePodcastsInput: undefined,
   handleRemoveTagsInput: undefined,

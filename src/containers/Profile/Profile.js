@@ -35,6 +35,13 @@ class Profile extends Component {
         tags: [''],
         twitter_url: '',
         website_url: '',
+        talks: false,
+        workshops: false,
+        foreign_language: false,
+        record_outside: false,
+        guests: false,
+        travel: false,
+        podcast_production: false,
       },
       staticTags: staticTags.tags,
     }
@@ -187,10 +194,51 @@ class Profile extends Component {
     })
   }
 
-  handleRemoteInput = (e) => {
-    this.setState({
-      profile: {...this.state.profile, remote_possible: !this.state.profile.remote_possible}
-    })
+  handleCheckboxInput = (e, type) => {
+    switch (type) {
+      case 'REMOTE':
+        this.setState({
+          profile: {...this.state.profile, remote_possible: !this.state.profile.remote_possible}
+        })
+        break
+      case 'TALKS':
+        this.setState({
+          profile: {...this.state.profile, talks: !this.state.profile.talks}
+        })
+        break
+      case 'WORKSHOPS':
+        this.setState({
+          profile: {...this.state.profile, workshops: !this.state.profile.workshops}
+        })
+        break
+      case 'FOREIGN_LANGUAGE':
+        this.setState({
+          profile: {...this.state.profile, foreign_language: !this.state.profile.foreign_language}
+        })
+        break
+      case 'RECORD_OUTSIDE':
+        this.setState({
+          profile: {...this.state.profile, record_outside: !this.state.profile.record_outside}
+        })
+        break
+      case 'GUESTS':
+        this.setState({
+          profile: {...this.state.profile, guests: !this.state.profile.guests}
+        })
+        break
+      case 'TRAVEL':
+        this.setState({
+          profile: {...this.state.profile, travel: !this.state.profile.travel}
+        })
+        break
+      case 'PODCAST_PRODUCTION':
+        this.setState({
+          profile: {...this.state.profile, podcast_production: !this.state.profile.podcast_production}
+        })
+        break
+      default:
+        return
+    }
   }
 
   handleSubmit = (e) => {
@@ -262,11 +310,11 @@ class Profile extends Component {
             handleAddPodcastsInput={this.handleAddPodcastsInput}
             handleAddTagsInput={this.handleAddTagsInput}
             handleChange={this.handleChange}
+            handleCheckboxInput={this.handleCheckboxInput}
             handleEditToggle={this.handleEditToggle}
             handleLanguagesChange={this.handleLanguagesChange}
             handlePodcastsNameChange={this.handlePodcastsNameChange}
             handlePodcastsUrlChange={this.handlePodcastsUrlChange}
-            handleRemoteInput={this.handleRemoteInput}
             handleRemoveLanguagesInput={this.handleRemoveLanguagesInput}
             handleRemovePodcastsInput={this.handleRemovePodcastsInput}
             handleRemoveTagsInput={this.handleRemoveTagsInput}

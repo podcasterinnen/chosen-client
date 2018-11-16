@@ -178,6 +178,12 @@ button {
   cursor: inherit;
 }
 
+input[type="checkbox"] {
+  vertical-align: 2px;
+  
+  margin-right: 10px;
+}
+
 input[type="email"],
 input[type="password"],
 input[type="text"],
@@ -235,6 +241,12 @@ label {
 }
 
 /* .label {} */
+.label--checkbox {
+  font-size: 16px;
+
+  display: inline-block;
+}
+
 .label--right {
   float: right;
 }
