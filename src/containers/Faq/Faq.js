@@ -42,7 +42,7 @@ class Faq extends Component {
         <h2>4. Profil freischalten lassen</h2>
         <p>Wir erhalten bei jeder neuen Anmeldung eine Benachrichtigung. Das Team von podcasterinnen.org wird dein Profil – wenn es vollständig ausgefüllt ist - so schnell wie möglich freischalten. Sobald dein Profil freigeschaltet wurde, erhältst du eine E-Mail.<br/> Weitere Änderungen die du in deinem Profil angibst, müssen nicht mehr manuell von uns freigeschaltet werden sondern erfolgen automatisch, sobald du sie gespeichert hast. </p>
         <h2>5. Gefunden werden</h2>
-        <p>Lorem ipsum weisse Elefanten</p>
+        <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>
       </section>
     )
   }
