@@ -24,6 +24,8 @@ class Faq extends Component {
         <p>Es kann ein paar Tage dauern, bis wir dein Profil freigeschaltet haben, da wir ein sehr kleines Team sind.</p>
         <h2>Warum ist es überhaupt nötig mein Profil freischalten zu lassen?</h2>
         <p>Jede Podcasterin kann sich ihr persönliches Profil anlegen. Allerdings gibt es einen Ausschluss. Wir werden keinen Podcasterinnen bei uns eine Plattform bieten, die aus dem rechten Spektrum (AfD, Identitären, Pegida, etc) kommen oder mit ihrem Podcast rechte oder antisemitische Hetze verbreiten. Dies schließt auch Podcasterinnen mit ein, die sich in der „ProLife“-Bewegung engagieren.Menschenverachtung und rechter Hetze werden wir hier keinen Raum geben. Sollte dir ein solches Profil auffallen, melde dich bitte bei uns: <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a></p>
+        <h2>Wie kann ich mein Profil löschen?</h2>
+        <p>Wenn du dein Profil löschen möchtest, kannst du uns gerne eine E-Mail an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a> schicken. Wir löschen dein Profil sobald wir das nächste mal online sind.</p>
         <h2>Warum gibt es meine Kategorie (meinen Tag, mein Schlagwort) nicht?</h2>
         <p>Das hat vor allem etwas mit der Übersichtlichkeit der Seite zu tun.<br/>
         Wenn du dein Profil einrichtest, kannst du deinem Podcast verschiedenen Kategorien zuordnen. So wissen die Besucher:innen deines Profils gleich, um welche Themen sich dein Format inhaltlich dreht. Oder man kann direkt nach Podcasterinnen und Podcasts zu bestimmten Themen suchen. Die Schlagworte sind also ziemlich praktisch.<br/>
