@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import Tooltip from '../Tooltip/Tooltip'
+
 import './ProfileForm.css'
 
 class ProfileForm extends Component {
@@ -33,15 +35,16 @@ class ProfileForm extends Component {
       staticTags,
     } = this.props
 
-    console.log('1', profile)
-
     return(
       <div>
         <button className="button button--decent" onClick={handleEditToggle}>Bearbeiten beenden</button>
         <h2>Bearbeite dein Profil:</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div>
-            <label>Vorname/Nickname</label>
+            <label>
+              Vorname/Nickname
+              <Tooltip content="Hier trägst du deinen Vornamen ein. Wenn du deinen Klarnamen nicht verwenden möchtest, kannst auch ein Nickname eintragen. Er sollte von dir nur so gewählt werden, dass du auch gefunden werden kannst."></Tooltip>
+            </label>
             <input 
               autoComplete="given-name"
               onChange={(e) => handleChange(e, 'forename')} 
@@ -51,7 +54,10 @@ class ProfileForm extends Component {
             />
           </div>
           <div>
-            <label>Nachname</label>
+            <label>
+              Nachname
+              <Tooltip content="Dieses Feld ist optional. Das heißt, du kannst deinen Nachnamen angeben wenn du möchtest. Wenn du nur deinen Nickname verwenden möchtest, ist das völlig in Ordnung."></Tooltip>
+            </label>
             <input 
               autoComplete="family-name"
               onChange={(e) => handleChange(e, 'surname')}
@@ -63,6 +69,7 @@ class ProfileForm extends Component {
           <div>
             <label>
               Kurz-Biographie
+              <Tooltip content="In diesem Feld stehen dir 255 Zeichen zur Verfügung. Du kannst dich, deinen Podcast hier kurz und knapp vorstellen. Für ausführlicherer Beschreibungen ist in den nächsten Feldern Platz."></Tooltip>
               <span className="label label--right">{bioShortCharactersRemaining} Zeichen</span>
             </label>
             <textarea 
@@ -74,7 +81,10 @@ class ProfileForm extends Component {
             ></textarea>
           </div>
           <div>
-            <label>Über mich</label>
+            <label>
+              Über mich
+              <Tooltip content="Hier kannst du etwas über deine Person schreiben. Alles was wichtig ist über dich und deine Tätigkeiten zu wissen kannst du hier rein schreiben."></Tooltip>
+            </label>
             <textarea 
               onChange={(e) => handleChange(e, 'bio_long')} 
               placeholder="Über mich" 
@@ -83,7 +93,10 @@ class ProfileForm extends Component {
             ></textarea>
           </div>
           <div>
-            <label>Themen, über die ich spreche:</label>
+            <label>
+              Themen, über die ich spreche:
+              <Tooltip content="Dies sind deine Podcastthemen und Themen über die du darüberhinaus sprechen möchtest, zum Beispiel als Gästin in einem anderen Podcast oder bei einem Workshop/Vortrag. Dir stehen viele Tags zur Verfügung, die versuchen sollen, deine Themen so gut wie möglich abzudecken."></Tooltip>
+            </label>
             { profile.tags && profile.tags.length && profile.tags.map((tag, index) => (
               <div key={index}>
                 <input
@@ -115,7 +128,10 @@ class ProfileForm extends Component {
             >Thema hinzufügen</button>
           </div>
           <div>
-            <label>Sprachen</label>
+            <label>
+              Sprachen
+              <Tooltip content="Hier kann du die Sprachen eintragen in denen du podcasten und zum Beispiel Vorträge halten kannst/möchtest."></Tooltip>
+            </label>
             { profile.languages && profile.languages.length && profile.languages.map((language, index) => (
               <div key={index}>
                 <input
@@ -143,7 +159,10 @@ class ProfileForm extends Component {
             <h3 className="profile__subheadline">Podcasts</h3>
             { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
               <div key={index}>
-                <label>Name des Podcasts</label>
+                <label>
+                  Name des Podcasts
+                  <Tooltip content="Trage den Namen deines Podcasts hier ein."></Tooltip>
+                </label>
                 <input
                   autoComplete="off"
                   className="profile__input--multi"
@@ -155,6 +174,7 @@ class ProfileForm extends Component {
                 />
                 <label>
                   Kurze Beschreibung des Podcasts
+                  <Tooltip content="Hier kannst du deinen Podcast in wenigen Worten beschreiben."></Tooltip>
                 </label>
                 <input
                   autoComplete="off"
@@ -190,7 +210,10 @@ class ProfileForm extends Component {
             >Podcast hinzufügen</button>
           </div>
           <div>
-            <h3 className="profile__subheadline">Referenzen</h3>
+            <h3 className="profile__subheadline">
+              Referenzen
+              <Tooltip content="Du hast bereits Vorträge gehalten oder sasst auf einem Panel das aufgezeichnet wurde? Du kannst diese hier in den Referenzen eintragen."></Tooltip>
+            </h3>
             { profile.references && profile.references.length && profile.references.map((reference, index) => (
               <div key={index}>
                 <label>Titel</label>
@@ -240,7 +263,10 @@ class ProfileForm extends Component {
             >Referenz hinzufügen</button>
           </div>
           <div>
-            <h3 className="profile__subheadline">Dazu kann man mich anfragen:</h3>
+            <h3 className="profile__subheadline">
+              Dazu kann man mich anfragen:
+              <Tooltip content="Hier kannst, durch anklicken der Checkbox, angeben, für was du angefragt werden möchtest. Bzw. was deine Skills im Podcastbereich sind."></Tooltip>
+            </h3>
             <div>
               <input 
                 id="talksPossible"
@@ -347,7 +373,10 @@ class ProfileForm extends Component {
             </div>
           </div>
           <div>
-          <h3 className="profile__subheadline">Weitere Infos über mich:</h3>
+          <h3 className="profile__subheadline">
+            Weitere Infos über mich:
+            <Tooltip content="Wenn du magst, zeig den Menschen die eine Podcasterin suchen, wo du wohnst, wo du auf Twitter zu finden bist und deine Webseite."></Tooltip>
+          </h3>
             <div>
               <label>Stadt</label>
               <input 
