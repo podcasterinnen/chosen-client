@@ -249,7 +249,13 @@ class Session extends Component {
         }
         { sessionState === 'REGISTRATION_IN_PROGRESS' &&
           <p>
-            Validiere deine E-Mail-Adresse.
+            Liebe Podcasterin,
+          </p>
+          <p>
+            danke für deine Registrierung. Wir schicken dir eine E-Mail an deine angegebene Adresse. Sobald du die E-Mail erhalten hast, klicke bitte auf den Link. Du wirst automatisch zu podcasterinnen.org weitergeleitet. Nun musst du dich mit deiner E-Mail Adresse und deinem Passwort anmelden. Nach erfolgreicher Anmeldung kannst du auch schon mit dem anlegen deines Profils beginnen.
+          </p>
+          <p>
+            Etwas hat nicht geklappt? Schreibe uns gerne an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>
           </p>
         }
         { sessionState === 'INVALID' &&
