@@ -13,7 +13,7 @@ import Root from './Root'
 
 const store = createStore(
   chosenApp,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose,
   applyMiddleware(thunk),
 )
 store.dispatch(initialiseSession())
