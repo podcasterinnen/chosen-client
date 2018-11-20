@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import registerServiceWorker from './registerServiceWorker'
-import { createStore, applyMiddleware } from 'redux'
+import { compose, createStore, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 import chosenApp from './reducer'
@@ -11,10 +11,12 @@ import { initialiseSession } from './containers/Session/SessionActions'
 
 import Root from './Root'
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 const store = createStore(
   chosenApp,
-  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose,
-  applyMiddleware(thunk),
+  composeEnhancers(
+    applyMiddleware(thunk)
+  ),
 )
 store.dispatch(initialiseSession())
 
