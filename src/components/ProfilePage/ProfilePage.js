@@ -6,11 +6,11 @@ import './ProfilePage.css'
 class ProfilePage extends Component {
 
   render() {
-    const { profile } = this.props
+    const { imgUrl, profile } = this.props
 
     return(
       <div className="profile__container">
-      <img className="profile__avatar" alt={`Avatar-Foto von ${profile.forename}.`} src={`https://ui-avatars.com/api/?name=${profile.forename}&background=2C3E50&color=FFFFFF&font-size=0.125&size=200&length=100`} />
+      <div className="profile__avatar" style={{backgroundImage: `url(${imgUrl})`}}></div>
       <h1 className="profile__title">{profile.forename} {profile.surname}</h1>
       { profile.bio_short &&
         <p className="profile__subtitle">{profile.bio_short}</p>

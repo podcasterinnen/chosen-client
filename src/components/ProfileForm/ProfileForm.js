@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import Dropzone from 'react-dropzone'
 
 import Tooltip from '../Tooltip/Tooltip'
 
@@ -14,6 +15,7 @@ class ProfileForm extends Component {
       handleAddPodcastsInput,
       handleAddReferencesInput,
       handleAddTagsInput,
+      handleAvatarDrop,
       handleChange,
       handleEditToggle,
       handleLanguagesChange,
@@ -30,6 +32,7 @@ class ProfileForm extends Component {
       handleRemoveTagsInput,
       handleSubmit,
       handleTagsChange,
+      imgUrl,
       patternDataTags, 
       profile, 
       staticTags,
@@ -40,6 +43,20 @@ class ProfileForm extends Component {
         <button className="button button--decent" onClick={handleEditToggle}>Bearbeiten beenden</button>
         <h2>Bearbeite dein Profil:</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="profile__avatar-dropzone">
+            <label>
+              Profilbild
+            </label>
+            <Dropzone
+              onDrop={(files) => handleAvatarDrop(files)}
+            >
+              <div className="profile__avatar profile__avatar--form" style={{backgroundImage: `url(${imgUrl})`}}>
+                { imgUrl === '' &&
+                  <p className="profile__avatar__placeholder">Zieh dein Profilbild hier hinein oder klicke hier, um dein Profilbild hochzuladen.</p>
+                }
+              </div>
+            </Dropzone>
+          </div>
           <div>
             <label>
               Vorname/Nickname

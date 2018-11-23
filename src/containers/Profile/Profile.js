@@ -14,8 +14,10 @@ class Profile extends Component {
     super(props)
     this.state = {
       bioShortCharactersRemaining: 255,
+      imgUrl: '',
       isEditable: false,
       profile: {
+        avatar: [],
         bioShort: '',
         bioLong: '',
         city: '',
@@ -169,6 +171,15 @@ class Profile extends Component {
     this.setState({
       profile: {...this.state.profile, references: this.state.profile.references.concat([{ title: '', description: '', url: '' }])}
     })
+  }
+
+  handleAvatarDrop = (files) => {
+    this.setState({
+      imgUrl: URL.createObjectURL(files[0]),
+      profile: {
+        avatar: files[0]
+      },
+    });
   }
 
   handleRemovePodcastsInput = (index) => (e) => {
@@ -349,6 +360,7 @@ class Profile extends Component {
     const { state } = this.props
     const { 
       bioShortCharactersRemaining, 
+      imgUrl,
       isEditable, 
       profile, 
       staticTags,
@@ -366,6 +378,7 @@ class Profile extends Component {
             }
             { profile &&
               <ProfilePage
+                imgUrl = {imgUrl}
                 profile={profile}
               ></ProfilePage>
             }
@@ -381,6 +394,7 @@ class Profile extends Component {
             handleAddPodcastsInput={this.handleAddPodcastsInput}
             handleAddReferencesInput={this.handleAddReferencesInput}
             handleAddTagsInput={this.handleAddTagsInput}
+            handleAvatarDrop={this.handleAvatarDrop}
             handleChange={this.handleChange}
             handleCheckboxInput={this.handleCheckboxInput}
             handleEditToggle={this.handleEditToggle}
@@ -397,6 +411,7 @@ class Profile extends Component {
             handleRemoveTagsInput={this.handleRemoveTagsInput}
             handleSubmit={this.handleSubmit}
             handleTagsChange={this.handleTagsChange}
+            imgUrl={imgUrl}
             patternDataTags={patternDataTags}
             profile={profile}
             staticTags={staticTags}

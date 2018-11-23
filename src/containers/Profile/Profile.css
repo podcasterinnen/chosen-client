@@ -1,8 +1,33 @@
 .profile__avatar {
+  background-color: var(--theme-primary-color-dark);
+  background-position: center;
+  background-size: cover;
   border-radius: 50%;
   clear: right;
   display: block;
   margin: 0 auto;
+  width: 200px;
+  height: 200px;
+}
+
+.profile__avatar--form {
+  background-color: transparent;
+  border-radius: 0;
+  position: absolute;
+  width: 196px;
+  height: 196px;
+  z-index: 1;
+}
+
+.profile__avatar-dropzone {
+  margin: 20px 0;
+}
+
+.profile__avatar__placeholder {
+  font-size: 12px;
+  line-height: 1.5em;
+
+  margin: 20px;
 }
 
 .profile__button--add {
