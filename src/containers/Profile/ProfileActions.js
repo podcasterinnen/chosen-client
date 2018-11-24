@@ -50,7 +50,6 @@ const requestProfile = () => ({
 
 export const submitProfile = (object) => {
   return (dispatch) => {
-    console.log('Object', object)
     let data = new FormData()
     let id = null
     let podcaster = {}
@@ -66,7 +65,7 @@ export const submitProfile = (object) => {
           }
           array.push(item)
         })
-        data.append(`podcaster[${key}]`, JSON.stringify(array))
+        // data.append(`podcaster[${key}]`, JSON.stringify(array).replace(/\\/g,''))
       } else if (typeof value === 'boolean') {
         data.append(`podcaster[${key}]`, value)
       } else if (typeof value === 'number' && key === 'id') {
@@ -78,21 +77,22 @@ export const submitProfile = (object) => {
     data.append('id', id)
     data.append('podcaster', podcaster)
     dispatch(editRequest(data))
-    console.log('Data', data)
+    for (const pair of data.entries()) {
+      console.log(pair[0]+ ', ' + pair[1]); 
+    }
     return axios
       .put(`${API_URL_PODCASTERINNEN}${id}`, data, {
         withCredentials: true,
         headers: { 
           'cache-control': 'no-cache',
-          'Content-Type': 'multipart/form-data'
+          'content-type': 'application/json',
         },
         mode: 'cors',
       })
       .then(response => {
         console.log(response)
-        return response.json()
+        dispatch(editSuccess(response.data))
       })
-      .then(json => dispatch(editSuccess(json)))
       .catch((error) => {
         console.log(error)
         dispatch(editError(error))
