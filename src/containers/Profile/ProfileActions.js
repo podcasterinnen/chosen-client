@@ -6,6 +6,8 @@ import {
   LOCAL_STORAGE_USER_ID,
 } from '../../utils/types'
 
+const axios = require('axios')
+
 const EDIT_ERROR = 'EDIT_ERROR'
 const EDITING_PROFILE = 'EDITING_PROFILE'
 const EDITING_QUIT = 'EDITING_QUIT'
@@ -49,38 +51,41 @@ const requestProfile = () => ({
 export const submitProfile = (object) => {
   return (dispatch) => {
     console.log('Object', object)
-    let data = {}
+    let data = new FormData()
     let id = null
-    data.podcaster = {}
+    let podcaster = {}
+    
     Object.entries(object).forEach(([key, value]) => {
       if (value !== '' && typeof value === 'string') {
-        data.podcaster[key] = value
+        data.append(`podcaster[${key}]`, value)
       } else if (Array.isArray(value) && value.length > 0) {
-        console.log('Array', value)
-        data.podcaster[key] = []
+        let array = []
         value.forEach((item, index) => {
           if (item.id) {
             delete item.id
           }
-          data.podcaster[key].push(item)
+          array.push(item)
         })
-        console.log(data.podcaster[key])
+        data.append(`podcaster[${key}]`, JSON.stringify(array))
       } else if (typeof value === 'boolean') {
-        data.podcaster[key] = value
+        data.append(`podcaster[${key}]`, value)
       } else if (typeof value === 'number' && key === 'id') {
         id = value
+      } else if (key === 'avatar') {
+        data.append(`podcaster[${key}]`, value)
       }
     })
+    data.append('id', id)
+    data.append('podcaster', podcaster)
     dispatch(editRequest(data))
     console.log('Data', data)
-    return fetch(`${API_URL_PODCASTERINNEN}${id}`, {
-        body: JSON.stringify(data),
-        'cache-control': 'no-cache',
-        credentials: 'include',
-        headers: {
-          'content-type': 'application/json',
+    return axios
+      .put(`${API_URL_PODCASTERINNEN}${id}`, data, {
+        withCredentials: true,
+        headers: { 
+          'cache-control': 'no-cache',
+          'Content-Type': 'multipart/form-data'
         },
-        method: 'PUT',
         mode: 'cors',
       })
       .then(response => {

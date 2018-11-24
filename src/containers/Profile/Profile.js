@@ -177,6 +177,7 @@ class Profile extends Component {
     this.setState({
       imgUrl: URL.createObjectURL(files[0]),
       profile: {
+        ...this.state.profile,
         avatar: files[0]
       },
     });
@@ -325,7 +326,7 @@ class Profile extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log(this.state.profile)
+    console.log('1', this.state.profile)
     this.props.handleSubmitProfile(this.state.profile)
   }
 
