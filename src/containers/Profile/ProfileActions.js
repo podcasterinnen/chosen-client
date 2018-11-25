@@ -53,39 +53,43 @@ export const submitProfile = (object) => {
     let data = new FormData()
     let id = null
     let podcaster = {}
-    
-    Object.entries(object).forEach(([key, value]) => {
-      if (value !== '' && typeof value === 'string') {
-        data.append(`podcaster[${key}]`, value)
-      } else if (Array.isArray(value) && value.length > 0) {
-        let array = []
-        value.forEach((item, index) => {
-          if (item.id) {
-            delete item.id
-          }
-          array.push(item)
-        })
-        // data.append(`podcaster[${key}]`, JSON.stringify(array).replace(/\\/g,''))
-      } else if (typeof value === 'boolean') {
-        data.append(`podcaster[${key}]`, value)
-      } else if (typeof value === 'number' && key === 'id') {
-        id = value
-      } else if (key === 'avatar') {
-        data.append(`podcaster[${key}]`, value)
-      }
-    })
-    data.append('id', id)
-    data.append('podcaster', podcaster)
+    let file = object.avatar
+    console.log(file)
+
+    data.append('podcaster', JSON.stringify(object))
+    data.append('avatar', file)
+    // Object.entries(object).forEach(([key, value]) => {
+    //   if (value !== '' && typeof value === 'string') {
+    //     data.append(`podcaster[${key}]`, value)
+    //   } else if (Array.isArray(value) && value.length > 0) {
+    //     let array = []
+    //     value.forEach((item, index) => {
+    //       if (item.id) {
+    //         delete item.id
+    //       }
+    //       array.push(item)
+    //     })
+    //     data.append(`podcaster[${key}]`, JSON.stringify(array))
+    //   } else if (typeof value === 'boolean') {
+    //     data.append(`podcaster[${key}]`, value)
+    //   } else if (typeof value === 'number' && key === 'id') {
+    //     id = value
+    //   } else if (key === 'avatar') {
+    //     data.append(`podcaster[${key}]`, value)
+    //   }
+    // })
+    data.append('id', '1')
+    // data.append('podcaster', podcaster)
     dispatch(editRequest(data))
     for (const pair of data.entries()) {
       console.log(pair[0]+ ', ' + pair[1]); 
     }
     return axios
-      .put(`${API_URL_PODCASTERINNEN}${id}`, data, {
+      .put(`${API_URL_PODCASTERINNEN}1`, data, {
         withCredentials: true,
         headers: { 
           'cache-control': 'no-cache',
-          'content-type': 'application/json',
+          'content-type': 'multipart/form-data',
         },
         mode: 'cors',
       })
