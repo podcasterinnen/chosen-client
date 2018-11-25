@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import './Faq.css'
-import { initialiseFaq } from './FaqActions'
 
 class Faq extends Component {
-  componentDidMount() {
-    this.props.handleInitFaq()
-  }
 
   render() {
     return (
@@ -50,14 +45,4 @@ class Faq extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleInitFaq: () => {
-    dispatch(initialiseFaq())
-  }
-})
-
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Faq)
+export default Faq

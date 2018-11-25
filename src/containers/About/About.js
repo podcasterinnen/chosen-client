@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import './About.css'
-import { initialiseAbout } from './AboutActions'
 
 import photoDaniela from './daniela_400x400.jpg'
 import photoMichaela from './michaela_400x400.jpg'
 import photoNele from './nele_400x400.jpg'
 
 class About extends Component {
-  componentDidMount() {
-    this.props.handleInitAbout()
-  }
 
   render() {
     return (
@@ -60,14 +55,4 @@ class About extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleInitAbout: () => {
-    dispatch(initialiseAbout())
-  }
-})
-
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(About)
+export default About

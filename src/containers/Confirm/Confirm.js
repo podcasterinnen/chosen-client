@@ -39,10 +39,15 @@ class Confirm extends Component {
 
 Confirm.propTypes = {
   confirmState: PropTypes.string,
+  handleEmailConfirmation: PropTypes.func,
+  handleInitConfirm: PropTypes.func,
+  location: PropTypes.object.isRequired,
 }
 
 Confirm.defaultProps = {
   confirmState: 'UNKNOWN',
+  handleEmailConfirmation: undefined,
+  handleInitConfirm: undefined,
 }
 
 const mapDispatchToProps = (dispatch) => ({

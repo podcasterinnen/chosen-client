@@ -73,26 +73,23 @@ export const loginUser = (emailAddress, password) => {
       }
     }
     return fetch(API_URL_SESSIONS, {
-        body: JSON.stringify(data),
-        'cache-control': 'no-cache',
-        credentials: 'include',
-        headers: {
-          'content-type': 'application/json',
-        },
-        method: 'POST',
-        mode: 'cors',
-      })
+      body: JSON.stringify(data),
+      'cache-control': 'no-cache',
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'POST',
+      mode: 'cors',
+    })
       .then((response) => {
-        console.log({response})
         return response.json()
       })
       .then((json) => {
-        console.log(json)
         localStorage.setItem(LOCAL_STORAGE_USER_ID, json.info.detail)
         return dispatch(loginSuccess(json))
       })
       .catch((error) => {
-        console.log(error)
         dispatch(sessionError(error))
       })
   }
@@ -102,25 +99,22 @@ export const logoutUser = () => {
   return (dispatch) => {
     dispatch(logoutRequest())
     return fetch(`${API_URL_SESSIONS}${localStorage.getItem(LOCAL_STORAGE_USER_ID)}`, {
-        'cache-control': 'no-cache',
-        credentials: 'include',
-        headers: {
-          'content-type': 'application/json',
-        },
-        method: 'DELETE',
-        mode: 'cors',
-      })
+      'cache-control': 'no-cache',
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'DELETE',
+      mode: 'cors',
+    })
       .then(response => {
-        console.log({response})
         localStorage.removeItem(LOCAL_STORAGE_USER_ID)
         return response.json()
       })
       .then(json => {
-        console.log(json)
         return dispatch(logoutSuccess(json))
       })
       .catch((error) => {
-        console.log(error)
         localStorage.removeItem(LOCAL_STORAGE_USER_ID)
         dispatch(sessionError(error))
       })
@@ -140,21 +134,19 @@ export const registerNewUser = (emailAddress, forename, password) => {
       }
     }
     return fetch(`${API_URL_REGISTER}`, {
-        body: JSON.stringify(data),
-        'cache-control': 'no-cache',
-        headers: {
-          'content-type': 'application/json',
-        },
-        method: 'POST',
-        mode: 'cors',
-      })
+      body: JSON.stringify(data),
+      'cache-control': 'no-cache',
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'POST',
+      mode: 'cors',
+    })
       .then(response => {
-        console.log(response)
         return response.json()
       })
       .then(json => dispatch(registerSuccess(json)))
       .catch((error) => {
-        console.log(error)
         dispatch(sessionError(error))
       })
   }

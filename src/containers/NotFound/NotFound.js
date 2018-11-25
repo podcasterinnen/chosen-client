@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
 import './NotFound.css'
-import { initialiseNotFound } from './NotFoundActions'
 
 class NotFound extends Component {
-  componentDidMount() {
-    this.props.handleInitNotFound()
-  }
 
   render() {
     return (
@@ -20,14 +15,5 @@ class NotFound extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleInitNotFound: () => {
-    dispatch(initialiseNotFound())
-  }
-})
 
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(NotFound)
+export default NotFound

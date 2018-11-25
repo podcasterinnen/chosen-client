@@ -16,3 +16,4 @@ export const API_URL_CONFIRM = `${backendHost}/confirm`
 export const API_URL_REGISTER = `${backendHost}/users/`
 export const API_URL_SESSIONS = `${backendHost}/sessions/`
 export const API_URL_PODCASTERINNEN = `${backendHost}/podcasters/`
+export const API_URL_UPLOADS = `${backendHost}`

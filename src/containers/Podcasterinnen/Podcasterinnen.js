@@ -22,9 +22,7 @@ class Podcasterinnen extends Component {
   }
 
   componentDidMount = () => {
-    // if(this.props.match.params && this.props.match.params.id === )
     this.props.handleInitPodcasterinnen()
-    console.log(this.props, this.state)
   }
 
   handleChange = () => {
@@ -121,17 +119,18 @@ class Podcasterinnen extends Component {
 }
 
 Podcasterinnen.propTypes = {
+  handleInitPodcasterinnen: PropTypes.func,
   podcasterinnen: PropTypes.array,
 }
 
 Podcasterinnen.defaultProps = {
+  handleInitPodcasterinnen: undefined,
   podcasterinnen: null,
 }
 
 const mapDispatchToProps = (dispatch) => ({
   handleInitPodcasterinnen: () => {
     dispatch(initialisePodcasterinnen())
-    .then(() => console.log('Podcasterinnen loaded'))
   }
 })
 

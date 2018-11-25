@@ -139,14 +139,14 @@ class Session extends Component {
 
   handleToggleClick = () => {
     switch (this.props.sessionState) {
-      case 'UNKNOWN':
-        this.props.handleSetSessionState('REGISTERED')
-        break
-      case 'REGISTERED':
-        this.props.handleSetSessionState('UNKNOWN')
-        break
-      default:
-        return
+    case 'UNKNOWN':
+      this.props.handleSetSessionState('REGISTERED')
+      break
+    case 'REGISTERED':
+      this.props.handleSetSessionState('UNKNOWN')
+      break
+    default:
+      return
     }
   }
 
@@ -276,10 +276,18 @@ class Session extends Component {
 }
 
 Session.propTypes = {
+  handleInitSession: PropTypes.func,
+  handleLoginNewUser: PropTypes.func,
+  handleRegisterNewUser: PropTypes.func,
+  handleSetSessionState: PropTypes.func,
   sessionState: PropTypes.string,
 }
 
 Session.defaultProps = {
+  handleInitSession: undefined,
+  handleLoginNewUser: undefined,
+  handleRegisterNewUser: undefined,
+  handleSetSessionState: undefined,
   sessionState: 'UNKNOWN',
 }
 

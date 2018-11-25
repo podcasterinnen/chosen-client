@@ -23,9 +23,8 @@ import {
 import { initialiseSession } from './containers/Session/SessionActions'
 
 const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
-  console.log(sessionState)
   return (
-      <Route
+    <Route
       {...rest}
       render={props =>
         sessionState === LOGGED_IN ? (
@@ -39,7 +38,6 @@ const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
 }
 
 const Root = ({ store }) => {
-  console.log(store.getState().sessionReducer.sessionState)
   store.dispatch(initialiseSession())
   return(
     <Provider store={store}>
@@ -66,7 +64,9 @@ const Root = ({ store }) => {
 }
 
 Root.propTypes = {
-  store: PropTypes.object.isRequired
+  component: PropTypes.object.isRequired,
+  sessionState: PropTypes.string.isRequired,
+  store: PropTypes.object.isRequired,
 }
 
 export default Root

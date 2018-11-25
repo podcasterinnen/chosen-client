@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 import { Link, withRouter } from 'react-router-dom'
 
 import './App.css'
-import { initialiseApp } from './AppActions'
 
 class App extends Component {
-  componentDidMount() {
-    this.props.handleInitApp()
-  }
 
   render() {
     return (
@@ -21,14 +16,6 @@ class App extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleInitApp: () => {
-    dispatch(initialiseApp())
-  }
-})
 
 
-export default withRouter(connect(
-  null,
-  mapDispatchToProps
-)(App))
+export default withRouter(App)

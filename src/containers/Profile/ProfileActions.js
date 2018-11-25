@@ -51,41 +51,24 @@ const requestProfile = () => ({
 export const submitProfile = (object) => {
   return (dispatch) => {
     let data = new FormData()
-    let id = null
-    let podcaster = {}
+    let id = object.id
     let file = object.avatar
-    console.log(file)
-
+    
+    // remove avatar from profile object
+    delete object.avatar
     data.append('podcaster', JSON.stringify(object))
     data.append('avatar', file)
-    // Object.entries(object).forEach(([key, value]) => {
-    //   if (value !== '' && typeof value === 'string') {
-    //     data.append(`podcaster[${key}]`, value)
-    //   } else if (Array.isArray(value) && value.length > 0) {
-    //     let array = []
-    //     value.forEach((item, index) => {
-    //       if (item.id) {
-    //         delete item.id
-    //       }
-    //       array.push(item)
-    //     })
-    //     data.append(`podcaster[${key}]`, JSON.stringify(array))
-    //   } else if (typeof value === 'boolean') {
-    //     data.append(`podcaster[${key}]`, value)
-    //   } else if (typeof value === 'number' && key === 'id') {
-    //     id = value
-    //   } else if (key === 'avatar') {
-    //     data.append(`podcaster[${key}]`, value)
-    //   }
-    // })
-    data.append('id', '1')
-    // data.append('podcaster', podcaster)
+    data.append('id', id)
+
     dispatch(editRequest(data))
-    for (const pair of data.entries()) {
-      console.log(pair[0]+ ', ' + pair[1]); 
-    }
+
+    // Debug FormData:
+    // for (const pair of data.entries()) {
+    //   console.log(pair[0]+ ', ' + pair[1]); 
+    // }
+    
     return axios
-      .put(`${API_URL_PODCASTERINNEN}1`, data, {
+      .put(`${API_URL_PODCASTERINNEN}${id}`, data, {
         withCredentials: true,
         headers: { 
           'cache-control': 'no-cache',
@@ -94,11 +77,9 @@ export const submitProfile = (object) => {
         mode: 'cors',
       })
       .then(response => {
-        console.log(response)
         dispatch(editSuccess(response.data))
       })
       .catch((error) => {
-        console.log(error)
         dispatch(editError(error))
       })
   }

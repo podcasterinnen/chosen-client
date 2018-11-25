@@ -1,13 +1,8 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
 
 import './Privacy.css'
-import { initialisePrivacy } from './PrivacyActions'
 
 class Privacy extends Component {
-  componentDidMount() {
-    this.props.handleInitPrivacy()
-  }
 
   render() {
     return (
@@ -20,14 +15,5 @@ class Privacy extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleInitPrivacy: () => {
-    dispatch(initialisePrivacy())
-  }
-})
 
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Privacy)
+export default Privacy

@@ -22,11 +22,10 @@ class PodcasterinnenCard extends Component {
               <p className="card__subtitle">{item.forename}s Podcasts:</p>
               <ul className="card__list">
                 { item.podcasts.map((podcast) => {
-                    return (
-                      <li className="card__list__item" key={podcast.name}>{podcast.name}</li>
-                    )
-                  })
-                }
+                  return (
+                    <li className="card__list__item" key={podcast.name}>{podcast.name}</li>
+                  )
+                }) }
               </ul>
             </div>
           }
@@ -35,11 +34,10 @@ class PodcasterinnenCard extends Component {
               <p className="card__subtitle">Themen, über die {item.forename} spricht:</p>
               <ul className="card__list">
                 { item.tags.map((tag) => {
-                    return (
-                      <li className="card__list__item" key={tag}>{tag}</li>
-                    )
-                  })
-                }
+                  return (
+                    <li className="card__list__item" key={tag}>{tag}</li>
+                  )
+                }) }
               </ul>
             </div>
           }
@@ -52,6 +50,7 @@ class PodcasterinnenCard extends Component {
 
 PodcasterinnenCard.propTypes = {
   item: PropTypes.object,
+  match: PropTypes.object.isRequired,
 }
 
 PodcasterinnenCard.defaultProps = {

@@ -2,12 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import './Imprint.css'
-import { initialiseImprint } from './ImprintActions'
 
 class Imprint extends Component {
-  componentDidMount() {
-    this.props.handleInitImprint()
-  }
 
   render() {
     return (
@@ -34,14 +30,4 @@ class Imprint extends Component {
   }
 }
 
-const mapDispatchToProps = (dispatch) => ({
-  handleInitImprint: () => {
-    dispatch(initialiseImprint())
-  }
-})
-
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(Imprint)
+export default Imprint

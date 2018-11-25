@@ -28,16 +28,15 @@ export const confirmEmail = (key) => {
   return (dispatch) => {
     const url = `${API_URL_CONFIRM}?key=${key}`
     return fetch(url, {
-        'cache-control': 'no-cache',
-        credentials: 'include',
-        headers: {
-          'content-type': 'application/json',
-        },
-        method: 'GET',
-        mode: 'cors',
-      })
+      'cache-control': 'no-cache',
+      credentials: 'include',
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'GET',
+      mode: 'cors',
+    })
       .then((response) => {
-        console.log({response})
         if (response.status === 200) {
           return dispatch(confirmSuccess(response))
         } else {
@@ -48,7 +47,6 @@ export const confirmEmail = (key) => {
 
       })
       .catch((error) => {
-        console.log(error)
         dispatch(confirmError(error))
       })
   }

@@ -390,10 +390,10 @@ class ProfileForm extends Component {
             </div>
           </div>
           <div>
-          <h3 className="profile__subheadline">
-            Weitere Infos über mich:
-            <Tooltip content="Wenn du magst, zeig den Menschen die eine Podcasterin suchen, wo du wohnst, wo du auf Twitter zu finden bist und deine Webseite."></Tooltip>
-          </h3>
+            <h3 className="profile__subheadline">
+              Weitere Infos über mich:
+              <Tooltip content="Wenn du magst, zeig den Menschen die eine Podcasterin suchen, wo du wohnst, wo du auf Twitter zu finden bist und deine Webseite."></Tooltip>
+            </h3>
             <div>
               <label>Stadt</label>
               <input 
@@ -452,6 +452,7 @@ ProfileForm.propTypes = {
   handleAddPodcastsInput: PropTypes.func,
   handleAddReferencesInput: PropTypes.func,
   handleAddTagsInput: PropTypes.func,
+  handleAvatarDrop: PropTypes.func,
   handleChange: PropTypes.func,
   handleCheckboxInput: PropTypes.func,
   handleEditToggle: PropTypes.func,
@@ -468,6 +469,7 @@ ProfileForm.propTypes = {
   handleRemoveTagsInput: PropTypes.func,
   handleSubmit: PropTypes.func,
   handleTagsChange: PropTypes.func,
+  imgUrl: PropTypes.string,
   patternDataTags: PropTypes.string, 
   profile: PropTypes.object, 
   staticTags: PropTypes.array,
@@ -478,6 +480,7 @@ ProfileForm.defaultProps = {
   handleAddPodcastsInput: undefined,
   handleAddReferencesInput: undefined,
   handleAddTagsInput: undefined,
+  handleAvatarDrop: undefined,
   handleChange: undefined,
   handleCheckboxInput: undefined,
   handleEditToggle: undefined,
@@ -494,6 +497,7 @@ ProfileForm.defaultProps = {
   handleRemoveTagsInput: undefined,
   handleSubmit: undefined,
   handleTagsChange: undefined,
+  imgUrl: undefined,
   patternDataTags: undefined, 
   profile: undefined, 
   staticTags: undefined,

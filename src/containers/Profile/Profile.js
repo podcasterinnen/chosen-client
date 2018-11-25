@@ -8,6 +8,7 @@ import './Profile.css'
 import ProfileForm from '../../components/ProfileForm/ProfileForm'
 import ProfilePage from '../../components/ProfilePage/ProfilePage'
 import { submitProfile, editingProfile, editingQuit, initialiseProfile } from './ProfileActions'
+import { API_URL_UPLOADS } from '../../config/config'
 
 class Profile extends Component {
   constructor(props) {
@@ -96,7 +97,6 @@ class Profile extends Component {
           newProfile[key] = value
         }
       })
-      console.log(newProfile, newProfile.bio_short)
       this.setState({ 
         bioShortCharactersRemaining: 255 - newProfile.bio_short.length,
         profile: newProfile
@@ -180,7 +180,7 @@ class Profile extends Component {
         ...this.state.profile,
         avatar: files[0]
       },
-    });
+    })
   }
 
   handleRemovePodcastsInput = (index) => (e) => {
@@ -188,7 +188,6 @@ class Profile extends Component {
     this.setState({
       profile: {...this.state.profile, podcasts: this.state.profile.podcasts.filter((podcast, podcastIndex) => index !== podcastIndex)}
     })
-    console.log(this.state)
   }
 
   handleRemoveReferencesInput = (index) => (e) => {
@@ -196,7 +195,6 @@ class Profile extends Component {
     this.setState({
       profile: {...this.state.profile, references: this.state.profile.references.filter((reference, referenceIndex) => index !== referenceIndex)}
     })
-    console.log(this.state)
   }
 
   handlePodcastsDescriptionChange = (index) => (e) => {
@@ -279,54 +277,53 @@ class Profile extends Component {
 
   handleCheckboxInput = (e, type) => {
     switch (type) {
-      case 'REMOTE':
-        this.setState({
-          profile: {...this.state.profile, remote_possible: !this.state.profile.remote_possible}
-        })
-        break
-      case 'TALKS':
-        this.setState({
-          profile: {...this.state.profile, talks: !this.state.profile.talks}
-        })
-        break
-      case 'WORKSHOPS':
-        this.setState({
-          profile: {...this.state.profile, workshops: !this.state.profile.workshops}
-        })
-        break
-      case 'FOREIGN_LANGUAGE':
-        this.setState({
-          profile: {...this.state.profile, foreign_language: !this.state.profile.foreign_language}
-        })
-        break
-      case 'RECORD_OUTSIDE':
-        this.setState({
-          profile: {...this.state.profile, record_outside: !this.state.profile.record_outside}
-        })
-        break
-      case 'GUESTS':
-        this.setState({
-          profile: {...this.state.profile, guests: !this.state.profile.guests}
-        })
-        break
-      case 'TRAVEL':
-        this.setState({
-          profile: {...this.state.profile, travel: !this.state.profile.travel}
-        })
-        break
-      case 'PODCAST_PRODUCTION':
-        this.setState({
-          profile: {...this.state.profile, podcast_production: !this.state.profile.podcast_production}
-        })
-        break
-      default:
-        return
+    case 'REMOTE':
+      this.setState({
+        profile: {...this.state.profile, remote_possible: !this.state.profile.remote_possible}
+      })
+      break
+    case 'TALKS':
+      this.setState({
+        profile: {...this.state.profile, talks: !this.state.profile.talks}
+      })
+      break
+    case 'WORKSHOPS':
+      this.setState({
+        profile: {...this.state.profile, workshops: !this.state.profile.workshops}
+      })
+      break
+    case 'FOREIGN_LANGUAGE':
+      this.setState({
+        profile: {...this.state.profile, foreign_language: !this.state.profile.foreign_language}
+      })
+      break
+    case 'RECORD_OUTSIDE':
+      this.setState({
+        profile: {...this.state.profile, record_outside: !this.state.profile.record_outside}
+      })
+      break
+    case 'GUESTS':
+      this.setState({
+        profile: {...this.state.profile, guests: !this.state.profile.guests}
+      })
+      break
+    case 'TRAVEL':
+      this.setState({
+        profile: {...this.state.profile, travel: !this.state.profile.travel}
+      })
+      break
+    case 'PODCAST_PRODUCTION':
+      this.setState({
+        profile: {...this.state.profile, podcast_production: !this.state.profile.podcast_production}
+      })
+      break
+    default:
+      return
     }
   }
 
   handleSubmit = (e) => {
     e.preventDefault()
-    console.log('1', this.state.profile)
     this.props.handleSubmitProfile(this.state.profile)
   }
 
@@ -379,7 +376,7 @@ class Profile extends Component {
             }
             { profile &&
               <ProfilePage
-                imgUrl = {imgUrl}
+                imgUrl = {`${API_URL_UPLOADS}${profile.avatar}`}
                 profile={profile}
               ></ProfilePage>
             }
@@ -424,12 +421,21 @@ class Profile extends Component {
 }
 
 Profile.propTypes = {
+  match: PropTypes.object.isRequired,
+  handleInitProfile: PropTypes.func,
+  handleEditingProfile: PropTypes.func,
+  handleEditingQuit: PropTypes.func,
+  handleSubmitProfile: PropTypes.func,
   podcasterinnen: PropTypes.array,
   profile: PropTypes.object,
   state: PropTypes.string,
 }
 
 Profile.defaultProps = {
+  handleInitProfile: undefined,
+  handleEditingProfile: undefined,
+  handleEditingQuit: undefined,
+  handleSubmitProfile: undefined,
   podcasterinnen: [],
   profile: {},
   state: 'STATE_DEFAULT',
@@ -444,7 +450,6 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleInitProfile: (match) => {
     dispatch(initialiseProfile(match))
-    .then(() => console.log('Profile loaded'))
   },
   handleSubmitProfile: (profile) => {
     dispatch(submitProfile(profile))

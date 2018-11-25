@@ -5,5 +5,5 @@
  * @param {number} i 
  */
 export const generateKey = (pre, i) => {
-  return `${ pre }_${ new Date().getTime() }_${i}`;
+  return `${ pre }_${ new Date().getTime() }_${i}`
 }
