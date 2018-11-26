@@ -38,7 +38,14 @@ class ProfileForm extends Component {
 
     return(
       <div>
-        <button className="button button--decent" onClick={handleEditToggle}>Bearbeiten beenden</button>
+        { (profile && profile.bio_short && profile.podcasts.length) &&
+        <button className="button button--decent profile-form__button-edit" onClick={handleEditToggle}>Bearbeiten beenden</button>
+        }
+        { (!profile || !profile.bio_short || !profile.podcasts.length) &&
+          <div className="profile-form__banner">
+            <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Podcasterinnen-Profil zu vervollständigen.</p>
+          </div>
+        }
         <h2>Bearbeite dein Profil:</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="profile__avatar-dropzone">

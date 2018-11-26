@@ -96,10 +96,10 @@ class Profile extends Component {
           newProfile[key] = value
         }
       })
-      this.setState({ 
-        bioShortCharactersRemaining: 255 - newProfile.bio_short.length,
-        profile: newProfile
-      })
+      this.setState({ profile: newProfile })
+      if (newProfile.bio_short) {
+        this.setState({ bioShortCharactersRemaining: 255 - newProfile.bio_short.length })
+      }
     } else {
       for (let podcasterin of nextProps.podcasterinnen) {
         // TODO: fix type error
@@ -357,12 +357,12 @@ class Profile extends Component {
       <section className="profile main__section">
         { (state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR') &&
           <div>
-            { isEditable && 
+            { isEditable && (profile && profile.bio_short && profile.podcasts.length) && 
               <div className="message-container message-container--align-right">
                 <button className="button button--decent" onClick={this.handleEditToggle}>Profil Bearbeiten</button>
               </div>
             }
-            { profile &&
+            { (profile && profile.bio_short && profile.podcasts.length) &&
               <ProfilePage
                 profile={profile}
               ></ProfilePage>
@@ -372,7 +372,7 @@ class Profile extends Component {
         { state === 'STATE_SENDING_REQUEST' &&
           <p>Profil wird bearbeitet ...</p>
         }
-        { state === 'STATE_EDITING' &&
+        { (state === 'STATE_EDITING' || (!profile || !profile.bio_short || !profile.podcasts.length)) &&
           <ProfileForm
             bioShortCharactersRemaining={bioShortCharactersRemaining}
             handleAddLanguagesInput={this.handleAddLanguagesInput}

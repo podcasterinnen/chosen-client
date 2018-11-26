@@ -1,3 +1,18 @@
+.profile-form__banner {
+}
+
+.profile-form__banner__text {
+  background-color: var(--theme-lighter-color-grey);
+  border: 1px solid var(--theme-primary-color);
+  border-radius: 4px;
+  padding: 20px 20px;
+}
+
+.profile-form__button-edit {
+  display: block;
+  margin: 0 0 0 auto;
+}
+
 .profile-form__multi-input-container {
   margin: 0 0 40px 0;
 }
