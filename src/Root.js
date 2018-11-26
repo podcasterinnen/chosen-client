@@ -64,9 +64,14 @@ const Root = ({ store }) => {
 }
 
 Root.propTypes = {
-  component: PropTypes.object.isRequired,
-  sessionState: PropTypes.string.isRequired,
+  component: PropTypes.object,
+  sessionState: PropTypes.string,
   store: PropTypes.object.isRequired,
+}
+
+Root.defaultProps = {
+  component: undefined,
+  sessionState: undefined,
 }
 
 export default Root

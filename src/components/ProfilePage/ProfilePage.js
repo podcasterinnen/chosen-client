@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
+import { API_URL_UPLOADS } from '../../config/config'
 import './ProfilePage.css'
 
 class ProfilePage extends Component {
 
   render() {
-    const { imgUrl, profile } = this.props
+    const { profile } = this.props
 
     return(
       <div className="profile__container">
-        <div className="profile__avatar" style={{backgroundImage: `url(${imgUrl})`}}></div>
+        <div className="profile__avatar" style={(profile.avatar !== null && profile.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : {backgroundImage: 'none'}}></div>
         <h1 className="profile__title">{profile.forename} {profile.surname}</h1>
         { profile.bio_short &&
         <p className="profile__subtitle">{profile.bio_short}</p>
@@ -122,12 +123,10 @@ class ProfilePage extends Component {
 }
 
 ProfilePage.propTypes = {
-  imgUrl: PropTypes.string,
   profile: PropTypes.object,
 }
 
 ProfilePage.defaultProps = {
-  imgUrl: undefined,
   profile: undefined, 
 }
 

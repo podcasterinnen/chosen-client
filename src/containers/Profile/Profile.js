@@ -15,7 +15,6 @@ class Profile extends Component {
     super(props)
     this.state = {
       bioShortCharactersRemaining: 255,
-      imgUrl: '',
       isEditable: false,
       profile: {
         avatar: [],
@@ -357,8 +356,7 @@ class Profile extends Component {
   render() {
     const { state } = this.props
     const { 
-      bioShortCharactersRemaining, 
-      imgUrl,
+      bioShortCharactersRemaining,
       isEditable, 
       profile, 
       staticTags,
@@ -376,7 +374,6 @@ class Profile extends Component {
             }
             { profile &&
               <ProfilePage
-                imgUrl = {`${API_URL_UPLOADS}${profile.avatar}`}
                 profile={profile}
               ></ProfilePage>
             }
@@ -409,7 +406,6 @@ class Profile extends Component {
             handleRemoveTagsInput={this.handleRemoveTagsInput}
             handleSubmit={this.handleSubmit}
             handleTagsChange={this.handleTagsChange}
-            imgUrl={imgUrl}
             patternDataTags={patternDataTags}
             profile={profile}
             staticTags={staticTags}

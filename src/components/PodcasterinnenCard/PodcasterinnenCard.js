@@ -2,16 +2,20 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter, Link } from 'react-router-dom'
 
+import { API_URL_UPLOADS } from '../../config/config'
 import './PodcasterinnenCard.css'
 
 class PodcasterinnenCard extends Component {
 
   render() {
     const { item, match } = this.props
+    if (item.avatar !== null && item.avatar !== '') {
+      // do something
+    }
 
     return(
       <div className="card">
-        <img className="card__avatar" alt={`Avatar-Foto von ${item.forename}.`} src={`https://ui-avatars.com/api/?name=${item.forename}&background=2C3E50&color=FFFFFF&font-size=0.125&size=200&length=100`} />
+        <div className="card__avatar" style={(item.avatar !== null && item.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${item.avatar})`} : {backgroundImage: 'none'}}></div>
         <div className="card__text">
           <h3 className="card__title">{item.forename} {item.surname}</h3>
           { item.bio_short &&

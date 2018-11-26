@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Dropzone from 'react-dropzone'
 
+import { API_URL_UPLOADS } from '../../config/config'
 import Tooltip from '../Tooltip/Tooltip'
 
 import './ProfileForm.css'
@@ -32,7 +33,6 @@ class ProfileForm extends Component {
       handleRemoveTagsInput,
       handleSubmit,
       handleTagsChange,
-      imgUrl,
       patternDataTags, 
       profile, 
       staticTags,
@@ -50,9 +50,9 @@ class ProfileForm extends Component {
             <Dropzone
               onDrop={(files) => handleAvatarDrop(files)}
             >
-              <div className="profile__avatar profile__avatar--form" style={{backgroundImage: `url(${imgUrl})`}}>
-                { imgUrl === '' &&
-                  <p className="profile__avatar__placeholder">Zieh dein Profilbild hier hinein oder klicke hier, um dein Profilbild hochzuladen.</p>
+              <div className="profile__avatar profile__avatar--form" style={(profile.avatar !== null && profile.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : {backgroundImage: 'none'}}>
+                { (profile.avatar === null || profile.avatar === '') &&
+                <p className="profile__avatar__placeholder">Zieh dein Profilbild hier hinein oder klicke hier, um dein Profilbild hochzuladen.</p>
                 }
               </div>
             </Dropzone>
@@ -469,7 +469,6 @@ ProfileForm.propTypes = {
   handleRemoveTagsInput: PropTypes.func,
   handleSubmit: PropTypes.func,
   handleTagsChange: PropTypes.func,
-  imgUrl: PropTypes.string,
   patternDataTags: PropTypes.string, 
   profile: PropTypes.object, 
   staticTags: PropTypes.array,
@@ -497,7 +496,6 @@ ProfileForm.defaultProps = {
   handleRemoveTagsInput: undefined,
   handleSubmit: undefined,
   handleTagsChange: undefined,
-  imgUrl: undefined,
   patternDataTags: undefined, 
   profile: undefined, 
   staticTags: undefined,

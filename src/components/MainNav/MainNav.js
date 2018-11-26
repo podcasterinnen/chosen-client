@@ -130,7 +130,7 @@ class MainNav extends Component {
 
 MainNav.propTypes = {
   handleLogoutUser: PropTypes.func,
-  location: PropTypes.string.isRequired,
+  location: PropTypes.object.isRequired,
   sessionState: PropTypes.string,
 }
 
