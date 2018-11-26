@@ -178,7 +178,7 @@ class ProfileForm extends Component {
                   value={podcast.name}
                 />
                 <label>
-                  Kurze Beschreibung des Podcasts
+                  Kurze Beschreibung des Podcasts (max. 144 Zeichen)
                   <Tooltip content="Hier kannst du deinen Podcast in wenigen Worten beschreiben."></Tooltip>
                 </label>
                 <input
@@ -187,7 +187,7 @@ class ProfileForm extends Component {
                   list="podcasts-data"
                   maxLength="144"
                   onChange={handlePodcastsDescriptionChange(index)}
-                  placeholder="Kurze Beschreibung des Podcasts"
+                  placeholder="Kurze Beschreibung des Podcasts (max. 144 Zeichen)"
                   type="text"
                   value={podcast.description}
                 />
