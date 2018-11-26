@@ -15,7 +15,6 @@ class ProfileForm extends Component {
       handleAddLanguagesInput,
       handleAddPodcastsInput,
       handleAddReferencesInput,
-      handleAddTagsInput,
       handleAvatarDrop,
       handleChange,
       handleEditToggle,
@@ -30,10 +29,8 @@ class ProfileForm extends Component {
       handleRemoveLanguagesInput,
       handleRemovePodcastsInput,
       handleRemoveReferencesInput,
-      handleRemoveTagsInput,
       handleSubmit,
       handleTagsChange,
-      patternDataTags, 
       profile, 
       staticTags,
     } = this.props
@@ -114,35 +111,23 @@ class ProfileForm extends Component {
               Themen, über die ich spreche:
               <Tooltip content="Dies sind deine Podcastthemen und Themen über die du darüberhinaus sprechen möchtest, zum Beispiel als Gästin in einem anderen Podcast oder bei einem Workshop/Vortrag. Dir stehen viele Tags zur Verfügung, die versuchen sollen, deine Themen so gut wie möglich abzudecken."></Tooltip>
             </label>
-            { profile.tags && profile.tags.length && profile.tags.map((tag, index) => (
-              <div key={index}>
+            { staticTags.map((staticTag, index) => (
+              <label
+                className="profile-form__tag"
+                key={index}
+              >
                 <input
-                  autoComplete="off"
-                  className="profile__input--multi"
-                  list="tags-data"
+                  className="profile-form__tag__checkbox"
+                  key={index}
                   onChange={handleTagsChange(index)}
-                  pattern={patternDataTags}
-                  placeholder="Thema"
-                  type="text"
-                  value={tag}
-                />
-                <datalist id="tags-data">
-                  { staticTags.map((staticTag, index) => (
-                    <option key={index} value={staticTag} />
-                  ))}
-                </datalist>
-                <button
-                  className="button button--decent button--icon profile__button--delete"
-                  onClick={handleRemoveTagsInput(index)}
-                  tabIndex="-1"
-                >-</button>
-              </div>
+                  type="checkbox"
+                  checked={(profile.tags.indexOf(staticTag) > -1) ? 'checked' : ''}
+                ></input>
+                <div
+                  className="profile-form__tag__label"
+                >{staticTag}</div>
+              </label>
             ))}
-            <button 
-              className="button profile__button--add"
-              onClick={(e) => handleAddTagsInput(e)}
-              tabIndex="-1"
-            >Thema hinzufügen</button>
           </div>
           <div>
             <label>
@@ -451,7 +436,6 @@ ProfileForm.propTypes = {
   handleAddLanguagesInput: PropTypes.func,
   handleAddPodcastsInput: PropTypes.func,
   handleAddReferencesInput: PropTypes.func,
-  handleAddTagsInput: PropTypes.func,
   handleAvatarDrop: PropTypes.func,
   handleChange: PropTypes.func,
   handleCheckboxInput: PropTypes.func,
@@ -466,10 +450,8 @@ ProfileForm.propTypes = {
   handleRemoveLanguagesInput: PropTypes.func,
   handleRemovePodcastsInput: PropTypes.func,
   handleRemoveReferencesInput: PropTypes.func,
-  handleRemoveTagsInput: PropTypes.func,
   handleSubmit: PropTypes.func,
   handleTagsChange: PropTypes.func,
-  patternDataTags: PropTypes.string, 
   profile: PropTypes.object, 
   staticTags: PropTypes.array,
 }
@@ -478,7 +460,6 @@ ProfileForm.defaultProps = {
   handleAddLanguagesInput: undefined,
   handleAddPodcastsInput: undefined,
   handleAddReferencesInput: undefined,
-  handleAddTagsInput: undefined,
   handleAvatarDrop: undefined,
   handleChange: undefined,
   handleCheckboxInput: undefined,
@@ -493,10 +474,8 @@ ProfileForm.defaultProps = {
   handleRemoveLanguagesInput: undefined,
   handleRemovePodcastsInput: undefined,
   handleRemoveReferencesInput: undefined,
-  handleRemoveTagsInput: undefined,
   handleSubmit: undefined,
   handleTagsChange: undefined,
-  patternDataTags: undefined, 
   profile: undefined, 
   staticTags: undefined,
 }

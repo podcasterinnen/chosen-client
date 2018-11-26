@@ -8,7 +8,6 @@ import './Profile.css'
 import ProfileForm from '../../components/ProfileForm/ProfileForm'
 import ProfilePage from '../../components/ProfilePage/ProfilePage'
 import { submitProfile, editingProfile, editingQuit, initialiseProfile } from './ProfileActions'
-import { API_URL_UPLOADS } from '../../config/config'
 
 class Profile extends Component {
   constructor(props) {
@@ -326,27 +325,18 @@ class Profile extends Component {
     this.props.handleSubmitProfile(this.state.profile)
   }
 
-  handleAddTagsInput = (e) => {
-    e.preventDefault()
-    this.setState({
-      profile: {...this.state.profile, tags: this.state.profile.tags.concat([''])}
-    })
-  }
-
-  handleRemoveTagsInput = (index) => (e) => {
-    e.preventDefault()
-    this.setState({
-      profile: {...this.state.profile, tags: this.state.profile.tags.filter((tag, tagIndex) => index !== tagIndex)}
-    })
-  }
-
-  handleTagsChange = (index) => (e) => {
-    e.preventDefault()
-    const newTags = this.state.profile.tags.map((tag, tagIndex) => {
-      if (index !== tagIndex) {
-        return tag
+  handleTagsChange = (index) => (event) => {
+    let newTags = this.state.profile.tags
+    this.state.staticTags.forEach((staticTag, i) => {
+      // Add or remove tag from new tags depending on checkbox value
+      if (index === i && event.target.checked === true) {
+        newTags.push(staticTag)
+      } else if (index === i && event.target.checked === false) {
+        const tagIndex = newTags.indexOf(staticTag)
+        if (tagIndex !== -1) {
+          newTags.splice(tagIndex, 1)
+        }
       }
-      return e.target.value
     })
     this.setState({
       profile: {...this.state.profile, tags: newTags},
@@ -361,7 +351,6 @@ class Profile extends Component {
       profile, 
       staticTags,
     } = this.state
-    const patternDataTags = staticTags.join('|')
 
     return (
       <section className="profile main__section">
@@ -388,7 +377,6 @@ class Profile extends Component {
             handleAddLanguagesInput={this.handleAddLanguagesInput}
             handleAddPodcastsInput={this.handleAddPodcastsInput}
             handleAddReferencesInput={this.handleAddReferencesInput}
-            handleAddTagsInput={this.handleAddTagsInput}
             handleAvatarDrop={this.handleAvatarDrop}
             handleChange={this.handleChange}
             handleCheckboxInput={this.handleCheckboxInput}
@@ -403,10 +391,8 @@ class Profile extends Component {
             handleRemoveLanguagesInput={this.handleRemoveLanguagesInput}
             handleRemovePodcastsInput={this.handleRemovePodcastsInput}
             handleRemoveReferencesInput={this.handleRemoveReferencesInput}
-            handleRemoveTagsInput={this.handleRemoveTagsInput}
             handleSubmit={this.handleSubmit}
             handleTagsChange={this.handleTagsChange}
-            patternDataTags={patternDataTags}
             profile={profile}
             staticTags={staticTags}
           ></ProfileForm>
