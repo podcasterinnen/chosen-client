@@ -61,7 +61,8 @@ class Profile extends Component {
       })
     } else {
       for (let podcasterin of this.props.podcasterinnen) {
-        if (podcasterin.id === this.props.match.params.id) {
+        // FIX: type handling
+        if (podcasterin.id == this.props.match.params.id) {
           this.setState({
             profile: podcasterin,
           })

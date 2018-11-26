@@ -15,6 +15,7 @@ const reducer = (store = defaultStore, action) => {
   case 'INITIALISE_SESSION': 
     let state = UNKNOWN
     if (localStorage.getItem(LOCAL_STORAGE_USER_ID)) {
+      console.log('Initializing session')
       state = LOGGED_IN
     }
     return {...store, sessionState: state}
