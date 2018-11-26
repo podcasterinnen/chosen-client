@@ -33,9 +33,13 @@ class ProfilePage extends Component {
         <div>
           <h3 className="profile__subheadline">Sprachen:</h3>
           <ul className="profile__tag-list">
-            { profile.languages.map((language) => (
-              <li className="profile__tag" key={language}>{language}</li>
-            ))}
+            { profile.languages.map((language) => {
+              if (language !== '') {
+                return (
+                  <li className="profile__tag" key={language}>{language}</li>
+                )
+              }
+            })}
           </ul>
         </div>
         }
@@ -43,14 +47,18 @@ class ProfilePage extends Component {
         <div>
           <h3 className="profile__subheadline">{profile.forename}s Podcasts:</h3>
           <ul className="profile__podcast-list">
-            { profile.podcasts.map((podcast) => (
-              <li className="profile__podcast" key={podcast.name}>
-                <img className="profile__podcast__image" alt={`Cover von ${podcast.name}.`} src={"https://ui-avatars.com/api/?name=&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100"} />
-                <div className="profile__podcast__text">
-                  <p><a href={podcast.url} target="_blank">{podcast.name}</a> · {podcast.description}</p>
-                </div>
-              </li>
-            ))}
+            { profile.podcasts.map((podcast) => {
+              if (podcast.name !== '') {
+                return (
+                  <li className="profile__podcast" key={podcast.name}>
+                    <img className="profile__podcast__image" alt={`Cover von ${podcast.name}.`} src={"https://ui-avatars.com/api/?name=&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100"} />
+                    <div className="profile__podcast__text">
+                      <p><a href={podcast.url} target="_blank">{podcast.name}</a> · {podcast.description}</p>
+                    </div>
+                  </li>
+                )
+              }
+            })}
           </ul>
         </div>
         }
@@ -58,13 +66,17 @@ class ProfilePage extends Component {
         <div>
           <h3 className="profile__subheadline">{profile.forename}s Referenzen:</h3>
           <ul className="profile__reference-list">
-            { profile.references.map((reference) => (
-              <li className="profile__reference" key={reference.title}>
-                <div className="profile__reference__text">
-                  <p><a href={reference.url} target="_blank">{reference.title}</a> · {reference.description}</p>
-                </div>
-              </li>
-            ))}
+            { profile.references.map((reference) => {
+              if (reference.title !== '') {
+                return (
+                  <li className="profile__reference" key={reference.title}>
+                    <div className="profile__reference__text">
+                      <p><a href={reference.url} target="_blank">{reference.title}</a> · {reference.description}</p>
+                    </div>
+                  </li>
+                )
+              }
+            })}
           </ul>
         </div>
         }
