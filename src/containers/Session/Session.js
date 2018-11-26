@@ -67,37 +67,25 @@ class Session extends Component {
 
   handleForenameValidation = () => {
     if (this.state.forename !== '') {
-      this.setState({
-        forenameValid: true,
-      })
+      this.setState({ forenameValid: true })
     } else {
-      this.setState({
-        forenameValid: false,
-      })
+      this.setState({ forenameValid: false })
     }
   }
 
   handlePasswordValidation = () => {
     if (this.state.password.length >= 8) {
-      this.setState({
-        passwordValid: true,
-      })
+      this.setState({ passwordValid: true })
     } else {
-      this.setState({
-        passwordValid: false,
-      })
+      this.setState({ passwordValid: false })
     }
   }
 
   handlePasswordControlValidation = () => {
     if (this.state.passwordControl === this.state.password && this.state.password.length >= 8) {
-      this.setState({
-        passwordControlValid: true,
-      })
+      this.setState({ passwordControlValid: true })
     } else {
-      this.setState({
-        passwordControlValid: false,
-      })
+      this.setState({ passwordControlValid: false })
     }
   }
 
@@ -112,9 +100,7 @@ class Session extends Component {
         isEnabledForRegistration: true,
       })
     } else {
-      this.setState({
-        isEnabledForRegistration: false,
-      })
+      this.setState({ isEnabledForRegistration: false })
     }
   }
 
