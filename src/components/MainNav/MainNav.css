@@ -5,6 +5,8 @@
   position: fixed;
   height: var(--main-nav-height);
   width: 100%;
+  /* Render above checkboxes */
+  z-index: 1;
 }
 
 .mainnav__button {
