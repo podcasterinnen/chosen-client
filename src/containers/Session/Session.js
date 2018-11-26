@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Link } from 'react-router-dom'
+import { withRouter, Redirect } from 'react-router-dom'
 
 import './Session.css'
 import { initialiseSession, loginUser, registerNewUser, setSessionState } from './SessionActions'
@@ -252,9 +252,7 @@ class Session extends Component {
           </p>
         }
         { sessionState === 'LOGGED_IN' &&
-          <p>
-            Du hast dich erfolgreich angemeldet. Hier geht es zu deinem <Link to="/profile">Podcasterinnen-Profil</Link>.
-          </p>
+          <Redirect to="/profile" />
         }
       </div>
     )
