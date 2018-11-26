@@ -90,7 +90,7 @@ class Session extends Component {
   }
 
   handlePasswordControlValidation = () => {
-    if (this.state.passwordControl === this.state.password) {
+    if (this.state.passwordControl === this.state.password && this.state.password.length >= 8) {
       this.setState({
         passwordControlValid: true,
       })
