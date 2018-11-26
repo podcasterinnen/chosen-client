@@ -30,12 +30,31 @@
   margin: 20px;
 }
 
-.profile__button--add {
+.profile__button--add,
+.profile__button--add:focus {
+  color: var(--theme-primary-color);
+  text-transform: none;
+
+  background-color: transparent;
   margin-top: 5px;
   margin-bottom: 30px;
+  padding: 10px 0;
+}
+
+.profile__button--add:active,
+.profile__button--add:hover {
+  color: var(--theme-primary-color);
+  text-decoration: underline;
+
+  background-color: transparent;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding: 10px 0;
 }
 
 .profile__button--delete {
+  background-color: var(--theme-secondary-color);
+  border: 1px solid var(--theme-secondary-color);
   margin-left: 20px;
 }
 

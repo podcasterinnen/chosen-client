@@ -1,3 +1,11 @@
+.profile-form__multi-input-container {
+  margin: 0 0 40px 0;
+}
+
+.profile-form__multi-input-container:last-of-type {
+  margin: 0;
+}
+
 .profile-form__tag {
   display: inline-block;
 }
@@ -27,6 +35,14 @@
 
   background-color: var(--theme-primary-color);
   opacity: 1;
+}
+
+.profile-form__tags {
+  margin: 20px 0 40px 0;
+}
+
+.profile-form__tags__label {
+  margin: 10px 0;
 }
 
 .profile-form__twitter-at {

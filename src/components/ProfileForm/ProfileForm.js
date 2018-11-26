@@ -6,6 +6,7 @@ import { API_URL_UPLOADS } from '../../config/config'
 import Tooltip from '../Tooltip/Tooltip'
 
 import './ProfileForm.css'
+import iconTrash from'../../assets/icons/baseline_delete_white_18dp.png'
 
 class ProfileForm extends Component {
   
@@ -106,8 +107,8 @@ class ProfileForm extends Component {
               value={profile.bio_long || ''}
             ></textarea>
           </div>
-          <div>
-            <label>
+          <div className="profile-form__tags">
+            <label className="profile-form__tags__label">
               Themen, über die ich spreche:
               <Tooltip content="Dies sind deine Podcastthemen und Themen über die du darüberhinaus sprechen möchtest, zum Beispiel als Gästin in einem anderen Podcast oder bei einem Workshop/Vortrag. Dir stehen viele Tags zur Verfügung, die versuchen sollen, deine Themen so gut wie möglich abzudecken."></Tooltip>
             </label>
@@ -145,22 +146,24 @@ class ProfileForm extends Component {
                   value={language}
                 />
                 <button
-                  className="button button--decent button--icon profile__button--delete"
+                  className="button button--icon profile__button--delete"
                   onClick={handleRemoveLanguagesInput(index)}
                   tabIndex="-1"
-                >-</button>
+                >
+                  <img src={iconTrash}></img>
+                </button>
               </div>
             ))}
             <button 
               className="button profile__button--add"
               onClick={(e) => handleAddLanguagesInput(e)}
               tabIndex="-1"
-            >Sprache hinzufügen</button>
+            >Weitere Sprache hinzufügen</button>
           </div>
           <div>
             <h3 className="profile__subheadline">Podcasts</h3>
             { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
-              <div key={index}>
+              <div className="profile-form__multi-input-container" key={index}>
                 <label>
                   Name des Podcasts
                   <Tooltip content="Trage den Namen deines Podcasts hier ein."></Tooltip>
@@ -202,14 +205,16 @@ class ProfileForm extends Component {
                   className="button button--decent button--icon profile__button--delete"
                   onClick={handleRemovePodcastsInput(index)}
                   tabIndex="-1"
-                >-</button>
-              </div>
+                >
+                  <img src={iconTrash}></img></button>
+                </div>
             ))}
             <button 
               className="button profile__button--add"
               onClick={(e) => handleAddPodcastsInput(e)}
               tabIndex="-1"
-            >Podcast hinzufügen</button>
+            >Weiteren Podcast hinzufügen</button>
+            <Tooltip content="Du hast mehr als einen Podcast? Kein Problem. Füge einen weiteren hinzu und gebe wie zuvor den Namen, die Beschreibung und den Link ein."></Tooltip>
           </div>
           <div>
             <h3 className="profile__subheadline">
@@ -217,7 +222,7 @@ class ProfileForm extends Component {
               <Tooltip content="Du hast bereits Vorträge gehalten oder sasst auf einem Panel das aufgezeichnet wurde? Du kannst diese hier in den Referenzen eintragen."></Tooltip>
             </h3>
             { profile.references && profile.references.length && profile.references.map((reference, index) => (
-              <div key={index}>
+              <div className="profile-form__multi-input-container" key={index}>
                 <label>Titel</label>
                 <input
                   autoComplete="off"
@@ -255,14 +260,15 @@ class ProfileForm extends Component {
                   className="button button--decent button--icon profile__button--delete"
                   onClick={handleRemoveReferencesInput(index)}
                   tabIndex="-1"
-                >-</button>
-              </div>
+                >
+                  <img src={iconTrash}></img></button>
+                </div>
             ))}
             <button 
               className="button profile__button--add"
               onClick={(e) => handleAddReferencesInput(e)}
               tabIndex="-1"
-            >Referenz hinzufügen</button>
+            >Weitere Referenz hinzufügen</button>
           </div>
           <div>
             <h3 className="profile__subheadline">
