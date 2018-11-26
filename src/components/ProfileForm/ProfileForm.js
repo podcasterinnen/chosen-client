@@ -209,7 +209,7 @@ class ProfileForm extends Component {
                   className="profile__input--multi"
                   list="podcasts-data"
                   onChange={handlePodcastsUrlChange(index)}
-                  placeholder="Link zur Webseite des Podcast"
+                  placeholder="z.B. https://podcasterinnen.org"
                   type="url"
                   value={podcast.url}
                 />
@@ -256,13 +256,13 @@ class ProfileForm extends Component {
                   type="text"
                   value={reference.description}
                 />
-                <label>Link</label>
+                <label>Link zu deiner Referenz</label>
                 <input
                   autoComplete="off"
                   className="profile__input--multi"
                   list="references-data"
                   onChange={handleReferencesUrlChange(index)}
-                  placeholder="Link"
+                  placeholder="z.B. https://podcasterinnen.org"
                   type="url"
                   value={reference.url}
                 />
