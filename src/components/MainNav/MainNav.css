@@ -76,14 +76,10 @@
   .mainnav__list__element--right {
     margin-left: auto;
   }
-}
-
-@media screen and (min-width: 600px) {
   .mainnav__list__element--rightest {
     margin-left: 0;
   }
 }
-
 .mainnav__list__element__link {
   color: #FFFFFF;
   text-decoration: none;

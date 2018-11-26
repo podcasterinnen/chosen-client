@@ -102,7 +102,7 @@ class MainNav extends Component {
               </NavLink>
             </li>
           }
-          <li className="mainnav__list__element mainnav__list__element--rightest">
+          <li className={( sessionState === 'LOGGED_IN') ? "mainnav__list__element mainnav__list__element--rightest" : "mainnav__list__element mainnav__list__element--right"}>
             <NavLink
               activeClassName="mainnav__list__element__link--active"
               className="mainnav__list__element__link"
