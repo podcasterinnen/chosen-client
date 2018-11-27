@@ -9,6 +9,19 @@ import './ProfileForm.css'
 import iconTrash from'../../assets/icons/baseline_delete_white_18dp.png'
 
 class ProfileForm extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      showPreview: false,
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    console.log(nextProps)
+    if (nextProps.imgUrlPreview) {
+      this.setState({ showPreview: true }, () => { console.log(this.state)})
+    }
+  }
   
   render() {
     const { 
@@ -32,9 +45,12 @@ class ProfileForm extends Component {
       handleRemoveReferencesInput,
       handleSubmit,
       handleTagsChange,
+      imgUrlPreview,
       profile, 
       staticTags,
     } = this.props
+    const { showPreview } = this.state
+    console.log(showPreview, imgUrlPreview)
 
     return(
       <div>
@@ -55,7 +71,7 @@ class ProfileForm extends Component {
             <Dropzone
               onDrop={(files) => handleAvatarDrop(files)}
             >
-              <div className="profile__avatar profile__avatar--form" style={(profile.avatar !== null && profile.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : {backgroundImage: 'none'}}>
+              <div className="profile__avatar profile__avatar--form" style={(profile.avatar !== null && profile.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : (showPreview ? {backgroundImage: `url(${imgUrlPreview})`} : {backgroundImage: `none`})}>
                 { (profile.avatar === null || profile.avatar === '') &&
                 <p className="profile__avatar__placeholder">Zieh dein Profilbild hier hinein oder klicke hier, um dein Profilbild hochzuladen.</p>
                 }

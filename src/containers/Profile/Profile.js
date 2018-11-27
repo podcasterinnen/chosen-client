@@ -22,6 +22,7 @@ class Profile extends Component {
         city: '',
         country: '',
         forename: '',
+        imgUrlPreview: '',
         languages: [''],
         podcasts: [{
           description: '',
@@ -174,7 +175,7 @@ class Profile extends Component {
 
   handleAvatarDrop = (files) => {
     this.setState({
-      imgUrl: URL.createObjectURL(files[0]),
+      imgUrlPreview: URL.createObjectURL(files[0]),
       profile: {
         ...this.state.profile,
         avatar: files[0]
@@ -348,6 +349,7 @@ class Profile extends Component {
     const { state } = this.props
     const { 
       bioShortCharactersRemaining,
+      imgUrlPreview,
       isEditable, 
       profile, 
       staticTags,
@@ -394,6 +396,7 @@ class Profile extends Component {
             handleRemoveReferencesInput={this.handleRemoveReferencesInput}
             handleSubmit={this.handleSubmit}
             handleTagsChange={this.handleTagsChange}
+            imgUrlPreview={imgUrlPreview}
             profile={profile}
             staticTags={staticTags}
           ></ProfileForm>
