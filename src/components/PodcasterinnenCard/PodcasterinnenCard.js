@@ -33,7 +33,7 @@ class PodcasterinnenCard extends Component {
               </ul>
             </div>
           }
-          { item.tags &&
+          { (Array.isArray(item.tags) && item.tags.length > 0 && item.tags[0] !== '') &&
             <div>
               <p className="card__subtitle">Themen, über die {item.forename} spricht:</p>
               <ul className="card__list">
