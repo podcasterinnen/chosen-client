@@ -62,7 +62,7 @@ class ProfilePage extends Component {
           </ul>
         </div>
         }
-        { (Array.isArray(profile.references) && profile.references.length > 0 && profile.references[0].name !== '') &&
+        { (Array.isArray(profile.references) && profile.references.length > 0 && profile.references[0].title !== '') &&
         <div>
           <h3 className="profile__subheadline">{profile.forename}s Referenzen:</h3>
           <ul className="profile__reference-list">
