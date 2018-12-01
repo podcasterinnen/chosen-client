@@ -39,7 +39,14 @@ class ProfileForm extends Component {
     return(
       <div>
         { (profile && profile.bio_short && profile.podcasts.length) &&
-        <button className="button button--decent profile-form__button-edit" onClick={handleEditToggle}>Bearbeiten beenden</button>
+        <div className="profile-form__button-container">
+          <button className="button button--decent profile-form__button-edit" onClick={handleEditToggle}>Bearbeiten abbrechen</button>
+          <button 
+            className="button" 
+            type="submit" 
+            value="submit"
+          >Änderungen speichern</button>
+        </div>
         }
         { (!profile || !profile.bio_short || !profile.podcasts.length) &&
           <div className="profile-form__banner">
@@ -442,10 +449,10 @@ class ProfileForm extends Component {
             </div>
           </div>
           <button 
-            className="button" 
+            className="button profile-form__button-submit" 
             type="submit" 
             value="submit"
-          >Fertig</button>
+          >Änderungen speichern</button>
         </form>
       </div>
     )
