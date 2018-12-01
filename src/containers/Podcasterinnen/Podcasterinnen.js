@@ -32,13 +32,17 @@ class Podcasterinnen extends Component {
       this.handleSearch()
     })
   }
+  
+  handleSubmit = (e) => {
+    e.preventDefault()
+  }
 
   handleSearch = () => {
     const result = []
     this.props.podcasterinnen.forEach((podcasterin) => {
       const podcasterinString = JSON.stringify(podcasterin).toLowerCase()
       const queryString = this.state.query.toLowerCase()
-      if (podcasterinString.includes(queryString)) {
+      if (podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
         result.push(podcasterin)
       }
     })
@@ -56,6 +60,7 @@ class Podcasterinnen extends Component {
 
   render() {
     const { match, podcasterinnen } = this.props
+    const { query } = this.state
     
     return(
       <Switch>
@@ -67,7 +72,7 @@ class Podcasterinnen extends Component {
             return (
               <section className="Podcasterinnen main__section main__section--wide">
                 <h1>Podcasterinnen</h1>
-                <form className="podcasterinnen__search">
+                <form className="podcasterinnen__search" onSubmit={(e) => this.handleSubmit(e)}>
                   <label className="podcasterinnen__search__label">Suche</label>
                   <input
                     className="podcasterinnen__search__bar"
@@ -75,6 +80,7 @@ class Podcasterinnen extends Component {
                     onChange={this.handleChange}
                     placeholder="Suche nach ..."
                     type="text"
+                    value={query}
                   />
                 </form>
                 { !podcasterinnen &&
@@ -84,7 +90,7 @@ class Podcasterinnen extends Component {
                 }
                 { this.state.results.length > 0 &&
                   <div>
-                    <h2>Suchergebnisse:</h2>
+                    <h2>Suchergebnisse für "{query}":</h2>
                     <p><small>{this.state.results.length} Einträge</small></p>
                     <p><button className="button button--decent" onClick={this.handleSearchReset}>Suche zurücksetzen</button></p>
                     <ul className="podcasterinnen__list">
