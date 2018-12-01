@@ -89,11 +89,13 @@ class Podcasterinnen extends Component {
                     <p><button className="button button--decent" onClick={this.handleSearchReset}>Suche zurücksetzen</button></p>
                     <ul className="podcasterinnen__list">
                       { this.state.results.map((result, i) => {
-                        return (
-                          <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
-                            <PodcasterinnenCard item={result}></PodcasterinnenCard>
-                          </li>
-                        )
+                        if (result.profile_state === 'PUBLISHED') {
+                          return (
+                            <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
+                              <PodcasterinnenCard item={result}></PodcasterinnenCard>
+                            </li>
+                          )
+                        }
                       })}
                     </ul>
                   </div>
@@ -101,11 +103,13 @@ class Podcasterinnen extends Component {
                 { (this.state.results <= 0 && podcasterinnen) &&
                   <ul className="podcasterinnen__list">
                     { podcasterinnen.map((podcasterin, i) => {
-                      return (
-                        <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
-                          <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
-                        </li>
-                      )
+                      if (podcasterin.profile_state === 'PUBLISHED') {
+                        return (
+                          <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
+                            <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
+                          </li>
+                        )
+                      }
                     })}
                   </ul>
                 }
