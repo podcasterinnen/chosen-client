@@ -6,7 +6,7 @@ import { API_URL_UPLOADS } from '../../config/config'
 import Tooltip from '../Tooltip/Tooltip'
 
 import './ProfileForm.css'
-import iconTrash from'../../assets/icons/baseline_delete_white_18dp.png'
+import iconTrash from '../../assets/icons/baseline_delete_white_18dp.png'
 
 class ProfileForm extends Component {
   
