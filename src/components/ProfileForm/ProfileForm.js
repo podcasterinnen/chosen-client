@@ -143,23 +143,25 @@ class ProfileForm extends Component {
               <Tooltip content="Hier kann du die Sprachen eintragen in denen du podcasten und zum Beispiel Vorträge halten kannst/möchtest."></Tooltip>
             </label>
             { profile.languages && profile.languages.length && profile.languages.map((language, index) => (
-              <div key={index}>
-                <input
-                  autoComplete="off"
-                  className="profile__input--multi"
-                  onChange={handleLanguagesChange(index)}
-                  placeholder="Sprache"
-                  type="text"
-                  value={language}
-                />
-                <button
-                  className="button button--icon profile__button--delete"
-                  onClick={handleRemoveLanguagesInput(index)}
-                  tabIndex="-1"
-                >
-                  <img src={iconTrash}></img>
-                </button>
-              </div>
+            <div key={index}>
+              <input
+                autoComplete="off"
+                className="profile__input--multi"
+                onChange={handleLanguagesChange(index)}
+                placeholder="Sprache"
+                type="text"
+                value={language}
+              />
+              { index > 0 &&
+              <button
+                className="button button--icon profile__button--delete"
+                onClick={handleRemoveLanguagesInput(index)}
+                tabIndex="-1"
+              >
+                <img src={iconTrash}></img>
+              </button>
+              }
+            </div>
             ))}
             <button 
               className="button profile__button--add"
@@ -208,13 +210,16 @@ class ProfileForm extends Component {
                   type="url"
                   value={podcast.url}
                 />
+                { index > 0 &&
                 <button
                   className="button button--decent button--icon profile__button--delete"
                   onClick={handleRemovePodcastsInput(index)}
                   tabIndex="-1"
                 >
-                  <img src={iconTrash}></img></button>
-                </div>
+                  <img src={iconTrash}></img>
+                </button>
+                }
+              </div>
             ))}
             <button 
               className="button profile__button--add"
@@ -263,13 +268,16 @@ class ProfileForm extends Component {
                   type="url"
                   value={reference.url}
                 />
+                { index > 0 &&
                 <button
                   className="button button--decent button--icon profile__button--delete"
                   onClick={handleRemoveReferencesInput(index)}
                   tabIndex="-1"
                 >
-                  <img src={iconTrash}></img></button>
-                </div>
+                  <img src={iconTrash}></img>
+                </button>
+                }
+              </div>
             ))}
             <button 
               className="button profile__button--add"
