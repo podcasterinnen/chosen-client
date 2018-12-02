@@ -109,6 +109,10 @@ class Session extends Component {
     return re.test(String(email).toLowerCase())
   }
 
+  handlePasswordReset = () => {
+
+  }
+
   handleSubmit = (e, type) => {
     e.preventDefault()
     switch(type) {
@@ -210,28 +214,33 @@ class Session extends Component {
           </form>
         }
         { sessionState === 'REGISTERED' &&
-          <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
-            <h1>Login:</h1>
-            <div>
-              <label>E-Mail-Adresse</label>
-              <input 
-                onChange={(e) => this.handleChange(e, 'email')} 
-                autoComplete="username" 
-                placeholder="buffy.summers@sunnydale.high.net" 
-                type="email" 
-              />
-            </div>
-            <div>
-              <label>Passwort</label>
-              <input 
-                onChange={(e) => this.handleChange(e, 'password')}
-                autoComplete="current-password"
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                type="password"
-              />
-            </div>
-            <button className="button" type="submit" value="submit">Einloggen</button>
-          </form>
+          <div>
+            <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
+              <h1>Login:</h1>
+              <div>
+                <label>E-Mail-Adresse</label>
+                <input 
+                  onChange={(e) => this.handleChange(e, 'email')} 
+                  autoComplete="username" 
+                  placeholder="buffy.summers@sunnydale.high.net" 
+                  type="email" 
+                />
+              </div>
+              <div>
+                <label>Passwort</label>
+                <input 
+                  onChange={(e) => this.handleChange(e, 'password')}
+                  autoComplete="current-password"
+                  placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                  type="password"
+                />
+              </div>
+              <button className="button" type="submit" value="submit">Einloggen</button>
+            </form>
+            <p className="session__reset-password">
+              <button className="session__reset-password__button" onClick={this.handlePasswordReset}>Passwort zurücksetzen</button>
+            </p>
+          </div>
         }
         { sessionState === 'REGISTRATION_IN_PROGRESS' &&
           <div>

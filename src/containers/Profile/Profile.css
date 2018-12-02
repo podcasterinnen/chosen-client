@@ -35,6 +35,7 @@
   color: var(--theme-primary-color);
   text-transform: none;
 
+  cursor: pointer;
   background-color: transparent;
   margin-top: 5px;
   margin-bottom: 30px;

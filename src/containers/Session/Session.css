@@ -1,0 +1,27 @@
+.session__reset-password {
+  text-align: right;
+
+  cursor: pointer;
+}
+
+.session__reset-password__button {
+  color: var(--theme-primary-color);
+  text-transform: none;
+
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding: 10px 0;
+}
+
+.session__reset-password__button:active,
+.session__reset-password__button:hover {
+  color: var(--theme-primary-color);
+  text-decoration: underline;
+
+  background-color: transparent;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding: 10px 0;
+}
