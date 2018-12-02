@@ -15,7 +15,6 @@ const reducer = (store = defaultStore, action) => {
   case 'INITIALISE_SESSION': 
     let state = UNKNOWN
     if (localStorage.getItem(LOCAL_STORAGE_USER_ID)) {
-      console.log('Initializing session')
       state = LOGGED_IN
     }
     return {...store, sessionState: state}
@@ -25,6 +24,10 @@ const reducer = (store = defaultStore, action) => {
     return {...store, sessionState: REGISTERED}
   case 'LOGIN_REQUEST':
     return {...store, sessionState: LOGIN_IN_PROGRESS}
+  case 'PASSWORD_RESET_ERROR':
+    return {...store, sessionState: INVALID}
+  case 'PASSWORD_RESET_SUCCESS':
+    return {...store, sessionState: REGISTERED}
   case 'REGISTER_SUCCESS':
     return {...store, sessionState: REGISTERED}
   case 'REGISTER_REQUEST':
