@@ -15,6 +15,7 @@ const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
 const PASSWORD_RESET_ERROR = 'PASSWORD_RESET_ERROR'
 const PASSWORD_RESET_SUCCESS = 'PASSWORD_RESET_SUCCESS'
+const PASSWORD_RESET_REQUEST = 'PASSWORD_RESET_REQUEST'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const REGISTER_REQUEST = 'REGISTER_REQUEST'
 const SESSION_ERROR = 'SESSION_ERROR'
@@ -50,6 +51,10 @@ export const passwordResetSuccess = (json) => ({
 export const passwordResetError = (error) => ({
   payload: error,
   type: PASSWORD_RESET_ERROR,
+})
+
+export const passwordResetRequest = () => ({
+  type: PASSWORD_RESET_REQUEST,
 })
 
 export const registerRequest = () => ({
@@ -167,6 +172,7 @@ export const registerNewUser = (emailAddress, forename, password) => {
 
 export const resetPassword = (emailAddress) => {
   return (dispatch) => {
+    dispatch(passwordResetRequest())
     const data = {
       password_reset: {
         email: emailAddress,

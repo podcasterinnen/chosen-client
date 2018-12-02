@@ -3,8 +3,11 @@ import {
   LOCAL_STORAGE_USER_ID,
   LOGGED_IN,
   LOGIN_IN_PROGRESS,
+  FORGOT_PASSWORD_IN_PROGRESS,
+  FORGOT_PASSWORD_SUCCESS,
   REGISTERED,
   REGISTRATION_IN_PROGRESS,
+  REGISTER_SUCCESS,
   UNKNOWN,
 } from '../../utils/types'
 
@@ -27,9 +30,11 @@ const reducer = (store = defaultStore, action) => {
   case 'PASSWORD_RESET_ERROR':
     return {...store, sessionState: INVALID}
   case 'PASSWORD_RESET_SUCCESS':
-    return {...store, sessionState: REGISTERED}
+    return {...store, sessionState: FORGOT_PASSWORD_SUCCESS}
+  case 'PASSWORD_RESET_REQUEST':
+    return {...store, sessionState: FORGOT_PASSWORD_IN_PROGRESS}
   case 'REGISTER_SUCCESS':
-    return {...store, sessionState: REGISTERED}
+    return {...store, sessionState: REGISTER_SUCCESS}
   case 'REGISTER_REQUEST':
     return {...store, sessionState: REGISTRATION_IN_PROGRESS}
   case 'SESSION_ERROR':

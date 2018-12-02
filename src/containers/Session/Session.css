@@ -1,3 +1,21 @@
+.session__message-container {
+  background-color: var(--theme-lighter-color-grey);
+  border: 1px solid var(--theme-primary-color);
+  border-radius: 4px;
+  margin: 0 0 40px 0;
+  padding: 20px 20px;
+}
+
+.session__message-container--success {
+  background-color: var(--theme-lighter-color-grey);
+  border: 1px solid var(--theme-primary-color);
+}
+
+.session__message-container--error {
+  background-color: var(--theme-lighter-color-grey);
+  border: 1px solid var(--theme-secondary-color);
+}
+
 .session__reset-password {
   text-align: right;
 
