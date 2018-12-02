@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withRouter } from 'react-router-dom'
 
 import { API_URL_UPLOADS } from '../../config/config'
 import './ProfilePage.css'
@@ -7,10 +8,18 @@ import './ProfilePage.css'
 class ProfilePage extends Component {
 
   render() {
-    const { profile } = this.props
+    const { match, history, profile } = this.props
 
     return(
       <div className="profile__container">
+        { match.path === '/podcasterinnen/:id' &&
+          <button
+            className="button button--decent"
+            onClick={() => history.goBack()}
+          >
+            Zurück
+          </button>
+        }
         <div className="profile__avatar" style={(profile.avatar !== null && profile.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : {backgroundImage: 'none'}}></div>
         <h1 className="profile__title">{profile.forename} {profile.surname}</h1>
         { profile.bio_short &&
@@ -62,7 +71,7 @@ class ProfilePage extends Component {
           </ul>
         </div>
         }
-        { (Array.isArray(profile.references) && profile.references.length > 0 && profile.references[0].name !== '') &&
+        { (Array.isArray(profile.references) && profile.references.length > 0 && profile.references[0].title !== '') &&
         <div>
           <h3 className="profile__subheadline">{profile.forename}s Referenzen:</h3>
           <ul className="profile__reference-list">
@@ -142,4 +151,4 @@ ProfilePage.defaultProps = {
   profile: undefined, 
 }
 
-export default ProfilePage
+export default withRouter(ProfilePage)
