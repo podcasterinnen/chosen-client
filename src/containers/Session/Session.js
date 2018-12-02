@@ -161,7 +161,8 @@ class Session extends Component {
               <label>Vorname/Nickname:</label>
               <input 
                 onChange={(e) => this.handleChange(e, 'forename')} 
-                autoComplete="given-name" 
+                autoComplete="given-name"
+                autoCorrect="off" 
                 placeholder="Buffy"
                 type="text" value={this.state.forename} 
                 required
@@ -172,7 +173,9 @@ class Session extends Component {
               <label>E-Mail-Adresse</label>
               <input 
                 onChange={(e) => this.handleChange(e, 'email')} 
-                autoComplete="username" 
+                autoCapitalize="off"
+                autoComplete="username"
+                autoCorrect="off" 
                 placeholder="buffy.summers@sunnydaly-high.net" 
                 type="email" 
                 value={this.state.emailAddress}
@@ -221,7 +224,9 @@ class Session extends Component {
                 <label>E-Mail-Adresse</label>
                 <input 
                   onChange={(e) => this.handleChange(e, 'email')} 
+                  autoCapitalize="off"
                   autoComplete="username" 
+                  autoCorrect="off"
                   placeholder="buffy.summers@sunnydale.high.net" 
                   type="email" 
                 />
