@@ -43,9 +43,6 @@ export const confirmEmail = (key) => {
           return dispatch(confirmError(response.statusText))
         }
       })
-      .then((json) => {
-
-      })
       .catch((error) => {
         dispatch(confirmError(error))
       })

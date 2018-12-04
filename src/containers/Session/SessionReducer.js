@@ -3,8 +3,11 @@ import {
   LOCAL_STORAGE_USER_ID,
   LOGGED_IN,
   LOGIN_IN_PROGRESS,
+  FORGOT_PASSWORD_IN_PROGRESS,
+  FORGOT_PASSWORD_SUCCESS,
   REGISTERED,
   REGISTRATION_IN_PROGRESS,
+  REGISTER_SUCCESS,
   UNKNOWN,
 } from '../../utils/types'
 
@@ -15,7 +18,6 @@ const reducer = (store = defaultStore, action) => {
   case 'INITIALISE_SESSION': 
     let state = UNKNOWN
     if (localStorage.getItem(LOCAL_STORAGE_USER_ID)) {
-      console.log('Initializing session')
       state = LOGGED_IN
     }
     return {...store, sessionState: state}
@@ -25,8 +27,14 @@ const reducer = (store = defaultStore, action) => {
     return {...store, sessionState: REGISTERED}
   case 'LOGIN_REQUEST':
     return {...store, sessionState: LOGIN_IN_PROGRESS}
+  case 'FORGOT_PASSWORD_ERROR':
+    return {...store, sessionState: INVALID}
+  case 'FORGOT_PASSWORD_SUCCESS':
+    return {...store, sessionState: FORGOT_PASSWORD_SUCCESS}
+  case 'FORGOT_PASSWORD_REQUEST':
+    return {...store, sessionState: FORGOT_PASSWORD_IN_PROGRESS}
   case 'REGISTER_SUCCESS':
-    return {...store, sessionState: REGISTERED}
+    return {...store, sessionState: REGISTER_SUCCESS}
   case 'REGISTER_REQUEST':
     return {...store, sessionState: REGISTRATION_IN_PROGRESS}
   case 'SESSION_ERROR':

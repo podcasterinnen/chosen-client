@@ -4,7 +4,18 @@ import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 
 import './Session.css'
-import { initialiseSession, loginUser, registerNewUser, setSessionState } from './SessionActions'
+import { initialiseSession, loginUser, registerNewUser, forgotPassword, setSessionState } from './SessionActions'
+import {
+  INVALID,
+  LOGGED_IN,
+  FORGOT_PASSWORD,
+  FORGOT_PASSWORD_SUCCESS,
+  FORGOT_PASSWORD_IN_PROGRESS,
+  REGISTERED,
+  REGISTER_SUCCESS,
+  REGISTRATION_IN_PROGRESS,
+  UNKNOWN,
+} from '../../utils/types'
 
 class Session extends Component {
   constructor(props) {
@@ -109,6 +120,10 @@ class Session extends Component {
     return re.test(String(email).toLowerCase())
   }
 
+  handleForgotPassword = () => {
+    this.props.handleSetSessionState(FORGOT_PASSWORD)
+  }
+
   handleSubmit = (e, type) => {
     e.preventDefault()
     switch(type) {
@@ -118,6 +133,9 @@ class Session extends Component {
     case 'register':
       this.props.handleRegisterNewUser(this.state.emailAddress, this.state.forename, this.state.password)
       break
+    case 'passwordReset':
+      this.props.handlePasswordReset(this.state.emailAddress)
+      break
     default:
       return
     }
@@ -125,11 +143,11 @@ class Session extends Component {
 
   handleToggleClick = () => {
     switch (this.props.sessionState) {
-    case 'UNKNOWN':
-      this.props.handleSetSessionState('REGISTERED')
+    case UNKNOWN:
+      this.props.handleSetSessionState(REGISTERED)
       break
-    case 'REGISTERED':
-      this.props.handleSetSessionState('UNKNOWN')
+    case REGISTERED:
+      this.props.handleSetSessionState(UNKNOWN)
       break
     default:
       return
@@ -142,15 +160,48 @@ class Session extends Component {
 
     return (
       <div className="session main__section">
+        { (sessionState === REGISTRATION_IN_PROGRESS ||
+          sessionState === REGISTER_SUCCESS) &&
+        <div className="session__message-container">
+          <p>
+            Liebe Podcasterin,
+          </p>
+          <p>
+            danke für deine Registrierung. Wir schicken dir eine E-Mail an deine angegebene Adresse. Sobald du die E-Mail erhalten hast, klicke bitte auf den Link. Du wirst automatisch zu podcasterinnen.org weitergeleitet. Nun musst du dich mit deiner E-Mail Adresse und deinem Passwort anmelden. Nach erfolgreicher Anmeldung kannst du auch schon mit dem anlegen deines Profils beginnen.
+          </p>
+          <p>
+            Etwas hat nicht geklappt? Schreibe uns gerne an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>
+          </p>
+        </div>
+        }
+        { (sessionState === FORGOT_PASSWORD_IN_PROGRESS ||
+          sessionState === FORGOT_PASSWORD_SUCCESS) &&
+        <div className="session__message-container">
+          <p>
+            Liebe Podcasterin,
+          </p>
+          <p>
+            wir haben dir gerade eine E-Mail an deine angegebene Adresse verschickt. Sobald du die E-Mail erhalten hast, klicke bitte auf den Link. Du wirst automatisch zu podcasterinnen.org weitergeleitet, damit du ein neues Passwort anlegen kannst. Danach kannst du dich mit deinem neuen Passwort anmelden.
+          </p>
+          <p>
+            Etwas hat nicht geklappt? Schreibe uns gerne an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>.
+          </p>
+        </div>
+        }
+        { sessionState === INVALID &&
+        <div className="session__message-container session__message-container--error">
+          <p>Hier ist leider etwas schief gegangen. Versuche es doch noch einmal – vielleicht hast du dich einfach vertippt? Ansonsten schreibe uns doch eine E-Mail an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a> und schildere dein Problem. Wir helfen dir gerne weiter.</p>
+        </div>
+        }
         <div className="message-container message-container--align-right">
-          { sessionState === 'UNKNOWN' &&
+          { (sessionState === UNKNOWN || sessionState === FORGOT_PASSWORD) &&
             <button className="button button--decent" onClick={this.handleToggleClick}>Zum Login</button>
           }
-          { sessionState === 'REGISTERED' &&
+          { sessionState === REGISTERED &&
             <button className="button button--decent" onClick={this.handleToggleClick}>Registrieren</button>
           }
         </div>
-        { sessionState === 'UNKNOWN' &&
+        { sessionState === UNKNOWN &&
           <form onSubmit={(e) => this.handleSubmit(e, 'register')}>
             <h1>Registrieren:</h1>
             <div>
@@ -212,51 +263,60 @@ class Session extends Component {
             <button className="button" type="submit" value="submit" disabled={!isEnabledForRegistration}>Registrieren</button>
           </form>
         }
-        { sessionState === 'REGISTERED' &&
-          <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
-            <h1>Login:</h1>
-            <div>
-              <label>E-Mail-Adresse</label>
-              <input 
-                onChange={(e) => this.handleChange(e, 'email')} 
-                autoCapitalize="off"
-                autoComplete="username" 
-                autoCorrect="off"
-                placeholder="buffy.summers@sunnydale.high.net" 
-                type="email" 
-              />
-            </div>
-            <div>
-              <label>Passwort</label>
-              <input 
-                onChange={(e) => this.handleChange(e, 'password')}
-                autoComplete="current-password"
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
-                type="password"
-              />
-            </div>
-            <button className="button" type="submit" value="submit">Einloggen</button>
-          </form>
-        }
-        { sessionState === 'REGISTRATION_IN_PROGRESS' &&
+        { (sessionState === REGISTERED ||
+          sessionState === FORGOT_PASSWORD_IN_PROGRESS ||
+          sessionState === REGISTRATION_IN_PROGRESS ||
+          sessionState === FORGOT_PASSWORD_SUCCESS ||
+          sessionState === REGISTER_SUCCESS ||
+          sessionState === INVALID) &&
           <div>
-            <p>
-              Liebe Podcasterin,
-            </p>
-            <p>
-              danke für deine Registrierung. Wir schicken dir eine E-Mail an deine angegebene Adresse. Sobald du die E-Mail erhalten hast, klicke bitte auf den Link. Du wirst automatisch zu podcasterinnen.org weitergeleitet. Nun musst du dich mit deiner E-Mail Adresse und deinem Passwort anmelden. Nach erfolgreicher Anmeldung kannst du auch schon mit dem anlegen deines Profils beginnen.
-            </p>
-            <p>
-              Etwas hat nicht geklappt? Schreibe uns gerne an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>
+            <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
+              <h1>Login:</h1>
+              <div>
+                <label>E-Mail-Adresse</label>
+                <input 
+                  onChange={(e) => this.handleChange(e, 'email')} 
+                  autoCapitalize="off"
+                  autoComplete="username" 
+                  autoCorrect="off"
+                  placeholder="buffy.summers@sunnydale.high.net" 
+                  type="email" 
+                />
+              </div>
+              <div>
+                <label>Passwort</label>
+                <input 
+                  onChange={(e) => this.handleChange(e, 'password')}
+                  autoComplete="current-password"
+                  placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;"
+                  type="password"
+                />
+              </div>
+              <button className="button" type="submit" value="submit">Einloggen</button>
+            </form>
+            <p className="session__reset-password">
+              <button className="session__reset-password__button" onClick={this.handleForgotPassword}>Passwort zurücksetzen</button>
             </p>
           </div>
         }
-        { sessionState === 'INVALID' &&
-          <p>
-            Hier ist leider etwas schief gegangen.
-          </p>
+        { sessionState === FORGOT_PASSWORD &&
+          <form onSubmit={(e) => this.handleSubmit(e, 'passwordReset')}>
+            <h1>Passwort zurücksetzen:</h1>
+              <div>
+                <label>E-Mail-Adresse</label>
+                <input 
+                  onChange={(e) => this.handleChange(e, 'email')} 
+                  autoCapitalize="off"
+                  autoComplete="username" 
+                  autoCorrect="off"
+                  placeholder="buffy.summers@sunnydale.high.net" 
+                  type="email" 
+                />
+              </div>
+              <button className="button" type="submit" value="submit">Passwort zurücksetzen</button>
+          </form>
         }
-        { sessionState === 'LOGGED_IN' &&
+        { sessionState === LOGGED_IN &&
           <Redirect to="/profile" />
         }
       </div>
@@ -267,6 +327,7 @@ class Session extends Component {
 Session.propTypes = {
   handleInitSession: PropTypes.func,
   handleLoginNewUser: PropTypes.func,
+  handlePasswordReset: PropTypes.func,
   handleRegisterNewUser: PropTypes.func,
   handleSetSessionState: PropTypes.func,
   sessionState: PropTypes.string,
@@ -275,9 +336,10 @@ Session.propTypes = {
 Session.defaultProps = {
   handleInitSession: undefined,
   handleLoginNewUser: undefined,
+  handlePasswordReset: undefined,
   handleRegisterNewUser: undefined,
   handleSetSessionState: undefined,
-  sessionState: 'UNKNOWN',
+  sessionState: UNKNOWN,
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -286,6 +348,9 @@ const mapDispatchToProps = (dispatch) => ({
   },
   handleLoginNewUser: (emailAdress, password) => {
     dispatch(loginUser(emailAdress, password))
+  },
+  handlePasswordReset: (emailAdress) => {
+    dispatch(forgotPassword(emailAdress))
   },
   handleRegisterNewUser: (emailAdress, forename, password) => {
     dispatch(registerNewUser(emailAdress, forename, password))
