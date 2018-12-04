@@ -8,13 +8,13 @@ class Faq extends Component {
     return (
       <section className="faq main__section">
         <h1>FAQs</h1>
-        <p>Du hast Fragen zu podcasterinnen.org? Dann bist du hier genau richtig. Hier erklären wir die wichtigsten Punkte und Wissenswertes zur Nutzung der Seite. Falls wir etwas vergessen haben oder du weitere Fragen hast, nimm gerne mit uns <a href="mailto:contact@podcasterinnen.org">Kontakt</a> auf. </p>
+        <p>Du hast Fragen zu podcasterinnen.org? Dann bist du hier genau richtig. Hier erklären wir die wichtigsten Punkte und Wissenswertes zur Nutzung der Seite. Falls wir etwas vergessen haben oder du weitere Fragen hast, nimm gerne mit uns <a href="mailto:contact@podcasterinnen.org">Kontakt</a> auf.</p>
         <h2> Wer kann sich bei podcasterinnen.org ein Profil anlegen?</h2>
         <p>Jede nicht-binäre Podcastende/Podcasterin die einen eigenen Podcast produziert und/oder in einem festen Team podcastet kann sich bei uns ein Profil anlegen.</p>
         <h2>Wie melde ich mich bei podcasterinnen.org an?</h2>
         <p>Zuerst musst du dich mit deiner E-Mail-Adresse und einem <a href="http://www.sicherespasswort.com/" rel="noopener noreferrer" target="_blank">(möglichst sicheren)</a> Passwort registrieren. Du bekommst eine Bestätigungsmail die dich auf die Webseite <a href="https://podcasterinnen.org">podcasterinnen.org</a> zurück führt. Nun kannst du dich erneut anmelden und mit dem anlegen deines Profil beginnen.</p>
         <h2>Wie sieht ein gut ausgefülltes Profil aus?</h2>
-        <p>Welche Informationen du in deinem Profil angeben möchtest, ist letztlich ganz dir überlassen. Wir empfehlen dir aber die wichtigsten Schlagworte für deinen Podcast zu verwenden damit die Besucher:innen von podcasterinnen.org dich bzw. deine Podcasts schnell finden können.<br/>Du kannst dein Profil jederzeit weiter bearbeiten und verändern. Eine ausführliche Anleitung zum anlegen und verwalten deines Profils findest du weiter unten „In wenigen Schritten zu deinem Profil“</a>).</p>
+        <p>Welche Informationen du in deinem Profil angeben möchtest, ist letztlich ganz dir überlassen. Wir empfehlen dir aber die wichtigsten Schlagworte für deinen Podcast zu verwenden damit die Besucher:innen von podcasterinnen.org dich bzw. deine Podcasts schnell finden können.<br/>Du kannst dein Profil jederzeit weiter bearbeiten und verändern. Eine ausführliche Anleitung zum anlegen und verwalten deines Profils findest du weiter unten „In wenigen Schritten zu deinem Profil“).</p>
         <h2>Wann wird mein Profil freigeschaltet?</h2>
         <p>Es kann ein paar Tage dauern, bis wir dein Profil freigeschaltet haben, da wir ein sehr kleines Team sind.</p>
         <h2>Warum ist es überhaupt nötig mein Profil freischalten zu lassen?</h2>
