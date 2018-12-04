@@ -25,7 +25,9 @@ class App extends Component {
     const { podcasterinnen } = this.props
 
     return (
-      <div>
+      <div className="app">
+        <div className="app__ball app__ball--top"></div>
+        <div className="app__ball app__ball--bottom"></div>
         <section className="app-cta main__section">
           <h1 className="title app__headline">podcasterinnen.org</h1>
           <p className="subtitle app__subtitle">Nicht-binäre Podcastende und Technik. Podcasterinnen und Inhalte. Podcasterinnen und nicht-binäre Podcastende hinter dem Mikro und auf der Bühne.</p>
