@@ -13,9 +13,9 @@ const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
-const PASSWORD_RESET_ERROR = 'PASSWORD_RESET_ERROR'
-const PASSWORD_RESET_SUCCESS = 'PASSWORD_RESET_SUCCESS'
-const PASSWORD_RESET_REQUEST = 'PASSWORD_RESET_REQUEST'
+const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR'
+const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS'
+const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const REGISTER_REQUEST = 'REGISTER_REQUEST'
 const SESSION_ERROR = 'SESSION_ERROR'
@@ -23,6 +23,20 @@ const SET_SESSION_STATE = 'SET_SESSION_STATE'
 
 export const initialiseSession = () => ({
   type: INITIALISE_SESSION,
+})
+
+export const forgotPasswordSuccess = (json) => ({
+  payload: json,
+  type: FORGOT_PASSWORD_SUCCESS,
+})
+
+export const forgotPasswordError = (error) => ({
+  payload: error,
+  type: FORGOT_PASSWORD_ERROR,
+})
+
+export const forgotPasswordRequest = () => ({
+  type: FORGOT_PASSWORD_REQUEST,
 })
 
 export const loginRequest = () => ({
@@ -41,20 +55,6 @@ export const logoutRequest = () => ({
 export const logoutSuccess = (json) => ({
   payload: json,
   type: LOGOUT_SUCCESS,
-})
-
-export const passwordResetSuccess = (json) => ({
-  payload: json,
-  type: PASSWORD_RESET_SUCCESS,
-})
-
-export const passwordResetError = (error) => ({
-  payload: error,
-  type: PASSWORD_RESET_ERROR,
-})
-
-export const passwordResetRequest = () => ({
-  type: PASSWORD_RESET_REQUEST,
 })
 
 export const registerRequest = () => ({
@@ -170,9 +170,9 @@ export const registerNewUser = (emailAddress, forename, password) => {
   }
 }
 
-export const resetPassword = (emailAddress) => {
+export const forgotPassword = (emailAddress) => {
   return (dispatch) => {
-    dispatch(passwordResetRequest())
+    dispatch(forgotPasswordRequest())
     const data = {
       password_reset: {
         email: emailAddress,
@@ -190,9 +190,9 @@ export const resetPassword = (emailAddress) => {
       .then(response => {
         return response.json()
       })
-      .then(json => dispatch(passwordResetSuccess(json)))
+      .then(json => dispatch(forgotPasswordSuccess(json)))
       .catch((error) => {
-        dispatch(passwordResetError(error))
+        dispatch(forgotPasswordError(error))
       })
   }
 }
