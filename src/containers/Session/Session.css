@@ -12,7 +12,7 @@
 }
 
 .session__message-container--error {
-  background-color: var(--theme-lighter-color-grey);
+  background-color: var(--theme-secondary-color-light);
   border: 1px solid var(--theme-secondary-color);
 }
 

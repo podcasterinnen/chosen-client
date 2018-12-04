@@ -184,13 +184,13 @@ class Session extends Component {
             wir haben dir gerade eine E-Mail an deine angegebene Adresse verschickt. Sobald du die E-Mail erhalten hast, klicke bitte auf den Link. Du wirst automatisch zu podcasterinnen.org weitergeleitet, damit du ein neues Passwort anlegen kannst. Danach kannst du dich mit deinem neuen Passwort anmelden.
           </p>
           <p>
-            Etwas hat nicht geklappt? Schreibe uns gerne an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>
+            Etwas hat nicht geklappt? Schreibe uns gerne an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>.
           </p>
         </div>
         }
         { sessionState === INVALID &&
         <div className="session__message-container session__message-container--error">
-          <p>Hier ist leider etwas schief gegangen.</p>
+          <p>Hier ist leider etwas schief gegangen. Versuche es doch noch einmal – vielleicht hast du dich einfach vertippt? Ansonsten schreibe uns doch eine E-Mail an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a> und schildere dein Problem. Wir helfen dir gerne weiter.</p>
         </div>
         }
         <div className="message-container message-container--align-right">
@@ -267,7 +267,8 @@ class Session extends Component {
           sessionState === FORGOT_PASSWORD_IN_PROGRESS ||
           sessionState === REGISTRATION_IN_PROGRESS ||
           sessionState === FORGOT_PASSWORD_SUCCESS ||
-          sessionState === REGISTER_SUCCESS) &&
+          sessionState === REGISTER_SUCCESS ||
+          sessionState === INVALID) &&
           <div>
             <form onSubmit={(e) => this.handleSubmit(e, 'login')}>
               <h1>Login:</h1>

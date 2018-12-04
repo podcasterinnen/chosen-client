@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { BrowserRouter as Router, Redirect, Route, Switch } from 'react-router-dom'
+import IdleTimer from 'react-idle-timer'
 
 import About from '../../containers/About/About'
 import App from '../../containers/App/App'
@@ -19,9 +20,13 @@ import FooterNav from '../FooterNav/FooterNav'
 import MainNav from '../MainNav/MainNav'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
 
+
+import { logoutUser } from '../../containers/Session/SessionActions'
+
 import {
   LOGGED_IN,
 } from '../../utils/types'
+import { SESSION_TIMEOUT } from '../../config/config';
 
 const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
   return (
@@ -39,6 +44,25 @@ const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
 }
 
 class PodcasterinnenRouter extends Component {
+  constructor(props) {
+    super(props)
+    this.idleTimer = null
+    this.onIdle = this.onIdle.bind(this)
+  }
+
+  componentDidMount = () => {
+    window.addEventListener('beforeunload', this.onIdle)
+  }
+
+  componentWillUnmount = () => {
+    window.removeEventListener('beforeunload', this.onIdle)
+  }
+
+  onIdle = () => {
+    if (this.props.sessionState === LOGGED_IN) {
+      this.props.handleLogoutUser()
+    }
+  }
   
   render() {
     const { sessionState } = this.props
@@ -46,6 +70,12 @@ class PodcasterinnenRouter extends Component {
     return (
       <Router>
         <ScrollToTop>
+          <IdleTimer
+            ref={ref => { this.idleTimer = ref }}
+            onIdle={this.onIdle}
+            debounce={250}
+            timeout={SESSION_TIMEOUT}
+          />
           <main className="main" role="main">
             <MainNav></MainNav>
             <Switch>
@@ -70,12 +100,20 @@ class PodcasterinnenRouter extends Component {
 }
 
 PodcasterinnenRouter.propTypes = {
+  handleLogoutUser: PropTypes.func,
   sessionState: PropTypes.string,
 }
 
 PodcasterinnenRouter.defaultProps = {
+  handleLogoutUser: undefined,
   sessionState: undefined,
 }
+
+const mapDispatchToProps = (dispatch) => ({
+  handleLogoutUser: () => {
+    dispatch(logoutUser())
+  },
+})
 
 const mapStateToProps = (state) => ({
   sessionState: state.sessionReducer.sessionState,
@@ -83,5 +121,5 @@ const mapStateToProps = (state) => ({
 
 export default connect(
   mapStateToProps,
-  null,
+  mapDispatchToProps,
 )(PodcasterinnenRouter)

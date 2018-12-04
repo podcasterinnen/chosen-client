@@ -22,3 +22,5 @@ export const API_URL_REGISTER = `${backendHost}/users/`
 export const API_URL_RESET_PASSWORD = `${backendHost}/password_resets/update`
 export const API_URL_SESSIONS = `${backendHost}/sessions/`
 export const API_URL_UPLOADS = `${backendHost}`
+
+export const SESSION_TIMEOUT = 1000 * 60 * 15
