@@ -16,6 +16,7 @@ import Profile from '../../containers/Profile/Profile'
 import ResetPassword from '../../containers/ResetPassword/ResetPassword'
 import Session from '../../containers/Session/Session'
 
+import CookieConsent from '../CookieConsent/CookieConsent'
 import FooterNav from '../FooterNav/FooterNav'
 import MainNav from '../MainNav/MainNav'
 import ScrollToTop from '../ScrollToTop/ScrollToTop'
@@ -92,6 +93,7 @@ class PodcasterinnenRouter extends Component {
               <Route component={NotFound} />
             </Switch>
             <FooterNav></FooterNav>
+            <CookieConsent></CookieConsent>
           </main>
         </ScrollToTop>
       </Router>
