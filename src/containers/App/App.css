@@ -1,5 +1,5 @@
 .app {
-  text-align: center;
+  text-align: left;
 }
 
 .app__button {
@@ -9,4 +9,16 @@
   .app__button {
     margin: 40px 0;
   }
+}
+
+.app__cta {
+  text-align: center;
+}
+
+.app__headline {
+  text-align: center;
+}
+
+.app__subtitle {
+  text-align: center;
 }

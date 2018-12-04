@@ -150,5 +150,5 @@ const mapStateToProps = (state) => ({
 
 export default withRouter(connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(Podcasterinnen))

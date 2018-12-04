@@ -27,11 +27,11 @@ const reducer = (store = defaultStore, action) => {
     return {...store, sessionState: REGISTERED}
   case 'LOGIN_REQUEST':
     return {...store, sessionState: LOGIN_IN_PROGRESS}
-  case 'PASSWORD_RESET_ERROR':
+  case 'FORGOT_PASSWORD_ERROR':
     return {...store, sessionState: INVALID}
-  case 'PASSWORD_RESET_SUCCESS':
+  case 'FORGOT_PASSWORD_SUCCESS':
     return {...store, sessionState: FORGOT_PASSWORD_SUCCESS}
-  case 'PASSWORD_RESET_REQUEST':
+  case 'FORGOT_PASSWORD_REQUEST':
     return {...store, sessionState: FORGOT_PASSWORD_IN_PROGRESS}
   case 'REGISTER_SUCCESS':
     return {...store, sessionState: REGISTER_SUCCESS}
