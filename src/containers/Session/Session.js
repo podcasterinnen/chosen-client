@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Redirect } from 'react-router-dom'
 
 import './Session.css'
-import { initialiseSession, loginUser, registerNewUser, resetPassword, setSessionState } from './SessionActions'
+import { initialiseSession, loginUser, registerNewUser, forgotPassword, setSessionState } from './SessionActions'
 import {
   INVALID,
   LOGGED_IN,

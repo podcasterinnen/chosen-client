@@ -12,6 +12,7 @@ import NotFound from '../../containers/NotFound/NotFound'
 import Podcasterinnen from '../../containers/Podcasterinnen/Podcasterinnen'
 import Privacy from '../../containers/Privacy/Privacy'
 import Profile from '../../containers/Profile/Profile'
+import ResetPassword from '../../containers/ResetPassword/ResetPassword'
 import Session from '../../containers/Session/Session'
 
 import FooterNav from '../FooterNav/FooterNav'
@@ -53,6 +54,7 @@ class PodcasterinnenRouter extends Component {
               <Route path="/confirm" component={Confirm} />
               <Route path="/faq" component={Faq} />
               <Route path="/imprint" component={Imprint} />
+              <Route path="/password_resets" component={ResetPassword} />
               <Route path="/podcasterinnen" component={Podcasterinnen} />
               <Route path="/privacy" component={Privacy} />
               <PrivateRoute sessionState={sessionState} path="/profile" component={Profile} />
