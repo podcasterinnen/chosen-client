@@ -1,5 +1,5 @@
 import {
-  API_URL_PASSWORD_RESET,
+  API_URL_FORGOT_PASSWORD,
   API_URL_REGISTER,
   API_URL_SESSIONS,
 } from '../../config/config'
@@ -178,7 +178,7 @@ export const forgotPassword = (emailAddress) => {
         email: emailAddress,
       },
     }
-    return fetch(API_URL_PASSWORD_RESET, {
+    return fetch(API_URL_FORGOT_PASSWORD, {
       body: JSON.stringify(data),
       'cache-control': 'no-cache',
       headers: {

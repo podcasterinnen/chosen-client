@@ -349,7 +349,7 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(loginUser(emailAdress, password))
   },
   handlePasswordReset: (emailAdress) => {
-    dispatch(resetPassword(emailAdress))
+    dispatch(forgotPassword(emailAdress))
   },
   handleRegisterNewUser: (emailAdress, forename, password) => {
     dispatch(registerNewUser(emailAdress, forename, password))
