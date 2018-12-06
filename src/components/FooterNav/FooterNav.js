@@ -8,7 +8,7 @@ import './FooterNav.css'
 class FooterNav extends Component {
   render() {
     return(
-      <nav className="footernav">
+      <nav role="navigation" className="footernav">
         <ol className="footernav__list">
 
           <li className="footernav__list__element">

@@ -72,7 +72,7 @@ class Podcasterinnen extends Component {
             return (
               <section className="Podcasterinnen main__section main__section--wide">
                 <h1>Podcasterinnen</h1>
-                <form className="podcasterinnen__search" onSubmit={(e) => this.handleSubmit(e)}>
+                <form role="search" className="podcasterinnen__search" onSubmit={(e) => this.handleSubmit(e)}>
                   <label className="podcasterinnen__search__label">Suche</label>
                   <input
                     className="podcasterinnen__search__bar"
