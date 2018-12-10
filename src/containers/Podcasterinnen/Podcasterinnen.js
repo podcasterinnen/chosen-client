@@ -174,7 +174,7 @@ class Podcasterinnen extends Component {
 
 Podcasterinnen.propTypes = {
   handleInitPodcasterinnen: PropTypes.func,
-  podcasterinnen: PropTypes.resultay,
+  podcasterinnen: PropTypes.array,
 }
 
 Podcasterinnen.defaultProps = {
