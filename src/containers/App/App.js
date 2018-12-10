@@ -23,6 +23,7 @@ class App extends Component {
 
   render() {
     const { podcasterinnen } = this.props
+    let count = 0
 
     return (
       <div className="app">
@@ -40,7 +41,9 @@ class App extends Component {
             <h2>Neueste Podcasterinnen-Profile:</h2>
             <ul className="podcasterinnen__list">
               { podcasterinnen.sort(this.sortPodcasterinnen).map((podcasterin, i) => {
-                if (podcasterin.profile_state === 'PUBLISHED' && i < 4) {
+                // Show only 4 newest profiles
+                if (count < 4 && podcasterin.profile_state === 'PUBLISHED') {
+                  count += 1
                   return (
                     <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
                       <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
