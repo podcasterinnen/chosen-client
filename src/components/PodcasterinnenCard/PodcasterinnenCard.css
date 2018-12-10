@@ -39,6 +39,8 @@
 .card__list {
   margin: 0 -5px;
   padding: 0;
+  overflow: hidden;
+  max-height: 82px;
 }
 
 .card__list__item {
