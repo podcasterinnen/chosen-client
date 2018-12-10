@@ -5,6 +5,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 
 import './Session.css'
 import { initialiseSession, loginUser, registerNewUser, forgotPassword, setSessionState } from './SessionActions'
+import Tooltip from '../../components/Tooltip/Tooltip'
 import {
   INVALID,
   LOGGED_IN,
@@ -206,7 +207,10 @@ class Session extends Component {
           <form onSubmit={(e) => this.handleSubmit(e, 'register')}>
             <h1>Registrieren:</h1>
             <div>
-              <label>Vorname/Nickname:</label>
+              <label>
+                Vorname/Nickname:
+                <Tooltip content="Hier trägst du deinen Vornamen ein. Wenn du deinen Klarnamen nicht verwenden möchtest, kannst auch ein Nickname eintragen. Er sollte von dir nur so gewählt werden, dass du auch gefunden werden kannst."></Tooltip>
+              </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'forename')} 
                 autoComplete="given-name"
