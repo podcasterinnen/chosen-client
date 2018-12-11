@@ -50,14 +50,6 @@ class PodcasterinnenRouter extends Component {
     this.onIdle = this.onIdle.bind(this)
   }
 
-  componentDidMount = () => {
-    window.addEventListener('beforeunload', this.onIdle)
-  }
-
-  componentWillUnmount = () => {
-    window.removeEventListener('beforeunload', this.onIdle)
-  }
-
   onIdle = () => {
     if (this.props.sessionState === LOGGED_IN) {
       this.props.handleLogoutUser()

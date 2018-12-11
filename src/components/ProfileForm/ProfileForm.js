@@ -50,20 +50,10 @@ class ProfileForm extends Component {
       staticTags,
     } = this.props
     const { showPreview } = this.state
-    console.log(showPreview, imgUrlPreview)
+    console.log('Show Preview', showPreview, 'ImgUrlPrevew', imgUrlPreview)
 
     return(
       <div>
-        { (profile && profile.bio_short && profile.podcasts.length) &&
-        <div className="profile-form__button-container">
-          <button className="button button--decent profile-form__button-edit" onClick={handleEditToggle}>Bearbeiten abbrechen</button>
-          <button 
-            className="button" 
-            type="submit" 
-            value="submit"
-          >Änderungen speichern</button>
-        </div>
-        }
         { (!profile || !profile.bio_short || !profile.podcasts.length) &&
           <div className="profile-form__banner">
             <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Podcasterinnen-Profil zu vervollständigen.</p>
@@ -71,6 +61,16 @@ class ProfileForm extends Component {
         }
         <h2>Bearbeite dein Profil:</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
+          { (profile && profile.bio_short && profile.podcasts.length) &&
+          <div className="profile-form__button-container">
+            <button className="button button--decent profile-form__button-edit" onClick={handleEditToggle}>Abbrechen</button>
+            <button 
+              className="button" 
+              type="submit" 
+              value="submit"
+            >Änderungen speichern</button>
+          </div>
+          }
           <div className="profile__avatar-dropzone">
             <label>
               Profilbild
@@ -78,7 +78,7 @@ class ProfileForm extends Component {
             <Dropzone
               onDrop={(files) => handleAvatarDrop(files)}
             >
-              <div className="profile__avatar profile__avatar--form" style={(profile.avatar !== null && profile.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : (showPreview ? {backgroundImage: `url(${imgUrlPreview})`} : {backgroundImage: `none`})}>
+              <div className="profile__avatar profile__avatar--form" style={(profile.avatar !== null && profile.avatar !== '' && !showPreview) ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : (showPreview ? {backgroundImage: `url(${imgUrlPreview})`} : {backgroundImage: `none`})}>
                 { (profile.avatar === null || profile.avatar === '') &&
                 <p className="profile__avatar__placeholder">Zieh dein Profilbild hier hinein oder klicke hier, um dein Profilbild hochzuladen.</p>
                 }

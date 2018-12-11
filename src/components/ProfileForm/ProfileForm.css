@@ -1,5 +1,4 @@
-.profile-form__banner {
-}
+/* .profile-form__banner {} */
 
 .profile-form__banner__text {
   background-color: var(--theme-lighter-color-grey);
@@ -9,7 +8,8 @@
 }
 
 .profile-form__button-container {
-  text-align: right;
+  float: right;
+  margin-top: -60px;
 }
 
 .profile-form__button-edit {
