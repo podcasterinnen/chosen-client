@@ -1,1 +1,27 @@
-/* .faq {} */
+.faq__accordeon__content {
+  border-bottom: 1px solid var(--theme-primary-color);
+  display: none;
+  padding-bottom: 20px;
+}
+
+.faq__accordeon--active .faq__accordeon__content {
+  display: block;
+}
+
+.faq__accordeon__headline {
+  border-bottom: 1px solid var(--theme-primary-color);
+  cursor: pointer;
+  padding: 10px 0;
+}
+
+.faq__accordeon__icon {
+  float: right;
+  margin-top: 8px;
+  width: 30px;
+  height: 30px;
+}
+
+.faq__accordeon--active .faq__accordeon__icon {
+  transform: rotateZ(180deg);
+  transition: transform 0.25s ease-in-out;
+}
