@@ -52,7 +52,7 @@ class App extends Component {
                 }
               })}
             </ul>
-            <p className="app__cta"><Link className="button button--cta app__button" to="/podcasterinnen">Weitere Podcasterinnen</Link></p>
+            <p className="app__cta"><Link className="button button--cta app__button" to="/podcasterinnen">Weitere Profile</Link></p>
           </div>
           }
         </section>
