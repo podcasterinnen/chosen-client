@@ -8,9 +8,17 @@
   padding: 20px 20px;
 }
 
+.profile-form__button-container {
+  text-align: right;
+}
+
 .profile-form__button-edit {
+  margin-right: 10px;
+}
+
+.profile-form__button-submit {
   display: block;
-  margin: 0 0 0 auto;
+  margin: 60px 0 0 auto;
 }
 
 .profile-form__multi-input-container {

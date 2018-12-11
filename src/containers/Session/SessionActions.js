@@ -1,4 +1,5 @@
 import {
+  API_URL_FORGOT_PASSWORD,
   API_URL_REGISTER,
   API_URL_SESSIONS,
 } from '../../config/config'
@@ -12,6 +13,9 @@ const LOGIN_REQUEST = 'LOGIN_REQUEST'
 const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 const LOGOUT_REQUEST = 'LOGOUT_REQUEST'
 const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS'
+const FORGOT_PASSWORD_ERROR = 'FORGOT_PASSWORD_ERROR'
+const FORGOT_PASSWORD_SUCCESS = 'FORGOT_PASSWORD_SUCCESS'
+const FORGOT_PASSWORD_REQUEST = 'FORGOT_PASSWORD_REQUEST'
 const REGISTER_SUCCESS = 'REGISTER_SUCCESS'
 const REGISTER_REQUEST = 'REGISTER_REQUEST'
 const SESSION_ERROR = 'SESSION_ERROR'
@@ -19,6 +23,20 @@ const SET_SESSION_STATE = 'SET_SESSION_STATE'
 
 export const initialiseSession = () => ({
   type: INITIALISE_SESSION,
+})
+
+export const forgotPasswordSuccess = (json) => ({
+  payload: json,
+  type: FORGOT_PASSWORD_SUCCESS,
+})
+
+export const forgotPasswordError = (error) => ({
+  payload: error,
+  type: FORGOT_PASSWORD_ERROR,
+})
+
+export const forgotPasswordRequest = () => ({
+  type: FORGOT_PASSWORD_REQUEST,
 })
 
 export const loginRequest = () => ({
@@ -124,16 +142,16 @@ export const logoutUser = () => {
 export const registerNewUser = (emailAddress, forename, password) => {
   return (dispatch) => {
     dispatch(registerRequest())
-    const data =  {
+    const data = {
       user: {
         email: emailAddress,
         password: password,
         podcasters: {
           forename: forename,
         },
-      }
+      },
     }
-    return fetch(`${API_URL_REGISTER}`, {
+    return fetch(API_URL_REGISTER, {
       body: JSON.stringify(data),
       'cache-control': 'no-cache',
       headers: {
@@ -148,6 +166,33 @@ export const registerNewUser = (emailAddress, forename, password) => {
       .then(json => dispatch(registerSuccess(json)))
       .catch((error) => {
         dispatch(sessionError(error))
+      })
+  }
+}
+
+export const forgotPassword = (emailAddress) => {
+  return (dispatch) => {
+    dispatch(forgotPasswordRequest())
+    const data = {
+      password_reset: {
+        email: emailAddress,
+      },
+    }
+    return fetch(API_URL_FORGOT_PASSWORD, {
+      body: JSON.stringify(data),
+      'cache-control': 'no-cache',
+      headers: {
+        'content-type': 'application/json',
+      },
+      method: 'POST',
+      mode: 'cors',
+    })
+      .then(response => {
+        return response.json()
+      })
+      .then(json => dispatch(forgotPasswordSuccess(json)))
+      .catch((error) => {
+        dispatch(forgotPasswordError(error))
       })
   }
 }

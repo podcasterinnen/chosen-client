@@ -26,21 +26,25 @@ class PodcasterinnenCard extends Component {
               <p className="card__subtitle">{item.forename}s Podcasts:</p>
               <ul className="card__list">
                 { item.podcasts.map((podcast) => {
-                  return (
-                    <li className="card__list__item" key={podcast.name}>{podcast.name}</li>
-                  )
+                  if (podcast.name !== '') {
+                    return (
+                      <li className="card__list__item" key={podcast.name}>{podcast.name}</li>
+                    )
+                  }
                 }) }
               </ul>
             </div>
           }
-          { item.tags &&
+          { (Array.isArray(item.tags) && item.tags.length > 0 && item.tags[0] !== '') &&
             <div>
               <p className="card__subtitle">Themen, über die {item.forename} spricht:</p>
               <ul className="card__list">
                 { item.tags.map((tag) => {
-                  return (
-                    <li className="card__list__item" key={tag}>{tag}</li>
-                  )
+                  if (tag !== '') {
+                    return (
+                      <li className="card__list__item" key={tag}>{tag}</li>
+                    )
+                  }
                 }) }
               </ul>
             </div>

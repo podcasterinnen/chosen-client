@@ -5,8 +5,8 @@
   position: fixed;
   height: var(--main-nav-height);
   width: 100%;
-  /* Render above checkboxes */
-  z-index: 1;
+  /* Render above checkboxes and avatar image */
+  z-index: 2;
 }
 
 .mainnav__button {
@@ -60,6 +60,7 @@
 .mainnav__list__element {
   border-bottom: 1px solid rgba(255,255,255,0.3);
 }
+
 @media screen and (min-width: 600px) {
   .mainnav__list__element {
     background-color: transparent;

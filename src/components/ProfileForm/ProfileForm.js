@@ -6,7 +6,7 @@ import { API_URL_UPLOADS } from '../../config/config'
 import Tooltip from '../Tooltip/Tooltip'
 
 import './ProfileForm.css'
-import iconTrash from'../../assets/icons/baseline_delete_white_18dp.png'
+import iconTrash from '../../assets/icons/baseline_delete_white_18dp.png'
 
 class ProfileForm extends Component {
   constructor(props) {
@@ -55,7 +55,14 @@ class ProfileForm extends Component {
     return(
       <div>
         { (profile && profile.bio_short && profile.podcasts.length) &&
-        <button className="button button--decent profile-form__button-edit" onClick={handleEditToggle}>Bearbeiten beenden</button>
+        <div className="profile-form__button-container">
+          <button className="button button--decent profile-form__button-edit" onClick={handleEditToggle}>Bearbeiten abbrechen</button>
+          <button 
+            className="button" 
+            type="submit" 
+            value="submit"
+          >Änderungen speichern</button>
+        </div>
         }
         { (!profile || !profile.bio_short || !profile.podcasts.length) &&
           <div className="profile-form__banner">
@@ -159,23 +166,25 @@ class ProfileForm extends Component {
               <Tooltip content="Hier kann du die Sprachen eintragen in denen du podcasten und zum Beispiel Vorträge halten kannst/möchtest."></Tooltip>
             </label>
             { profile.languages && profile.languages.length && profile.languages.map((language, index) => (
-              <div key={index}>
-                <input
-                  autoComplete="off"
-                  className="profile__input--multi"
-                  onChange={handleLanguagesChange(index)}
-                  placeholder="Sprache"
-                  type="text"
-                  value={language}
-                />
-                <button
-                  className="button button--icon profile__button--delete"
-                  onClick={handleRemoveLanguagesInput(index)}
-                  tabIndex="-1"
-                >
-                  <img src={iconTrash}></img>
-                </button>
-              </div>
+            <div key={index}>
+              <input
+                autoComplete="off"
+                className="profile__input--multi"
+                onChange={handleLanguagesChange(index)}
+                placeholder="Sprache"
+                type="text"
+                value={language}
+              />
+              { index > 0 &&
+              <button
+                className="button button--icon profile__button--delete"
+                onClick={handleRemoveLanguagesInput(index)}
+                tabIndex="-1"
+              >
+                <img src={iconTrash}></img>
+              </button>
+              }
+            </div>
             ))}
             <button 
               className="button profile__button--add"
@@ -224,13 +233,16 @@ class ProfileForm extends Component {
                   type="url"
                   value={podcast.url}
                 />
+                { index > 0 &&
                 <button
                   className="button button--decent button--icon profile__button--delete"
                   onClick={handleRemovePodcastsInput(index)}
                   tabIndex="-1"
                 >
-                  <img src={iconTrash}></img></button>
-                </div>
+                  <img src={iconTrash}></img>
+                </button>
+                }
+              </div>
             ))}
             <button 
               className="button profile__button--add"
@@ -279,13 +291,16 @@ class ProfileForm extends Component {
                   type="url"
                   value={reference.url}
                 />
+                { index > 0 &&
                 <button
                   className="button button--decent button--icon profile__button--delete"
                   onClick={handleRemoveReferencesInput(index)}
                   tabIndex="-1"
                 >
-                  <img src={iconTrash}></img></button>
-                </div>
+                  <img src={iconTrash}></img>
+                </button>
+                }
+              </div>
             ))}
             <button 
               className="button profile__button--add"
@@ -450,10 +465,10 @@ class ProfileForm extends Component {
             </div>
           </div>
           <button 
-            className="button" 
+            className="button profile-form__button-submit" 
             type="submit" 
             value="submit"
-          >Fertig</button>
+          >Änderungen speichern</button>
         </form>
       </div>
     )

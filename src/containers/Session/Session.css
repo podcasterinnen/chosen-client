@@ -1,0 +1,45 @@
+.session__message-container {
+  background-color: var(--theme-lighter-color-grey);
+  border: 1px solid var(--theme-primary-color);
+  border-radius: 4px;
+  margin: 0 0 40px 0;
+  padding: 20px 20px;
+}
+
+.session__message-container--success {
+  background-color: var(--theme-lighter-color-grey);
+  border: 1px solid var(--theme-primary-color);
+}
+
+.session__message-container--error {
+  background-color: var(--theme-secondary-color-light);
+  border: 1px solid var(--theme-secondary-color);
+}
+
+.session__reset-password {
+  text-align: right;
+
+  cursor: pointer;
+}
+
+.session__reset-password__button {
+  color: var(--theme-primary-color);
+  text-transform: none;
+
+  background-color: transparent;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding: 10px 0;
+}
+
+.session__reset-password__button:active,
+.session__reset-password__button:hover {
+  color: var(--theme-primary-color);
+  text-decoration: underline;
+
+  background-color: transparent;
+  margin-top: 5px;
+  margin-bottom: 30px;
+  padding: 10px 0;
+}

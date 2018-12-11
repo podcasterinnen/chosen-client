@@ -42,7 +42,7 @@ class MainNav extends Component {
     const { menuIsOpen } = this.state
 
     return(
-      <nav className="mainnav">
+      <nav role="navigation" className="mainnav">
         <button className="mainnav__button" onClick={this.handleMenuClick}>
           Menü
           { menuIsOpen &&
@@ -111,7 +111,8 @@ class MainNav extends Component {
             >
               { (sessionState === 'UNKNOWN' ||
                 sessionState === 'INVALID' ||
-                sessionState === 'REGISTRATION_IN_PROGRESS') &&
+                sessionState === 'REGISTRATION_IN_PROGRESS' ||
+                sessionState === 'FORGOT_PASSWORD') &&
                 <span>Registrieren / Login</span>
               }
               { sessionState === 'REGISTERED' &&
