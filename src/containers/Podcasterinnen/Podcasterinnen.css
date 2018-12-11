@@ -37,3 +37,8 @@
 .podcasterinnen__search {
   margin: 20px 0;
 }
+
+.podcasterinnnen__search__result-label {
+  float: right;
+  margin: 6px 0;
+}

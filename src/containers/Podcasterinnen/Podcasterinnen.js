@@ -150,12 +150,10 @@ class Podcasterinnen extends Component {
                 }
                 { this.state.results.length > 0 &&
                   <div>
+                    <p className="podcasterinnnen__search__result-label"><small>{this.state.results.length} Einträge</small></p>
                     <h2>
-                      Suchergebnisse:
+                      Passende Profile:
                     </h2>
-                    <p>
-                      <small>{this.state.results.length} Einträge</small>
-                    </p>
                     <ul className="podcasterinnen__list">
                       { this.state.results.map((result, i) => {
                         if (result.profile_state === 'PUBLISHED') {
@@ -170,7 +168,7 @@ class Podcasterinnen extends Component {
                   </div>
                 }
                 { (isSearching && this.state.results <= 0) &&
-                  <p>Keine Ergebnisse.</p>
+                  <p>Keine passenden Profile gefunden.</p>
                 }
                 { (!isSearching && podcasterinnen) &&
                   <ul className="podcasterinnen__list">
