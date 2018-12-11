@@ -23,31 +23,31 @@
 /* GENERAL TYPOGRAPHY STYLES */
 
 @font-face {
-  font-family: 'Glacial';
+  font-family: "Quattrocento";
   font-weight: 400;
-  src:  url('./assets/fonts/glacialindifference-regular-webfont.woff2') format('woff2'),
-        url('./assets/fonts/glacialindifference-regular-webfont.woff') format('woff');
+  src:  url("./assets/fonts/quattrocentosans-regular-webfont.woff2") format("woff2"),
+        url("./assets/fonts/quattrocentosans-regular-webfont.woff") format("woff");
 }
 
 @font-face {
-  font-family: 'Glacial';
+  font-family: "Quattrocento";
   font-weight: 700;
-  src:  url('./assets/fonts/glacialindifference-bold-webfont.woff2') format('woff2'),
-        url('./assets/fonts/glacialindifference-bold-webfont.woff') format('woff');
+  src:  url("./assets/fonts/quattrocentosans-bold-webfont.woff2") format("woff2"),
+        url("./assets/fonts/quattrocentosans-bold-webfont.woff") format("woff");
 }
 
 @font-face {
-  font-family: 'AbrilFatface';
+  font-family: "Playfair";
   font-weight: 700;
-  src:  url('./assets/fonts/abrilfatface-regular-webfont.woff2') format('woff2'),
-        url('./assets/fonts/abrilfatface-regular-webfont.woff') format('woff');
+  src:  url("./assets/fonts/playfairdisplay-bold-webfont.woff2") format("woff2"),
+        url("./assets/fonts/playfairdisplay-bold-webfont.woff") format("woff");
 }
 
 body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: var(--theme-primary-color-dark);
-  font-family: "Glacial", sans-serif;
+  font-family: "Quattrocento", sans-serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.5em;
@@ -70,14 +70,17 @@ a:hover {
 }
 
 h1,
-h2,
+h2 {
+  font-family: "Playfair";
+  font-weight: 700;
+}
+
 h3,
 h4,
 h5,
 h6 {
-  font-family: "AbrilFatface";
+  font-family: "Quattrocento";
   font-weight: 700;
-  letter-spacing: 1px;
 }
 
 h1,
@@ -109,7 +112,7 @@ h2 {
   color: var(--theme-primary-color);
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 1px;
   line-height: 1.375em;
   text-align: center;
   text-transform: uppercase;

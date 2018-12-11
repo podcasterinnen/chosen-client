@@ -25,8 +25,8 @@ class About extends Component {
             <li>Podcast: <a href="http://www.kunstundhorst.de" rel="noopener noreferrer" target="_blank">kunst & horst</a></li>
           </ul>
         </div>
-        <div class="founder__imagecontainer">
-          <img class="founder__imagecontainer__image" src={photoDaniela} alt="Daniela Ishorst" />
+        <div className="founder__imagecontainer">
+          <img className="founder__imagecontainer__image" src={photoDaniela} alt="Daniela Ishorst" />
         </div>
         <div>
           <h3>Michaela Lehr – die Entwicklerin.</h3>
@@ -36,8 +36,8 @@ class About extends Component {
             <li>Webseite: <a href="https://geildanke.com" rel="noopener noreferrer" target="_blank">geildanke.com</a></li>
           </ul>
         </div>
-        <div class="founder__imagecontainer">
-          <img class="founder__imagecontainer__image "src={photoMichaela} alt="Michaela Lehr" />
+        <div className="founder__imagecontainer">
+          <img className="founder__imagecontainer__image "src={photoMichaela} alt="Michaela Lehr" />
         </div>
         <div>
           <h3>Nele Heise – die Stimme aus dem Off.</h3>
@@ -47,8 +47,8 @@ class About extends Component {
             <li>Webseite: <a href="http://www.neleheise.de/" rel="noopener noreferrer" target="_blank">neleheise</a></li>
           </ul>
         </div>
-        <div class="founder__imagecontainer">
-          <img class="founder__imagecontainer__image"src={photoNele} alt="Nele Heise" />
+        <div className="founder__imagecontainer">
+          <img className="founder__imagecontainer__image"src={photoNele} alt="Nele Heise" />
         </div>
       </section>
     )
