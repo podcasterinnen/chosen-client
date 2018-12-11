@@ -5,6 +5,7 @@ import { withRouter, Redirect } from 'react-router-dom'
 
 import './Session.css'
 import { initialiseSession, loginUser, registerNewUser, forgotPassword, setSessionState } from './SessionActions'
+import Tooltip from '../../components/Tooltip/Tooltip'
 import {
   INVALID,
   LOGGED_IN,
@@ -16,6 +17,7 @@ import {
   REGISTRATION_IN_PROGRESS,
   UNKNOWN,
 } from '../../utils/types'
+import { MIN_PASSWORD_LENGTH } from '../../config/config'
 
 class Session extends Component {
   constructor(props) {
@@ -85,7 +87,7 @@ class Session extends Component {
   }
 
   handlePasswordValidation = () => {
-    if (this.state.password.length >= 8) {
+    if (this.state.password.length >= MIN_PASSWORD_LENGTH) {
       this.setState({ passwordValid: true })
     } else {
       this.setState({ passwordValid: false })
@@ -93,7 +95,7 @@ class Session extends Component {
   }
 
   handlePasswordControlValidation = () => {
-    if (this.state.passwordControl === this.state.password && this.state.password.length >= 8) {
+    if (this.state.passwordControl === this.state.password && this.state.password.length >= MIN_PASSWORD_LENGTH) {
       this.setState({ passwordControlValid: true })
     } else {
       this.setState({ passwordControlValid: false })
@@ -102,7 +104,7 @@ class Session extends Component {
 
   handleRegisterFormValidation = () => {
     // Validate for Submit Button
-    if (this.state.password.length >= 8 &&
+    if (this.state.password.length >= MIN_PASSWORD_LENGTH &&
       this.state.passwordControl === this.state.password &&
       this.state.forename !== '' &&
       this.state.emailAddress !== '' &&
@@ -205,7 +207,10 @@ class Session extends Component {
           <form onSubmit={(e) => this.handleSubmit(e, 'register')}>
             <h1>Registrieren:</h1>
             <div>
-              <label>Vorname/Nickname:</label>
+              <label>
+                Vorname/Nickname:
+                <Tooltip content="Hier trägst du deinen Vornamen ein. Wenn du deinen Klarnamen nicht verwenden möchtest, kannst auch ein Nickname eintragen. Er sollte von dir nur so gewählt werden, dass du auch gefunden werden kannst."></Tooltip>
+              </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'forename')} 
                 autoComplete="given-name"
@@ -233,12 +238,12 @@ class Session extends Component {
             <div>
               <label>
                 Passwort
-                <span className="label label--right">Minimum: 8 Zeichen</span>
+                <span className="label label--right">Minimum: {MIN_PASSWORD_LENGTH} Zeichen</span>
               </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'password')} 
                 autoComplete="current-password" 
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
                 type="password" 
                 value={this.state.password}
                 required
@@ -248,12 +253,12 @@ class Session extends Component {
             <div>
               <label>
                 Passwort wiederholen
-                <span className="label label--right">Minimum: 8 Zeichen</span>
+                <span className="label label--right">Minimum: {MIN_PASSWORD_LENGTH} Zeichen</span>
               </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'passwordControl')}
                 autoComplete="current-password" 
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
                 type="password" 
                 value={this.state.passwordControl} 
                 required

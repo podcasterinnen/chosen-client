@@ -1,14 +1,62 @@
 .app {
+  position: relative;
+  overflow: hidden;
+}
+
+.app__ball {
+  display: none;
+}
+
+@media screen and (min-width: 600px) {
+  .app__ball {
+    border-radius: 50%;
+    display: block;
+    opacity: 0.25;
+    position: absolute;
+    z-index: -1;
+  }
+  
+  .app__ball--top {
+    background-color: var(--theme-secondary-color);
+    left: -420px;
+    top: -480px;
+    width: 950px;
+    height: 950px;
+  }
+}
+
+.app__ball--bottom {
+  background-color: var(--theme-primary-color);
+  bottom: -530px;
+  right: -400px;
+  width: 1100px;
+  height: 1100px;
+}
+
+.app-copy {
   text-align: left;
+  
+  margin: 0 auto;
+  padding: 0 20px var(--section-padding-top) 20px;
+  width: 100%;
+  max-width: 1000px;
+}
+
+.app-cta__text {
+  font-size: 20px;
+  line-height: 1.5em;
+}
+/* @media screen and (min-width: 600px) {
+  
+} */
+
+.app-cta {
+  padding-bottom: 10px;
+  min-height: 0;
 }
 
 .app__button {
-  margin: 20px 0;
-}
-@media screen and (min-width: 600px) {
-  .app__button {
-    margin: 40px 0;
-  }
+  margin: 10px 0 20px 0;
 }
 
 .app__cta {

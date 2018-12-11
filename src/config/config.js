@@ -24,3 +24,4 @@ export const API_URL_SESSIONS = `${backendHost}/sessions/`
 export const API_URL_UPLOADS = `${backendHost}`
 
 export const SESSION_TIMEOUT = 1000 * 60 * 15
+export const MIN_PASSWORD_LENGTH = 12

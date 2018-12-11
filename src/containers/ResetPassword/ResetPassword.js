@@ -6,6 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import './ResetPassword.css'
 import { resetPassword, initialiseResetPassword } from './ResetPasswordActions'
+import { MIN_PASSWORD_LENGTH } from '../../config/config'
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class ResetPassword extends Component {
   }
 
   handlePasswordValidation = () => {
-    if (this.state.password.length >= 8) {
+    if (this.state.password.length >= MIN_PASSWORD_LENGTH) {
       this.setState({ passwordValid: true })
     } else {
       this.setState({ passwordValid: false })
@@ -52,7 +53,7 @@ class ResetPassword extends Component {
   }
 
   handlePasswordControlValidation = () => {
-    if (this.state.passwordControl === this.state.password && this.state.password.length >= 8) {
+    if (this.state.passwordControl === this.state.password && this.state.password.length >= MIN_PASSWORD_LENGTH) {
       this.setState({ passwordControlValid: true })
     } else {
       this.setState({ passwordControlValid: false })
@@ -70,7 +71,7 @@ class ResetPassword extends Component {
 
   handlePasswordResetFormValidation = () => {
     // Validate for Submit Button
-    if (this.state.password.length >= 8 &&
+    if (this.state.password.length >= MIN_PASSWORD_LENGTH &&
       this.state.passwordControl === this.state.password) {
       this.setState({
         isEnabledForResetPassword: true,
@@ -97,12 +98,12 @@ class ResetPassword extends Component {
             <div>
               <label>
                 Passwort
-                <span className="label label--right">Minimum: 8 Zeichen</span>
+                <span className="label label--right">Minimum: {MIN_PASSWORD_LENGTH} Zeichen</span>
               </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'password')} 
                 autoComplete="current-password" 
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
                 type="password" 
                 value={this.state.password}
                 required
@@ -112,12 +113,12 @@ class ResetPassword extends Component {
             <div>
               <label>
                 Passwort wiederholen
-                <span className="label label--right">Minimum: 8 Zeichen</span>
+                <span className="label label--right">Minimum: {MIN_PASSWORD_LENGTH} Zeichen</span>
               </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'passwordControl')}
                 autoComplete="current-password" 
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
                 type="password" 
                 value={this.state.passwordControl} 
                 required
