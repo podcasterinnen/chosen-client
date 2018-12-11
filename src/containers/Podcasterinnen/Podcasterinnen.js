@@ -17,10 +17,31 @@ import staticTags from '../../assets/data/tags.json'
  */
 const styles = {
   creatable: {
+    control: (provided) => ({
+      ...provided,
+      '&:hover': { border: '1px solid #7797AE' },
+      border: '1px solid lightgray',
+      boxShadow: 'none',
+    }),
     input: (provided) => ({
       ...provided,
       marginTop: 12,
       height: 44,
+    }),
+    multiValueRemove: (provided) => ({
+      ... provided,
+      '&:hover': {
+        backgroundColor: '#E9C5D7',
+        color: '#7797AE',
+      },
+    }),
+    option: (provided) => ({
+      ... provided,
+      '&:hover': {
+        backgroundColor: '#7797AE',
+        color: 'white',
+        cursor: 'pointer',
+      },
     }),
   }
 }
@@ -112,6 +133,7 @@ class Podcasterinnen extends Component {
                   <Creatable
                     className="podcasterinnen__search__bar"
                     components={makeAnimated()}
+                    formatCreateLabel={(inputValue) => ('Suche nach ' + inputValue)}
                     isMulti={true}
                     ref={input => this.search = input}
                     onChange={this.handleChange}
