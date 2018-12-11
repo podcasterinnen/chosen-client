@@ -29,14 +29,14 @@ const styles = {
       height: 44,
     }),
     multiValueRemove: (provided) => ({
-      ... provided,
+      ...provided,
       '&:hover': {
         backgroundColor: '#E9C5D7',
         color: '#7797AE',
       },
     }),
     option: (provided) => ({
-      ... provided,
+      ...provided,
       '&:hover': {
         backgroundColor: '#7797AE',
         color: 'white',
@@ -108,8 +108,8 @@ class Podcasterinnen extends Component {
   toCamelCase = (sentenceCase) => {
     var out = ''
     sentenceCase.split(' ').forEach(function (el, idx) {
-        var add = el.toLowerCase()
-        out += (idx === 0 ? add : add[0].toUpperCase() + add.slice(1))
+      var add = el.toLowerCase()
+      out += (idx === 0 ? add : add[0].toUpperCase() + add.slice(1))
     })
     return out
   }
@@ -194,11 +194,13 @@ class Podcasterinnen extends Component {
 
 Podcasterinnen.propTypes = {
   handleInitPodcasterinnen: PropTypes.func,
+  match: PropTypes.object,
   podcasterinnen: PropTypes.array,
 }
 
 Podcasterinnen.defaultProps = {
   handleInitPodcasterinnen: undefined,
+  match: undefined,
   podcasterinnen: null,
 }
 

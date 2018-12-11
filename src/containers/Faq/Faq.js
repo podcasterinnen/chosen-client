@@ -80,7 +80,7 @@ class Faq extends Component {
         <h3>4. Gefunden werden</h3>
         <p>Bisher fehlt leider noch eins der wichtigsten Features: Die Kontaktaufnahme über podcasterinnen.org zu euch. Wir werden das Feature so schnell wie möglich implemetieren. Da ihr aber sowohl die Webseite eures Podcasts und auch eure Twitterhandle mit eintragen könnt, denken wir, dass die Leute, die euch suchen auf diesem Weg auf euch zukommen können. Wir wissen, dass das keine ideale Lösung ist und arbeiten daran, die Situation einfacher und mit weniger klicks zu gestalten. Wir möchten euch trotzdem darum bitten, weder eure E-Mail-Adresse noch eure Handynummer deswegen in eurem Profil mit anzugeben.</p>
       </section>
-     )
+    )
   }
 }
 

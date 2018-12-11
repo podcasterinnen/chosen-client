@@ -26,7 +26,7 @@ import { logoutUser } from '../../containers/Session/SessionActions'
 import {
   LOGGED_IN,
 } from '../../utils/types'
-import { SESSION_TIMEOUT } from '../../config/config';
+import { SESSION_TIMEOUT } from '../../config/config'
 
 const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
   return (
@@ -89,6 +89,11 @@ class PodcasterinnenRouter extends Component {
       </Router>
     )
   }
+}
+
+PrivateRoute.propTypes = {
+  component: PropTypes.func.isRequired,
+  sessionState: PropTypes.string.isRequired,
 }
 
 PodcasterinnenRouter.propTypes = {

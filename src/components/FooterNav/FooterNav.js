@@ -8,7 +8,7 @@ import './FooterNav.css'
 class FooterNav extends Component {
   render() {
     return(
-      <nav role="navigation" className="footernav">
+      <nav className="footernav">
         <ol className="footernav__list">
 
           <li className="footernav__list__element">
@@ -16,8 +16,9 @@ class FooterNav extends Component {
               href="https://twitter.com/podcasterinnen" 
               className="footernav__list__element__link"
               target="_blank"
+              rel="noopener noreferrer"
             >
-              <img className="footernav__icon"src={iconTwitter}></img>Folge uns auf Twitter
+              <img alt="Twitter-Icon" className="footernav__icon"src={iconTwitter}></img>Folge uns auf Twitter
             </a>             
           </li>
 

@@ -17,7 +17,6 @@ class ProfileForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps)
     if (nextProps.imgUrlPreview) {
       this.setState({ showPreview: true }, () => { console.log(this.state)})
     }
@@ -78,7 +77,7 @@ class ProfileForm extends Component {
             <Dropzone
               onDrop={(files) => handleAvatarDrop(files)}
             >
-              <div className="profile__avatar profile__avatar--form" style={(profile.avatar !== null && profile.avatar !== '' && !showPreview) ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : (showPreview ? {backgroundImage: `url(${imgUrlPreview})`} : {backgroundImage: `none`})}>
+              <div className="profile__avatar profile__avatar--form" style={(profile.avatar !== null && profile.avatar !== '' && !showPreview) ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : (showPreview ? {backgroundImage: `url(${imgUrlPreview})`} : {backgroundImage: 'none'})}>
                 { (profile.avatar === null || profile.avatar === '') &&
                 <p className="profile__avatar__placeholder">Zieh dein Profilbild hier hinein oder klicke hier, um dein Profilbild hochzuladen.</p>
                 }
@@ -166,25 +165,25 @@ class ProfileForm extends Component {
               <Tooltip content="Hier kann du die Sprachen eintragen in denen du podcasten und zum Beispiel Vorträge halten kannst/möchtest."></Tooltip>
             </label>
             { profile.languages && profile.languages.length && profile.languages.map((language, index) => (
-            <div key={index}>
-              <input
-                autoComplete="off"
-                className="profile__input--multi"
-                onChange={handleLanguagesChange(index)}
-                placeholder="Sprache"
-                type="text"
-                value={language}
-              />
-              { index > 0 &&
-              <button
-                className="button button--icon profile__button--delete"
-                onClick={handleRemoveLanguagesInput(index)}
-                tabIndex="-1"
-              >
-                <img src={iconTrash}></img>
-              </button>
-              }
-            </div>
+              <div key={index}>
+                <input
+                  autoComplete="off"
+                  className="profile__input--multi"
+                  onChange={handleLanguagesChange(index)}
+                  placeholder="Sprache"
+                  type="text"
+                  value={language}
+                />
+                { index > 0 &&
+                <button
+                  className="button button--icon profile__button--delete"
+                  onClick={handleRemoveLanguagesInput(index)}
+                  tabIndex="-1"
+                >
+                  <img alt="Papierkorb-Symbol" src={iconTrash}></img>
+                </button>
+                }
+              </div>
             ))}
             <button 
               className="button profile__button--add"
@@ -239,7 +238,7 @@ class ProfileForm extends Component {
                   onClick={handleRemovePodcastsInput(index)}
                   tabIndex="-1"
                 >
-                  <img src={iconTrash}></img>
+                  <img alt="Papierkorb-Symbol" src={iconTrash}></img>
                 </button>
                 }
               </div>
@@ -297,7 +296,7 @@ class ProfileForm extends Component {
                   onClick={handleRemoveReferencesInput(index)}
                   tabIndex="-1"
                 >
-                  <img src={iconTrash}></img>
+                  <img alt="Papierkorb-Symbol" src={iconTrash}></img>
                 </button>
                 }
               </div>
@@ -496,6 +495,7 @@ ProfileForm.propTypes = {
   handleRemoveReferencesInput: PropTypes.func,
   handleSubmit: PropTypes.func,
   handleTagsChange: PropTypes.func,
+  imgUrlPreview: PropTypes.string,
   profile: PropTypes.object, 
   staticTags: PropTypes.array,
 }
@@ -520,6 +520,7 @@ ProfileForm.defaultProps = {
   handleRemoveReferencesInput: undefined,
   handleSubmit: undefined,
   handleTagsChange: undefined,
+  imgUrlPreview: undefined,
   profile: undefined, 
   staticTags: undefined,
 }

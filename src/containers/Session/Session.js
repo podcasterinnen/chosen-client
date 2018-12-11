@@ -42,7 +42,7 @@ class Session extends Component {
   componentDidMount() {
     this.props.handleInitSession()
   }
-
+  
   handleChange = (e, type) => {
     switch(type) {
     case 'email':
@@ -322,18 +322,18 @@ class Session extends Component {
         { sessionState === FORGOT_PASSWORD &&
           <form onSubmit={(e) => this.handleSubmit(e, 'passwordReset')}>
             <h1>Passwort zurücksetzen:</h1>
-              <div>
-                <label>E-Mail-Adresse</label>
-                <input 
-                  onChange={(e) => this.handleChange(e, 'email')} 
-                  autoCapitalize="off"
-                  autoComplete="username" 
-                  autoCorrect="off"
-                  placeholder="buffy.summers@sunnydale.high.net" 
-                  type="email" 
-                />
-              </div>
-              <button className="button" type="submit" value="submit">Passwort zurücksetzen</button>
+            <div>
+              <label>E-Mail-Adresse</label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'email')} 
+                autoCapitalize="off"
+                autoComplete="username" 
+                autoCorrect="off"
+                placeholder="buffy.summers@sunnydale.high.net" 
+                type="email" 
+              />
+            </div>
+            <button className="button" type="submit" value="submit">Passwort zurücksetzen</button>
           </form>
         }
         { sessionState === LOGGED_IN &&
