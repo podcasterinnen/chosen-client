@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router-dom'
+import { Link, withRouter, Redirect } from 'react-router-dom'
 
 import './Session.css'
 import { initialiseSession, loginUser, registerNewUser, forgotPassword, setSessionState } from './SessionActions'
@@ -32,6 +32,7 @@ class Session extends Component {
       passwordValid: true,
       passwordControl: '',
       passwordControlValid: true,
+      privacyAccepted: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -65,6 +66,11 @@ class Session extends Component {
       this.setState({ passwordControl: e.target.value }, () => {
         this.handleRegisterFormValidation()
         this.handlePasswordControlValidation()
+      })
+      break
+    case 'privacy':
+      this.setState({ privacyAccepted: e.target.checked }, () => {
+        this.handleRegisterFormValidation()
       })
       break
     default:
@@ -108,7 +114,8 @@ class Session extends Component {
       this.state.passwordControl === this.state.password &&
       this.state.forename !== '' &&
       this.state.emailAddress !== '' &&
-      this.validateEmail(this.state.emailAddress)) {
+      this.validateEmail(this.state.emailAddress) &&
+      this.state.privacyAccepted === true) {
       this.setState({
         isEnabledForRegistration: true,
       })
@@ -264,6 +271,14 @@ class Session extends Component {
                 required
                 className={this.state.passwordControlValid ? 'inputIsValid' : 'inputIsInvalid'}
               />
+            </div>
+            <div className="session__checkbox">
+              <input
+                onChange={(e) => this.handleChange(e, 'privacy')} 
+                type="checkbox"
+                checked={this.state.privacyAccepted}
+              />
+              <label className="session__checkbox__label">Ich habe die <Link to="/privacy" target="_blank">Datenschutzerklärung und AGB</Link> gelesen und bin damit einverstanden.</label>
             </div>
             <button className="button" type="submit" value="submit" disabled={!isEnabledForRegistration}>Registrieren</button>
           </form>
