@@ -1,3 +1,11 @@
+.session__checkbox {
+  margin-bottom: 40px;
+}
+
+.session__checkbox__label {
+  display: inline-block;
+}
+
 .session__message-container {
   background-color: var(--theme-lighter-color-grey);
   border: 1px solid var(--theme-primary-color);

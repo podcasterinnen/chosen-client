@@ -23,7 +23,7 @@
   background-color: transparent;
   border: none;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   .mainnav__button {
     display: none;
   }
@@ -42,7 +42,7 @@
   transform: translateX(-100%);
   transition: transform ease-in-out 0.125s;
 }
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   .mainnav__list {
     background-color: transparent;
     border-bottom: none;
@@ -61,7 +61,7 @@
   border-bottom: 1px solid rgba(255,255,255,0.3);
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   .mainnav__list__element {
     background-color: transparent;
     border-bottom: none;
@@ -73,7 +73,7 @@
 }
 
 /* .mainnav__list__element--right {} */
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 800px) {
   .mainnav__list__element--right {
     margin-left: auto;
   }

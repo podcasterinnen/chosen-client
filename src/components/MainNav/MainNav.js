@@ -42,7 +42,7 @@ class MainNav extends Component {
     const { menuIsOpen } = this.state
 
     return(
-      <nav className="mainnav">
+      <nav role="navigation" className="mainnav">
         <button className="mainnav__button" onClick={this.handleMenuClick}>
           Menü
           { menuIsOpen &&
@@ -102,7 +102,7 @@ class MainNav extends Component {
               </NavLink>
             </li>
           }
-          <li className={( sessionState === 'LOGGED_IN') ? "mainnav__list__element mainnav__list__element--rightest" : "mainnav__list__element mainnav__list__element--right"}>
+          <li className={( sessionState === 'LOGGED_IN') ? 'mainnav__list__element mainnav__list__element--rightest' : 'mainnav__list__element mainnav__list__element--right'}>
             <NavLink
               activeClassName="mainnav__list__element__link--active"
               className="mainnav__list__element__link"

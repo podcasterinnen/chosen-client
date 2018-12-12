@@ -1,11 +1,26 @@
+.founder {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 0;
+}
 
+@media screen and (min-width: 600px) {
+  .founder {
+    align-items: initial;
+    flex-direction: row;
+  }
+}
 
-.founder__imagecontainer {
-  margin: 25px 0 0 0;
+@media screen and (min-width: 600px) {
+  .founder__imagecontainer {
+    margin: 25px 0 0 0;
+  }
 }
 
 .founder__imagecontainer__image {
-  border-radius: 25px; 
+  border-radius: 50%; 
+  margin-right: 30px;
   max-width: 150px; 
 }
 

@@ -60,7 +60,6 @@ class ProfilePage extends Component {
               if (podcast.name !== '') {
                 return (
                   <li className="profile__podcast" key={podcast.name}>
-                    <img className="profile__podcast__image" alt={`Cover von ${podcast.name}.`} src={"https://ui-avatars.com/api/?name=&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100"} />
                     <div className="profile__podcast__text">
                       <p><a href={podcast.url} target="_blank">{podcast.name}</a> · {podcast.description}</p>
                     </div>
@@ -136,7 +135,7 @@ class ProfilePage extends Component {
         <p className="profile__info-text"><a href={`https://twitter.com/${profile.twitter_url}`} target="_blank">{profile.forename} auf Twitter</a></p>
         }
         { profile.website_url &&
-        <p className="profile__info-text"><a href={profile.website_url} target="_blank">{profile.forename}'s Webseite</a></p>
+        <p className="profile__info-text"><a href={profile.website_url} target="_blank">{profile.forename}&apos;s Webseite</a></p>
         }
       </div>
     )
@@ -144,10 +143,14 @@ class ProfilePage extends Component {
 }
 
 ProfilePage.propTypes = {
+  history: PropTypes.object,
+  match: PropTypes.object,
   profile: PropTypes.object,
 }
 
 ProfilePage.defaultProps = {
+  history: undefined,
+  match: undefined,
   profile: undefined, 
 }
 

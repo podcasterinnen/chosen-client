@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Provider } from 'react-redux'
 
 import { initialiseSession } from './containers/Session/SessionActions'
-import PodcasterinnenRouter from './components/PodcasterinnenRouter/PodcasterinnenRouter';
+import PodcasterinnenRouter from './components/PodcasterinnenRouter/PodcasterinnenRouter'
 
 const Root = ({ store }) => {
   store.dispatch(initialiseSession())

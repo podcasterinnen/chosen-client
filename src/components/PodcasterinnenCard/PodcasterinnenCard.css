@@ -21,7 +21,7 @@
   color: var(--theme-primary-color);
   font-size: 14px;
   font-weight: 700;
-  letter-spacing: 3px;
+  letter-spacing: 2px;
   line-height: 1.375em;
   text-align: center;
   text-transform: uppercase;
@@ -39,6 +39,8 @@
 .card__list {
   margin: 0 -5px;
   padding: 0;
+  overflow: hidden;
+  max-height: 82px;
 }
 
 .card__list__item {

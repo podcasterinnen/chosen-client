@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { withRouter, Redirect } from 'react-router-dom'
+import { Link, withRouter, Redirect } from 'react-router-dom'
 
 import './Session.css'
 import { initialiseSession, loginUser, registerNewUser, forgotPassword, setSessionState } from './SessionActions'
+import Tooltip from '../../components/Tooltip/Tooltip'
 import {
   INVALID,
   LOGGED_IN,
@@ -16,6 +17,7 @@ import {
   REGISTRATION_IN_PROGRESS,
   UNKNOWN,
 } from '../../utils/types'
+import { MIN_PASSWORD_LENGTH } from '../../config/config'
 
 class Session extends Component {
   constructor(props) {
@@ -30,6 +32,7 @@ class Session extends Component {
       passwordValid: true,
       passwordControl: '',
       passwordControlValid: true,
+      privacyAccepted: false,
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -39,7 +42,7 @@ class Session extends Component {
   componentDidMount() {
     this.props.handleInitSession()
   }
-
+  
   handleChange = (e, type) => {
     switch(type) {
     case 'email':
@@ -65,6 +68,11 @@ class Session extends Component {
         this.handlePasswordControlValidation()
       })
       break
+    case 'privacy':
+      this.setState({ privacyAccepted: e.target.checked }, () => {
+        this.handleRegisterFormValidation()
+      })
+      break
     default:
       return
     }
@@ -85,7 +93,7 @@ class Session extends Component {
   }
 
   handlePasswordValidation = () => {
-    if (this.state.password.length >= 8) {
+    if (this.state.password.length >= MIN_PASSWORD_LENGTH) {
       this.setState({ passwordValid: true })
     } else {
       this.setState({ passwordValid: false })
@@ -93,7 +101,7 @@ class Session extends Component {
   }
 
   handlePasswordControlValidation = () => {
-    if (this.state.passwordControl === this.state.password && this.state.password.length >= 8) {
+    if (this.state.passwordControl === this.state.password && this.state.password.length >= MIN_PASSWORD_LENGTH) {
       this.setState({ passwordControlValid: true })
     } else {
       this.setState({ passwordControlValid: false })
@@ -102,11 +110,12 @@ class Session extends Component {
 
   handleRegisterFormValidation = () => {
     // Validate for Submit Button
-    if (this.state.password.length >= 8 &&
+    if (this.state.password.length >= MIN_PASSWORD_LENGTH &&
       this.state.passwordControl === this.state.password &&
       this.state.forename !== '' &&
       this.state.emailAddress !== '' &&
-      this.validateEmail(this.state.emailAddress)) {
+      this.validateEmail(this.state.emailAddress) &&
+      this.state.privacyAccepted === true) {
       this.setState({
         isEnabledForRegistration: true,
       })
@@ -205,7 +214,10 @@ class Session extends Component {
           <form onSubmit={(e) => this.handleSubmit(e, 'register')}>
             <h1>Registrieren:</h1>
             <div>
-              <label>Vorname/Nickname:</label>
+              <label>
+                Vorname/Nickname:
+                <Tooltip content="Hier trägst du deinen Vornamen ein. Wenn du deinen Klarnamen nicht verwenden möchtest, kannst auch ein Nickname eintragen. Er sollte von dir nur so gewählt werden, dass du auch gefunden werden kannst."></Tooltip>
+              </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'forename')} 
                 autoComplete="given-name"
@@ -233,12 +245,12 @@ class Session extends Component {
             <div>
               <label>
                 Passwort
-                <span className="label label--right">Minimum: 8 Zeichen</span>
+                <span className="label label--right">Minimum: {MIN_PASSWORD_LENGTH} Zeichen</span>
               </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'password')} 
                 autoComplete="current-password" 
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
                 type="password" 
                 value={this.state.password}
                 required
@@ -248,17 +260,25 @@ class Session extends Component {
             <div>
               <label>
                 Passwort wiederholen
-                <span className="label label--right">Minimum: 8 Zeichen</span>
+                <span className="label label--right">Minimum: {MIN_PASSWORD_LENGTH} Zeichen</span>
               </label>
               <input 
                 onChange={(e) => this.handleChange(e, 'passwordControl')}
                 autoComplete="current-password" 
-                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
+                placeholder="&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;&#9679;" 
                 type="password" 
                 value={this.state.passwordControl} 
                 required
                 className={this.state.passwordControlValid ? 'inputIsValid' : 'inputIsInvalid'}
               />
+            </div>
+            <div className="session__checkbox">
+              <input
+                onChange={(e) => this.handleChange(e, 'privacy')} 
+                type="checkbox"
+                checked={this.state.privacyAccepted}
+              />
+              <label className="session__checkbox__label">Ich habe die <Link to="/privacy" target="_blank">Datenschutzerklärung und AGB</Link> gelesen und bin damit einverstanden.</label>
             </div>
             <button className="button" type="submit" value="submit" disabled={!isEnabledForRegistration}>Registrieren</button>
           </form>
@@ -302,18 +322,18 @@ class Session extends Component {
         { sessionState === FORGOT_PASSWORD &&
           <form onSubmit={(e) => this.handleSubmit(e, 'passwordReset')}>
             <h1>Passwort zurücksetzen:</h1>
-              <div>
-                <label>E-Mail-Adresse</label>
-                <input 
-                  onChange={(e) => this.handleChange(e, 'email')} 
-                  autoCapitalize="off"
-                  autoComplete="username" 
-                  autoCorrect="off"
-                  placeholder="buffy.summers@sunnydale.high.net" 
-                  type="email" 
-                />
-              </div>
-              <button className="button" type="submit" value="submit">Passwort zurücksetzen</button>
+            <div>
+              <label>E-Mail-Adresse</label>
+              <input 
+                onChange={(e) => this.handleChange(e, 'email')} 
+                autoCapitalize="off"
+                autoComplete="username" 
+                autoCorrect="off"
+                placeholder="buffy.summers@sunnydale.high.net" 
+                type="email" 
+              />
+            </div>
+            <button className="button" type="submit" value="submit">Passwort zurücksetzen</button>
           </form>
         }
         { sessionState === LOGGED_IN &&
