@@ -38,7 +38,7 @@ class App extends Component {
         <section className="app-copy">
           { podcasterinnen &&
           <div>
-            <h2>Neueste Podcasterinnen-Profile:</h2>
+            <h2>Neueste Profile:</h2>
             <ul className="podcasterinnen__list">
               { podcasterinnen.sort(this.sortPodcasterinnen).map((podcasterin, i) => {
                 // Show only 4 newest profiles
