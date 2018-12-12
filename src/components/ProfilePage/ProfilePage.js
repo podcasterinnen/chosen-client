@@ -60,11 +60,6 @@ class ProfilePage extends Component {
               if (podcast.name !== '') {
                 return (
                   <li className="profile__podcast" key={podcast.name}>
-                    <img 
-                      className="profile__podcast__image"
-                      alt={`Cover von ${podcast.name}.`}
-                      src="https://ui-avatars.com/api/?name=&background=7797AE&color=FFFFFF&font-size=0.125&size=200&length=100"
-                    />
                     <div className="profile__podcast__text">
                       <p><a href={podcast.url} target="_blank">{podcast.name}</a> · {podcast.description}</p>
                     </div>
