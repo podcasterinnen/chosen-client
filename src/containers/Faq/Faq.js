@@ -47,7 +47,11 @@ class Faq extends Component {
   }
 
   handleAccordeonClick = (selectedId) => {
-    this.setState({ selectedId })
+    if (this.state.selectedId !== selectedId) {
+      this.setState({ selectedId })
+    } else {
+      this.setState({ selectedId: null })
+    }
   }
 
   render() {
