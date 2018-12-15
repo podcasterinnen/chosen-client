@@ -25,3 +25,7 @@ export const API_URL_UPLOADS = `${backendHost}`
 
 export const SESSION_TIMEOUT = 1000 * 60 * 15
 export const MIN_PASSWORD_LENGTH = 12
+
+export const ENV_DEV = 'development'
+export const ENV_STAGING = 'staging'
+export const ENV_PROD = 'production'
