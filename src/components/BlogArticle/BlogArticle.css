@@ -1,0 +1,8 @@
+.blog-article__date {
+  color: var(--theme-color-grey);
+  text-align: right;
+
+  border-bottom: 1px solid var(--theme-light-color-grey);
+  margin-top: 40px;
+  padding-bottom: 20px;
+}

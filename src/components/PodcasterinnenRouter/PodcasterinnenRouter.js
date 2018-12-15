@@ -6,6 +6,7 @@ import IdleTimer from 'react-idle-timer'
 
 import About from '../../containers/About/About'
 import App from '../../containers/App/App'
+import Blog from '../../containers/Blog/Blog'
 import Confirm from '../../containers/Confirm/Confirm'
 import Faq from '../../containers/Faq/Faq'
 import Imprint from '../../containers/Imprint/Imprint'
@@ -73,6 +74,7 @@ class PodcasterinnenRouter extends Component {
             <Switch>
               <Route exact path="/" component={App} />
               <Route path="/about" component={About} />
+              <Route path="/blog" component={Blog} />
               <Route path="/confirm" component={Confirm} />
               <Route path="/faq" component={Faq} />
               <Route path="/imprint" component={Imprint} />

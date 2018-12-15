@@ -1,0 +1,35 @@
+.blog__icon {
+  float: right;
+  margin-top: 8px;
+  width: 30px;
+  height: 30px;
+  transform: rotateZ(-90deg);
+  transition: transform 0.125s ease-in-out;
+}
+.blog__link:hover .blog__icon ,
+.blog__link:active .blog__icon {
+  transform: rotateZ(-90deg) translateY(10px);
+}
+
+.blog__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.blog__link {
+  color: var(--theme-primary-color-dark);
+}
+
+.blog__link:hover,
+.blog__link:active {
+  color: var(--theme-primary-color);
+  text-decoration: none;
+}
+
+.blog__link__title {
+  border-bottom: 1px solid var(--theme-primary-color);
+  cursor: pointer;
+  padding: 10px 0;
+}
+

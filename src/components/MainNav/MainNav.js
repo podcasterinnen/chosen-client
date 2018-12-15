@@ -90,6 +90,16 @@ class MainNav extends Component {
               Über uns
             </NavLink>
           </li>
+          <li className="mainnav__list__element">
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link"
+              exact
+              to="/blog"
+            >
+              Blog
+            </NavLink>
+          </li>
           { sessionState === 'LOGGED_IN' &&
             <li className="mainnav__list__element mainnav__list__element--right">
               <NavLink
