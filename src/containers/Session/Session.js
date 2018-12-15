@@ -286,8 +286,6 @@ class Session extends Component {
           </form>
         }
         { (sessionState === REGISTERED ||
-          sessionState === FORGOT_PASSWORD_IN_PROGRESS ||
-          sessionState === REGISTRATION_IN_PROGRESS ||
           sessionState === FORGOT_PASSWORD_SUCCESS ||
           sessionState === REGISTER_SUCCESS ||
           sessionState === INVALID) &&
