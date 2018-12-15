@@ -51,7 +51,7 @@ const requestProfile = () => ({
 export const submitProfile = (object) => {
   return (dispatch) => {
     let data = new FormData()
-    let id = object.id
+    let id = localStorage.getItem(LOCAL_STORAGE_USER_ID)
     let file = object.avatar
     
     // remove avatar from profile object

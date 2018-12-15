@@ -84,10 +84,11 @@ export const setSessionState = (newState) => ({
 export const loginUser = (emailAddress, password) => {
   return (dispatch) => {
     dispatch(loginRequest())
-    const data =  {
+    const data = {
       session: {
         email: emailAddress,
         password: password,
+        remember_me: true,
       }
     }
     return fetch(API_URL_SESSIONS, {
