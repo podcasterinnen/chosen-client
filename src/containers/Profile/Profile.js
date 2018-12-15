@@ -359,22 +359,25 @@ class Profile extends Component {
       <section className="profile main__section">
         { (state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR') &&
           <div>
-            { isEditable && (profile && profile.bio_short && profile.podcasts.length) && 
+            { (!profile || !profile.bio_short || !profile.podcasts.length) &&
+              <div className="profile-form__banner">
+                <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Podcasterinnen-Profil zu vervollständigen.</p>
+              </div>
+            }
+            { isEditable && 
               <div className="message-container message-container--align-right">
                 <button className="button button--decent" onClick={this.handleEditToggle}>Profil Bearbeiten</button>
               </div>
             }
-            { (profile && profile.bio_short && profile.podcasts.length) &&
-              <ProfilePage
-                profile={profile}
-              ></ProfilePage>
-            }
+            <ProfilePage
+              profile={profile}
+            ></ProfilePage>
           </div>
         }
         { state === 'STATE_SENDING_REQUEST' &&
           <p>Profil wird bearbeitet ...</p>
         }
-        { (state === 'STATE_EDITING' || (!profile || !profile.bio_short || !profile.podcasts.length)) &&
+        { (state === 'STATE_EDITING') &&
           <ProfileForm
             bioShortCharactersRemaining={bioShortCharactersRemaining}
             handleAddLanguagesInput={this.handleAddLanguagesInput}

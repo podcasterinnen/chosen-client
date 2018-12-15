@@ -18,7 +18,7 @@ class ProfileForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (nextProps.imgUrlPreview) {
-      this.setState({ showPreview: true }, () => { console.log(this.state)})
+      this.setState({ showPreview: true })
     }
   }
   
@@ -53,11 +53,6 @@ class ProfileForm extends Component {
 
     return(
       <div>
-        { (!profile || !profile.bio_short || !profile.podcasts.length) &&
-          <div className="profile-form__banner">
-            <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Podcasterinnen-Profil zu vervollständigen.</p>
-          </div>
-        }
         <h2>Bearbeite dein Profil:</h2>
         <form onSubmit={(e) => handleSubmit(e)}>
           { (profile && profile.bio_short && profile.podcasts.length) &&
