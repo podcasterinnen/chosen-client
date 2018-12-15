@@ -127,7 +127,6 @@ class Podcasterinnen extends Component {
           render={() => {
             return (
               <section className="Podcasterinnen main__section main__section--wide">
-                <h1>Podcasterinnen</h1>
                 <form role="search" className="podcasterinnen__search">
                   <label className="podcasterinnen__search__label">Suche</label>
                   <Creatable

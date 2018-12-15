@@ -42,7 +42,7 @@ class Faq extends Component {
             </div>
           )
         })}
-        <h1>In wenigen Schritten zu deinem Profil.</h1>
+        <h2>In wenigen Schritten zu deinem Profil.</h2>
         <h3>1. Registrieren</h3>
         <p>Zuerst musst du dich bei podcasterinnen.org registrieren. Dafür klicke auf unserer Startseite auf den Button <strong>„Mitmachen“</strong>. Dort findest du den Login- und den Registrierungsbereich. Gib nun deinen Vornamen/Nickname an, deine E-Mail-Adresse und zwei Mal dein Passwort, welches mindestens 12 Zeichen haben muss. Dann klicke auf <strong>„Registrieren“</strong>.</p>
         <p>Du bekommst nun eine E-Mail an die von dir eingegebene Adresse mit einem Bestätigungslink. Klicke auf den Link und du wirst automatisch auf die Seite von podcasterinnen.org zurückgeleitet. Nun musst du dich einloggen. Diesmal gibst du also unter <strong>„Login“</strong> deine E-Mail-Adresse und dein Passwort ein. Jetzt kannst du mit dem Ausfüllen deines Profils beginnen.</p>

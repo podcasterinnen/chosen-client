@@ -28,7 +28,7 @@ class Blog extends Component {
                 <li key={article.id}>
                   <Link className="blog__link" to={`blog/${article.date}`}>
                     <span className="blog__icon"><img src={iconArrow}></img></span>
-                    <h3 className="blog__link__title">{article.date} - {article.title}</h3>
+                    <h3 className="blog__link__title">{article.date} · {article.title}</h3>
                   </Link>
                 </li>
                 ))}

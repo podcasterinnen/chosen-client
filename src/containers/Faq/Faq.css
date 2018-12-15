@@ -14,11 +14,17 @@
   padding: 10px 0;
 }
 
+.faq__accordeon__headline:hover,
+.faq__accordeon__headline:active {
+  color: var(--theme-primary-color);
+}
+
 .faq__accordeon__icon {
   float: right;
   margin-top: 8px;
   width: 30px;
   height: 30px;
+  transition: transform 0.125s ease-in-out;
 }
 
 .faq__accordeon--active .faq__accordeon__icon {
