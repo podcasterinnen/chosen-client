@@ -340,6 +340,7 @@ class Profile extends Component {
         }
       }
     })
+    newTags = newTags.filter((entry) => (entry.trim() != ''))
     this.setState({
       profile: {...this.state.profile, tags: newTags},
     })
@@ -359,7 +360,7 @@ class Profile extends Component {
       <section className="profile main__section">
         { (state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR') &&
           <div>
-            { (!profile || !profile.bio_short || !profile.podcasts.length) &&
+            { (!profile || !profile.bio_short || !profile.podcasts.length || profile.podcasts[0].name === '') &&
               <div className="profile-form__banner">
                 <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Podcasterinnen-Profil zu vervollständigen.</p>
               </div>
