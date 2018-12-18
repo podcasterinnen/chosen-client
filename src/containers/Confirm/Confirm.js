@@ -6,6 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import './Confirm.css'
 import { confirmEmail, initialiseConfirm } from './ConfirmActions'
+import { REGISTERED, LOGGED_IN } from '../../utils/types'
 
 class Confirm extends Component {
   componentDidMount() {
@@ -30,7 +31,7 @@ class Confirm extends Component {
           <p>Deine E-Mail-Adresse konnte leider nicht verifiziert werden. Schreibe uns gerne eine E-Mail an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>. Wir versuchen das Problem so schnell wie möglich zu beheben.</p>
         }
         { confirmState === 'SUCCESS' &&
-          <p>Deine E-Mail-Adresse wurde erfolgreich verifiziert. <Link to="/session">Logge dich ein</Link>, um dein Profil anzulegen und zu bearbeiten.</p>
+          <p>Deine E-Mail-Adresse wurde erfolgreich verifiziert. <Link to={{ pathname: '/session', state: { sessionState: LOGGED_IN }}}>Logge dich ein</Link>, um dein Profil anzulegen und zu bearbeiten.</p>
         }
       </section>
     )

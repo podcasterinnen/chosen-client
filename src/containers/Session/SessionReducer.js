@@ -19,6 +19,8 @@ const reducer = (store = defaultStore, action) => {
     let state = UNKNOWN
     if (localStorage.getItem(LOCAL_STORAGE_USER_ID)) {
       state = LOGGED_IN
+    } else if (action.payload === true) {
+      state = REGISTERED
     }
     return {...store, sessionState: state}
   case 'LOGIN_SUCCESS':

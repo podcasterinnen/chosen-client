@@ -21,7 +21,8 @@ const REGISTER_REQUEST = 'REGISTER_REQUEST'
 const SESSION_ERROR = 'SESSION_ERROR'
 const SET_SESSION_STATE = 'SET_SESSION_STATE'
 
-export const initialiseSession = () => ({
+export const initialiseSession = (wasRedirected = false) => ({
+  payload: wasRedirected,
   type: INITIALISE_SESSION,
 })
 

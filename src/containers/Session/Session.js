@@ -40,7 +40,9 @@ class Session extends Component {
   }
   
   componentDidMount() {
-    this.props.handleInitSession()
+    const wasRedirected = (this.props.location.state && this.props.location.state.sessionState === LOGGED_IN) ? true : false
+    this.props.handleInitSession(wasRedirected)
+
   }
   
   handleChange = (e, type) => {
@@ -365,8 +367,8 @@ Session.defaultProps = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleInitSession: () => {
-    dispatch(initialiseSession())
+  handleInitSession: (wasRedirected) => {
+    dispatch(initialiseSession(wasRedirected))
   },
   handleLoginNewUser: (emailAdress, password) => {
     dispatch(loginUser(emailAdress, password))

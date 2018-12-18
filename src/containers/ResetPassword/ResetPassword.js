@@ -7,6 +7,7 @@ import { Link, withRouter } from 'react-router-dom'
 import './ResetPassword.css'
 import { resetPassword, initialiseResetPassword } from './ResetPasswordActions'
 import { MIN_PASSWORD_LENGTH } from '../../config/config'
+import { LOGGED_IN } from '../../utils/types'
 
 class ResetPassword extends Component {
   constructor(props) {
@@ -132,7 +133,7 @@ class ResetPassword extends Component {
           <p>Dein neues Passwort konnte leider nicht angelegt werden. Schreibe uns gerne eine E-Mail an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a>. Wir versuchen das Problem so schnell wie möglich zu beheben.</p>
         }
         { resetPasswordState === 'SUCCESS' &&
-          <p>Dein neues Passwort wurde erfolgreich gespeichert. <Link to="/session">Logge dich ein</Link>, um dein Profil anzulegen und zu bearbeiten.</p>
+          <p>Dein neues Passwort wurde erfolgreich gespeichert. <Link to={{ pathname: '/session', state: { sessionState: LOGGED_IN }}}>Logge dich ein</Link>, um dein Profil anzulegen und zu bearbeiten.</p>
         }
       </section>
     )
