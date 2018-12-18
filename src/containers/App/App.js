@@ -31,6 +31,7 @@ class App extends Component {
         <div className="app__ball app__ball--bottom"></div>
         <section className="app-cta main__section">
           <h1 className="title app__headline">podcasterinnen.org</h1>
+          <h2 className="title--small app__headline--small">Podcasterinnen und nicht-binäre Podcastpersonen hinter dem Mikro und auf der Bühne.</h2>
           <p className="subtitle app__subtitle">Du bist Podcasterin? Eine nicht-binäre Podcastperson? Du machst einen eigenen Podcast, besitzt Expertise zu einem besonderen Thema? Dann bist du hier richtig. Wir möchten mit podcasterinnen.org zeigen, wie vielfältig Podcasts sind.</p>
           <p className="app__cta"><Link className="button button--cta app__button" to="/session">Mitmachen</Link></p>
           <p className="app-cta__text">Podcasterinnen und nicht-binäre Podcastpersonen gibt es viele, doch leider sind sie selten zu Gast auf Bühnen, in Podcasts oder bei Workshops. Du bist Podcaster:in und suchst für ein Thema eine Podcastperson? Du bist Veranstalter:in und suchst nicht-binäre Podcastende oder eine Podcasterin für einen Vortrag oder einen Workshop? Bestimmt findest du sie hier.</p>

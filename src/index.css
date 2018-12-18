@@ -109,13 +109,10 @@ h2 {
 }
 
 .subtitle {
-  color: var(--theme-primary-color);
   font-size: 16px;
   font-weight: 700;
-  letter-spacing: 1px;
   line-height: 1.375em;
   text-align: center;
-  text-transform: uppercase;
 }
 @media screen and (min-width: 600px) {
   .subtitle {
@@ -138,6 +135,26 @@ h2 {
   }
 }
 
+.title--small {
+  color: var(--theme-primary-color);
+  font-family: "Quattrocento", sans-serif;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1.5em;
+  text-align: center;
+  text-transform: uppercase;
+}
+@media screen and (min-width: 600px) {
+  .title--small {
+    font-size: 26px;
+  }
+}
+@media screen and (min-width: 800px) {
+  .title--small {
+    font-size: 26px;
+  }
+}
 /* GENERAL FORM STYLES */
 button {
   background-color: transparent;
