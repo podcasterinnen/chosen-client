@@ -13,7 +13,7 @@ class BlogArticle extends Component {
 
   componentDidMount = () => {
     for (const article of articles) {
-      if (article.date === this.props.match.params.id) {
+      if (article.url === this.props.match.params.id) {
         this.setState({ article: article })
       }
     }
