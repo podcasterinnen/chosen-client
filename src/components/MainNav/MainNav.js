@@ -67,7 +67,7 @@ class MainNav extends Component {
               exact
               to="/podcasterinnen"
             >
-              Podcasterinnen
+              Profile
             </NavLink>
           </li>
           <li className="mainnav__list__element">
