@@ -362,7 +362,7 @@ class Profile extends Component {
           <div>
             { (!profile || !profile.bio_short || !profile.podcasts.length || profile.podcasts[0].name === '') &&
               <div className="profile-form__banner">
-                <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Podcasterinnen-Profil zu vervollständigen.</p>
+                <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Profil zu vervollständigen.</p>
               </div>
             }
             { isEditable && 

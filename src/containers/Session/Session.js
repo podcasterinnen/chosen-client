@@ -40,9 +40,7 @@ class Session extends Component {
   }
   
   componentDidMount() {
-    const wasRedirected = (this.props.location.state && this.props.location.state.sessionState === LOGGED_IN) ? true : false
-    this.props.handleInitSession(wasRedirected)
-
+    this.props.handleInitSession()
   }
   
   handleChange = (e, type) => {
@@ -189,7 +187,7 @@ class Session extends Component {
           sessionState === FORGOT_PASSWORD_SUCCESS) &&
         <div className="session__message-container">
           <p>
-            Liebe Podcastperson, liebe Podcasterin,
+            Liebe Podcasterin, liebe Podcastperson,
           </p>
           <p>
             wir haben dir gerade eine E-Mail an deine angegebene Adresse verschickt. Sobald du die E-Mail erhalten hast, klicke bitte auf den Link. Du wirst automatisch zu podcasterinnen.org weitergeleitet, damit du ein neues Passwort anlegen kannst. Danach kannst du dich mit deinem neuen Passwort anmelden.
@@ -367,8 +365,8 @@ Session.defaultProps = {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  handleInitSession: (wasRedirected) => {
-    dispatch(initialiseSession(wasRedirected))
+  handleInitSession: () => {
+    dispatch(initialiseSession())
   },
   handleLoginNewUser: (emailAdress, password) => {
     dispatch(loginUser(emailAdress, password))
