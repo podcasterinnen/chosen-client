@@ -5,6 +5,7 @@
   /* --theme-secondary-color: #A75F5F; */
   /* --theme-secondary-color: #5FA783; */
   --theme-secondary-color: #A75F83;
+  --theme-secondary-color-dark: #844866;
   --theme-secondary-color-light: #E8DDE2;
   --theme-light-color: #F6FBFF;
   --theme-light-color-grey: #B7BFC8;
@@ -169,9 +170,12 @@ button {
   background-color: var(--theme-primary-color);
   border: none;
   border-radius: 4px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
   cursor: pointer;
   display: inline-block;
   padding: 10px 30px;
+
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
 
 .button:active,
@@ -181,11 +185,19 @@ button {
   text-decoration: none;
   
   background-color: var(--theme-primary-color-dark);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   outline: none;
+  transform: translateY(1px);
 }
 
 .button--cta {
   background-color: var(--theme-secondary-color);
+}
+
+.button--cta:active,
+.button--cta:focus,
+.button--cta:hover {
+  background-color: var(--theme-secondary-color-dark);
 }
 
 .button--decent {

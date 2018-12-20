@@ -16,6 +16,7 @@ import Privacy from '../../containers/Privacy/Privacy'
 import Profile from '../../containers/Profile/Profile'
 import ResetPassword from '../../containers/ResetPassword/ResetPassword'
 import Session from '../../containers/Session/Session'
+import Why from '../../containers/Why/Why'
 
 import FooterNav from '../FooterNav/FooterNav'
 import MainNav from '../MainNav/MainNav'
@@ -83,6 +84,7 @@ class PodcasterinnenRouter extends Component {
               <Route path="/privacy" component={Privacy} />
               <PrivateRoute sessionState={sessionState} path="/profile" component={Profile} />
               <Route path="/session" component={Session} />
+              <Route path="/why" component={Why} />
               <Route component={NotFound} />
             </Switch>
             <FooterNav></FooterNav>

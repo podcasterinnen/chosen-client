@@ -1,0 +1,40 @@
+.why__button {
+  font-size: 12px;
+  line-height: 1em;
+
+  background-color: var(--theme-secondary-color);
+  border-radius: 50%;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  cursor: pointer;
+  display: block;
+  margin: 0 auto 50px auto;
+  padding: 20px 0 0 0;
+  position: relative;
+  width: 80px;
+  height: 80px;
+
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.why__button::after {
+  border: 0;
+  border-color: transparent transparent transparent var(--theme-light-color);
+  border-style: solid;
+  border-width: 13px 0 13px 20px;
+  background: transparent;
+  box-sizing: border-box;
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  top: 27px;
+  left: 32px;
+  width: 0;
+  height: 24px;
+
+  transition: 100ms all ease;
+}
+
+.why__button--is-playing::after {
+  border-style: double;
+  border-width: 0px 0 0px 16px;
+}
