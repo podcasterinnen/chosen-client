@@ -59,6 +59,7 @@
 
 .mainnav__list__element {
   border-bottom: 1px solid rgba(255,255,255,0.3);
+  cursor: pointer;
 }
 
 @media screen and (min-width: 800px) {
@@ -70,6 +71,10 @@
 
     transform: translateX(0);
   }
+}
+
+.mainnav__list__element--hidden {
+  display: none;
 }
 
 /* .mainnav__list__element--right {} */

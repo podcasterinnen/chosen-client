@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { NavLink, withRouter } from 'react-router-dom'
+import { NavLink, Redirect, withRouter } from 'react-router-dom'
 
 import './MainNav.css'
 import { initialiseSession, logoutUser } from '../../containers/Session/SessionActions'
@@ -11,6 +11,7 @@ class MainNav extends Component {
     super(props)
     this.state = {
       menuIsOpen: false,
+      wasLoggedOut: false,
     }
   }
 
@@ -22,6 +23,7 @@ class MainNav extends Component {
 
   handleLogout = (e) => {
     this.props.handleLogoutUser()
+    this.setState({ wasLoggedOut: true })
   }
 
   handleMenuClick = (e) => {
@@ -39,7 +41,7 @@ class MainNav extends Component {
 
   render() {
     const { sessionState } = this.props
-    const { menuIsOpen } = this.state
+    const { menuIsOpen, wasLoggedOut } = this.state
 
     return(
       <nav role="navigation" className="mainnav">
@@ -112,7 +114,7 @@ class MainNav extends Component {
               </NavLink>
             </li>
           }
-          <li className={( sessionState === 'LOGGED_IN') ? 'mainnav__list__element mainnav__list__element--rightest' : 'mainnav__list__element mainnav__list__element--right'}>
+          <li className={( sessionState === 'LOGGED_IN') ? 'mainnav__list__element mainnav__list__element--rightest mainnav__list__element--hidden' : 'mainnav__list__element mainnav__list__element--right'}>
             <NavLink
               activeClassName="mainnav__list__element__link--active"
               className="mainnav__list__element__link"
@@ -128,11 +130,18 @@ class MainNav extends Component {
               { sessionState === 'REGISTERED' &&
                 <span>Login</span>
               }
-              { sessionState === 'LOGGED_IN' &&
-                <span onClick={this.handleLogout}>Logout</span>
-              }
             </NavLink>
           </li>
+          <li className={( sessionState === 'LOGGED_IN') ? 'mainnav__list__element mainnav__list__element--rightest' : 'mainnav__list__element mainnav__list__element--rightest mainnav__list__element--hidden'}>
+              { sessionState === 'LOGGED_IN' &&
+                <span className="mainnav__list__element__link">
+                  <span onClick={this.handleLogout}>Logout</span>
+                  { wasLoggedOut &&
+                  <Redirect to="/" />
+                  }
+                </span>
+              }
+            </li>
         </ol>
       </nav>
     )
