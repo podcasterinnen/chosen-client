@@ -203,6 +203,14 @@ button {
 .button--decent {
   background-color: var(--theme-light-color-grey);
   border: 1px solid var(--theme-light-color-grey);
+  box-shadow: none;
+}
+
+.button--decent:active,
+.button--decent:focus,
+.button--decent:hover {
+  box-shadow: none;
+  transform: translateY(0);
 }
 
 .button--icon {
@@ -216,6 +224,7 @@ button {
   color: var(--theme-color-grey);
 
   background-color: var(--theme-light-color-grey);
+  box-shadow: none;
   cursor: inherit;
 }
 
