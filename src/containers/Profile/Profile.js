@@ -347,7 +347,10 @@ class Profile extends Component {
   }
 
   render() {
-    const { state } = this.props
+    const { 
+      location,
+      state,
+    } = this.props
     const { 
       bioShortCharactersRemaining,
       imgUrlPreview,
@@ -358,7 +361,10 @@ class Profile extends Component {
 
     return (
       <section className="profile main__section">
-        { (state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR') &&
+        { (
+            state === 'STATE_DEFAULT' || state === 'STATE_REQUEST_SUCCESSFUL' || state === 'STATE_REQUEST_ERROR' ||
+            (state === 'STATE_EDITING' && location.pathname !== '/profile')
+          ) &&
           <div>
             { (!profile || !profile.bio_short || !profile.podcasts.length || profile.podcasts[0].name === '') &&
               <div className="profile-form__banner">
@@ -378,7 +384,7 @@ class Profile extends Component {
         { state === 'STATE_SENDING_REQUEST' &&
           <p>Profil wird bearbeitet ...</p>
         }
-        { (state === 'STATE_EDITING') &&
+        { (state === 'STATE_EDITING' && location.pathname === '/profile') &&
           <ProfileForm
             bioShortCharactersRemaining={bioShortCharactersRemaining}
             handleAddLanguagesInput={this.handleAddLanguagesInput}
