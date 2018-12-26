@@ -110,7 +110,7 @@ class MainNav extends Component {
                 exact
                 to="/profile"
               >
-                Profil
+                Mein Profil
               </NavLink>
             </li>
           }
