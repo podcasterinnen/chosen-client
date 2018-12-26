@@ -68,6 +68,7 @@ class ProfileForm extends Component {
           <div className="profile__avatar-dropzone">
             <label>
               Profilbild
+              <Tooltip content="Verwende bitte ein Bild, das kein Leerzeichen im Format hat. Wir versuchen die Einschränkung möglichst schnell loszuwerden."></Tooltip>
             </label>
             <Dropzone
               onDrop={(files) => handleAvatarDrop(files)}
