@@ -64,7 +64,7 @@ class Profile extends Component {
     } else {
       for (let podcasterin of this.props.podcasterinnen) {
         // FIX: type handling
-        if (podcasterin.id == this.props.match.params.id) {
+        if (podcasterin.forename == this.props.match.params.id) {
           document.title = `${podcasterin.forename} – podcasterinnen.org`
           this.setState({
             profile: podcasterin,
@@ -107,7 +107,7 @@ class Profile extends Component {
     } else {
       for (let podcasterin of nextProps.podcasterinnen) {
         // TODO: fix type error
-        if (podcasterin.id == this.props.match.params.id) {
+        if (podcasterin.id == this.props.location.state.id) {
           document.title = `${podcasterin.forename} – podcasterinnen.org`
           this.setState({
             profile: podcasterin,

@@ -49,7 +49,7 @@ class PodcasterinnenCard extends Component {
               </ul>
             </div>
           }
-          <Link className="card__link" to={`podcasterinnen/${item.id}`}>Mehr über {item.forename}</Link>
+          <Link className="card__link" to={{ pathname: `podcasterinnen/${item.forename.replace(/\s+/g, '-').toLowerCase()}-${item.podcasts[0].name.replace(/\s+/g, '-').toLowerCase()}`, state: { id: item.id }}}>Mehr über {item.forename}</Link>
         </div>
       </div>
     )
