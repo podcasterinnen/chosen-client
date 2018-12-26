@@ -351,6 +351,7 @@ class Profile extends Component {
   render() {
     const { 
       location,
+      match,
       state,
     } = this.props
     const { 
@@ -361,6 +362,8 @@ class Profile extends Component {
       staticTags,
     } = this.state
 
+    console.log(this.props)
+
     return (
       <section className="profile main__section">
         { (
@@ -368,7 +371,8 @@ class Profile extends Component {
             (state === 'STATE_EDITING' && location.pathname !== '/profile')
           ) &&
           <div>
-            { (!profile || !profile.bio_short || !profile.podcasts.length || profile.podcasts[0].name === '') &&
+            { (!profile || !profile.bio_short || !profile.podcasts.length || profile.podcasts[0].name === '' &&
+              location.pathname === '/profile') &&
               <div className="profile-form__banner">
                 <p className="profile-form__banner__text">Es sieht so aus als wäre dein Profil noch nicht ausgefüllt. Beginne doch damit, dein Profil zu vervollständigen.</p>
               </div>
