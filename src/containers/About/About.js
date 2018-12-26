@@ -7,6 +7,10 @@ import photoMichaela from './michaela_400x400.jpg'
 import photoNele from './nele_400x400.jpg'
 
 class About extends Component {
+  
+  componentDidMount = () => {
+    document.title = 'Über uns  – podcasterinnen.org'
+  }
 
   render() {
     return (

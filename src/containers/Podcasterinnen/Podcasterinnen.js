@@ -62,6 +62,9 @@ class Podcasterinnen extends Component {
   componentDidMount = () => {
     this.props.handleInitPodcasterinnen()
     this.initCreatables()
+    if (this.props.location.pathname === '/podcasterinnen') {
+      document.title = `Profile – podcasterinnen.org`
+    }
   }
 
   handleChange = (selectedOption) => {

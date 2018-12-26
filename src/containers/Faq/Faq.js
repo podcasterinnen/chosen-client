@@ -14,6 +14,10 @@ class Faq extends Component {
     this.handleClick = this.handleAccordeonClick.bind(this)
   }
 
+  componentDidMount = () => {
+    document.title = 'FAQs – podcasterinnen.org'
+  }
+
   handleAccordeonClick = (selectedId) => {
     if (this.state.selectedId !== selectedId) {
       this.setState({ selectedId })

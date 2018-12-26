@@ -9,6 +9,7 @@ import { confirmEmail, initialiseConfirm } from './ConfirmActions'
 import { REGISTERED, LOGGED_IN } from '../../utils/types'
 
 class Confirm extends Component {
+
   componentDidMount() {
     const key = querySearch(this.props.location.search, { ignoreQueryPrefix: true }).key
     this.props.handleInitConfirm()
@@ -17,6 +18,7 @@ class Confirm extends Component {
     if (key && typeof key === 'string') {
       this.props.handleEmailConfirmation(key)
     }
+    document.title = 'podcasterinnen.org'
   }
 
   render() {

@@ -41,6 +41,7 @@ class Session extends Component {
   
   componentDidMount() {
     this.props.handleInitSession()
+    document.title = 'podcasterinnen.org'
   }
   
   handleChange = (e, type) => {

@@ -4,6 +4,10 @@ import './Imprint.css'
 
 class Imprint extends Component {
 
+  componentDidMount = () => {
+    document.title = 'Impressum – podcasterinnen.org'
+  }
+
   render() {
     return (
       <section className="imprint main__section">

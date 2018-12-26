@@ -4,6 +4,10 @@ import './Privacy.css'
 
 class Privacy extends Component {
 
+  componentDidMount = () => {
+    document.title = 'Datenschutzerklärung – podcasterinnen.org'
+  }
+
   render() {
     return (
       <section className="main__section">

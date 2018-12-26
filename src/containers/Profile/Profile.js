@@ -55,11 +55,12 @@ class Profile extends Component {
 
   componentDidMount() {
     const match = this.props.match
-    if (this.props.match.path === '/profile') {
+    if (this.props.location.pathname === '/profile') {
       this.props.handleInitProfile(match)
       this.setState({
         isEditable: true,
       })
+      document.title = 'Mein Profil – podcasterinnen.org'
     } else {
       for (let podcasterin of this.props.podcasterinnen) {
         // FIX: type handling
@@ -105,6 +106,7 @@ class Profile extends Component {
       for (let podcasterin of nextProps.podcasterinnen) {
         // TODO: fix type error
         if (podcasterin.id == this.props.match.params.id) {
+          document.title = `${podcasterin.forename} – podcasterinnen.org`
           this.setState({
             profile: podcasterin,
           })

@@ -8,6 +8,10 @@ import BlogArticle from '../../components/BlogArticle/BlogArticle'
 
 class Blog extends Component {
 
+  componentDidMount = () => {
+    document.title = 'Blog – podcasterinnen.org'
+  }
+
   render() {
     const { match } = this.props
 

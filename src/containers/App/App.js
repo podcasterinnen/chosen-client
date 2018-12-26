@@ -9,8 +9,10 @@ import PodcasterinnenCard from '../../components/PodcasterinnenCard/Podcasterinn
 import { generateKey } from '../../utils/utils'
 
 class App extends Component {
+
   componentDidMount = () => {
     this.props.handleInitPodcasterinnen()
+    document.title = 'podcasterinnen.org'
   }
 
   sortPodcasterinnen = (a, b) => {

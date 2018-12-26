@@ -5,6 +5,10 @@ import './NotFound.css'
 
 class NotFound extends Component {
 
+  componentDidMount = () => {
+    document.title = 'Nicht gefunden – podcasterinnen.org'
+  }
+
   render() {
     return (
       <section className="notfound main__section">

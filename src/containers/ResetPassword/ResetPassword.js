@@ -24,6 +24,7 @@ class ResetPassword extends Component {
 
   componentDidMount() {
     this.props.handleInitResetPassword()
+    document.title = 'Passwort zurücksetzen – podcasterinnen.org'
   }
 
   handleChange = (e, type) => {
