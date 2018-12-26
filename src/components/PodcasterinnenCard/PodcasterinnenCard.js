@@ -15,7 +15,9 @@ class PodcasterinnenCard extends Component {
 
     return(
       <div className="card">
-        <div className="card__avatar" style={(item.avatar !== null && item.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${item.avatar})`} : {backgroundImage: 'none'}}></div>
+        <Link className="card__link" to={{ pathname: `podcasterinnen/${item.forename.replace(/\s+/g, '-').toLowerCase()}-${item.podcasts[0].name.replace(/\s+/g, '-').toLowerCase()}`, state: { id: item.id }}}>
+          <div className="card__avatar" style={(item.avatar !== null && item.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${item.avatar})`} : {backgroundImage: 'none'}}></div>
+        </Link>
         <div className="card__text">
           <h3 className="card__title">{item.forename} {item.surname}</h3>
           { item.bio_short &&
