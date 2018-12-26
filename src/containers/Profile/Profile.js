@@ -63,15 +63,31 @@ class Profile extends Component {
       document.title = 'Mein Profil – podcasterinnen.org'
     } else {
       for (let podcasterin of this.props.podcasterinnen) {
-        // FIX: type handling
-        if (podcasterin.forename == this.props.match.params.id) {
-          document.title = `${podcasterin.forename} – podcasterinnen.org`
-          this.setState({
-            profile: podcasterin,
-          })
-        }
+        this.checkForProfile(podcasterin)
       }
     }
+  }
+
+  checkForProfile = (podcasterin) => {
+    console.log(this.props, podcasterin)
+    if (
+        (podcasterin &&
+        podcasterin.podcasts &&
+        this.props.location.pathname === `/podcasterinnen/${podcasterin.forename.replace(/\s+/g, '-').toLowerCase()}-${podcasterin.podcasts[0].name.replace(/\s+/g, '-').toLowerCase()}`) ||
+        (this.props.location.state &&
+        podcasterin &&
+        podcasterin.id == this.props.location.state.id)
+      ) {
+      document.title = `${podcasterin.forename} – podcasterinnen.org`
+      this.setState({
+        profile: podcasterin,
+      })
+    } else if (window.location.pathname === `/podcasterinnen/${podcasterin.id}`) {
+      console.log(window.location)
+      // redirect old profiles
+      window.location.replace(`/podcasterinnen/${podcasterin.forename.replace(/\s+/g, '-').toLowerCase()}-${podcasterin.podcasts[0].name.replace(/\s+/g, '-').toLowerCase()}`)
+    }
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -107,12 +123,7 @@ class Profile extends Component {
     } else {
       for (let podcasterin of nextProps.podcasterinnen) {
         // TODO: fix type error
-        if (podcasterin.id == this.props.location.state.id) {
-          document.title = `${podcasterin.forename} – podcasterinnen.org`
-          this.setState({
-            profile: podcasterin,
-          })
-        }
+        this.checkForProfile(podcasterin)
       }
     }
   }
