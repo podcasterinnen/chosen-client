@@ -2,6 +2,7 @@
   "name": "chosen-client",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://podcasterinnen.org",
   "dependencies": {
     "axios": "^0.18.0",
     "normalize.css": "^8.0.0",
@@ -19,7 +20,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=development react-scripts start",
-    "build": "react-scripts build",
+    "build": "PUBLIC_URL=https://podcasterinnen.org react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "./node_modules/.bin/eslint src"
