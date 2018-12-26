@@ -65,6 +65,7 @@ class Profile extends Component {
       for (let podcasterin of this.props.podcasterinnen) {
         // FIX: type handling
         if (podcasterin.id == this.props.match.params.id) {
+          document.title = `${podcasterin.forename} – podcasterinnen.org`
           this.setState({
             profile: podcasterin,
           })
@@ -99,6 +100,7 @@ class Profile extends Component {
         }
       })
       this.setState({ profile: newProfile })
+      document.title = `${newProfile.forename} – podcasterinnen.org`
       if (newProfile.bio_short) {
         this.setState({ bioShortCharactersRemaining: 255 - newProfile.bio_short.length })
       }
@@ -351,7 +353,6 @@ class Profile extends Component {
   render() {
     const { 
       location,
-      match,
       state,
     } = this.props
     const { 
@@ -361,8 +362,6 @@ class Profile extends Component {
       profile, 
       staticTags,
     } = this.state
-
-    console.log(this.props)
 
     return (
       <section className="profile main__section">
