@@ -345,7 +345,10 @@ class ProfileForm extends Component {
               <label 
                 className="label label--checkbox"
                 htmlFor="remotePossible"
-              >Ich kann remote aufnehmen.</label>
+              >
+                Ich kann remote aufnehmen.
+                <Tooltip content="Klicke hier, wenn du Podcasts auch über Distanz aufnehmen kannst."></Tooltip>
+              </label>
             </div>
             <div>
               <input 
