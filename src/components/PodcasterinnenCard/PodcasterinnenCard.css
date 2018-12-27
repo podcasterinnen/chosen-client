@@ -45,12 +45,16 @@
 
 .card__list__item {
   list-style: none;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 
   background-color: var(--theme-light-color);
   border-radius: 2px;
   display: inline-block;
-  margin: 5px;
+  margin: 4px;
   padding: 3px 14px 2px 14px;
+  overflow: hidden;
+  max-width: 240px;
 }
 
 .card__subtitle {
