@@ -8,7 +8,8 @@ import './PodcasterinnenCard.css'
 class PodcasterinnenCard extends Component {
 
   render() {
-    const { item, match } = this.props
+    const { item } = this.props
+
     if (item.avatar !== null && item.avatar !== '') {
       // do something
     }
@@ -51,7 +52,7 @@ class PodcasterinnenCard extends Component {
               </ul>
             </div>
           }
-          <Link className="card__link" to={{ pathname: `podcasterinnen/${item.forename.replace(/\s+/g, '-').toLowerCase()}-${item.podcasts[0].name.replace(/\s+/g, '-').toLowerCase()}`, state: { id: item.id }}}>Mehr über {item.forename}</Link>
+          <Link className="card__link" to={{ pathname: `podcasterinnen/${item.forename.replace(/\s+/g, '-').toLowerCase()}-${item.podcasts[0].name.replace(/–|-/g, ' ').replace(/\s+/g, '-').toLowerCase()}`, state: { id: item.id }}}>Mehr über {item.forename}</Link>
         </div>
       </div>
     )

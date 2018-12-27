@@ -69,11 +69,10 @@ class Profile extends Component {
   }
 
   checkForProfile = (podcasterin) => {
-    console.log(this.props, podcasterin)
     if (
         (podcasterin &&
         podcasterin.podcasts &&
-        this.props.location.pathname === `/podcasterinnen/${podcasterin.forename.replace(/\s+/g, '-').toLowerCase()}-${podcasterin.podcasts[0].name.replace(/\s+/g, '-').toLowerCase()}`) ||
+        this.props.location.pathname === `/podcasterinnen/${podcasterin.forename.replace(/\s+/g, '-').toLowerCase()}-${podcasterin.podcasts[0].name.replace(/–|-/g, ' ').replace(/\s+/g, '-').toLowerCase()}`) ||
         (this.props.location.state &&
         podcasterin &&
         podcasterin.id == this.props.location.state.id)
@@ -83,9 +82,8 @@ class Profile extends Component {
         profile: podcasterin,
       })
     } else if (window.location.pathname === `/podcasterinnen/${podcasterin.id}`) {
-      console.log(window.location)
       // redirect old profiles
-      window.location.replace(`/podcasterinnen/${podcasterin.forename.replace(/\s+/g, '-').toLowerCase()}-${podcasterin.podcasts[0].name.replace(/\s+/g, '-').toLowerCase()}`)
+      window.location.replace(`/podcasterinnen/${podcasterin.forename.replace(/\s+/g, '-').toLowerCase()}-${podcasterin.podcasts[0].name.replace(/–|-/g, ' ').replace(/\s+/g, '-').toLowerCase()}`)
     }
 
   }
