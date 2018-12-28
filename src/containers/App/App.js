@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { Link, withRouter } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
 
 import './App.css'
 import { initialisePodcasterinnen } from '../Podcasterinnen/PodcasterinnenActions'
@@ -9,10 +9,24 @@ import PodcasterinnenCard from '../../components/PodcasterinnenCard/Podcasterinn
 import { generateKey } from '../../utils/utils'
 
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      tagQuery: null,
+      toPodcasterinnen: false,
+    }
+  }
 
   componentDidMount = () => {
     this.props.handleInitPodcasterinnen()
     document.title = 'podcasterinnen.org'
+  }
+
+  handleTagSearch = (query) => {
+    this.setState({ 
+      tagQuery: query,
+      toPodcasterinnen: true,
+    })
   }
 
   sortPodcasterinnen = (a, b) => {
@@ -25,7 +39,12 @@ class App extends Component {
 
   render() {
     const { podcasterinnen } = this.props
+    const { toPodcasterinnen, tagQuery } = this.state
     let count = 0
+
+    if (toPodcasterinnen) {
+      return <Redirect to={{ pathname: '/podcasterinnen', state: { query: tagQuery }}}></Redirect>
+    }
 
     return (
       <div className="app">
@@ -49,7 +68,10 @@ class App extends Component {
                   count += 1
                   return (
                     <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
-                      <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
+                      <PodcasterinnenCard 
+                        handleClick={(query) => this.handleTagSearch(query)}
+                        item={podcasterin}
+                      ></PodcasterinnenCard>
                     </li>
                   )
                 }

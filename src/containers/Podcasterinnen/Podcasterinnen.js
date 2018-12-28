@@ -65,6 +65,10 @@ class Podcasterinnen extends Component {
     if (this.props.location.pathname === '/podcasterinnen') {
       document.title = `Profile – podcasterinnen.org`
     }
+
+    if (this.props.location.state && this.props.location.state.query) {
+      this.handleChange(this.props.location.state.query)
+    }
   }
 
   handleChange = (selectedOption) => {
@@ -109,7 +113,7 @@ class Podcasterinnen extends Component {
   }
 
   render() {
-    const { match, podcasterinnen } = this.props
+    const { location, match, podcasterinnen } = this.props
     const { isSearching, options, query } = this.state
     let shuffledPodcasterinnen = null
 
