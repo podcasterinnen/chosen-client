@@ -111,6 +111,11 @@ class Podcasterinnen extends Component {
   render() {
     const { match, podcasterinnen } = this.props
     const { isSearching, options, query } = this.state
+    let shuffledPodcasterinnen = null
+
+    if (podcasterinnen) {
+      shuffledPodcasterinnen = podcasterinnen.sort(() => Math.random() - 0.5)
+    }
     
     return(
       <Switch>
@@ -163,9 +168,9 @@ class Podcasterinnen extends Component {
                 { (isSearching && this.state.results <= 0) &&
                   <p>Keine passenden Profile gefunden.</p>
                 }
-                { (!isSearching && podcasterinnen) &&
+                { (!isSearching && shuffledPodcasterinnen) &&
                   <ul className="podcasterinnen__list">
-                    { podcasterinnen.map((podcasterin, i) => {
+                    { shuffledPodcasterinnen.map((podcasterin, i) => {
                       if (podcasterin.profile_state === 'PUBLISHED') {
                         return (
                           <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
