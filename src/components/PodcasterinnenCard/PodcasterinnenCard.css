@@ -57,6 +57,10 @@
   max-width: 240px;
 }
 
+.card__list__item--link {
+  cursor: pointer;
+}
+
 .card__subtitle {
   color: var(--theme-light-color-grey);
 

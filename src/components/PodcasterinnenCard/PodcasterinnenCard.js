@@ -8,7 +8,7 @@ import './PodcasterinnenCard.css'
 class PodcasterinnenCard extends Component {
 
   render() {
-    const { item } = this.props
+    const { handleClick, item } = this.props
 
     if (item.avatar !== null && item.avatar !== '') {
       // do something
@@ -45,7 +45,14 @@ class PodcasterinnenCard extends Component {
                 { item.tags.map((tag) => {
                   if (tag !== '') {
                     return (
-                      <li className="card__list__item" key={tag}>{tag}</li>
+                      <li
+                        className="card__list__item card__list__item--link"
+                        key={tag}
+                        onClick={() => handleClick([{
+                          label: tag,
+                          value: tag,
+                        }])}
+                      >{tag}</li>
                     )
                   }
                 }) }

@@ -157,7 +157,10 @@ class Podcasterinnen extends Component {
                         if (result.profile_state === 'PUBLISHED') {
                           return (
                             <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
-                              <PodcasterinnenCard item={result}></PodcasterinnenCard>
+                              <PodcasterinnenCard 
+                                handleClick={(query) => this.handleChange(query)}
+                                item={result}
+                              ></PodcasterinnenCard>
                             </li>
                           )
                         }
@@ -174,7 +177,10 @@ class Podcasterinnen extends Component {
                       if (podcasterin.profile_state === 'PUBLISHED') {
                         return (
                           <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
-                            <PodcasterinnenCard item={podcasterin}></PodcasterinnenCard>
+                            <PodcasterinnenCard 
+                              handleClick={(query) => this.handleChange(query)}
+                              item={podcasterin}
+                            ></PodcasterinnenCard>
                           </li>
                         )
                       }

@@ -82,7 +82,7 @@ class ProfileForm extends Component {
           </div>
           <div>
             <label>
-              Vorname/Nickname
+              Vorname/Nickname (Pflichtfeld)
               <Tooltip content="Hier trägst du deinen Vornamen ein. Wenn du deinen Klarnamen nicht verwenden möchtest, kannst auch ein Nickname eintragen. Er sollte von dir nur so gewählt werden, dass du auch gefunden werden kannst."></Tooltip>
             </label>
             <input 
@@ -108,7 +108,7 @@ class ProfileForm extends Component {
           </div>
           <div>
             <label>
-              Kurz-Biographie
+              Kurz-Biographie (Pflichtfeld)
               <Tooltip content="In diesem Feld stehen dir 255 Zeichen zur Verfügung. Du kannst dich, deinen Podcast hier kurz und knapp vorstellen. Für ausführlicherer Beschreibungen ist in den nächsten Feldern Platz."></Tooltip>
               <span className="label label--right">{bioShortCharactersRemaining} Zeichen</span>
             </label>
@@ -188,7 +188,7 @@ class ProfileForm extends Component {
             >Weitere Sprache hinzufügen</button>
           </div>
           <div>
-            <h3 className="profile__subheadline">Podcasts</h3>
+            <h3 className="profile__subheadline">Podcasts (Pflichtfeld)</h3>
             { profile.podcasts && profile.podcasts.length && profile.podcasts.map((podcast, index) => (
               <div className="profile-form__multi-input-container" key={index}>
                 <label>
