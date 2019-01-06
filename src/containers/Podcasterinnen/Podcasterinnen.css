@@ -51,3 +51,29 @@
   float: right;
   margin: 6px 0;
 }
+
+.podcasterinnen__sort__label {
+  display: inline-block;
+  margin: 10px 0;
+}
+
+.podcasterinnen_sort__select {
+  color: var(--theme-primary-color);
+  text-decoration: underline;
+
+  border: none;
+  cursor: pointer;
+  display: inline-block;
+  margin: 0 0 0 10px;
+}
+
+.podcasterinnen_sort__select:active,
+.podcasterinnen_sort__select:hover {
+  color: var(--theme-primary-color-dark);
+}
+
+
+.podcasterinnen_sort__select:focus {
+  color: var(--theme-primary-color);
+  outline: none;
+}

@@ -54,9 +54,12 @@ class Podcasterinnen extends Component {
       options: [],
       query: '',
       results: [],
+      shuffledPodcasterinnen: [],
+      sortValue: 'random',
     }
     this.handleChange = this.handleChange.bind(this)
     this.handleSearch = this.handleSearch.bind(this)
+    this.handleSortChange = this.handleSortChange.bind(this)
   }
 
   componentDidMount = () => {
@@ -68,6 +71,42 @@ class Podcasterinnen extends Component {
 
     if (this.props.location.state && this.props.location.state.query) {
       this.handleChange(this.props.location.state.query)
+    }
+  }
+
+  componentWillUpdate = (nextProps, nextState) => {
+    if (
+      nextProps.podcasterinnen !== this.props.podcasterinnen ||
+      nextState.sortValue !== this.state.sortValue ||
+      nextState.query !== this.state.query
+      ) {
+      let sourceArray = nextProps.podcasterinnen
+      let result = []
+      if (nextState.results.length > 0) {
+        sourceArray = nextState.results
+      }
+      switch (nextState.sortValue) {
+      case 'alphabet':
+        result = sourceArray.sort((a, b) => {
+          if (a.forename > b.forename) { return 1 }
+          if (a.forename < b.forename) { return -1 }
+          return 0
+        })
+        break
+      case 'newest':
+        result = sourceArray.sort((a, b) => {
+          if (a.date_created > b.date_created) { return -1 }
+          if (a.date_created < b.date_created) { return 1 }
+          return 0
+        })
+        break
+      case 'random':
+        result = sourceArray.sort(() => Math.random() - 0.5)
+        break
+      }
+      this.setState({
+        results: result,
+      })
     }
   }
 
@@ -84,20 +123,28 @@ class Podcasterinnen extends Component {
   }
 
   handleSearch = () => {
-    const result = []
-    this.props.podcasterinnen.forEach((podcasterin) => {
-      const podcasterinString = JSON.stringify(podcasterin).toLowerCase()
-      let isResult = false
-      this.state.query.forEach((query) => {
-        const queryString = query.value.toLowerCase()
-        if (!isResult && podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
-          result.push(podcasterin)
-          isResult = true
-        }
+    if (this.state.query.length > 0) {
+      const result = []
+      this.props.podcasterinnen.forEach((podcasterin) => {
+        const podcasterinString = JSON.stringify(podcasterin).toLowerCase()
+        let isResult = false
+        this.state.query.forEach((query) => {
+          const queryString = query.value.toLowerCase()
+          if (!isResult && podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
+            result.push(podcasterin)
+            isResult = true
+          }
+        })
       })
-    })
+      this.setState({
+        results: result,
+      })
+    }
+  }
+
+  handleSortChange = (event) => {
     this.setState({
-      results: result,
+      sortValue: event.target.value,
     })
   }
 
@@ -113,13 +160,8 @@ class Podcasterinnen extends Component {
   }
 
   render() {
-    const { location, match, podcasterinnen } = this.props
-    const { isSearching, options, query } = this.state
-    let shuffledPodcasterinnen = null
-
-    if (podcasterinnen) {
-      shuffledPodcasterinnen = podcasterinnen.sort(() => Math.random() - 0.5)
-    }
+    const { match, podcasterinnen } = this.props
+    const { isSearching, options, query, results, sortValue } = this.state
     
     return(
       <Switch>
@@ -131,7 +173,7 @@ class Podcasterinnen extends Component {
             return (
               <section className="Podcasterinnen main__section main__section--wide">
                 <form role="search" className="podcasterinnen__search">
-                  <label className="podcasterinnen__search__label">Suche</label>
+                  <label>Suche</label>
                   <Creatable
                     className="podcasterinnen__search__bar"
                     components={makeAnimated()}
@@ -144,20 +186,31 @@ class Podcasterinnen extends Component {
                     styles={styles.creatable}
                     value={query}
                   />
+                  <label
+                  className="podcasterinnen__sort__label">Anordnen nach:</label>
+                  <select onChange={this.handleSortChange} value={sortValue} className="podcasterinnen_sort__select">
+                    <option value="random">Zufall</option>
+                    <option value="newest">Neueste zuerst</option>
+                    <option value="alphabet">A-Z</option>
+                  </select>
                 </form>
                 { !podcasterinnen &&
                   <p>
                     Loading...
                   </p>
                 }
-                { this.state.results.length > 0 &&
+                { results.length > 0 &&
                   <div>
-                    <p className="podcasterinnnen__search__result-label"><small>{this.state.results.length} Einträge</small></p>
-                    <h2>
-                      Passende Profile:
-                    </h2>
+                    { isSearching &&
+                    <div>
+                      <p className="podcasterinnnen__search__result-label"><small>{results.length} Einträge</small></p>
+                      <h2>
+                        Passende Profile:
+                      </h2>
+                    </div>
+                    }
                     <ul className="podcasterinnen__list">
-                      { this.state.results.map((result, i) => {
+                      { results.map((result, i) => {
                         if (result.profile_state === 'PUBLISHED') {
                           return (
                             <li className="podcasterinnen__list__item" key={generateKey(result, i)}>
@@ -172,10 +225,10 @@ class Podcasterinnen extends Component {
                     </ul>
                   </div>
                 }
-                { (isSearching && this.state.results <= 0) &&
+                { (isSearching && results <= 0) &&
                   <p>Keine passenden Profile gefunden.</p>
                 }
-                { (!isSearching && shuffledPodcasterinnen) &&
+                {/* { (!isSearching && shuffledPodcasterinnen) &&
                   <ul className="podcasterinnen__list">
                     { shuffledPodcasterinnen.map((podcasterin, i) => {
                       if (podcasterin.profile_state === 'PUBLISHED') {
@@ -190,7 +243,7 @@ class Podcasterinnen extends Component {
                       }
                     })}
                   </ul>
-                }
+                } */}
               </section>
             )
           }}
