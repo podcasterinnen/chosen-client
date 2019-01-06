@@ -189,7 +189,7 @@ class Podcasterinnen extends Component {
                   <label
                   className="podcasterinnen__sort__label">Anordnen nach:</label>
                   <select onChange={this.handleSortChange} value={sortValue} className="podcasterinnen_sort__select">
-                    <option value="random">Zufall</option>
+                    <option value="random">Zufällig</option>
                     <option value="newest">Neueste zuerst</option>
                     <option value="alphabet">A-Z</option>
                   </select>

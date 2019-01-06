@@ -54,13 +54,13 @@
 
 .podcasterinnen__sort__label {
   display: inline-block;
-  margin: 10px 0;
+  margin: 20px 0 0 0;
 }
 
 .podcasterinnen_sort__select {
   color: var(--theme-primary-color);
-  text-decoration: underline;
 
+  background-color: transparent;
   border: none;
   cursor: pointer;
   display: inline-block;
@@ -70,6 +70,7 @@
 .podcasterinnen_sort__select:active,
 .podcasterinnen_sort__select:hover {
   color: var(--theme-primary-color-dark);
+  text-decoration: underline;
 }
 
 
