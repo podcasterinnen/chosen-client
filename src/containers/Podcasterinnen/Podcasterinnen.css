@@ -22,11 +22,19 @@
   }
 }
 
-@media screen and (min-width: 850px) {
+@media screen and (min-width: 900px) {
   .podcasterinnen__list {
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media screen and (min-width: 1200px) {
+  .podcasterinnen__list {
+    grid-column-gap: 20px;
+    grid-row-gap: 20px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 }
 
@@ -35,7 +43,8 @@
 }
 
 .podcasterinnen__search {
-  margin: 20px 0 80px 0;
+  margin: 20px auto 80px auto;
+  max-width: 1100px;
 }
 
 .podcasterinnnen__search__result-label {
