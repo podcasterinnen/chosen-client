@@ -57,7 +57,7 @@ class App extends Component {
           <p className="app__cta"><Link className="button button--cta app__button" to="/session">Mitmachen</Link></p>
           <p className="app-cta__text">Podcasterinnen und nicht-binäre Podcastpersonen gibt es viele, doch leider sind sie selten zu Gast auf Bühnen, in Podcasts oder bei Workshops. Du bist Podcaster:in und suchst für ein Thema eine Podcastperson? Du bist Veranstalter:in und suchst nicht-binäre Podcastende oder eine Podcasterin für einen Vortrag oder einen Workshop? Bestimmt findest du sie hier.</p>
         </section>
-        <section className="app-copy">
+        <section className="app-copy main__section main__section--wide">
           { podcasterinnen &&
           <div>
             <h2>Neueste Profile:</h2>

@@ -35,11 +35,6 @@
 
 .app-copy {
   text-align: left;
-  
-  margin: 0 auto;
-  padding: 0 20px var(--section-padding-top) 20px;
-  width: 100%;
-  max-width: 1000px;
 }
 
 .app-cta__text {
