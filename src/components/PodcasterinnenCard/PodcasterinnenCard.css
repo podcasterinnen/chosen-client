@@ -25,6 +25,7 @@
   line-height: 1.375em;
   text-align: center;
   text-transform: uppercase;
+  word-break: break-all;
 
   margin: 10px 0 40px 0;
 }
