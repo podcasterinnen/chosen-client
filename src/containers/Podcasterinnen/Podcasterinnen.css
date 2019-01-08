@@ -30,13 +30,13 @@
   }
 }
 
-@media screen and (min-width: 1200px) {
+/* @media screen and (min-width: 1200px) {
   .podcasterinnen__list {
     grid-column-gap: 20px;
     grid-row-gap: 20px;
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-}
+} */
 
 .podcasterinnen__list__item {
   list-style: none;

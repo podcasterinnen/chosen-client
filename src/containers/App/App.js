@@ -64,7 +64,7 @@ class App extends Component {
             <ul className="podcasterinnen__list">
               { podcasterinnen.sort(this.sortPodcasterinnen).map((podcasterin, i) => {
                 // Show only 4 newest profiles
-                if (count < 4 && podcasterin.profile_state === 'PUBLISHED') {
+                if (count < 3 && podcasterin.profile_state === 'PUBLISHED') {
                   count += 1
                   return (
                     <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
