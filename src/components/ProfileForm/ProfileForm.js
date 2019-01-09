@@ -49,7 +49,6 @@ class ProfileForm extends Component {
       staticTags,
     } = this.props
     const { showPreview } = this.state
-    console.log('Show Preview', showPreview, 'ImgUrlPrevew', imgUrlPreview)
 
     return(
       <div>
