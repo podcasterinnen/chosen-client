@@ -103,6 +103,8 @@ class Podcasterinnen extends Component {
       case 'random':
         result = sourceArray.sort(() => Math.random() - 0.5)
         break
+      default:
+        return
       }
       this.setState({
         results: result,
@@ -221,6 +223,7 @@ class Podcasterinnen extends Component {
                             </li>
                           )
                         }
+                        return false
                       })}
                     </ul>
                   </div>

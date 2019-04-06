@@ -44,7 +44,7 @@ class MainNav extends Component {
     const { menuIsOpen, wasLoggedOut } = this.state
 
     return(
-      <nav role="navigation" className="mainnav">
+      <nav className="mainnav">
         <button className="mainnav__button" onClick={this.handleMenuClick}>
           Menü
           { menuIsOpen &&

@@ -40,7 +40,7 @@ class Faq extends Component {
               key={faq.index}
               onClick={() => this.handleAccordeonClick(faq.index)}
             >
-              <span className="faq__accordeon__icon"><img src={iconArrow}></img></span>
+              <span className="faq__accordeon__icon"><img alt="Icon of an arrow." src={iconArrow}></img></span>
               <h3 className="faq__accordeon__headline" dangerouslySetInnerHTML={{ __html: faq.headline }}></h3>
               <p className="faq__accordeon__content" dangerouslySetInnerHTML={{ __html: faq.copy }}></p>
             </div>

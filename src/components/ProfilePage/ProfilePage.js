@@ -48,6 +48,7 @@ class ProfilePage extends Component {
                   <li className="profile__tag" key={language}>{language}</li>
                 )
               }
+              return false
             })}
           </ul>
         </div>
@@ -66,6 +67,7 @@ class ProfilePage extends Component {
                   </li>
                 )
               }
+              return false
             })}
           </ul>
         </div>
@@ -84,6 +86,7 @@ class ProfilePage extends Component {
                   </li>
                 )
               }
+              return false
             })}
           </ul>
         </div>

@@ -75,6 +75,7 @@ class Profile extends Component {
         this.props.location.pathname === `/podcasterinnen/${podcasterin.forename.replace(/\s+/g, '-').toLowerCase()}-${podcasterin.podcasts[0].name.replace(/–|-/g, ' ').replace(/\s+/g, '-').toLowerCase()}`) ||
         (this.props.location.state &&
         podcasterin &&
+        // eslint-disable-next-line
         podcasterin.id == this.props.location.state.id)
       ) {
       document.title = `${podcasterin.forename} – podcasterinnen.org`
@@ -353,6 +354,7 @@ class Profile extends Component {
         }
       }
     })
+    // eslint-disable-next-line
     newTags = newTags.filter((entry) => (entry.trim() != ''))
     this.setState({
       profile: {...this.state.profile, tags: newTags},

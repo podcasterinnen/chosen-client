@@ -18,7 +18,7 @@ class FooterNav extends Component {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <img alt="Twitter-Icon" className="footernav__icon"src={iconTwitter} alt="Twitter Icon"></img>Folge uns auf Twitter
+              <img alt="Twitter-Icon" className="footernav__icon" src={iconTwitter}></img>Folge uns auf Twitter
             </a>
           </li>
 

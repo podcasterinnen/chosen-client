@@ -31,7 +31,9 @@ class Blog extends Component {
                 { articles.map((article) => (
                 <li key={article.id}>
                   <Link className="blog__link" to={`blog/${article.url}`}>
-                    <span className="blog__icon"><img src={iconArrow}></img></span>
+                    <span className="blog__icon">
+                      <img alt="Icon of an arrow." src={iconArrow}></img>
+                    </span>
                     <h3 className="blog__link__title">{article.date} · {article.title}</h3>
                   </Link>
                 </li>

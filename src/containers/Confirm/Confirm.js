@@ -6,7 +6,7 @@ import { Link, withRouter } from 'react-router-dom'
 
 import './Confirm.css'
 import { confirmEmail, initialiseConfirm } from './ConfirmActions'
-import { REGISTERED, LOGGED_IN } from '../../utils/types'
+import { LOGGED_IN } from '../../utils/types'
 
 class Confirm extends Component {
 

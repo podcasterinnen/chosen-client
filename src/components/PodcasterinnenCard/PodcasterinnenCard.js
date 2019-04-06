@@ -34,6 +34,7 @@ class PodcasterinnenCard extends Component {
                       <li className="card__list__item" key={podcast.name}>{podcast.name}</li>
                     )
                   }
+                  return false
                 }) }
               </ul>
             </div>
@@ -55,6 +56,7 @@ class PodcasterinnenCard extends Component {
                       >{tag}</li>
                     )
                   }
+                  return false
                 }) }
               </ul>
             </div>

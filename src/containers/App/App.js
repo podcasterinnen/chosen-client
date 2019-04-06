@@ -75,6 +75,7 @@ class App extends Component {
                     </li>
                   )
                 }
+                return false
               })}
             </ul>
             <p className="app__cta"><Link className="button button--cta app__button" to="/podcasterinnen">Weitere Profile</Link></p>
