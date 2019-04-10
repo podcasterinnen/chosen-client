@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { withRouter, Switch, Route } from 'react-router-dom'
 import Creatable from 'react-select/lib/Creatable'
 import makeAnimated from 'react-select/lib/animated'
+import querySearch from 'stringquery'
 
 import './Podcasterinnen.css'
 import Profile from '../Profile/Profile'
@@ -68,9 +69,56 @@ class Podcasterinnen extends Component {
     if (this.props.location.pathname === '/podcasterinnen') {
       document.title = `Profile – podcasterinnen.org`
     }
+  }
 
-    if (this.props.location.state && this.props.location.state.query) {
-      this.handleChange(this.props.location.state.query)
+  handleParameterChange = (searchString) => {
+    if (this.props.podcasterinnen) {
+      const result = []
+      let queryArray = []
+      const searchParameter = querySearch(searchString, { ignoreQueryPrefix: true }).search
+      const searchParameters = searchParameter ? searchParameter.split(';') : []
+      const uniqueSearchParameters = [ ...new Set(searchParameters) ]
+
+      if (uniqueSearchParameters.length > 0) {
+        this.props.podcasterinnen.forEach((podcasterin) => {
+          const podcasterinString = JSON.stringify(podcasterin).toLowerCase()
+          let isResult = false
+          uniqueSearchParameters.forEach((query) => {
+            const queryString = query.toLowerCase()
+            const queryUnescaped = unescape(query)
+            const queryCapitalized = queryUnescaped.split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')
+            if (!isResult && podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
+              result.push(podcasterin)
+              isResult = true
+            }
+            queryArray.push({
+              label: queryCapitalized,
+              value: query,
+            })
+          })
+        })
+        this.setState({
+          results: result,
+        })
+      } else {
+        this.setState({
+          results: this.props.podcasterinnen,
+        })
+      }
+      if (!this.state.query && queryArray.length > 0) {
+        this.setState({
+          query: queryArray,
+        })
+      }
+    }
+  }
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if (
+      (prevProps.podcasterinnen !== this.props.podcasterinnen || prevProps.location.search !== this.props.location.search) &&
+      this.props.podcasterinnen.length > 0
+    ) {
+      this.handleParameterChange(this.props.location.search)
     }
   }
 
@@ -78,7 +126,8 @@ class Podcasterinnen extends Component {
     if (
       nextProps.podcasterinnen !== this.props.podcasterinnen ||
       nextState.sortValue !== this.state.sortValue ||
-      nextState.query !== this.state.query
+      nextState.query !== this.state.query ||
+      nextProps.location.search !== this.props.location.search
       ) {
       let sourceArray = nextProps.podcasterinnen
       let result = []
@@ -106,6 +155,7 @@ class Podcasterinnen extends Component {
       default:
         return
       }
+      // this.handleParameterChange(nextProps.location.search)
       this.setState({
         results: result,
       })
@@ -113,33 +163,33 @@ class Podcasterinnen extends Component {
   }
 
   handleChange = (selectedOption) => {
+    const uniqueSelectedOption = [...new Set(selectedOption.map(({value}) => value))].map(e => selectedOption.find(({value}) => value === e))
     this.setState({
       isSearching: true,
-      query: selectedOption
+      query: uniqueSelectedOption
     }, () => {
       this.handleSearch()
-      if (selectedOption.length === 0) {
+      if (uniqueSelectedOption.length === 0) {
         this.setState({ isSearching: false })
       }
     })
   }
 
   handleSearch = () => {
+    let searchParameter = ''
     if (this.state.query.length > 0) {
-      const result = []
-      this.props.podcasterinnen.forEach((podcasterin) => {
-        const podcasterinString = JSON.stringify(podcasterin).toLowerCase()
-        let isResult = false
-        this.state.query.forEach((query) => {
-          const queryString = query.value.toLowerCase()
-          if (!isResult && podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
-            result.push(podcasterin)
-            isResult = true
-          }
-        })
+      this.state.query.forEach((query, index) => {
+        const queryString = query.value.toLowerCase()
+        if (index === 0) {
+          searchParameter = `?search=${queryString}`
+        } else {
+          searchParameter = `${searchParameter};${queryString}`
+        }
       })
-      this.setState({
-        results: result,
+      this.props.history.push(searchParameter)
+    } else {
+      this.props.history.push({
+        pathname: '/podcasterinnen',
       })
     }
   }
@@ -205,6 +255,7 @@ class Podcasterinnen extends Component {
                   <div>
                     { isSearching &&
                     <div>
+                      {/* TODO: results should only be published accounts */}
                       <p className="podcasterinnnen__search__result-label"><small>{results.length} Einträge</small></p>
                       <h2>
                         Passende Profile:
@@ -231,22 +282,6 @@ class Podcasterinnen extends Component {
                 { (isSearching && results <= 0) &&
                   <p>Keine passenden Profile gefunden.</p>
                 }
-                {/* { (!isSearching && shuffledPodcasterinnen) &&
-                  <ul className="podcasterinnen__list">
-                    { shuffledPodcasterinnen.map((podcasterin, i) => {
-                      if (podcasterin.profile_state === 'PUBLISHED') {
-                        return (
-                          <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
-                            <PodcasterinnenCard 
-                              handleClick={(query) => this.handleChange(query)}
-                              item={podcasterin}
-                            ></PodcasterinnenCard>
-                          </li>
-                        )
-                      }
-                    })}
-                  </ul>
-                } */}
               </section>
             )
           }}
