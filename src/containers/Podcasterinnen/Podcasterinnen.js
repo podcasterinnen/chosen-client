@@ -155,7 +155,6 @@ class Podcasterinnen extends Component {
       default:
         return
       }
-      // this.handleParameterChange(nextProps.location.search)
       this.setState({
         results: result,
       })
