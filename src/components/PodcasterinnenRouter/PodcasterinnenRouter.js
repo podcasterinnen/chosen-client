@@ -16,6 +16,7 @@ import Privacy from '../../containers/Privacy/Privacy'
 import Profile from '../../containers/Profile/Profile'
 import ResetPassword from '../../containers/ResetPassword/ResetPassword'
 import Session from '../../containers/Session/Session'
+import Support from '../../containers/Support/Support'
 import Why from '../../containers/Why/Why'
 
 import FooterNav from '../FooterNav/FooterNav'
@@ -76,6 +77,7 @@ class PodcasterinnenRouter extends Component {
               <Route exact path="/" component={App} />
               <Route path="/about" component={About} />
               <Route path="/blog" component={Blog} />
+              <Route path="/support" component={Support} />
               <Route path="/confirm" component={Confirm} />
               <Route path="/faq" component={Faq} />
               <Route path="/imprint" component={Imprint} />

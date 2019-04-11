@@ -102,6 +102,16 @@ class MainNav extends Component {
               Blog
             </NavLink>
           </li>
+          <li className="mainnav__list__element">
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link"
+              exact
+              to="/support"
+            >
+              Support
+            </NavLink>
+          </li>
           { sessionState === 'LOGGED_IN' &&
             <li className="mainnav__list__element mainnav__list__element--right">
               <NavLink
