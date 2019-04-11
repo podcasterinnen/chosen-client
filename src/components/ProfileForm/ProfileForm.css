@@ -7,13 +7,24 @@
   padding: 20px 20px;
 }
 
-.profile-form__button-container {
-  float: right;
-  margin-top: -60px;
+/* .profile-form__button-container {} */
+
+@media screen and (min-width: 600px) {
+  .profile-form__button-container  {
+    float: right;
+    margin-top: -70px;
+  }
 }
 
 .profile-form__button-edit {
-  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+@media screen and (min-width: 600px) {
+  .profile-form__button-edit  {
+    margin-bottom: 0;
+    margin-right: 10px;
+  }
 }
 
 .profile-form__button-submit {
