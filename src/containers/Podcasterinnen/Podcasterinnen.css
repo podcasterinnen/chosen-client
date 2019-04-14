@@ -3,6 +3,23 @@
   --podcasterinnen-grid-gutter-size: 10px;
 }
 
+.podcasterinnen__filter {
+  border: none;
+  padding: 20px;
+}
+
+.podcasterinnen__filter__input {
+  align-items: baseline;
+  display: flex;
+  margin-left: 60px;
+}
+
+.podcasterinnen__filter__legend {
+  font-size: 14px;
+
+  float: left;
+}
+
 .podcasterinnen__list {
   align-items: baseline;
   display: grid;
@@ -30,14 +47,6 @@
   }
 }
 
-/* @media screen and (min-width: 1200px) {
-  .podcasterinnen__list {
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-  }
-} */
-
 .podcasterinnen__list__item {
   list-style: none;
 }
@@ -47,10 +56,20 @@
   max-width: 1100px;
 }
 
+.podcasterinnen__search__features {
+  display: flex;
+}
+
+.podcasterinnen__search__label {
+  margin: 20px 0 0 0;
+}
+
 .podcasterinnnen__search__result-label {
   float: right;
   margin: 6px 0;
 }
+
+/* .podcasterinnen__sort {} */
 
 .podcasterinnen__sort__label {
   display: inline-block;

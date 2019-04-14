@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { withRouter, Switch, Route } from 'react-router-dom'
 import Creatable from 'react-select/lib/Creatable'
+import Select from 'react-select'
 import makeAnimated from 'react-select/lib/animated'
 import querySearch from 'stringquery'
 
@@ -12,6 +13,44 @@ import { initialisePodcasterinnen } from './PodcasterinnenActions'
 import PodcasterinnenCard from '../../components/PodcasterinnenCard/PodcasterinnenCard'
 import { generateKey } from '../../utils/utils'
 import staticTags from '../../assets/data/tags.json'
+
+/**
+ * Options for Search Filter
+ */
+const filterOptions = [
+  {
+    value: 'talks',
+    label: 'Ich halte Vorträge.',
+  }, 
+  {
+    value: 'workshops',
+    label: 'Ich gebe Workshops/Schulungen.',
+  }, 
+  {
+    value: 'remote',
+    label: 'Ich kann remote aufnehmen.',
+  }, 
+  {
+    value: 'foreign_language',
+    label: 'Ich nehme auch fremdsprachige Podcasts auf.',
+  }, 
+  {
+    value: 'record_outside',
+    label: 'Ich nehme auch Podcasts draußen auf.',
+  }, 
+  {
+    value: 'guests',
+    label: 'Ich lade auch Gästinnen ein.',
+  }, 
+  {
+    value: 'travel',
+    label: 'Ich reise auch um Podcasts aufzuzeichnen.',
+  }, 
+  {
+    value: 'podcast_production',
+    label: 'Ich kann Podcasts schneiden, aufnehmen und produzieren.',
+  },
+]
 
 /**
  * Center text of creatable vertically
@@ -52,6 +91,7 @@ class Podcasterinnen extends Component {
     super(props)
     this.state = {
       isSearching: false,
+      filter: '',
       options: [],
       query: '',
       results: [],
@@ -174,6 +214,40 @@ class Podcasterinnen extends Component {
     })
   }
 
+  handleFilter = (selectedOption) => {
+    console.log('handleFilter selectedOption', selectedOption)
+    const uniqueSelectedOption = [...new Set(selectedOption.map(({value}) => value))].map(e => selectedOption.find(({value}) => value === e))
+    this.setState({
+      isSearching: true,
+      filter: uniqueSelectedOption
+    }, () => {
+      this.filter()
+      if (uniqueSelectedOption.length === 0) {
+        this.setState({ isSearching: false })
+      }
+    })
+  }
+
+  // Todo: add correct parameter and do not overwrite search parameter
+  filter = () => {
+    let filterParameter = ''
+    if (this.state.filter.length > 0) {
+      this.state.filter.forEach((query, index) => {
+        const filterString = query.value.toLowerCase()
+        if (index === 0) {
+          filterParameter = `?filter=${filterString}`
+        } else {
+          filterParameter = `${filterParameter};${filterString}`
+        }
+      })
+      this.props.history.push(filterParameter)
+    } else {
+      this.props.history.push({
+        pathname: '/podcasterinnen',
+      })
+    }
+  }
+
   handleSearch = () => {
     let searchParameter = ''
     if (this.state.query.length > 0) {
@@ -212,7 +286,7 @@ class Podcasterinnen extends Component {
 
   render() {
     const { match, podcasterinnen } = this.props
-    const { isSearching, options, query, results, sortValue } = this.state
+    const { isSearching, options, query, results, sortValue, filter } = this.state
     
     return(
       <Switch>
@@ -224,7 +298,7 @@ class Podcasterinnen extends Component {
             return (
               <section className="Podcasterinnen main__section main__section--wide">
                 <form role="search" className="podcasterinnen__search">
-                  <label>Suche</label>
+                  <label className="podcasterinnen__search__label">Suche</label>
                   <Creatable
                     className="podcasterinnen__search__bar"
                     components={makeAnimated()}
@@ -237,13 +311,24 @@ class Podcasterinnen extends Component {
                     styles={styles.creatable}
                     value={query}
                   />
-                  <label
-                  className="podcasterinnen__sort__label">Anordnen nach:</label>
-                  <select onChange={this.handleSortChange} value={sortValue} className="podcasterinnen_sort__select">
-                    <option value="random">Zufällig</option>
-                    <option value="newest">Neueste zuerst</option>
-                    <option value="alphabet">A-Z</option>
-                  </select>
+                  <label className="podcasterinnen__search__label">Filter</label>
+                  <Select
+                    isMulti
+                    onChange={this.handleFilter}
+                    options={filterOptions}
+                    styles={styles.creatable}
+                    value={filter}
+                  />
+                  <div className="podcasterinnen__search__features">
+                    <div className="podcasterinnen__sort">
+                      <label className="podcasterinnen__sort__label">Anordnen nach:</label>
+                      <select onChange={this.handleSortChange} value={sortValue} className="podcasterinnen_sort__select">
+                        <option value="random">Zufällig</option>
+                        <option value="newest">Neueste zuerst</option>
+                        <option value="alphabet">A-Z</option>
+                      </select>
+                    </div>
+                  </div>
                 </form>
                 { !podcasterinnen &&
                   <p>
