@@ -27,7 +27,7 @@ const filterOptions = [
     label: 'Ich gebe Workshops/Schulungen.',
   }, 
   {
-    value: 'remote',
+    value: 'remote_possible',
     label: 'Ich kann remote aufnehmen.',
   }, 
   {
@@ -99,7 +99,7 @@ class Podcasterinnen extends Component {
       sortValue: 'random',
     }
     this.handleChange = this.handleChange.bind(this)
-    this.handleSearch = this.handleSearch.bind(this)
+    this.changeParameter = this.changeParameter.bind(this)
     this.handleSortChange = this.handleSortChange.bind(this)
   }
 
@@ -114,30 +114,55 @@ class Podcasterinnen extends Component {
   handleParameterChange = (searchString) => {
     if (this.props.podcasterinnen) {
       const result = []
-      let queryArray = []
+      // Filter Variables
+      let filterQueryArray = []
+      const filterParameter = querySearch(searchString, { ignoreQueryPrefix: true }).filter
+      const filterParamters = filterParameter ? filterParameter.split(';') : []
+      const uniqueFilterParameters = [ ...new Set(filterParamters) ]
+      // Search Variables
+      let searchQueryArray = []
       const searchParameter = querySearch(searchString, { ignoreQueryPrefix: true }).search
       const searchParameters = searchParameter ? searchParameter.split(';') : []
       const uniqueSearchParameters = [ ...new Set(searchParameters) ]
 
-      if (uniqueSearchParameters.length > 0) {
+      if (uniqueSearchParameters.length > 0 || uniqueFilterParameters.length > 0) {
         this.props.podcasterinnen.forEach((podcasterin) => {
           const podcasterinString = JSON.stringify(podcasterin).toLowerCase()
-          let isResult = false
-          uniqueSearchParameters.forEach((query) => {
-            const queryString = query.toLowerCase()
-            const queryUnescaped = unescape(query)
-            const queryCapitalized = queryUnescaped.split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')
-            if (!isResult && podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
-              result.push(podcasterin)
-              isResult = true
-            }
-            queryArray.push({
-              label: queryCapitalized,
-              value: query,
+          if (uniqueSearchParameters.length > 0) {
+            uniqueSearchParameters.forEach((query) => {
+              let isResult = false
+              const queryString = query.toLowerCase()
+              const queryUnescaped = unescape(query)
+              const queryCapitalized = queryUnescaped.split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')
+              if (!isResult && podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
+                result.push(podcasterin)
+                isResult = true
+              }
+              searchQueryArray.push({
+                label: queryCapitalized,
+                value: query,
+              })
             })
-          })
+          }
+          if (uniqueFilterParameters.length > 0) {
+            uniqueFilterParameters.forEach((query) => {
+              let isResult = false
+              const queryString = `"${query.toLowerCase()}":true`
+              const queryUnescaped = unescape(query)
+              const queryCapitalized = queryUnescaped.split(' ').map((s) => s.charAt(0).toUpperCase() + s.substring(1)).join(' ')
+              if (!isResult && podcasterinString.includes(queryString) && podcasterin.profile_state === 'PUBLISHED') {
+                result.push(podcasterin)
+                isResult = true
+              }
+              filterQueryArray.push({
+                label: queryCapitalized,
+                value: query,
+              })
+            })
+          }
         })
         this.setState({
+          isSearching: true,
           results: result,
         })
       } else {
@@ -145,13 +170,24 @@ class Podcasterinnen extends Component {
           results: this.props.podcasterinnen,
         })
       }
-      if (!this.state.query && queryArray.length > 0) {
+
+      if (!this.state.query && searchQueryArray.length > 0) {
         this.setState({
-          query: queryArray,
+          query: this.getUnique(searchQueryArray),
+        })
+      }
+
+      if (!this.state.filter && filterQueryArray.length > 0) {
+        this.setState({
+          filter: this.getUnique(filterQueryArray),
         })
       }
     }
   }
+
+  getUnique = (arr, comp) => (
+    arr.map(e => e[comp]).map((e, i, final) => final.indexOf(e) === i && i).filter(e => arr[e]).map(e => arr[e])
+  )
 
   componentDidUpdate = (prevProps, prevState) => {
     if (
@@ -207,7 +243,7 @@ class Podcasterinnen extends Component {
       isSearching: true,
       query: uniqueSelectedOption
     }, () => {
-      this.handleSearch()
+      this.changeParameter()
       if (uniqueSelectedOption.length === 0) {
         this.setState({ isSearching: false })
       }
@@ -215,52 +251,63 @@ class Podcasterinnen extends Component {
   }
 
   handleFilter = (selectedOption) => {
-    console.log('handleFilter selectedOption', selectedOption)
     const uniqueSelectedOption = [...new Set(selectedOption.map(({value}) => value))].map(e => selectedOption.find(({value}) => value === e))
     this.setState({
       isSearching: true,
       filter: uniqueSelectedOption
     }, () => {
-      this.filter()
+      this.changeParameter()
       if (uniqueSelectedOption.length === 0) {
         this.setState({ isSearching: false })
       }
     })
   }
 
-  // Todo: add correct parameter and do not overwrite search parameter
-  filter = () => {
-    let filterParameter = ''
-    if (this.state.filter.length > 0) {
-      this.state.filter.forEach((query, index) => {
-        const filterString = query.value.toLowerCase()
-        if (index === 0) {
-          filterParameter = `?filter=${filterString}`
-        } else {
-          filterParameter = `${filterParameter};${filterString}`
-        }
-      })
-      this.props.history.push(filterParameter)
-    } else {
-      this.props.history.push({
-        pathname: '/podcasterinnen',
-      })
-    }
-  }
-
-  handleSearch = () => {
-    let searchParameter = ''
-    if (this.state.query.length > 0) {
+  changeParameter = () => {
+    let paramterString = ''
+    // Only searching
+    if (this.state.query.length > 0 && !this.state.filter.length > 0) {
       this.state.query.forEach((query, index) => {
         const queryString = query.value.toLowerCase()
         if (index === 0) {
-          searchParameter = `?search=${queryString}`
+          paramterString = `?search=${queryString}`
         } else {
-          searchParameter = `${searchParameter};${queryString}`
+          paramterString = `${paramterString};${queryString}`
         }
       })
-      this.props.history.push(searchParameter)
-    } else {
+      this.props.history.push(paramterString)
+    // Only filtering
+    } else if (!this.state.query.length > 0 && this.state.filter.length > 0) {
+      this.state.filter.forEach((filter, index) => {
+        const filterString = filter.value.toLowerCase()
+        if (index === 0) {
+          paramterString = `?filter=${filterString}`
+        } else {
+          paramterString = `${paramterString};${filterString}`
+        }
+      })
+      this.props.history.push(paramterString)
+
+    // Filtering and searching
+    } else if (this.state.query.length > 0 && this.state.filter.length > 0) {
+      this.state.query.forEach((query, index) => {
+        const queryString = query.value.toLowerCase()
+        if (index === 0) {
+          paramterString = `?search=${queryString}`
+        } else {
+          paramterString = `${paramterString};${queryString}`
+        }
+      })
+      this.state.filter.forEach((filter, index) => {
+        const filterString = filter.value.toLowerCase()
+        if (index === 0) {
+          paramterString = `${paramterString}&filter=${filterString}`
+        } else {
+          paramterString = `${paramterString};${filterString}`
+        }
+      })
+      this.props.history.push(paramterString)
+    }  else {
       this.props.history.push({
         pathname: '/podcasterinnen',
       })
