@@ -7,11 +7,14 @@ import './App.css'
 import { initialisePodcasterinnen } from '../Podcasterinnen/PodcasterinnenActions'
 import PodcasterinnenCard from '../../components/PodcasterinnenCard/PodcasterinnenCard'
 import { generateKey } from '../../utils/utils'
+import staticTags from '../../assets/data/tags.json'
 
 class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      randomPodcasterinnenWithRandomTag: null,
+      randomTag: null,
       tagQuery: null,
       toPodcasterinnen: false,
     }
@@ -22,11 +25,36 @@ class App extends Component {
     document.title = 'podcasterinnen.org'
   }
 
+  componentDidUpdate = (nextProps) => {
+    if (nextProps.podcasterinnen !== this.props.podcasterinnen) {
+      this.setPodcasterinnenWithRandomTag()
+    }
+  }
+
   handleTagSearch = (query) => {
     this.setState({ 
       tagQuery: query,
       toPodcasterinnen: true,
     })
+  }
+
+  setPodcasterinnenWithRandomTag = () => {
+    const randomTag = staticTags.tags[Math.floor(Math.random() * staticTags.tags.length)]
+    const randomTagPodcasterinnen = []
+    this.props.podcasterinnen.forEach((podcasterin) => {
+      if (podcasterin.tags.includes(randomTag)) {
+        randomTagPodcasterinnen.push(podcasterin)
+      }
+    })
+    if (randomTagPodcasterinnen.length > 2) {
+      console.log('randomTagPodcasterinnen', randomTagPodcasterinnen)
+      this.setState({
+        randomTag: randomTag,
+        randomPodcasterinnenWithRandomTag: randomTagPodcasterinnen,
+      })
+    } else {
+      this.setPodcasterinnenWithRandomTag()
+    }
   }
 
   sortPodcasterinnen = (a, b) => {
@@ -39,8 +67,9 @@ class App extends Component {
 
   render() {
     const { podcasterinnen } = this.props
-    const { toPodcasterinnen, tagQuery } = this.state
-    let count = 0
+    const { randomTag, randomPodcasterinnenWithRandomTag, toPodcasterinnen, tagQuery } = this.state
+    let newestPodcasterinnenCount = 0
+    let randomTagPodcasterinnenCount = 0
 
     if (toPodcasterinnen) {
       return <Redirect to={{ pathname: '/podcasterinnen', state: { query: tagQuery }}}></Redirect>
@@ -64,8 +93,8 @@ class App extends Component {
             <ul className="podcasterinnen__list">
               { podcasterinnen.sort(this.sortPodcasterinnen).map((podcasterin, i) => {
                 // Show only 4 newest profiles
-                if (count < 3 && podcasterin.profile_state === 'PUBLISHED') {
-                  count += 1
+                if (newestPodcasterinnenCount < 3) {
+                  newestPodcasterinnenCount += 1
                   return (
                     <li className="podcasterinnen__list__item" key={generateKey(podcasterin.forename, i)}>
                       <PodcasterinnenCard 
@@ -79,6 +108,29 @@ class App extends Component {
               })}
             </ul>
             <p className="app__cta"><Link className="button button--cta app__button" to="/podcasterinnen">Weitere Profile</Link></p>
+          </div>
+          }
+          { (randomPodcasterinnenWithRandomTag && randomPodcasterinnenWithRandomTag.length > 2) &&
+          <div>
+            <h2>Podcasterinnen sprechen über {randomTag}</h2>
+            <ul className="podcasterinnen__list">
+              { randomPodcasterinnenWithRandomTag.map((randomPodcasterinWithTag, i) => {
+                // Show only 4 newest profiles
+                if (randomTagPodcasterinnenCount < 3) {
+                  randomTagPodcasterinnenCount += 1
+                  return (
+                    <li className="podcasterinnen__list__item" key={generateKey(randomPodcasterinWithTag.forename, i)}>
+                      <PodcasterinnenCard 
+                        handleClick={(query) => this.handleTagSearch(query)}
+                        item={randomPodcasterinWithTag}
+                      ></PodcasterinnenCard>
+                    </li>
+                  )
+                }
+                return false
+              })}
+            </ul>
+            <p className="app__cta"><Link className="button button--cta app__button" to={`/podcasterinnen?search=${randomTag.toLowerCase()}`}>Weitere Profile zum Thema {randomTag}</Link></p>
           </div>
           }
         </section>
