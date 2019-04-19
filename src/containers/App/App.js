@@ -47,7 +47,6 @@ class App extends Component {
       }
     })
     if (randomTagPodcasterinnen.length > 2) {
-      console.log('randomTagPodcasterinnen', randomTagPodcasterinnen)
       this.setState({
         randomTag: randomTag,
         randomPodcasterinnenWithRandomTag: randomTagPodcasterinnen,
