@@ -20,6 +20,7 @@ Die Domains kosten Geld. Das Hosting kostet Geld. Die Teilnahme an Konferenzen k
         <p className="support__strong">Verwendungszweck: podcasterinnen.org</p>
         <p>(Bitte gebe unbedingt den Verwendungszweck mit an, da wir dieses Konto ebenfalls für Unterstützer:innen bei kunst & horst nutzen.)</p>
         <p>Natürlich bleibt podcasterinnen.org ein kostenloses Angebot.</p>
+        <p>Ihr könnt uns außerdem unterstützen, indem ihr von podcasterinnen.org berichtet. Egal ob ihr in eurem Blog oder Podcast davon berichtet, befreundete Podcaster*innen aufmerksam macht oder podcasterinnen.org bei Social Media teilt – wir freuen uns.</p>
       </section>
     )
   }
