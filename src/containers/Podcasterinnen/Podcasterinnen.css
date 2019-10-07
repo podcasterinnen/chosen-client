@@ -22,33 +22,18 @@
 
 .podcasterinnen__list {
   align-items: baseline;
-  display: grid;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  grid-template-columns: 1fr;
-  justify-items: stretch;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   margin: 0;
   padding: 0;
 }
 
-@media screen and (min-width: 600px) {
-  .podcasterinnen__list {
-    grid-column-gap: 15px;
-    grid-row-gap: 15px;
-    grid-template-columns: 1fr 1fr;
-  }
-}
-
-@media screen and (min-width: 900px) {
-  .podcasterinnen__list {
-    grid-column-gap: 20px;
-    grid-row-gap: 20px;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-}
-
 .podcasterinnen__list__item {
   list-style: none;
+  padding: 10px;
+  width: 100%;
+  max-width: 340px;
 }
 
 .podcasterinnen__search {
