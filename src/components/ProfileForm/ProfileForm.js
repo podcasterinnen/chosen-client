@@ -43,12 +43,16 @@ class ProfileForm extends Component {
       handleRemovePodcastsInput,
       handleRemoveReferencesInput,
       handleSubmit,
+      handlePronounsChange,
       handleTagsChange,
       imgUrlPreview,
-      profile, 
+      profile,
+      pronouns, 
       staticTags,
     } = this.props
     const { showPreview } = this.state
+
+    console.log('Profile', profile)
 
     return(
       <div>
@@ -104,6 +108,30 @@ class ProfileForm extends Component {
               type="text"
               value={profile.surname || ''}
             />
+          </div>
+          <div className="profile-form__tags">
+            <label className="profile-form__tags__label">
+              Meine Pronomen
+              <Tooltip content="TODO: Write Content."></Tooltip>
+            </label>
+            { pronouns.map((pronoun, index) => (
+              <label
+                className="profile-form__tag"
+                key={index}
+              >
+                <input
+                  className="profile-form__tag__checkbox"
+                  key={index}
+                  onChange={handlePronounsChange(index)}
+                  type="checkbox"
+                  checked={(profile.pronouns && profile.pronouns.indexOf(pronoun) > -1) ? 'checked' : ''}
+                ></input>
+                <div
+                  className="profile-form__tag__label"
+                >{pronoun}</div>
+              </label>
+            ))}
+            <p className="profile-form__helper-text">Sollte dein Pronomen hier noch fehlen, schreib uns gerne eine Mail an <a href="mailto:contact@podcasterinnen.org">contact@podcasterinnen.org</a> und wir fügen es der Liste hinzu.</p>
           </div>
           <div>
             <label>
@@ -492,9 +520,11 @@ ProfileForm.propTypes = {
   handleRemovePodcastsInput: PropTypes.func,
   handleRemoveReferencesInput: PropTypes.func,
   handleSubmit: PropTypes.func,
+  handlePronounsChange: PropTypes.func,
   handleTagsChange: PropTypes.func,
   imgUrlPreview: PropTypes.string,
   profile: PropTypes.object, 
+  pronouns: PropTypes.array,
   staticTags: PropTypes.array,
 }
 ProfileForm.defaultProps = {
@@ -517,9 +547,11 @@ ProfileForm.defaultProps = {
   handleRemovePodcastsInput: undefined,
   handleRemoveReferencesInput: undefined,
   handleSubmit: undefined,
+  handlePronounsChange: undefined,
   handleTagsChange: undefined,
   imgUrlPreview: undefined,
   profile: undefined, 
+  pronouns: undefined,
   staticTags: undefined,
 }
 

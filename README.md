@@ -3,12 +3,12 @@
 ## Develop
 
 1. Fork project
-2. Install dependencies with `npm i`
-3. Start server with `npm start`
+2. Install dependencies with `yarn`
+3. Start server with `yarn start`
 
 ### Before making a pull request
 
-1. Check that there are no linting errors wit `npm run lint`
+1. Check that there are no linting errors with `yarn run lint`
 
 ## Environments
 
