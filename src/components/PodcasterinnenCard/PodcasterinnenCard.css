@@ -63,6 +63,19 @@
   cursor: pointer;
 }
 
+.card__pronouns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.card__pronouns__text {
+  color: var(--theme-light-color-grey);
+  
+  margin: 0;
+}
+
 .card__subtitle {
   color: var(--theme-light-color-grey);
 

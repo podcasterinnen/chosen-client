@@ -10,16 +10,24 @@ class PodcasterinnenCard extends Component {
   render() {
     const { handleClick, item } = this.props
 
-    if (item.avatar !== null && item.avatar !== '') {
-      // do something
-    }
-
     return(
       <div className="card">
         <Link className="card__link" to={{ pathname: `podcasterinnen/${item.forename.replace(/\s+/g, '-').toLowerCase()}-${item.podcasts[0].name.replace(/–|-/g, ' ').replace(/\s+/g, '-').toLowerCase()}`, state: { id: item.id }}}>
           <div className="card__avatar" style={(item.avatar !== null && item.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${item.avatar})`} : {backgroundImage: 'none'}}></div>
         </Link>
         <div className="card__text">
+          { item.pronouns && item.pronouns.length > 0 ?
+            <div className="card__pronouns">
+              { item.pronouns.map((pronoun, i) => 
+                <p key={i} className="card__pronouns__text">
+                  <span>{pronoun}</span>
+                  { i < item.pronouns.length - 1 ?
+                    <span>/</span> : null
+                  }
+                </p>
+              )}
+            </div> : null
+          }
           <h3 className="card__title">{item.forename} {item.surname}</h3>
           { item.bio_short &&
             <p className="card__bio">{item.bio_short}</p>
