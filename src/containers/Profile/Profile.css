@@ -110,6 +110,21 @@
   padding: 0;
 }
 
+.profile__pronouns {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+}
+
+.profile__pronouns__text {
+  color: var(--theme-light-color-grey);
+  font-family: "Quattrocento";
+  font-size: 1rem;
+  font-weight: 100;
+  margin: 0;
+}
+
 /* .profile__podcast__text {} */
 @media screen and (min-width: 600px) {
   .profile__podcast__text {
