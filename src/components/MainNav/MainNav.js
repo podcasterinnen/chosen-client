@@ -77,6 +77,16 @@ class MainNav extends Component {
               activeClassName="mainnav__list__element__link--active"
               className="mainnav__list__element__link"
               exact
+              to="/podcast"
+            >
+              Podcast
+            </NavLink>
+          </li>
+          <li className="mainnav__list__element">
+            <NavLink
+              activeClassName="mainnav__list__element__link--active"
+              className="mainnav__list__element__link"
+              exact
               to="/faq"
             >
               FAQ
