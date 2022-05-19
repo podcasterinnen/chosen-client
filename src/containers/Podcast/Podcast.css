@@ -1,1 +1,11 @@
-/* .imprint {} */
+.podcast__header {
+  margin-top: 5rem;
+  position: relative;
+}
+
+.podcast__illustration {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  width: 400px;
+}
