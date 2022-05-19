@@ -1,3 +1,18 @@
+.episode {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding-top: 1rem;
+}
+
+.episode__cover {
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+  margin-right: 1rem;
+  width: 100px;
+  height: 100px;
+}
+
 .podcast__header {
   margin-top: 5rem;
   position: relative;

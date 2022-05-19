@@ -4,29 +4,45 @@ import './Podcast.css'
 import HeaderIllustration from '../../assets/images/podcast-header.svg'
 
 const Podcast = () => {
-  const [error, setError] = useState(null)
-  const [isLoaded, setIsLoaded] = useState(false)
-  const [podcast, setPodcast] = useState([])
+  const [episodes, setEpisodes] = useState(null)
+  const [episodesData, setEpisodesData] = useState([])
+  const [podcast, setPodcast] = useState(null)
 
   useEffect(() => {
     document.title = 'Podcast – podcasterinnen.org'
     fetch('https://backend.podlovers.org/wp-json/podlove/v2/podcast')
       .then(res => res.json())
       .then(
-        (result) => {
-          setIsLoaded(true)
-          console.log(result)
-          setPodcast(result)
-        },
-        // Note: it's important to handle errors here
-        // instead of a catch() block so that we don't swallow
-        // exceptions from actual bugs in components.
-        (error) => {
-          setIsLoaded(true)
-          setError(error)
-        }
+        (result) => { setPodcast(result) },
+        (error) => { console.log(error) }
+      )
+    fetch('https://backend.podlovers.org/wp-json/podlove/v2/episodes')
+      .then(res => res.json())
+      .then(
+        (result) => { setEpisodes(result.results) },
+        (error) => { console.log(error) }
       )
   }, [])
+
+  useEffect(() => {
+    if (episodes && episodes.length > 0) {
+      const promises = []
+      episodes.forEach(episode => {
+        const promise = fetch(`https://backend.podlovers.org/wp-json/podlove/v2/episodes/${episode.id}`)
+          .then(res => res.json())
+          .then(
+            (result) => result,
+            (error) => { console.log(error) }
+          )
+        promises.push(promise)
+      })
+      Promise.all(promises).then(res => setEpisodesData(res))
+    }
+  }, [episodes])
+
+  useEffect(() => {
+    console.log(episodesData)
+  }, [episodesData])
   
   return (
     <section className="podcast main__section">
@@ -41,6 +57,26 @@ const Podcast = () => {
           </h1>
           <h2 className="title--small">{podcast.subtitle}</h2>
           <h2 className="subtitle">{podcast.summary}</h2>
+        </div> : null
+      }
+      { episodesData && episodesData.length > 0 ?
+        <div>
+          { episodesData.map(episode => 
+            <div
+              key={episode.id}
+              className="episode"
+            >
+              <img
+                className="episode__cover"
+                src={episode.poster}
+              />
+              <div>
+                <p><span>{episode.mnemonic}</span> – <span>{episode.title_clean}</span></p>
+                <p>{episode.duration}</p>
+                <p>{episode.subtitle}</p>
+              </div>
+            </div>
+          )}
         </div> : null
       }
     </section>
