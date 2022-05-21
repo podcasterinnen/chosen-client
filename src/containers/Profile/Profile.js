@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 
+import pronouns from '../../assets/data/pronouns.json'
 import staticTags from '../../assets/data/tags.json'
 
 import './Profile.css'
@@ -46,6 +47,7 @@ class Profile extends Component {
         travel: false,
         podcast_production: false,
       },
+      pronouns: pronouns.pronouns,
       staticTags: staticTags.tags,
     }
     this.handleChange = this.handleChange.bind(this)
@@ -341,6 +343,26 @@ class Profile extends Component {
     this.props.handleSubmitProfile(this.state.profile)
   }
 
+  handlePronounsChange = (index) => (event) => {
+    let newPronouns = this.state.profile.pronouns || []
+    this.state.pronouns.forEach((pronoun, i) => {
+      // Add or remove tag from new pronouns depending on checkbox value
+      if (index === i && event.target.checked === true) {
+        newPronouns.push(pronoun)
+      } else if (index === i && event.target.checked === false) {
+        const pronounIndex = newPronouns.indexOf(pronoun)
+        if (pronounIndex !== -1) {
+          newPronouns.splice(pronounIndex, 1)
+        }
+      }
+    })
+    // eslint-disable-next-line
+    newPronouns = newPronouns.filter((entry) => (entry.trim() != ''))
+    this.setState({
+      profile: {...this.state.profile, pronouns: newPronouns},
+    })
+  }
+
   handleTagsChange = (index) => (event) => {
     let newTags = this.state.profile.tags
     this.state.staticTags.forEach((staticTag, i) => {
@@ -371,6 +393,7 @@ class Profile extends Component {
       imgUrlPreview,
       isEditable, 
       profile, 
+      pronouns,
       staticTags,
     } = this.state
 
@@ -421,9 +444,11 @@ class Profile extends Component {
             handleRemovePodcastsInput={this.handleRemovePodcastsInput}
             handleRemoveReferencesInput={this.handleRemoveReferencesInput}
             handleSubmit={this.handleSubmit}
+            handlePronounsChange={this.handlePronounsChange}
             handleTagsChange={this.handleTagsChange}
             imgUrlPreview={imgUrlPreview}
             profile={profile}
+            pronouns={pronouns}
             staticTags={staticTags}
           ></ProfileForm>
         }

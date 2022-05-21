@@ -21,7 +21,21 @@ class ProfilePage extends Component {
           </button>
         }
         <div className="profile__avatar" style={(profile.avatar !== null && profile.avatar !== '') ? {backgroundImage: `url(${API_URL_UPLOADS}${profile.avatar})`} : {backgroundImage: 'none'}}></div>
-        <h1 className="profile__title">{profile.forename} {profile.surname}</h1>
+        <h1 className="profile__title">
+          { profile.pronouns && profile.pronouns.length > 0 ?
+            <div className="profile__pronouns">
+              { profile.pronouns.map((pronoun, i) => 
+                <p key={i} className="profile__pronouns__text">
+                  <span>{pronoun}</span>
+                  { i < profile.pronouns.length - 1 ?
+                    <span>/</span> : null
+                  }
+                </p>
+              )}
+            </div> : null
+          }
+          {profile.forename} {profile.surname}
+        </h1>
         { profile.bio_short &&
         <p className="profile__subtitle">{profile.bio_short}</p>
         }

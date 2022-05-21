@@ -26,7 +26,7 @@ class App extends Component {
   }
 
   componentDidUpdate = (nextProps) => {
-    if (nextProps.podcasterinnen !== this.props.podcasterinnen) {
+    if (nextProps.podcasterinnen !== this.props.podcasterinnen && nextProps.podcasterinnen) {
       this.setPodcasterinnenWithRandomTag()
     }
   }
@@ -86,7 +86,7 @@ class App extends Component {
           <p className="app-cta__text">Podcasterinnen und nicht-binäre Podcastpersonen gibt es viele, doch leider sind sie selten zu Gast auf Bühnen, in Podcasts oder bei Workshops. Du bist Podcaster:in und suchst für ein Thema eine Podcastperson? Du bist Veranstalter:in und suchst nicht-binäre Podcastende oder eine Podcasterin für einen Vortrag oder einen Workshop? Bestimmt findest du sie hier.</p>
         </section>
         <section className="app-copy main__section main__section--wide">
-          { podcasterinnen &&
+          { podcasterinnen && podcasterinnen.length > 0 &&
           <div>
             <h2>Neueste Profile:</h2>
             <ul className="podcasterinnen__list">
@@ -109,7 +109,7 @@ class App extends Component {
             <p className="app__cta"><Link className="button button--cta app__button" to="/podcasterinnen">Weitere Profile</Link></p>
           </div>
           }
-          { (randomPodcasterinnenWithRandomTag && randomPodcasterinnenWithRandomTag.length > 2) &&
+          { (podcasterinnen && podcasterinnen.length > 0 && randomPodcasterinnenWithRandomTag && randomPodcasterinnenWithRandomTag.length > 2) &&
           <div>
             <h2>Podcasterinnen sprechen über {randomTag}</h2>
             <ul className="podcasterinnen__list">
