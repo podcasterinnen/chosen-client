@@ -1,6 +1,6 @@
 {
   "name": "chosen-client",
-  "version": "0.1.5",
+  "version": "1.0.1",
   "private": true,
   "homepage": "https://podcasterinnen.org",
   "dependencies": {
