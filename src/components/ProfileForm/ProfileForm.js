@@ -112,7 +112,7 @@ class ProfileForm extends Component {
           <div className="profile-form__tags">
             <label className="profile-form__tags__label">
               Meine Pronomen
-              <Tooltip content="TODO: Write Content."></Tooltip>
+              <Tooltip content="Hier kannst du dein/e Pronomen auswählen. Du kannst die Eingabe jederzeit wieder anpassen."></Tooltip>
             </label>
             { pronouns.map((pronoun, index) => (
               <label
