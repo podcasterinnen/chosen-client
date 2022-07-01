@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import './Podcast.css'
 import HeaderIllustration from '../../assets/images/podcast-header.svg'
 
-const Podcast = () => {
+const Podcast = ({ startPlaying }) => {
   const [activeContributions, setActiveContributions] = useState(null)
   const [activeEpisode, setActiveEpisode] = useState(null)
   const [contributors, setContributors] = useState(null)
@@ -127,6 +127,7 @@ const Podcast = () => {
         <div>
           <div className="episode__header">
             <img
+              onClick={() => startPlaying(activeEpisode.post_id)}
               className="episode__cover episode__cover--big"
               src={activeEpisode.poster}
             />

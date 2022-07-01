@@ -31,6 +31,7 @@ import {
   LOGGED_IN,
 } from '../../utils/types'
 import { SESSION_TIMEOUT } from '../../config/config'
+import Player from '../Player/Player'
 
 const PrivateRoute = ({ component: Component, sessionState, ...rest }) => {
   return (
@@ -52,6 +53,10 @@ class PodcasterinnenRouter extends Component {
     super(props)
     this.idleTimer = null
     this.onIdle = this.onIdle.bind(this)
+    this.state = {
+      activePlayerPostId: null,
+      isPlaying: false,
+    }
   }
 
   onIdle = () => {
@@ -83,7 +88,14 @@ class PodcasterinnenRouter extends Component {
               <Route path="/faq" component={Faq} />
               <Route path="/imprint" component={Imprint} />
               <Route path="/password_resets" component={ResetPassword} />
-              <Route path="/podcast" component={Podcast} />
+              <Route
+                path="/podcast"
+                component={() =>
+                  <Podcast startPlaying={(postId) => {
+                    this.setState({ isPlaying: true, activePlayerPostId: postId })
+                  }} />
+                }
+              />
               <Route path="/podcasterinnen" component={Podcasterinnen} />
               <Route path="/privacy" component={Privacy} />
               <PrivateRoute sessionState={sessionState} path="/profile" component={Profile} />
@@ -91,6 +103,9 @@ class PodcasterinnenRouter extends Component {
               <Route path="/why" component={Why} />
               <Route component={NotFound} />
             </Switch>
+            { this.state.isPlaying ?
+              <Player id={this.state.activePlayerPostId} /> : null
+            }
             <FooterNav></FooterNav>
           </main>
         </ScrollToTop>
