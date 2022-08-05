@@ -97,6 +97,13 @@
   height: 52px;
 }
 
+.profile-form__instagram-input[type="text"] {
+  vertical-align: top;
+
+  display: inline-block;
+  width: calc(100% - 52px);
+}
+
 .profile-form__twitter-input[type="text"] {
   vertical-align: top;
 
