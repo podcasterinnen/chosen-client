@@ -4,7 +4,7 @@
   "private": true,
   "homepage": "https://podcasterinnen.org",
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.21.2",
     "normalize.css": "^8.0.0",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
