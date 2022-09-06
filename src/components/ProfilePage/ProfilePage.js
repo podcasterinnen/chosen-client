@@ -151,6 +151,9 @@ class ProfilePage extends Component {
         { profile.twitter_url &&
         <p className="profile__info-text"><a href={`https://twitter.com/${profile.twitter_url}`} target="_blank">{profile.forename} auf Twitter</a></p>
         }
+        { profile.instagram_url &&
+        <p className="profile__info-text"><a href={profile.instagram_url} target="_blank">{profile.forename} auf Instagram</a></p>
+        }
         { profile.website_url &&
         <p className="profile__info-text"><a href={profile.website_url} target="_blank">{profile.forename}s Webseite</a></p>
         }

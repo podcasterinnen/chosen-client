@@ -480,6 +480,16 @@ class ProfileForm extends Component {
               />
             </div>
             <div>
+              <label>Instagram-Account</label>
+              <input 
+                className="profile-form__instagram-input"
+                onChange={(e) => handleChange(e, 'instagram_url')}
+                placeholder="https://www.instagram.com/dein_instagram_account/" 
+                type="text"
+                value={profile.instagram_url || ''}
+              />
+            </div>
+            <div>
               <label>Webseite</label>
               <input 
                 onChange={(e) => handleChange(e, 'website_url')} 
